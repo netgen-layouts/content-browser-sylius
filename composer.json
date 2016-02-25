@@ -1,0 +1,33 @@
+{
+    "name": "netgen/content-browser-bundle",
+    "description": "Netgen Content Browser Bundle",
+    "authors": [
+        {
+            "name": "Netgen",
+            "homepage": "http://www.netgenlabs.com"
+        }
+    ],
+    "require": {
+        "php": "^5.5|^7.0",
+        "symfony/symfony": "^2.7"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.8|^5.0",
+        "symfony/phpunit-bridge": "^2.7",
+        "matthiasnoback/symfony-dependency-injection-test": "*",
+        "ezsystems/ezpublish-kernel": "^6.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Netgen\\Bundle\\ContentBrowserBundle\\": ""
+        },
+        "exclude-from-classmap": [
+            "Tests/"
+        ]
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
+}
