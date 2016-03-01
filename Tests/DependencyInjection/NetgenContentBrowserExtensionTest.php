@@ -33,6 +33,9 @@ class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
             'trees' => array(
                 'default' => array(
                     'root_locations' => array(42),
+                    'categories' => array(
+                        'types' => array('type'),
+                    ),
                 ),
             ),
         );
@@ -55,6 +58,9 @@ class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
                     'max_selected' => 0,
                     'location_template' => 'NetgenContentBrowserBundle:ezpublish:location.html.twig',
                     'default_columns' => array('name', 'type', 'visible'),
+                    'categories' => array(
+                        'types' => array('type'),
+                    ),
                 ),
             ),
             $this->container->getParameter('netgen_content_browser.trees')
