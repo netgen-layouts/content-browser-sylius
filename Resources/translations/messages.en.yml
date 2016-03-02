@@ -4,5 +4,11 @@ netgen_content_browser.columns.name: 'Name'
 netgen_content_browser.columns.thumbnail: 'Thumbnail'
 netgen_content_browser.columns.type: 'Type'
 netgen_content_browser.columns.visible: 'Visible'
+netgen_content_browser.columns.owner: 'Owner'
+netgen_content_browser.columns.modified: 'Modified'
+netgen_content_browser.columns.published: 'Published'
+netgen_content_browser.columns.priority: 'Priority'
+netgen_content_browser.columns.section: 'Section'
+
 
 netgen_content_browser.trees.default.name: 'eZ Platform content'
