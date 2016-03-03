@@ -85,6 +85,7 @@ class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
         $this->load();
 
         $this->assertContainerBuilderHasService('netgen_content_browser.controller.api.tree');
+        $this->assertContainerBuilderHasService('netgen_content_browser.ezpublish.thumbnail_loader.variation');
         $this->assertContainerBuilderHasService('netgen_content_browser.ezpublish.location_builder');
         $this->assertContainerBuilderHasService('netgen_content_browser.ezpublish.adapter');
         $this->assertContainerBuilderHasService('netgen_content_browser.repository');
@@ -92,6 +93,11 @@ class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasAlias(
             'netgen_content_browser.adapter',
             'netgen_content_browser.ezpublish.adapter'
+        );
+
+        $this->assertContainerBuilderHasAlias(
+            'netgen_content_browser.ezpublish.thumbnail_loader',
+            'netgen_content_browser.ezpublish.thumbnail_loader.variation'
         );
     }
 }
