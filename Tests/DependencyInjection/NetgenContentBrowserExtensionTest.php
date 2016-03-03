@@ -38,6 +38,11 @@ class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
                     ),
                 ),
             ),
+            'adapters' => array(
+                'ezpublish' => array(
+                    'image_fields' => array('image'),
+                ),
+            ),
         );
     }
 
@@ -64,6 +69,11 @@ class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
                 ),
             ),
             $this->container->getParameter('netgen_content_browser.trees')
+        );
+
+        self::assertEquals(
+            array('image'),
+            $this->container->getParameter('netgen_content_browser.adapters.ezpublish.image_fields')
         );
     }
 

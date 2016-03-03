@@ -27,9 +27,15 @@ class NetgenContentBrowserExtension extends Extension implements PrependExtensio
         $configuration = new Configuration($extensionAlias);
         $config = $this->processConfiguration($configuration, $configs);
 
-        if (isset($config['trees'])) {
-            $container->setParameter('netgen_content_browser.trees', $config['trees']);
-        }
+        $container->setParameter(
+            'netgen_content_browser.trees',
+            $config['trees']
+        );
+
+        $container->setParameter(
+            'netgen_content_browser.adapters.ezpublish.image_fields',
+            $config['adapters']['ezpublish']['image_fields']
+        );
 
         $loader = new YamlFileLoader(
             $container,
@@ -49,6 +55,11 @@ class NetgenContentBrowserExtension extends Extension implements PrependExtensio
         $configFile = __DIR__ . '/../Resources/config/config.yml';
         $config = Yaml::parse(file_get_contents($configFile));
         $container->prependExtensionConfig('netgen_content_browser', $config);
+        $container->addResource(new FileResource($configFile));
+
+        $configFile = __DIR__ . '/../Resources/config/ezpublish.yml';
+        $config = Yaml::parse(file_get_contents($configFile));
+        $container->prependExtensionConfig('ezpublish', $config);
         $container->addResource(new FileResource($configFile));
     }
 }
