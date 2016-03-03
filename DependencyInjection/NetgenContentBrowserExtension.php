@@ -37,6 +37,11 @@ class NetgenContentBrowserExtension extends Extension implements PrependExtensio
             $config['adapters']['ezpublish']['image_fields']
         );
 
+        $container->setParameter(
+            'netgen_content_browser.adapters.ezpublish.variation_name',
+            $config['adapters']['ezpublish']['variation_name']
+        );
+
         $loader = new YamlFileLoader(
             $container,
             new FileLocator(__DIR__ . '/../Resources/config')
