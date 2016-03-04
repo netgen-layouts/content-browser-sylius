@@ -41,7 +41,7 @@ class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
             'adapters' => array(
                 'ezpublish' => array(
                     'image_fields' => array('image'),
-                    'variation_name' => 'netgen_content_browser'
+                    'variation_name' => 'netgen_content_browser',
                 ),
             ),
         );
