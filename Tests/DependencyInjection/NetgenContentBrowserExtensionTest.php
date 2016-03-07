@@ -32,6 +32,7 @@ class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
         return array(
             'trees' => array(
                 'default' => array(
+                    'adapter' => 'ezpublish',
                     'root_locations' => array(42),
                     'categories' => array(
                         'types' => array('type'),
@@ -57,19 +58,25 @@ class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasParameter('netgen_content_browser.trees');
 
         self::assertEquals(
+            array('default'),
+            $this->container->getParameter('netgen_content_browser.trees')
+        );
+
+        $this->assertContainerBuilderHasParameter('netgen_content_browser.tree.default');
+
+        self::assertEquals(
             array(
-                'default' => array(
-                    'root_locations' => array(42),
-                    'min_selected' => 1,
-                    'max_selected' => 0,
-                    'location_template' => 'NetgenContentBrowserBundle:ezpublish:location.html.twig',
-                    'default_columns' => array('name', 'type', 'visible'),
-                    'categories' => array(
-                        'types' => array('type'),
-                    ),
+                'adapter' => 'ezpublish',
+                'root_locations' => array(42),
+                'min_selected' => 1,
+                'max_selected' => 0,
+                'location_template' => 'NetgenContentBrowserBundle:ezpublish:location.html.twig',
+                'default_columns' => array('name', 'type', 'visible'),
+                'categories' => array(
+                    'types' => array('type'),
                 ),
             ),
-            $this->container->getParameter('netgen_content_browser.trees')
+            $this->container->getParameter('netgen_content_browser.tree.default')
         );
 
         self::assertEquals(
@@ -94,12 +101,6 @@ class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasService('netgen_content_browser.ezpublish.thumbnail_loader.variation');
         $this->assertContainerBuilderHasService('netgen_content_browser.ezpublish.location_builder');
         $this->assertContainerBuilderHasService('netgen_content_browser.ezpublish.adapter');
-        $this->assertContainerBuilderHasService('netgen_content_browser.repository');
-
-        $this->assertContainerBuilderHasAlias(
-            'netgen_content_browser.adapter',
-            'netgen_content_browser.ezpublish.adapter'
-        );
 
         $this->assertContainerBuilderHasAlias(
             'netgen_content_browser.ezpublish.thumbnail_loader',
