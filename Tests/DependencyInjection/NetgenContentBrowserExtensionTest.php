@@ -70,7 +70,7 @@ class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
                 'root_locations' => array(42),
                 'min_selected' => 1,
                 'max_selected' => 0,
-                'location_template' => 'NetgenContentBrowserBundle:ezpublish:location.html.twig',
+                'template' => 'NetgenContentBrowserBundle:ezpublish:item.html.twig',
                 'default_columns' => array('name', 'type', 'visible'),
                 'categories' => array(
                     'types' => array('type'),
@@ -99,7 +99,7 @@ class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
 
         $this->assertContainerBuilderHasService('netgen_content_browser.controller.api.tree');
         $this->assertContainerBuilderHasService('netgen_content_browser.ezpublish.thumbnail_loader.variation');
-        $this->assertContainerBuilderHasService('netgen_content_browser.ezpublish.location_builder');
+        $this->assertContainerBuilderHasService('netgen_content_browser.ezpublish.item_builder');
         $this->assertContainerBuilderHasService('netgen_content_browser.ezpublish.adapter');
 
         $this->assertContainerBuilderHasAlias(
