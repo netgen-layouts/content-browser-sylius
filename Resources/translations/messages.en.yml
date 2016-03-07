@@ -10,5 +10,5 @@ netgen_content_browser.columns.published: 'Published'
 netgen_content_browser.columns.priority: 'Priority'
 netgen_content_browser.columns.section: 'Section'
 
-
 netgen_content_browser.trees.default.name: 'eZ Platform content'
+netgen_content_browser.trees.tags.name: 'eZ Tags'
