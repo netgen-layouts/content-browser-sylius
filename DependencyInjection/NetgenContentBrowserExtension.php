@@ -29,8 +29,15 @@ class NetgenContentBrowserExtension extends Extension implements PrependExtensio
 
         $container->setParameter(
             'netgen_content_browser.trees',
-            $config['trees']
+            array_keys($config['trees'])
         );
+
+        foreach ($config['trees'] as $tree => $treeConfig) {
+            $container->setParameter(
+                'netgen_content_browser.tree.' . $tree,
+                $treeConfig
+            );
+        }
 
         $container->setParameter(
             'netgen_content_browser.adapters.ezpublish.image_fields',
