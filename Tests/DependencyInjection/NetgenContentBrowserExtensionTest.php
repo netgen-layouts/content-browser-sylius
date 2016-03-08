@@ -33,7 +33,7 @@ class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
             'trees' => array(
                 'default' => array(
                     'adapter' => 'ezpublish',
-                    'root_locations' => array(42),
+                    'root_items' => array(42),
                     'categories' => array(
                         'types' => array('type'),
                     ),
@@ -67,7 +67,7 @@ class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
         self::assertEquals(
             array(
                 'adapter' => 'ezpublish',
-                'root_locations' => array(42),
+                'root_items' => array(42),
                 'min_selected' => 1,
                 'max_selected' => 0,
                 'template' => 'NetgenContentBrowserBundle:ezpublish:item.html.twig',
