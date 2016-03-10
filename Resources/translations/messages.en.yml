@@ -1,7 +1,7 @@
-netgen_content_browser.columns.id: 'ID'
-netgen_content_browser.columns.parent_id: 'Parent ID'
 netgen_content_browser.columns.name: 'Name'
 
+netgen_content_browser.ezpublish.columns.location_id: 'Location ID'
+netgen_content_browser.ezpublish.columns.content_id: 'Content ID'
 netgen_content_browser.ezpublish.columns.thumbnail: 'Thumbnail'
 netgen_content_browser.ezpublish.columns.type: 'Type'
 netgen_content_browser.ezpublish.columns.visible: 'Visible'
