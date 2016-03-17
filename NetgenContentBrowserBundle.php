@@ -4,7 +4,7 @@ namespace Netgen\Bundle\ContentBrowserBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Netgen\Bundle\ContentBrowserBundle\DependencyInjection\CompilerPass\TreeCompilerPass;
+use Netgen\Bundle\ContentBrowserBundle\DependencyInjection\CompilerPass\ItemBuilderCompilerPass;
 
 class NetgenContentBrowserBundle extends Bundle
 {
@@ -17,6 +17,6 @@ class NetgenContentBrowserBundle extends Bundle
      */
     public function build(ContainerBuilder $container)
     {
-        $container->addCompilerPass(new TreeCompilerPass());
+        $container->addCompilerPass(new ItemBuilderCompilerPass());
     }
 }
