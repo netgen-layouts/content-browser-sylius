@@ -12,3 +12,6 @@ netgen_content_browser.columns.ezpublish.priority: 'Priority'
 netgen_content_browser.columns.ezpublish.section: 'Section'
 
 netgen_content_browser.columns.eztags.tag_id: 'Tag ID'
+netgen_content_browser.columns.eztags.parent_tag_id: 'Parent tag ID'
+netgen_content_browser.columns.eztags.parent_tag: 'Parent tag'
+netgen_content_browser.columns.eztags.modified: 'Modified'
