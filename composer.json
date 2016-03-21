@@ -16,7 +16,8 @@
         "phpunit/phpunit": "^4.8|^5.0",
         "symfony/phpunit-bridge": "^2.7",
         "matthiasnoback/symfony-dependency-injection-test": "*",
-        "ezsystems/ezpublish-kernel": "^6.0"
+        "ezsystems/ezpublish-kernel": "^6.0",
+        "netgen/tagsbundle": "^2.1"
     },
     "autoload": {
         "psr-4": {
