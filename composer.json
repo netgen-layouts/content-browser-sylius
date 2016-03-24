@@ -9,6 +9,7 @@
     ],
     "require": {
         "php": "^5.5|^7.0",
+        "netgen/content-browser-ui-bundle": "^1.0@dev",
         "symfony/symfony": "^2.7",
         "white-october/pagerfanta-bundle": "^1.0"
     },
@@ -19,6 +20,9 @@
         "ezsystems/ezpublish-kernel": "^6.0",
         "netgen/tagsbundle": "^2.1"
     },
+    "repositories": [
+        { "type": "composer", "url": "https://packagist.netgen.biz" }
+    ],
     "autoload": {
         "psr-4": {
             "Netgen\\Bundle\\ContentBrowserBundle\\": ""
@@ -27,6 +31,8 @@
             "Tests/"
         ]
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "extra": {
         "branch-alias": {
             "dev-master": "1.0.x-dev"
