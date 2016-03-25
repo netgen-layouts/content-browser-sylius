@@ -39,6 +39,16 @@ class NetgenContentBrowserExtension extends Extension implements PrependExtensio
             new FileLocator(__DIR__ . '/../Resources/config')
         );
 
+        $activatedBundles = array_keys($container->getParameter('kernel.bundles'));
+
+        if (in_array('EzPublishCoreBundle', $activatedBundles)) {
+            $loader->load('ezplatform/services.yml');
+        }
+
+        if (in_array('NetgenTagsBundle', $activatedBundles)) {
+            $loader->load('eztags/services.yml');
+        }
+
         $loader->load('services.yml');
     }
 
@@ -49,14 +59,30 @@ class NetgenContentBrowserExtension extends Extension implements PrependExtensio
      */
     public function prepend(ContainerBuilder $container)
     {
-        $configFile = __DIR__ . '/../Resources/config/config.yml';
-        $config = Yaml::parse(file_get_contents($configFile));
-        $container->prependExtensionConfig('netgen_content_browser', $config);
-        $container->addResource(new FileResource($configFile));
+        $activatedBundles = array_keys($container->getParameter('kernel.bundles'));
 
-        $configFile = __DIR__ . '/../Resources/config/ezpublish.yml';
+        if (in_array('EzPublishCoreBundle', $activatedBundles)) {
+            $this->doPrepend($container, 'ezplatform/config.yml', 'netgen_content_browser');
+            $this->doPrepend($container, 'ezplatform/image.yml', 'ezpublish');
+
+            if (in_array('NetgenTagsBundle', $activatedBundles)) {
+                $this->doPrepend($container, 'eztags/config.yml', 'netgen_content_browser');
+            }
+        }
+    }
+
+    /**
+     * Allow an extension to prepend the extension configurations.
+     *
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @param string $fileName
+     * @param string $configName
+     */
+    protected function doPrepend(ContainerBuilder $container, $fileName, $configName)
+    {
+        $configFile = __DIR__ . '/../Resources/config/' . $fileName;
         $config = Yaml::parse(file_get_contents($configFile));
-        $container->prependExtensionConfig('ezpublish', $config);
+        $container->prependExtensionConfig($configName, $config);
         $container->addResource(new FileResource($configFile));
     }
 }
