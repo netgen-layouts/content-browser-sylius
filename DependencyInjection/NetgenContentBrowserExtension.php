@@ -50,6 +50,7 @@ class NetgenContentBrowserExtension extends Extension implements PrependExtensio
         }
 
         $loader->load('services.yml');
+        $loader->load('default_settings.yml');
     }
 
     /**
