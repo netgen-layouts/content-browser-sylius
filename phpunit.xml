@@ -17,6 +17,7 @@
     <testsuites>
         <testsuite name="NetgenContentBrowserBundle">
             <directory>Tests</directory>
+            <exclude>Tests/Controller</exclude>
         </testsuite>
     </testsuites>
 
@@ -24,6 +25,7 @@
         <whitelist>
             <directory suffix=".php">.</directory>
             <exclude>
+                <directory>Controller</directory>
                 <directory>Tests</directory>
                 <directory>Resources</directory>
                 <directory>vendor</directory>
