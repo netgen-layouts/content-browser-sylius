@@ -34,8 +34,8 @@ class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
                         'converter' => 'converter',
                         'backend' => 'backend',
                         'root_items' => array(),
-                    )
-                )
+                    ),
+                ),
             )
         );
 
@@ -54,7 +54,7 @@ class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
             'kernel.bundles',
             array(
                 'EzPublishCoreBundle' => 'NetgenTagsBundle',
-                'NetgenTagsBundle' => 'NetgenTagsBundle'
+                'NetgenTagsBundle' => 'NetgenTagsBundle',
             )
         );
 
