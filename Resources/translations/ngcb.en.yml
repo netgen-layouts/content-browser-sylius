@@ -15,5 +15,3 @@ columns.eztags.tag_id: 'Tag ID'
 columns.eztags.parent_tag_id: 'Parent tag ID'
 columns.eztags.parent_tag: 'Parent tag'
 columns.eztags.modified: 'Modified'
-
-forms.ng_content_browser.change: 'Change'
