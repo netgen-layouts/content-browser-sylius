@@ -1,0 +1,19 @@
+columns.name: 'Name'
+
+columns.ezpublish.location_id: 'Location ID'
+columns.ezpublish.content_id: 'Content ID'
+columns.ezpublish.thumbnail: 'Thumbnail'
+columns.ezpublish.type: 'Type'
+columns.ezpublish.visible: 'Visible'
+columns.ezpublish.owner: 'Owner'
+columns.ezpublish.modified: 'Modified'
+columns.ezpublish.published: 'Published'
+columns.ezpublish.priority: 'Priority'
+columns.ezpublish.section: 'Section'
+
+columns.eztags.tag_id: 'Tag ID'
+columns.eztags.parent_tag_id: 'Parent tag ID'
+columns.eztags.parent_tag: 'Parent tag'
+columns.eztags.modified: 'Modified'
+
+forms.ng_content_browser.change: 'Change'
