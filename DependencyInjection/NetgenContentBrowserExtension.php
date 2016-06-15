@@ -62,6 +62,8 @@ class NetgenContentBrowserExtension extends Extension implements PrependExtensio
     {
         $activatedBundles = array_keys($container->getParameter('kernel.bundles'));
 
+        $this->doPrepend($container, 'framework/twig.yml', 'twig');
+
         if (in_array('EzPublishCoreBundle', $activatedBundles)) {
             $this->doPrepend($container, 'ezplatform/config.yml', 'netgen_content_browser');
             $this->doPrepend($container, 'ezplatform/image.yml', 'ezpublish');
