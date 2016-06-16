@@ -38,6 +38,7 @@ class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
         );
 
         $this->assertContainerBuilderHasParameter('netgen_content_browser.route_prefix', '/cb');
+        $this->assertContainerBuilderHasParameter('netgen_content_browser.columns.date_format', 'D, d M Y H:i:s');
         $this->assertContainerBuilderHasParameter('netgen_content_browser.config.ezcontent');
     }
 
@@ -84,6 +85,8 @@ class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
         $this->load();
 
         $this->assertContainerBuilderHasService('netgen_content_browser.item_builder');
+        $this->assertContainerBuilderNotHasService('netgen_content_browser.backend.ezlocation');
+        $this->assertContainerBuilderNotHasService('netgen_content_browser.backend.eztags');
 
         $this->assertContainerBuilderHasSyntheticService('netgen_content_browser.current_config');
 
