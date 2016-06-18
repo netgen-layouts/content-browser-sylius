@@ -29,7 +29,7 @@ Activate the routes
 Add the following to your main `routing.yml` file to activate Content Browser routes:
 
 ```
-_netgen_content_browser:
+netgen_content_browser:
     resource: "@NetgenContentBrowserBundle/Resources/config/routing.yml"
-    prefix: /cb
+    prefix: "%netgen_content_browser.route_prefix%"
 ```
