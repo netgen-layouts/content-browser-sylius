@@ -41,6 +41,10 @@ class NetgenContentBrowserExtension extends Extension implements PrependExtensio
 
         $activatedBundles = array_keys($container->getParameter('kernel.bundles'));
 
+        if (in_array('SyliusCoreBundle', $activatedBundles)) {
+            $loader->load('sylius/product/services.yml');
+        }
+
         if (in_array('EzPublishCoreBundle', $activatedBundles)) {
             $loader->load('ezplatform/services.yml');
         }
@@ -63,6 +67,10 @@ class NetgenContentBrowserExtension extends Extension implements PrependExtensio
         $activatedBundles = array_keys($container->getParameter('kernel.bundles'));
 
         $this->doPrepend($container, 'framework/twig.yml', 'twig');
+
+        if (in_array('SyliusCoreBundle', $activatedBundles)) {
+            $this->doPrepend($container, 'sylius/product/config.yml', 'netgen_content_browser');
+        }
 
         if (in_array('EzPublishCoreBundle', $activatedBundles)) {
             $this->doPrepend($container, 'ezplatform/config.yml', 'netgen_content_browser');

@@ -15,3 +15,5 @@ columns.eztags.tag_id: 'Tag ID'
 columns.eztags.parent_tag_id: 'Parent tag ID'
 columns.eztags.parent_tag: 'Parent tag'
 columns.eztags.modified: 'Modified'
+
+columns.sylius_product.product_id: 'Product ID'

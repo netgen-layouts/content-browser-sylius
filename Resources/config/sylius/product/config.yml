@@ -1,0 +1,11 @@
+configs:
+    sylius_product:
+        min_selected: 1
+        max_selected: 0
+        template: 'NetgenContentBrowserBundle:sylius:product_item.html.twig'
+        columns:
+            product_id:
+                name: columns.sylius_product.product_id
+                value_provider: sylius_product\product_id
+        default_columns:
+            - product_id
