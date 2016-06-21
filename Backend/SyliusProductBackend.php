@@ -5,7 +5,6 @@ namespace Netgen\Bundle\ContentBrowserBundle\Backend;
 use Netgen\Bundle\ContentBrowserBundle\Item\CategoryInterface;
 use Netgen\Bundle\ContentBrowserBundle\Item\Sylius\Product\Category;
 use Netgen\Bundle\ContentBrowserBundle\Item\Sylius\Product\Item;
-use Netgen\Bundle\ContentBrowserBundle\Item\Sylius\Product\Value;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Repository\ProductRepositoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
@@ -239,12 +238,7 @@ class SyliusProductBackend implements BackendInterface
      */
     protected function buildItem(ProductInterface $product, TaxonInterface $parentTaxon = null)
     {
-        return new Item(
-            new Value(
-                $product
-            ),
-            $parentTaxon
-        );
+        return new Item($product, $parentTaxon);
     }
 
     /**

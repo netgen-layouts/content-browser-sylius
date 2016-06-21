@@ -17,7 +17,7 @@ class SyliusProductTemplateValueProvider implements TemplateValueProviderInterfa
     public function getValues(ItemInterface $item)
     {
         return array(
-            'product' => $item->getValue()->getProduct(),
+            'product' => $item->getProduct(),
         );
     }
 }

@@ -3,14 +3,15 @@
 namespace Netgen\Bundle\ContentBrowserBundle\Item\Sylius\Product;
 
 use Netgen\Bundle\ContentBrowserBundle\Item\ItemInterface;
+use Sylius\Component\Product\Model\ProductInterface as BaseProductInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
-class Item implements ItemInterface
+class Item implements ItemInterface, ProductInterface
 {
     /**
-     * @var \Netgen\Bundle\ContentBrowserBundle\Item\ValueInterface
+     * @var \Sylius\Component\Product\Model\ProductInterface
      */
-    protected $value;
+    protected $product;
 
     /**
      * @var \Sylius\Component\Taxonomy\Model\TaxonInterface
@@ -20,12 +21,12 @@ class Item implements ItemInterface
     /**
      * Constructor.
      *
-     * @param \Netgen\Bundle\ContentBrowserBundle\Item\Sylius\Product\Value $value
+     * @param \Sylius\Component\Product\Model\ProductInterface $product
      * @param \Sylius\Component\Taxonomy\Model\TaxonInterface $parentTaxon
      */
-    public function __construct(Value $value, TaxonInterface $parentTaxon = null)
+    public function __construct(BaseProductInterface $product, TaxonInterface $parentTaxon = null)
     {
-        $this->value = $value;
+        $this->product = $product;
         $this->parentTaxon = $parentTaxon;
     }
 
@@ -40,17 +41,27 @@ class Item implements ItemInterface
     }
 
     /**
-     * Returns the item name.
+     * Returns the value.
+     *
+     * @return mixed
+     */
+    public function getValue()
+    {
+        return $this->product->getId();
+    }
+
+    /**
+     * Returns the name.
      *
      * @return string
      */
     public function getName()
     {
-        return $this->value->getName();
+        return $this->product->getName();
     }
 
     /**
-     * Returns the item parent ID.
+     * Returns the parent ID.
      *
      * @return int|string
      */
@@ -62,12 +73,12 @@ class Item implements ItemInterface
     }
 
     /**
-     * Returns the value.
+     * Returns the Sylius product.
      *
-     * @return \Netgen\Bundle\ContentBrowserBundle\Item\ValueInterface
+     * @return \Sylius\Component\Product\Model\ProductInterface
      */
-    public function getValue()
+    public function getProduct()
     {
-        return $this->value;
+        return $this->product;
     }
 }

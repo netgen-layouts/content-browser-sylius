@@ -16,8 +16,6 @@ class ProductId implements ColumnValueProviderInterface
      */
     public function getValue(ItemInterface $item)
     {
-        $product = $item->getValue()->getProduct();
-
-        return $product->getId();
+        return $item->getProduct()->getId();
     }
 }

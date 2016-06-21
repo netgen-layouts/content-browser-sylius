@@ -23,7 +23,7 @@ class Category implements CategoryInterface, TaxonInterface
     }
 
     /**
-     * Returns the ID.
+     * Returns the category ID.
      *
      * @return int|string
      */
@@ -53,7 +53,7 @@ class Category implements CategoryInterface, TaxonInterface
     }
 
     /**
-     * Returns the category parent ID.
+     * Returns the parent ID.
      *
      * @return int|string
      */
