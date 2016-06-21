@@ -67,7 +67,7 @@ class Item implements ItemInterface, ProductInterface
      */
     public function getParentId()
     {
-        return $this->parentTaxon instanceof TaxonInterface ?
+        return $this->parentTaxon instanceof BaseTaxonInterface ?
             $this->parentTaxon->getId() :
             null;
     }
