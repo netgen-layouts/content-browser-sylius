@@ -73,6 +73,16 @@ class Item implements ItemInterface, ProductInterface
     }
 
     /**
+     * Returns if the item is visible.
+     *
+     * @return bool
+     */
+    public function isVisible()
+    {
+        return true;
+    }
+
+    /**
      * Returns the Sylius product.
      *
      * @return \Sylius\Component\Product\Model\ProductInterface
