@@ -4,7 +4,7 @@ namespace Netgen\Bundle\ContentBrowserBundle\Item\Sylius\Product;
 
 use Netgen\Bundle\ContentBrowserBundle\Item\ItemInterface;
 use Sylius\Component\Product\Model\ProductInterface as BaseProductInterface;
-use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Sylius\Component\Taxonomy\Model\TaxonInterface as BaseTaxonInterface;
 
 class Item implements ItemInterface, ProductInterface
 {
@@ -24,7 +24,7 @@ class Item implements ItemInterface, ProductInterface
      * @param \Sylius\Component\Product\Model\ProductInterface $product
      * @param \Sylius\Component\Taxonomy\Model\TaxonInterface $parentTaxon
      */
-    public function __construct(BaseProductInterface $product, TaxonInterface $parentTaxon = null)
+    public function __construct(BaseProductInterface $product, BaseTaxonInterface $parentTaxon = null)
     {
         $this->product = $product;
         $this->parentTaxon = $parentTaxon;
