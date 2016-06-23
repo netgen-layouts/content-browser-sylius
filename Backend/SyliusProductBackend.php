@@ -2,8 +2,8 @@
 
 namespace Netgen\Bundle\ContentBrowserBundle\Backend;
 
-use Netgen\Bundle\ContentBrowserBundle\Item\CategoryInterface;
-use Netgen\Bundle\ContentBrowserBundle\Item\Sylius\Product\Category;
+use Netgen\Bundle\ContentBrowserBundle\Item\LocationInterface;
+use Netgen\Bundle\ContentBrowserBundle\Item\Sylius\Product\Location;
 use Netgen\Bundle\ContentBrowserBundle\Item\Sylius\Product\Item;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Repository\ProductRepositoryInterface;
@@ -39,30 +39,30 @@ class SyliusProductBackend implements BackendInterface
     /**
      * Returns the default sections available in the backend.
      *
-     * @return \Netgen\Bundle\ContentBrowserBundle\Item\CategoryInterface[]
+     * @return \Netgen\Bundle\ContentBrowserBundle\Item\LocationInterface[]
      */
     public function getDefaultSections()
     {
-        return $this->buildCategories(
+        return $this->buildLocations(
             $this->taxonRepository->findRootNodes()
         );
     }
 
     /**
-     * Loads a  category by its ID.
+     * Loads a  location by its ID.
      *
      * @param int|string $id
      *
-     * @throws \Netgen\Bundle\ContentBrowserBundle\Exceptions\NotFoundException If category does not exist
+     * @throws \Netgen\Bundle\ContentBrowserBundle\Exceptions\NotFoundException If location does not exist
      *
-     * @return \Netgen\Bundle\ContentBrowserBundle\Item\CategoryInterface
+     * @return \Netgen\Bundle\ContentBrowserBundle\Item\LocationInterface
      */
-    public function loadCategory($id)
+    public function loadLocation($id)
     {
         /** @var \Sylius\Component\Taxonomy\Model\TaxonInterface $taxon */
         $taxon = $this->taxonRepository->find($id);
 
-        return $this->buildCategory($taxon);
+        return $this->buildLocation($taxon);
     }
 
     /**
@@ -83,45 +83,45 @@ class SyliusProductBackend implements BackendInterface
     }
 
     /**
-     * Returns the categories below provided category.
+     * Returns the locations below provided location.
      *
-     * @param \Netgen\Bundle\ContentBrowserBundle\Item\CategoryInterface $category
+     * @param \Netgen\Bundle\ContentBrowserBundle\Item\LocationInterface $location
      *
-     * @return \Netgen\Bundle\ContentBrowserBundle\Item\CategoryInterface[]
+     * @return \Netgen\Bundle\ContentBrowserBundle\Item\LocationInterface[]
      */
-    public function getSubCategories(CategoryInterface $category)
+    public function getSubLocations(LocationInterface $location)
     {
-        $taxons = $this->taxonRepository->findChildren($category->getTaxon());
+        $taxons = $this->taxonRepository->findChildren($location->getTaxon());
 
-        return $this->buildCategories($taxons);
+        return $this->buildLocations($taxons);
     }
 
     /**
-     * Returns the count of categories below provided category.
+     * Returns the count of locations below provided location.
      *
-     * @param \Netgen\Bundle\ContentBrowserBundle\Item\CategoryInterface $category
+     * @param \Netgen\Bundle\ContentBrowserBundle\Item\LocationInterface $location
      *
      * @return int
      */
-    public function getSubCategoriesCount(CategoryInterface $category)
+    public function getSubLocationsCount(LocationInterface $location)
     {
-        return count($this->getSubCategories($category));
+        return count($this->getSubLocations($location));
     }
 
     /**
-     * Returns the category items.
+     * Returns the location items.
      *
-     * @param \Netgen\Bundle\ContentBrowserBundle\Item\CategoryInterface $category
+     * @param \Netgen\Bundle\ContentBrowserBundle\Item\LocationInterface $location
      * @param int $offset
      * @param int $limit
      *
      * @return \Netgen\Bundle\ContentBrowserBundle\Item\ItemInterface[]
      */
-    public function getSubItems(CategoryInterface $category, $offset = 0, $limit = 25)
+    public function getSubItems(LocationInterface $location, $offset = 0, $limit = 25)
     {
         /** @var \Pagerfanta\Pagerfanta $products */
         $products = $this->productRepository->createByTaxonPaginator(
-            $category->getTaxon()
+            $location->getTaxon()
         );
 
         $products->setMaxPerPage($limit);
@@ -131,22 +131,22 @@ class SyliusProductBackend implements BackendInterface
             iterator_to_array(
                 $products->getCurrentPageResults()
             ),
-            $category->getTaxon()
+            $location->getTaxon()
         );
     }
 
     /**
-     * Returns the category items count.
+     * Returns the location items count.
      *
-     * @param \Netgen\Bundle\ContentBrowserBundle\Item\CategoryInterface $category
+     * @param \Netgen\Bundle\ContentBrowserBundle\Item\LocationInterface $location
      *
      * @return int
      */
-    public function getSubItemsCount(CategoryInterface $category)
+    public function getSubItemsCount(LocationInterface $location)
     {
         /** @var \Pagerfanta\Pagerfanta $products */
         $products = $this->productRepository->createByTaxonPaginator(
-            $category->getTaxon()
+            $location->getTaxon()
         );
 
         return $products->getNbResults();
@@ -200,29 +200,29 @@ class SyliusProductBackend implements BackendInterface
     }
 
     /**
-     * Builds the category from provided taxon.
+     * Builds the location from provided taxon.
      *
      * @param \Sylius\Component\Taxonomy\Model\TaxonInterface $taxon
      *
-     * @return \Netgen\Bundle\ContentBrowserBundle\Item\CategoryInterface
+     * @return \Netgen\Bundle\ContentBrowserBundle\Item\LocationInterface
      */
-    protected function buildCategory(TaxonInterface $taxon)
+    protected function buildLocation(TaxonInterface $taxon)
     {
-        return new Category($taxon);
+        return new Location($taxon);
     }
 
     /**
-     * Builds the categories from provided taxons.
+     * Builds the locations from provided taxons.
      *
      * @param \Sylius\Component\Taxonomy\Model\TaxonInterface[] $taxons
      *
-     * @return \Netgen\Bundle\ContentBrowserBundle\Item\CategoryInterface[]
+     * @return \Netgen\Bundle\ContentBrowserBundle\Item\LocationInterface[]
      */
-    protected function buildCategories(array $taxons)
+    protected function buildLocations(array $taxons)
     {
         return array_map(
             function (TaxonInterface $taxon) {
-                return $this->buildCategory($taxon);
+                return $this->buildLocation($taxon);
             },
             $taxons
         );

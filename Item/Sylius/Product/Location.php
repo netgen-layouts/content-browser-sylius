@@ -2,10 +2,10 @@
 
 namespace Netgen\Bundle\ContentBrowserBundle\Item\Sylius\Product;
 
-use Netgen\Bundle\ContentBrowserBundle\Item\CategoryInterface;
+use Netgen\Bundle\ContentBrowserBundle\Item\LocationInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface as BaseTaxonInterface;
 
-class Category implements CategoryInterface, TaxonInterface
+class Location implements LocationInterface, TaxonInterface
 {
     /**
      * @var \Sylius\Component\Taxonomy\Model\TaxonInterface
@@ -23,7 +23,7 @@ class Category implements CategoryInterface, TaxonInterface
     }
 
     /**
-     * Returns the category ID.
+     * Returns the location ID.
      *
      * @return int|string
      */
