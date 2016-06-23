@@ -4,8 +4,12 @@ configs:
         max_selected: 0
         template: 'NetgenContentBrowserBundle:sylius:product_item.html.twig'
         columns:
+            name:
+                name: columns.name
+                value_provider: name
             product_id:
                 name: columns.sylius_product.product_id
                 value_provider: sylius_product\product_id
         default_columns:
+            - name
             - product_id
