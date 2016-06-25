@@ -204,7 +204,7 @@ class SyliusProductBackend implements BackendInterface
      *
      * @param \Sylius\Component\Taxonomy\Model\TaxonInterface $taxon
      *
-     * @return \Netgen\Bundle\ContentBrowserBundle\Item\LocationInterface
+     * @return \Netgen\Bundle\ContentBrowserBundle\Item\Sylius\Product\Location
      */
     protected function buildLocation(TaxonInterface $taxon)
     {
@@ -216,7 +216,7 @@ class SyliusProductBackend implements BackendInterface
      *
      * @param \Sylius\Component\Taxonomy\Model\TaxonInterface[] $taxons
      *
-     * @return \Netgen\Bundle\ContentBrowserBundle\Item\LocationInterface[]
+     * @return \Netgen\Bundle\ContentBrowserBundle\Item\Sylius\Product\Location[]
      */
     protected function buildLocations(array $taxons)
     {
@@ -234,7 +234,7 @@ class SyliusProductBackend implements BackendInterface
      * @param \Sylius\Component\Product\Model\ProductInterface $product
      * @param \Sylius\Component\Taxonomy\Model\TaxonInterface $parentTaxon
      *
-     * @return \Netgen\Bundle\ContentBrowserBundle\Item\ItemInterface
+     * @return \Netgen\Bundle\ContentBrowserBundle\Item\Sylius\Product\Item
      */
     protected function buildItem(ProductInterface $product, TaxonInterface $parentTaxon = null)
     {
@@ -247,7 +247,7 @@ class SyliusProductBackend implements BackendInterface
      * @param \Sylius\Component\Product\Model\ProductInterface[] $products
      * @param \Sylius\Component\Taxonomy\Model\TaxonInterface $parentTaxon
      *
-     * @return \Netgen\Bundle\ContentBrowserBundle\Item\ItemInterface[]
+     * @return \Netgen\Bundle\ContentBrowserBundle\Item\Sylius\Product\Item[]
      */
     protected function buildItems(array $products, TaxonInterface $parentTaxon = null)
     {
