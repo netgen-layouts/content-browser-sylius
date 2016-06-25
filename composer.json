@@ -18,7 +18,9 @@
         "symfony/phpunit-bridge": "^2.8|^3.0",
         "matthiasnoback/symfony-dependency-injection-test": "*",
         "ezsystems/ezpublish-kernel": "^6.0",
-        "netgen/tagsbundle": "^2.1"
+        "netgen/tagsbundle": "^2.1",
+        "sylius/product": "*",
+        "sylius/taxonomy": "*"
     },
     "repositories": [
         { "type": "composer", "url": "https://packagist.netgen.biz" }
