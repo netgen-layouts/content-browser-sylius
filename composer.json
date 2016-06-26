@@ -19,8 +19,7 @@
         "matthiasnoback/symfony-dependency-injection-test": "*",
         "ezsystems/ezpublish-kernel": "^6.0",
         "netgen/tagsbundle": "^2.1",
-        "sylius/product": "*",
-        "sylius/taxonomy": "*"
+        "sylius/core": "*"
     },
     "repositories": [
         { "type": "composer", "url": "https://packagist.netgen.biz" }

@@ -2,13 +2,14 @@
 
 namespace Netgen\Bundle\ContentBrowserBundle\Backend;
 
+use Netgen\Bundle\ContentBrowserBundle\Exceptions\NotFoundException;
 use Netgen\Bundle\ContentBrowserBundle\Item\LocationInterface;
 use Netgen\Bundle\ContentBrowserBundle\Item\Sylius\Product\Location;
 use Netgen\Bundle\ContentBrowserBundle\Item\Sylius\Product\Item;
-use Sylius\Component\Product\Model\ProductInterface;
-use Sylius\Component\Product\Repository\ProductRepositoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
+use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 
 class SyliusProductBackend implements BackendInterface
 {
@@ -26,7 +27,7 @@ class SyliusProductBackend implements BackendInterface
      * Constructor.
      *
      * @param \Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface $taxonRepository
-     * @param \Sylius\Component\Product\Repository\ProductRepositoryInterface $productRepository
+     * @param \Sylius\Component\Core\Repository\ProductRepositoryInterface $productRepository
      */
     public function __construct(
         TaxonRepositoryInterface $taxonRepository,
@@ -62,6 +63,15 @@ class SyliusProductBackend implements BackendInterface
         /** @var \Sylius\Component\Taxonomy\Model\TaxonInterface $taxon */
         $taxon = $this->taxonRepository->find($id);
 
+        if (!$taxon instanceof TaxonInterface) {
+            throw new NotFoundException(
+                sprintf(
+                    'Location with "%s" ID not found.',
+                    $id
+                )
+            );
+        }
+
         return $this->buildLocation($taxon);
     }
 
@@ -78,6 +88,15 @@ class SyliusProductBackend implements BackendInterface
     {
         /** @var \Sylius\Component\Product\Model\ProductInterface $product */
         $product = $this->productRepository->find($id);
+
+        if (!$product instanceof ProductInterface) {
+            throw new NotFoundException(
+                sprintf(
+                    'Item with "%s" ID not found.',
+                    $id
+                )
+            );
+        }
 
         return $this->buildItem($product);
     }
