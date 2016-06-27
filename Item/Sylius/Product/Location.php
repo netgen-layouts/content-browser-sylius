@@ -33,16 +33,6 @@ class Location implements LocationInterface, TaxonInterface
     }
 
     /**
-     * Returns the name.
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->taxon->getName();
-    }
-
-    /**
      * Returns the type.
      *
      * @return int|string
@@ -50,6 +40,16 @@ class Location implements LocationInterface, TaxonInterface
     public function getType()
     {
         return 'sylius_product';
+    }
+
+    /**
+     * Returns the name.
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->taxon->getName();
     }
 
     /**
