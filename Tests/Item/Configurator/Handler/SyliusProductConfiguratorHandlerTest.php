@@ -3,11 +3,8 @@
 namespace Netgen\Bundle\ContentBrowserBundle\Tests\Item\Configurator\Handler;
 
 use Netgen\Bundle\ContentBrowserBundle\Item\Sylius\Product\Item;
-use Netgen\TagsBundle\API\Repository\Values\Tags\Tag;
 use Netgen\Bundle\ContentBrowserBundle\Item\Configurator\Handler\SyliusProductConfiguratorHandler;
 use PHPUnit\Framework\TestCase;
-use DateTimeZone;
-use DateTime;
 use Sylius\Component\Core\Model\Product;
 
 class SyliusProductConfiguratorHandlerTest extends TestCase
