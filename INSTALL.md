@@ -19,6 +19,7 @@ Activate the Content Browser in your kernel class:
 ...
 
 $bundles[] = new Netgen\Bundle\ContentBrowserBundle\NetgenContentBrowserBundle();
+$bundles[] = new Netgen\Bundle\ContentBrowserUIBundle\NetgenContentBrowserUIBundle();
 
 return $bundles;
 ```
