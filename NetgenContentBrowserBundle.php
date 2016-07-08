@@ -4,11 +4,7 @@ namespace Netgen\Bundle\ContentBrowserBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Netgen\Bundle\ContentBrowserBundle\DependencyInjection\CompilerPass\BackendRegistryPass;
-use Netgen\Bundle\ContentBrowserBundle\DependencyInjection\CompilerPass\ColumnProviderPass;
-use Netgen\Bundle\ContentBrowserBundle\DependencyInjection\CompilerPass\ItemConfiguratorPass;
-use Netgen\Bundle\ContentBrowserBundle\DependencyInjection\CompilerPass\ItemRendererPass;
-use Netgen\Bundle\ContentBrowserBundle\DependencyInjection\CompilerPass\ChainedConfigLoaderPass;
+use Netgen\Bundle\ContentBrowserBundle\DependencyInjection\CompilerPass;
 
 class NetgenContentBrowserBundle extends Bundle
 {
@@ -21,10 +17,11 @@ class NetgenContentBrowserBundle extends Bundle
      */
     public function build(ContainerBuilder $container)
     {
-        $container->addCompilerPass(new ChainedConfigLoaderPass());
-        $container->addCompilerPass(new BackendRegistryPass());
-        $container->addCompilerPass(new ItemConfiguratorPass());
-        $container->addCompilerPass(new ItemRendererPass());
-        $container->addCompilerPass(new ColumnProviderPass());
+        $container->addCompilerPass(new CompilerPass\ChainedConfigLoaderPass());
+        $container->addCompilerPass(new CompilerPass\BackendRegistryPass());
+        $container->addCompilerPass(new CompilerPass\ItemConfiguratorPass());
+        $container->addCompilerPass(new CompilerPass\ItemRendererPass());
+        $container->addCompilerPass(new CompilerPass\ColumnProviderPass());
+        $container->addCompilerPass(new CompilerPass\EzPublishDefaultPreviewPass());
     }
 }
