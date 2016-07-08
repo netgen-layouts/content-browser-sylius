@@ -12,5 +12,5 @@ Running tests requires that you have complete vendors installed, so run `compose
 You can run unit tests by simply calling `phpunit` from the repo root.
 
 ```
-$ phpunit
+$ vendor/bin/phpunit
 ```
