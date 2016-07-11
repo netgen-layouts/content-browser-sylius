@@ -1,4 +1,4 @@
-configs:
+item_types:
     sylius_product:
         min_selected: 1
         max_selected: 0

@@ -50,7 +50,7 @@ class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
 
         $this->load(
             array(
-                'configs' => array(
+                'item_types' => array(
                     'ezcontent' => array(
                         'sections' => array(42),
                         'template' => 'template.html.twig',

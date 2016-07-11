@@ -28,14 +28,14 @@ class NetgenContentBrowserExtension extends Extension implements PrependExtensio
         $configuration = new Configuration($extensionAlias);
         $config = $this->processConfiguration($configuration, $configs);
 
-        foreach ($config['configs'] as $configName => $configValues) {
+        foreach ($config['item_types'] as $itemType => $itemConfig) {
             $definition = new DefinitionDecorator('netgen_content_browser.config');
             $definition
-                ->replaceArgument(0, $configName)
-                ->replaceArgument(1, $configValues);
+                ->replaceArgument(0, $itemType)
+                ->replaceArgument(1, $itemConfig);
 
             $container->setDefinition(
-                'netgen_content_browser.config.' . $configName,
+                'netgen_content_browser.config.' . $itemType,
                 $definition
             );
         }
