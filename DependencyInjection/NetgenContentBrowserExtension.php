@@ -2,6 +2,7 @@
 
 namespace Netgen\Bundle\ContentBrowserBundle\DependencyInjection;
 
+use Symfony\Component\DependencyInjection\DefinitionDecorator;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
@@ -28,9 +29,14 @@ class NetgenContentBrowserExtension extends Extension implements PrependExtensio
         $config = $this->processConfiguration($configuration, $configs);
 
         foreach ($config['configs'] as $configName => $configValues) {
-            $container->setParameter(
+            $definition = new DefinitionDecorator('netgen_content_browser.config');
+            $definition
+                ->replaceArgument(0, $configName)
+                ->replaceArgument(1, $configValues);
+
+            $container->setDefinition(
                 'netgen_content_browser.config.' . $configName,
-                $configValues
+                $definition
             );
         }
 

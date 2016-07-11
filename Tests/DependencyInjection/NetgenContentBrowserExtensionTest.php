@@ -27,20 +27,9 @@ class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
     {
         $this->container->setParameter('kernel.bundles', array());
 
-        $this->load(
-            array(
-                'configs' => array(
-                    'ezcontent' => array(
-                        'sections' => array(42),
-                        'template' => 'template.html.twig',
-                    ),
-                ),
-            )
-        );
+        $this->load();
 
         $this->assertContainerBuilderHasParameter('netgen_content_browser.route_prefix', '/cb');
-        $this->assertContainerBuilderHasParameter('netgen_content_browser.columns.date_format', 'D, d M Y H:i:s');
-        $this->assertContainerBuilderHasParameter('netgen_content_browser.config.ezcontent');
     }
 
     /**
@@ -59,21 +48,26 @@ class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
             )
         );
 
+        $this->load(
+            array(
+                'configs' => array(
+                    'ezcontent' => array(
+                        'sections' => array(42),
+                        'template' => 'template.html.twig',
+                    ),
+                ),
+            )
+        );
+
         $this->load();
 
         $this->assertContainerBuilderHasService('netgen_content_browser.item_repository');
         $this->assertContainerBuilderHasService('netgen_content_browser.backend.ezlocation');
         $this->assertContainerBuilderHasService('netgen_content_browser.backend.eztags');
         $this->assertContainerBuilderHasService('netgen_content_browser.backend.sylius_product');
+        $this->assertContainerBuilderHasService('netgen_content_browser.config.ezcontent');
 
         $this->assertContainerBuilderHasSyntheticService('netgen_content_browser.current_config');
-
-        $this->assertContainerBuilderHasService('netgen_content_browser.config_loader.default');
-        $this->assertContainerBuilderHasService('netgen_content_browser.config_loader.chained');
-        $this->assertContainerBuilderHasAlias(
-            'netgen_content_browser.config_loader',
-            'netgen_content_browser.config_loader.chained'
-        );
     }
 
     /**
@@ -93,12 +87,5 @@ class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderNotHasService('netgen_content_browser.backend.sylius_product');
 
         $this->assertContainerBuilderHasSyntheticService('netgen_content_browser.current_config');
-
-        $this->assertContainerBuilderHasService('netgen_content_browser.config_loader.default');
-        $this->assertContainerBuilderHasService('netgen_content_browser.config_loader.chained');
-        $this->assertContainerBuilderHasAlias(
-            'netgen_content_browser.config_loader',
-            'netgen_content_browser.config_loader.chained'
-        );
     }
 }

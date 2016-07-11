@@ -1,7 +1,7 @@
 parameters:
     netgen_content_browser.backend.sylius_product.class: Netgen\Bundle\ContentBrowserBundle\Backend\SyliusProductBackend
 
-    netgen_content_browser.item_configurator.handler.sylius_product.class: Netgen\Bundle\ContentBrowserBundle\Item\Configurator\Handler\SyliusProductConfiguratorHandler
+    netgen_content_browser.serializer.handler.sylius_product.class: Netgen\Bundle\ContentBrowserBundle\Item\Serializer\Handler\SyliusProductSerializerHandler
     netgen_content_browser.template_value_provider.sylius_product.class: Netgen\Bundle\ContentBrowserBundle\Item\Renderer\TemplateValueProvider\SyliusProductTemplateValueProvider
 
     netgen_content_browser.column_value_provider.sylius_product.product_id.class: Netgen\Bundle\ContentBrowserBundle\Item\ColumnProvider\ColumnValueProvider\SyliusProduct\ProductId
@@ -15,10 +15,10 @@ services:
         tags:
             - { name: netgen_content_browser.backend, value_type: sylius_product }
 
-    netgen_content_browser.item_configurator.handler.sylius_product:
-        class: "%netgen_content_browser.item_configurator.handler.sylius_product.class%"
+    netgen_content_browser.serializer.handler.sylius_product:
+        class: "%netgen_content_browser.serializer.handler.sylius_product.class%"
         tags:
-            - { name: netgen_content_browser.item_configurator.handler, value_type: sylius_product }
+            - { name: netgen_content_browser.serializer.handler, value_type: sylius_product }
 
     netgen_content_browser.template_value_provider.sylius_product:
         class: "%netgen_content_browser.template_value_provider.sylius_product.class%"
