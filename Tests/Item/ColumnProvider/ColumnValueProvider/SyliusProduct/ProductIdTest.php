@@ -29,7 +29,7 @@ class ProductIdTest extends TestCase
 
         $item = new Item($product);
 
-        self::assertEquals(
+        $this->assertEquals(
             42,
             $this->provider->getValue($item)
         );

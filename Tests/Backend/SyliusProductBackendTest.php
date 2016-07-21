@@ -57,14 +57,14 @@ class SyliusProductBackendTest extends TestCase
 
         $locations = $this->backend->getDefaultSections();
 
-        self::assertCount(2, $locations);
+        $this->assertCount(2, $locations);
 
         foreach ($locations as $location) {
-            self::assertInstanceOf(LocationInterface::class, $location);
+            $this->assertInstanceOf(LocationInterface::class, $location);
         }
 
-        self::assertEquals(1, $locations[0]->getId());
-        self::assertEquals(2, $locations[1]->getId());
+        $this->assertEquals(1, $locations[0]->getId());
+        $this->assertEquals(2, $locations[1]->getId());
     }
 
     /**
@@ -81,8 +81,8 @@ class SyliusProductBackendTest extends TestCase
 
         $location = $this->backend->loadLocation(1);
 
-        self::assertInstanceOf(LocationInterface::class, $location);
-        self::assertEquals(1, $location->getId());
+        $this->assertInstanceOf(LocationInterface::class, $location);
+        $this->assertEquals(1, $location->getId());
     }
 
     /**
@@ -114,8 +114,8 @@ class SyliusProductBackendTest extends TestCase
 
         $item = $this->backend->loadItem(1);
 
-        self::assertInstanceOf(ItemInterface::class, $item);
-        self::assertEquals(1, $item->getValue());
+        $this->assertInstanceOf(ItemInterface::class, $item);
+        $this->assertEquals(1, $item->getValue());
     }
 
     /**
@@ -150,10 +150,10 @@ class SyliusProductBackendTest extends TestCase
             new Location($this->getTaxon(1))
         );
 
-        self::assertCount(2, $locations);
+        $this->assertCount(2, $locations);
         foreach ($locations as $location) {
-            self::assertInstanceOf(LocationInterface::class, $location);
-            self::assertEquals(1, $location->getParentId());
+            $this->assertInstanceOf(LocationInterface::class, $location);
+            $this->assertEquals(1, $location->getParentId());
         }
     }
 
@@ -172,7 +172,7 @@ class SyliusProductBackendTest extends TestCase
             new Location($this->getTaxon(1))
         );
 
-        self::assertEquals(2, $count);
+        $this->assertEquals(2, $count);
     }
 
     /**
@@ -199,9 +199,9 @@ class SyliusProductBackendTest extends TestCase
             new Location($this->getTaxon(1))
         );
 
-        self::assertCount(2, $items);
+        $this->assertCount(2, $items);
         foreach ($items as $item) {
-            self::assertInstanceOf(ItemInterface::class, $item);
+            $this->assertInstanceOf(ItemInterface::class, $item);
         }
     }
 
@@ -237,9 +237,9 @@ class SyliusProductBackendTest extends TestCase
             2
         );
 
-        self::assertCount(2, $items);
+        $this->assertCount(2, $items);
         foreach ($items as $item) {
-            self::assertInstanceOf(ItemInterface::class, $item);
+            $this->assertInstanceOf(ItemInterface::class, $item);
         }
     }
 
@@ -264,7 +264,7 @@ class SyliusProductBackendTest extends TestCase
             new Location($this->getTaxon(1))
         );
 
-        self::assertEquals(2, $count);
+        $this->assertEquals(2, $count);
     }
 
     /**
@@ -289,9 +289,9 @@ class SyliusProductBackendTest extends TestCase
 
         $items = $this->backend->search('test');
 
-        self::assertCount(2, $items);
+        $this->assertCount(2, $items);
         foreach ($items as $item) {
-            self::assertInstanceOf(ItemInterface::class, $item);
+            $this->assertInstanceOf(ItemInterface::class, $item);
         }
     }
 
@@ -323,9 +323,9 @@ class SyliusProductBackendTest extends TestCase
 
         $items = $this->backend->search('test', 8, 2);
 
-        self::assertCount(2, $items);
+        $this->assertCount(2, $items);
         foreach ($items as $item) {
-            self::assertInstanceOf(ItemInterface::class, $item);
+            $this->assertInstanceOf(ItemInterface::class, $item);
         }
     }
 
@@ -348,7 +348,7 @@ class SyliusProductBackendTest extends TestCase
 
         $count = $this->backend->searchCount('test');
 
-        self::assertEquals(2, $count);
+        $this->assertEquals(2, $count);
     }
 
     /**

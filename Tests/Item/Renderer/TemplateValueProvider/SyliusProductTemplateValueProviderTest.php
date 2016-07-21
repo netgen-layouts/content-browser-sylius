@@ -26,7 +26,7 @@ class SyliusProductTemplateValueProviderTest extends TestCase
     {
         $item = $this->getItem();
 
-        self::assertEquals(
+        $this->assertEquals(
             array(
                 'product' => $item->getProduct(),
             ),

@@ -44,7 +44,7 @@ class LocationTest extends TestCase
      */
     public function testGetId()
     {
-        self::assertEquals(42, $this->location->getId());
+        $this->assertEquals(42, $this->location->getId());
     }
 
     /**
@@ -52,7 +52,7 @@ class LocationTest extends TestCase
      */
     public function testGetType()
     {
-        self::assertEquals('sylius_product', $this->location->getType());
+        $this->assertEquals('sylius_product', $this->location->getType());
     }
 
     /**
@@ -60,7 +60,7 @@ class LocationTest extends TestCase
      */
     public function testGetName()
     {
-        self::assertEquals('Some name', $this->location->getName());
+        $this->assertEquals('Some name', $this->location->getName());
     }
 
     /**
@@ -68,7 +68,7 @@ class LocationTest extends TestCase
      */
     public function testGetParentId()
     {
-        self::assertEquals(24, $this->location->getParentId());
+        $this->assertEquals(24, $this->location->getParentId());
     }
 
     /**
@@ -78,7 +78,7 @@ class LocationTest extends TestCase
     {
         $this->location = new Location(new Taxon());
 
-        self::assertNull($this->location->getParentId());
+        $this->assertNull($this->location->getParentId());
     }
 
     /**
@@ -86,6 +86,6 @@ class LocationTest extends TestCase
      */
     public function testGetProduct()
     {
-        self::assertEquals($this->taxon, $this->location->getTaxon());
+        $this->assertEquals($this->taxon, $this->location->getTaxon());
     }
 }
