@@ -34,3 +34,12 @@ netgen_content_browser:
     resource: "@NetgenContentBrowserBundle/Resources/config/routing.yml"
     prefix: "%netgen_content_browser.route_prefix%"
 ```
+
+Install assets
+--------------
+
+Run the following from your repo root to install Block Manager assets:
+
+```
+php app/console assets:install --symlink --relative
+```
