@@ -38,7 +38,7 @@ netgen_content_browser:
 Install assets
 --------------
 
-Run the following from your repo root to install Block Manager assets:
+Run the following from your repo root to install Content Browser assets:
 
 ```
 php app/console assets:install --symlink --relative
