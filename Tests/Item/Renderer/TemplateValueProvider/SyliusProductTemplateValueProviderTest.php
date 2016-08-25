@@ -4,8 +4,8 @@ namespace Netgen\Bundle\ContentBrowserBundle\Tests\Item\Renderer\TemplateValuePr
 
 use Netgen\Bundle\ContentBrowserBundle\Item\Sylius\Product\Item;
 use Netgen\Bundle\ContentBrowserBundle\Item\Renderer\TemplateValueProvider\SyliusProductTemplateValueProvider;
+use Netgen\Bundle\ContentBrowserBundle\Tests\Backend\Stubs\Product;
 use PHPUnit\Framework\TestCase;
-use Sylius\Component\Core\Model\Product;
 
 class SyliusProductTemplateValueProviderTest extends TestCase
 {

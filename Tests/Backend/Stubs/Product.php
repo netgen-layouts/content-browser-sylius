@@ -2,7 +2,7 @@
 
 namespace Netgen\Bundle\ContentBrowserBundle\Tests\Backend\Stubs;
 
-use Sylius\Component\Core\Model\Product as BaseProduct;
+use Sylius\Component\Product\Model\Product as BaseProduct;
 
 class Product extends BaseProduct
 {
