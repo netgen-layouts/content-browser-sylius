@@ -19,7 +19,7 @@ class SyliusProductBackend implements BackendInterface
     protected $taxonRepository;
 
     /**
-     * @var \Sylius\Component\Product\Repository\ProductRepositoryInterface
+     * @var \Sylius\Component\Core\Repository\ProductRepositoryInterface
      */
     protected $productRepository;
 
