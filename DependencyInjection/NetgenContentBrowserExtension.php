@@ -5,6 +5,7 @@ namespace Netgen\Bundle\ContentBrowserBundle\DependencyInjection;
 use Symfony\Component\DependencyInjection\DefinitionDecorator;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\Resource\FileResource;
@@ -45,6 +46,9 @@ class NetgenContentBrowserExtension extends Extension implements PrependExtensio
             new FileLocator(__DIR__ . '/../Resources/config')
         );
 
+        $loader->load('services.yml');
+        $loader->load('default_settings.yml');
+
         $activatedBundles = array_keys($container->getParameter('kernel.bundles'));
 
         if (in_array('SyliusCoreBundle', $activatedBundles)) {
@@ -58,9 +62,6 @@ class NetgenContentBrowserExtension extends Extension implements PrependExtensio
         if (in_array('NetgenTagsBundle', $activatedBundles)) {
             $loader->load('eztags/services.yml');
         }
-
-        $loader->load('services.yml');
-        $loader->load('default_settings.yml');
     }
 
     /**
@@ -70,9 +71,17 @@ class NetgenContentBrowserExtension extends Extension implements PrependExtensio
      */
     public function prepend(ContainerBuilder $container)
     {
-        $activatedBundles = array_keys($container->getParameter('kernel.bundles'));
+        $loader = new XmlFileLoader(
+            $container,
+            new FileLocator(__DIR__ . '/../Resources/config')
+        );
+
+        $loader->load('framework/assets.xml');
 
         $this->doPrepend($container, 'framework/twig.yml', 'twig');
+        $this->doPrepend($container, 'framework/assets.yml', 'framework');
+
+        $activatedBundles = array_keys($container->getParameter('kernel.bundles'));
 
         if (in_array('SyliusCoreBundle', $activatedBundles)) {
             $this->doPrepend($container, 'sylius/product/config.yml', 'netgen_content_browser');
