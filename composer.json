@@ -11,7 +11,7 @@
         "php": "^5.5|^7.0",
         "symfony/symfony": "^2.8|^3.0",
         "sensio/framework-extra-bundle": "^3.0",
-        "netgen/content-browser-ui-bundle": "^1.0",
+        "netgen/content-browser-ui-bundle": "^1.0@dev",
         "white-october/pagerfanta-bundle": "^1.0"
     },
     "require-dev": {
@@ -20,7 +20,7 @@
         "matthiasnoback/symfony-dependency-injection-test": "^1.0",
         "ezsystems/ezpublish-kernel": "^6.0",
         "netgen/tagsbundle": "^2.1",
-        "sylius/sylius": "^1.0"
+        "sylius/core": "^0.19|^1.0"
     },
     "repositories": [
         { "type": "composer", "url": "https://packagist.netgen.biz" }
