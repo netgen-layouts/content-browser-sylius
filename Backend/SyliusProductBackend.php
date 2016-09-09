@@ -110,7 +110,11 @@ class SyliusProductBackend implements BackendInterface
      */
     public function getSubLocations(LocationInterface $location)
     {
-        $taxons = $this->taxonRepository->findChildren($location->getTaxon());
+        $taxons = $this->taxonRepository->findBy(
+            array(
+                'parent' => $location->getTaxon(),
+            )
+        );
 
         return $this->buildLocations($taxons);
     }

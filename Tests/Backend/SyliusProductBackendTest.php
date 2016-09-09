@@ -142,8 +142,8 @@ class SyliusProductBackendTest extends TestCase
     {
         $this->taxonRepositoryMock
             ->expects($this->once())
-            ->method('findChildren')
-            ->with($this->equalTo($this->getTaxon(1)))
+            ->method('findBy')
+            ->with($this->equalTo(array('parent' => $this->getTaxon(1))))
             ->will($this->returnValue(array($this->getTaxon(2, 1), $this->getTaxon(3, 1))));
 
         $locations = $this->backend->getSubLocations(
@@ -164,8 +164,8 @@ class SyliusProductBackendTest extends TestCase
     {
         $this->taxonRepositoryMock
             ->expects($this->once())
-            ->method('findChildren')
-            ->with($this->equalTo($this->getTaxon(1)))
+            ->method('findBy')
+            ->with($this->equalTo(array('parent' => $this->getTaxon(1))))
             ->will($this->returnValue(array($this->getTaxon(2), $this->getTaxon(3))));
 
         $count = $this->backend->getSubLocationsCount(
