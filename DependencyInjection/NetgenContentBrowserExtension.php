@@ -47,7 +47,6 @@ class NetgenContentBrowserExtension extends Extension implements PrependExtensio
         );
 
         $loader->load('services.yml');
-        $loader->load('default_settings.yml');
 
         $activatedBundles = array_keys($container->getParameter('kernel.bundles'));
 
@@ -71,6 +70,13 @@ class NetgenContentBrowserExtension extends Extension implements PrependExtensio
      */
     public function prepend(ContainerBuilder $container)
     {
+        $loader = new YamlFileLoader(
+            $container,
+            new FileLocator(__DIR__ . '/../Resources/config')
+        );
+
+        $loader->load('default_settings.yml');
+
         $loader = new XmlFileLoader(
             $container,
             new FileLocator(__DIR__ . '/../Resources/config')

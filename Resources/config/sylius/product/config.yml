@@ -3,7 +3,7 @@ item_types:
         min_selected: 1
         max_selected: 0
         preview:
-            template: 'NetgenContentBrowserBundle:sylius:product_item.html.twig'
+            template: '%netgen_content_browser.sylius_product.default_item_template%'
         columns:
             name:
                 name: columns.name
