@@ -21,18 +21,6 @@ class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
     }
 
     /**
-     * @covers \Netgen\Bundle\ContentBrowserBundle\DependencyInjection\NetgenContentBrowserExtension::load
-     */
-    public function testParameters()
-    {
-        $this->container->setParameter('kernel.bundles', array());
-
-        $this->load();
-
-        $this->assertContainerBuilderHasParameter('netgen_content_browser.route_prefix', '/cb');
-    }
-
-    /**
      * We test for existence of one service from each of the config files.
      *
      * @covers \Netgen\Bundle\ContentBrowserBundle\DependencyInjection\NetgenContentBrowserExtension::load
