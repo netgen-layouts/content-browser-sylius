@@ -1,3 +1,6 @@
+form.messages.invalid_item: '(INVALID ITEM)'
+form.messages.no_item_selected: '(NO ITEM SELECTED)'
+
 columns.name: 'Name'
 
 columns.ezpublish.location_id: 'Location ID'
