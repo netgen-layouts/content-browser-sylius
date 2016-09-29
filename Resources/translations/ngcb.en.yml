@@ -1,5 +1,6 @@
 form.messages.invalid_item: '(INVALID ITEM)'
 form.messages.no_item_selected: '(NO ITEM SELECTED)'
+form.add_items: 'Add items'
 
 columns.name: 'Name'
 
