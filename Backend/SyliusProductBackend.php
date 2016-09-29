@@ -153,24 +153,7 @@ class SyliusProductBackend implements BackendInterface
      */
     public function getSubItems(LocationInterface $location, $offset = 0, $limit = 25)
     {
-        $taxon = $location->getTaxon();
-        $rootTaxon = $taxon->isRoot() ? $taxon : $taxon->getRoot();
-
-        $queryBuilder = $this->productRepository->createListQueryBuilder();
-
-        $queryBuilder
-            ->innerJoin('o.taxons', 'taxon')
-                ->andWhere($queryBuilder->expr()->eq('taxon.root', ':root'))
-                ->andWhere($queryBuilder->expr()->orX(
-                    'taxon = :taxon',
-                    ':left < taxon.left AND taxon.right < :right'
-                ))
-            ->setParameter('root', $rootTaxon)
-            ->setParameter('taxon', $taxon)
-            ->setParameter('left', $taxon->getLeft())
-            ->setParameter('right', $taxon->getRight());
-
-        $paginator = new Pagerfanta(new DoctrineORMAdapter($queryBuilder, true, false));
+        $paginator = $this->createByTaxonPaginator($location->getTaxon());
 
         $paginator->setMaxPerPage($limit);
         $paginator->setCurrentPage((int)($offset / $limit) + 1);
@@ -179,7 +162,7 @@ class SyliusProductBackend implements BackendInterface
             iterator_to_array(
                 $paginator->getCurrentPageResults()
             ),
-            $taxon
+            $location->getTaxon()
         );
     }
 
@@ -192,24 +175,7 @@ class SyliusProductBackend implements BackendInterface
      */
     public function getSubItemsCount(LocationInterface $location)
     {
-        $taxon = $location->getTaxon();
-        $rootTaxon = $taxon->isRoot() ? $taxon : $taxon->getRoot();
-
-        $queryBuilder = $this->productRepository->createListQueryBuilder();
-
-        $queryBuilder
-            ->innerJoin('o.taxons', 'taxon')
-                ->andWhere($queryBuilder->expr()->eq('taxon.root', ':root'))
-                ->andWhere($queryBuilder->expr()->orX(
-                    'taxon = :taxon',
-                    ':left < taxon.left AND taxon.right < :right'
-                ))
-            ->setParameter('root', $rootTaxon)
-            ->setParameter('taxon', $taxon)
-            ->setParameter('left', $taxon->getLeft())
-            ->setParameter('right', $taxon->getRight());
-
-        $paginator = new Pagerfanta(new DoctrineORMAdapter($queryBuilder, true, false));
+        $paginator = $this->createByTaxonPaginator($location->getTaxon());
 
         return $paginator->getNbResults();
     }
@@ -225,19 +191,10 @@ class SyliusProductBackend implements BackendInterface
      */
     public function search($searchText, $offset = 0, $limit = 25)
     {
-        $queryBuilder = $this->productRepository->createListQueryBuilder();
-
-        $queryBuilder
-            ->where(
-                $queryBuilder->expr()->andX(
-                    $queryBuilder->expr()->like('translation.name', ':name'),
-                    $queryBuilder->expr()->eq('translation.locale', ':locale')
-                )
-            )
-            ->setParameter('name', '%' . $searchText . '%')
-            ->setParameter('locale', $this->localeContext->getLocaleCode());
-
-        $paginator = new Pagerfanta(new DoctrineORMAdapter($queryBuilder, true, false));
+        $paginator = $this->createSearchPaginator(
+            $searchText,
+            $this->localeContext->getLocaleCode()
+        );
 
         $paginator->setMaxPerPage($limit);
         $paginator->setCurrentPage((int)($offset / $limit) + 1);
@@ -258,19 +215,10 @@ class SyliusProductBackend implements BackendInterface
      */
     public function searchCount($searchText)
     {
-        $queryBuilder = $this->productRepository->createListQueryBuilder();
-
-        $queryBuilder
-            ->where(
-                $queryBuilder->expr()->andX(
-                    $queryBuilder->expr()->like('translation.name', ':name'),
-                    $queryBuilder->expr()->eq('translation.locale', ':locale')
-                )
-            )
-            ->setParameter('name', '%' . $searchText . '%')
-            ->setParameter('locale', $this->localeContext->getLocaleCode());
-
-        $paginator = new Pagerfanta(new DoctrineORMAdapter($queryBuilder, true, false));
+        $paginator = $this->createSearchPaginator(
+            $searchText,
+            $this->localeContext->getLocaleCode()
+        );
 
         return $paginator->getNbResults();
     }
@@ -333,5 +281,58 @@ class SyliusProductBackend implements BackendInterface
             },
             $products
         );
+    }
+
+    /**
+     * Creates a paginator that finds all products with specific taxon.
+     *
+     * @param \Sylius\Component\Taxonomy\Model\TaxonInterface $taxon
+     *
+     * @return \Pagerfanta\Pagerfanta
+     */
+    protected function createByTaxonPaginator(TaxonInterface $taxon)
+    {
+        $root = $taxon->isRoot() ? $taxon : $taxon->getRoot();
+
+        $queryBuilder = $this->productRepository->createListQueryBuilder();
+
+        $queryBuilder
+            ->innerJoin('o.taxons', 'taxon')
+                ->andWhere($queryBuilder->expr()->eq('taxon.root', ':root'))
+                ->andWhere($queryBuilder->expr()->orX(
+                    'taxon = :taxon',
+                    ':left < taxon.left AND taxon.right < :right'
+                ))
+            ->setParameter('root', $root)
+            ->setParameter('taxon', $taxon)
+            ->setParameter('left', $taxon->getLeft())
+            ->setParameter('right', $taxon->getRight());
+
+        return new Pagerfanta(new DoctrineORMAdapter($queryBuilder, true, false));
+    }
+
+    /**
+     * Creates a paginator that searches products by name.
+     *
+     * @param string $searchText
+     * @param string $locale
+     *
+     * @return \Pagerfanta\Pagerfanta
+     */
+    protected function createSearchPaginator($searchText, $locale)
+    {
+        $queryBuilder = $this->productRepository->createListQueryBuilder();
+
+        $queryBuilder
+            ->where(
+                $queryBuilder->expr()->andX(
+                    $queryBuilder->expr()->like('translation.name', ':name'),
+                    $queryBuilder->expr()->eq('translation.locale', ':locale')
+                )
+            )
+            ->setParameter('name', '%' . $searchText . '%')
+            ->setParameter('locale', $locale);
+
+        return new Pagerfanta(new DoctrineORMAdapter($queryBuilder, true, false));
     }
 }
