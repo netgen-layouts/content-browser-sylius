@@ -12,6 +12,7 @@ services:
         arguments:
             - "@sylius.repository.taxon"
             - "@sylius.repository.product"
+            - "@sylius.context.locale"
         tags:
             - { name: netgen_content_browser.backend, item_type: sylius_product }
 

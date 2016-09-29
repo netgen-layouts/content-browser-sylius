@@ -6,10 +6,13 @@ use Netgen\Bundle\ContentBrowserBundle\Exceptions\NotFoundException;
 use Netgen\Bundle\ContentBrowserBundle\Item\LocationInterface;
 use Netgen\Bundle\ContentBrowserBundle\Item\Sylius\Product\Location;
 use Netgen\Bundle\ContentBrowserBundle\Item\Sylius\Product\Item;
+use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Pagerfanta;
 
 class SyliusProductBackend implements BackendInterface
 {
@@ -24,17 +27,25 @@ class SyliusProductBackend implements BackendInterface
     protected $productRepository;
 
     /**
+     * @var \Sylius\Component\Locale\Context\LocaleContextInterface
+     */
+    protected $localeContext;
+
+    /**
      * Constructor.
      *
      * @param \Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface $taxonRepository
      * @param \Sylius\Component\Core\Repository\ProductRepositoryInterface $productRepository
+     * @param \Sylius\Component\Locale\Context\LocaleContextInterface $localeContext
      */
     public function __construct(
         TaxonRepositoryInterface $taxonRepository,
-        ProductRepositoryInterface $productRepository
+        ProductRepositoryInterface $productRepository,
+        LocaleContextInterface $localeContext
     ) {
         $this->taxonRepository = $taxonRepository;
         $this->productRepository = $productRepository;
+        $this->localeContext = $localeContext;
     }
 
     /**
@@ -143,8 +154,10 @@ class SyliusProductBackend implements BackendInterface
     public function getSubItems(LocationInterface $location, $offset = 0, $limit = 25)
     {
         /** @var \Pagerfanta\Pagerfanta $products */
-        $products = $this->productRepository->createByTaxonPaginator(
-            $location->getTaxon()
+        $products = $this->productRepository->createPaginator(
+            array(
+                'mainTaxon' => $location->getTaxon(),
+            )
         );
 
         $products->setMaxPerPage($limit);
@@ -168,8 +181,10 @@ class SyliusProductBackend implements BackendInterface
     public function getSubItemsCount(LocationInterface $location)
     {
         /** @var \Pagerfanta\Pagerfanta $products */
-        $products = $this->productRepository->createByTaxonPaginator(
-            $location->getTaxon()
+        $products = $this->productRepository->createPaginator(
+            array(
+                'mainTaxon' => $location->getTaxon(),
+            )
         );
 
         return $products->getNbResults();
@@ -186,19 +201,26 @@ class SyliusProductBackend implements BackendInterface
      */
     public function search($searchText, $offset = 0, $limit = 25)
     {
-        /** @var \Pagerfanta\Pagerfanta $products */
-        $products = $this->productRepository->createFilterPaginator(
-            array(
-                'name' => $searchText,
-            )
-        );
+        $queryBuilder = $this->productRepository->createListQueryBuilder();
 
-        $products->setMaxPerPage($limit);
-        $products->setCurrentPage((int)($offset / $limit) + 1);
+        $queryBuilder
+            ->where(
+                $queryBuilder->expr()->andX(
+                    $queryBuilder->expr()->like('translation.name', ':name'),
+                    $queryBuilder->expr()->eq('translation.locale', ':locale')
+                )
+            )
+            ->setParameter('name', '%' . $searchText . '%')
+            ->setParameter('locale', $this->localeContext->getLocaleCode());
+
+        $paginator = new Pagerfanta(new DoctrineORMAdapter($queryBuilder, true, false));
+
+        $paginator->setMaxPerPage($limit);
+        $paginator->setCurrentPage((int)($offset / $limit) + 1);
 
         return $this->buildItems(
             iterator_to_array(
-                $products->getCurrentPageResults()
+                $paginator->getCurrentPageResults()
             )
         );
     }
@@ -212,14 +234,21 @@ class SyliusProductBackend implements BackendInterface
      */
     public function searchCount($searchText)
     {
-        /** @var \Pagerfanta\Pagerfanta $products */
-        $products = $this->productRepository->createFilterPaginator(
-            array(
-                'name' => $searchText,
-            )
-        );
+        $queryBuilder = $this->productRepository->createListQueryBuilder();
 
-        return $products->getNbResults();
+        $queryBuilder
+            ->where(
+                $queryBuilder->expr()->andX(
+                    $queryBuilder->expr()->like('translation.name', ':name'),
+                    $queryBuilder->expr()->eq('translation.locale', ':locale')
+                )
+            )
+            ->setParameter('name', '%' . $searchText . '%')
+            ->setParameter('locale', $this->localeContext->getLocaleCode());
+
+        $paginator = new Pagerfanta(new DoctrineORMAdapter($queryBuilder, true, false));
+
+        return $paginator->getNbResults();
     }
 
     /**
