@@ -159,9 +159,7 @@ class SyliusProductBackend implements BackendInterface
         $paginator->setCurrentPage((int)($offset / $limit) + 1);
 
         return $this->buildItems(
-            iterator_to_array(
-                $paginator->getCurrentPageResults()
-            ),
+            $paginator->getCurrentPageResults(),
             $location->getTaxon()
         );
     }
@@ -200,9 +198,7 @@ class SyliusProductBackend implements BackendInterface
         $paginator->setCurrentPage((int)($offset / $limit) + 1);
 
         return $this->buildItems(
-            iterator_to_array(
-                $paginator->getCurrentPageResults()
-            )
+            $paginator->getCurrentPageResults()
         );
     }
 
@@ -268,19 +264,20 @@ class SyliusProductBackend implements BackendInterface
     /**
      * Builds the items from provided products.
      *
-     * @param \Sylius\Component\Product\Model\ProductInterface[] $products
+     * @param \Sylius\Component\Product\Model\ProductInterface[]|\Iterator $products
      * @param \Sylius\Component\Taxonomy\Model\TaxonInterface $parentTaxon
      *
      * @return \Netgen\Bundle\ContentBrowserBundle\Item\Sylius\Product\Item[]
      */
-    protected function buildItems(array $products, TaxonInterface $parentTaxon = null)
+    protected function buildItems($products, TaxonInterface $parentTaxon = null)
     {
-        return array_map(
-            function (ProductInterface $product) use ($parentTaxon) {
-                return $this->buildItem($product, $parentTaxon);
-            },
-            $products
-        );
+        $items = array();
+
+        foreach ($products as $product) {
+            $items[] = $this->buildItem($product, $parentTaxon);
+        }
+
+        return $items;
     }
 
     /**
