@@ -8,6 +8,7 @@ use Netgen\Bundle\ContentBrowserBundle\Item\LocationInterface;
 use Netgen\Bundle\ContentBrowserBundle\Item\Sylius\Product\Location;
 use Netgen\Bundle\ContentBrowserBundle\Tests\Backend\Stubs\Taxon;
 use Netgen\Bundle\ContentBrowserBundle\Tests\Backend\Stubs\Product;
+use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Pagerfanta\Adapter\AdapterInterface;
@@ -28,6 +29,11 @@ class SyliusProductBackendTest extends TestCase
     protected $productRepositoryMock;
 
     /**
+     * @var \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected $localeContextMock;
+
+    /**
      * @var \Netgen\Bundle\ContentBrowserBundle\Backend\SyliusProductBackend
      */
     protected $backend;
@@ -36,10 +42,12 @@ class SyliusProductBackendTest extends TestCase
     {
         $this->taxonRepositoryMock = $this->createMock(TaxonRepositoryInterface::class);
         $this->productRepositoryMock = $this->createMock(ProductRepositoryInterface::class);
+        $this->localeContextMock = $this->createMock(LocaleContextInterface::class);
 
         $this->backend = new SyliusProductBackend(
             $this->taxonRepositoryMock,
-            $this->productRepositoryMock
+            $this->productRepositoryMock,
+            $this->localeContextMock
         );
     }
 
