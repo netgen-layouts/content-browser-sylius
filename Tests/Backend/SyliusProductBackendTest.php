@@ -71,8 +71,8 @@ class SyliusProductBackendTest extends TestCase
             $this->assertInstanceOf(LocationInterface::class, $location);
         }
 
-        $this->assertEquals(1, $locations[0]->getId());
-        $this->assertEquals(2, $locations[1]->getId());
+        $this->assertEquals(1, $locations[0]->getLocationId());
+        $this->assertEquals(2, $locations[1]->getLocationId());
     }
 
     /**
@@ -90,7 +90,7 @@ class SyliusProductBackendTest extends TestCase
         $location = $this->backend->loadLocation(1);
 
         $this->assertInstanceOf(LocationInterface::class, $location);
-        $this->assertEquals(1, $location->getId());
+        $this->assertEquals(1, $location->getLocationId());
     }
 
     /**

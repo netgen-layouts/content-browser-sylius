@@ -27,7 +27,7 @@ class Location implements LocationInterface, TaxonInterface
      *
      * @return int|string
      */
-    public function getId()
+    public function getLocationId()
     {
         return $this->taxon->getId();
     }

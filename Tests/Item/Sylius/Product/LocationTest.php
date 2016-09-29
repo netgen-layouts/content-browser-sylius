@@ -40,11 +40,11 @@ class LocationTest extends TestCase
 
     /**
      * @covers \Netgen\Bundle\ContentBrowserBundle\Item\Sylius\Product\Location::__construct
-     * @covers \Netgen\Bundle\ContentBrowserBundle\Item\Sylius\Product\Location::getId
+     * @covers \Netgen\Bundle\ContentBrowserBundle\Item\Sylius\Product\Location::getLocationId
      */
-    public function testGetId()
+    public function testGetLocationId()
     {
-        $this->assertEquals(42, $this->location->getId());
+        $this->assertEquals(42, $this->location->getLocationId());
     }
 
     /**
