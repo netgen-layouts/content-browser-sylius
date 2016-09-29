@@ -13,17 +13,17 @@ services:
             - "@sylius.repository.taxon"
             - "@sylius.repository.product"
         tags:
-            - { name: netgen_content_browser.backend, value_type: sylius_product }
+            - { name: netgen_content_browser.backend, item_type: sylius_product }
 
     netgen_content_browser.serializer.handler.sylius_product:
         class: "%netgen_content_browser.serializer.handler.sylius_product.class%"
         tags:
-            - { name: netgen_content_browser.serializer.handler, value_type: sylius_product }
+            - { name: netgen_content_browser.serializer.handler, item_type: sylius_product }
 
     netgen_content_browser.template_value_provider.sylius_product:
         class: "%netgen_content_browser.template_value_provider.sylius_product.class%"
         tags:
-            - { name: netgen_content_browser.template_value_provider, value_type: sylius_product }
+            - { name: netgen_content_browser.template_value_provider, item_type: sylius_product }
 
     netgen_content_browser.column_value_provider.sylius_product.product_id:
         class: "%netgen_content_browser.column_value_provider.sylius_product.product_id.class%"
