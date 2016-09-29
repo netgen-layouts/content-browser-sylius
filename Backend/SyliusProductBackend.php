@@ -153,21 +153,33 @@ class SyliusProductBackend implements BackendInterface
      */
     public function getSubItems(LocationInterface $location, $offset = 0, $limit = 25)
     {
-        /** @var \Pagerfanta\Pagerfanta $products */
-        $products = $this->productRepository->createPaginator(
-            array(
-                'mainTaxon' => $location->getTaxon(),
-            )
-        );
+        $taxon = $location->getTaxon();
+        $rootTaxon = $taxon->isRoot() ? $taxon : $taxon->getRoot();
 
-        $products->setMaxPerPage($limit);
-        $products->setCurrentPage((int)($offset / $limit) + 1);
+        $queryBuilder = $this->productRepository->createListQueryBuilder();
+
+        $queryBuilder
+            ->innerJoin('o.taxons', 'taxon')
+                ->andWhere($queryBuilder->expr()->eq('taxon.root', ':root'))
+                ->andWhere($queryBuilder->expr()->orX(
+                    'taxon = :taxon',
+                    ':left < taxon.left AND taxon.right < :right'
+                ))
+            ->setParameter('root', $rootTaxon)
+            ->setParameter('taxon', $taxon)
+            ->setParameter('left', $taxon->getLeft())
+            ->setParameter('right', $taxon->getRight());
+
+        $paginator = new Pagerfanta(new DoctrineORMAdapter($queryBuilder, true, false));
+
+        $paginator->setMaxPerPage($limit);
+        $paginator->setCurrentPage((int)($offset / $limit) + 1);
 
         return $this->buildItems(
             iterator_to_array(
-                $products->getCurrentPageResults()
+                $paginator->getCurrentPageResults()
             ),
-            $location->getTaxon()
+            $taxon
         );
     }
 
@@ -180,14 +192,26 @@ class SyliusProductBackend implements BackendInterface
      */
     public function getSubItemsCount(LocationInterface $location)
     {
-        /** @var \Pagerfanta\Pagerfanta $products */
-        $products = $this->productRepository->createPaginator(
-            array(
-                'mainTaxon' => $location->getTaxon(),
-            )
-        );
+        $taxon = $location->getTaxon();
+        $rootTaxon = $taxon->isRoot() ? $taxon : $taxon->getRoot();
 
-        return $products->getNbResults();
+        $queryBuilder = $this->productRepository->createListQueryBuilder();
+
+        $queryBuilder
+            ->innerJoin('o.taxons', 'taxon')
+                ->andWhere($queryBuilder->expr()->eq('taxon.root', ':root'))
+                ->andWhere($queryBuilder->expr()->orX(
+                    'taxon = :taxon',
+                    ':left < taxon.left AND taxon.right < :right'
+                ))
+            ->setParameter('root', $rootTaxon)
+            ->setParameter('taxon', $taxon)
+            ->setParameter('left', $taxon->getLeft())
+            ->setParameter('right', $taxon->getRight());
+
+        $paginator = new Pagerfanta(new DoctrineORMAdapter($queryBuilder, true, false));
+
+        return $paginator->getNbResults();
     }
 
     /**
