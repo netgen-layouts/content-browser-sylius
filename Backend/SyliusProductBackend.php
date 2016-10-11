@@ -71,7 +71,6 @@ class SyliusProductBackend implements BackendInterface
      */
     public function loadLocation($id)
     {
-        /** @var \Sylius\Component\Taxonomy\Model\TaxonInterface $taxon */
         $taxon = $this->taxonRepository->find($id);
 
         if (!$taxon instanceof TaxonInterface) {
@@ -97,7 +96,6 @@ class SyliusProductBackend implements BackendInterface
      */
     public function loadItem($id)
     {
-        /** @var \Sylius\Component\Product\Model\ProductInterface $product */
         $product = $this->productRepository->find($id);
 
         if (!$product instanceof ProductInterface) {
