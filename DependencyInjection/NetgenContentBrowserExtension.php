@@ -77,15 +77,7 @@ class NetgenContentBrowserExtension extends Extension implements PrependExtensio
 
         $loader->load('default_settings.yml');
 
-        $loader = new XmlFileLoader(
-            $container,
-            new FileLocator(__DIR__ . '/../Resources/config')
-        );
-
-        $loader->load('framework/assets.xml');
-
         $this->doPrepend($container, 'framework/twig.yml', 'twig');
-        $this->doPrepend($container, 'framework/assets.yml', 'framework');
 
         $activatedBundles = array_keys($container->getParameter('kernel.bundles'));
 
