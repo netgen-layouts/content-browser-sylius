@@ -40,6 +40,7 @@ class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
             array(
                 'item_types' => array(
                     'ezcontent' => array(
+                        'name' => 'item_types.ezcontent',
                         'sections' => array(42),
                         'preview' => array(
                             'template' => 'template.html.twig',
@@ -49,7 +50,12 @@ class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
             )
         );
 
-        $this->load();
+        $this->assertContainerBuilderHasParameter(
+            'netgen_content_browser.item_types',
+            array(
+                'ezcontent' => 'item_types.ezcontent',
+            )
+        );
 
         $this->assertContainerBuilderHasService('netgen_content_browser.item_repository');
         $this->assertContainerBuilderHasService('netgen_content_browser.backend.ezlocation');

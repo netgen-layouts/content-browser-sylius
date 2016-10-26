@@ -1,5 +1,6 @@
 item_types:
     sylius_product:
+        name: item_types.sylius_product
         min_selected: 1
         max_selected: 0
         preview:

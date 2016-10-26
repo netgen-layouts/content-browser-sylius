@@ -1,3 +1,8 @@
+item_types.ezcontent: 'eZ content'
+item_types.ezlocation: 'eZ location'
+item_types.eztags: 'eZ Tags'
+item_types.sylius_product: 'Sylius product'
+
 form.messages.invalid_item: '(INVALID ITEM)'
 form.messages.no_item_selected: '(NO ITEM SELECTED)'
 form.messages.no_items_selected: '(NO ITEMS SELECTED)'

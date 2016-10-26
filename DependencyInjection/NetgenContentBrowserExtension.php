@@ -28,6 +28,8 @@ class NetgenContentBrowserExtension extends Extension implements PrependExtensio
         $configuration = new Configuration($extensionAlias);
         $config = $this->processConfiguration($configuration, $configs);
 
+        $availableItemTypes = array();
+
         foreach ($config['item_types'] as $itemType => $itemConfig) {
             $definition = new DefinitionDecorator('netgen_content_browser.config');
             $definition
@@ -38,7 +40,11 @@ class NetgenContentBrowserExtension extends Extension implements PrependExtensio
                 'netgen_content_browser.config.' . $itemType,
                 $definition
             );
+
+            $availableItemTypes[$itemType] = $itemConfig['name'];
         }
+
+        $container->setParameter('netgen_content_browser.item_types', $availableItemTypes);
 
         $loader = new YamlFileLoader(
             $container,
