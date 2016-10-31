@@ -294,8 +294,6 @@ class SyliusProductBackend implements BackendInterface
      */
     protected function createByTaxonPaginator(TaxonInterface $taxon, $locale)
     {
-        $root = $taxon->isRoot() ? $taxon : $taxon->getRoot();
-
         $queryBuilder = $this->productRepository->createQueryBuilderWithLocaleCodeAndTaxonId(
             $locale,
             $taxon->getId()
