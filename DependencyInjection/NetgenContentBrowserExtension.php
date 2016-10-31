@@ -2,6 +2,7 @@
 
 namespace Netgen\Bundle\ContentBrowserBundle\DependencyInjection;
 
+use Netgen\Bundle\ContentBrowserBundle\Exceptions\RuntimeException;
 use Symfony\Component\DependencyInjection\DefinitionDecorator;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
@@ -19,7 +20,7 @@ class NetgenContentBrowserExtension extends Extension implements PrependExtensio
      * @param array $configs
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
      *
-     * @throws \InvalidArgumentException When provided tag is not defined in this extension
+     * @throws \Netgen\Bundle\ContentBrowserBundle\Exceptions\RuntimeException
      */
     public function load(array $configs, ContainerBuilder $container)
     {
@@ -31,6 +32,13 @@ class NetgenContentBrowserExtension extends Extension implements PrependExtensio
         $availableItemTypes = array();
 
         foreach ($config['item_types'] as $itemType => $itemConfig) {
+            if (!preg_match('/[A-Za-z]([A-Za-z0-9_])*/', $itemType)) {
+                throw new RuntimeException(
+                    'Item type must begin with a letter and be followed by' .
+                    'any combination of letters, digits and underscore.'
+                );
+            }
+
             $definition = new DefinitionDecorator('netgen_content_browser.config');
             $definition
                 ->replaceArgument(0, $itemType)
