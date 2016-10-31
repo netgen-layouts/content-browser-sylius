@@ -296,19 +296,10 @@ class SyliusProductBackend implements BackendInterface
     {
         $root = $taxon->isRoot() ? $taxon : $taxon->getRoot();
 
-        $queryBuilder = $this->productRepository->createListQueryBuilder($locale);
-
-        $queryBuilder
-            ->innerJoin('o.taxons', 'taxon')
-                ->andWhere($queryBuilder->expr()->eq('taxon.root', ':root'))
-                ->andWhere($queryBuilder->expr()->orX(
-                    'taxon = :taxon',
-                    ':left < taxon.left AND taxon.right < :right'
-                ))
-            ->setParameter('root', $root)
-            ->setParameter('taxon', $taxon)
-            ->setParameter('left', $taxon->getLeft())
-            ->setParameter('right', $taxon->getRight());
+        $queryBuilder = $this->productRepository->createQueryBuilderWithLocaleCodeAndTaxonId(
+            $locale,
+            $taxon->getId()
+        );
 
         return new Pagerfanta(new DoctrineORMAdapter($queryBuilder, true, false));
     }
@@ -323,7 +314,7 @@ class SyliusProductBackend implements BackendInterface
      */
     protected function createSearchPaginator($searchText, $locale)
     {
-        $queryBuilder = $this->productRepository->createListQueryBuilder($locale);
+        $queryBuilder = $this->productRepository->createQueryBuilderWithLocaleCodeAndTaxonId($locale);
 
         $queryBuilder
             ->andWhere(
