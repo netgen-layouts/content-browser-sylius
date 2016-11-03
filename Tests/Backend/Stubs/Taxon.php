@@ -2,7 +2,7 @@
 
 namespace Netgen\Bundle\ContentBrowserBundle\Tests\Backend\Stubs;
 
-use Sylius\Component\Core\Model\Taxon as BaseTaxon;
+use Sylius\Component\Taxonomy\Model\Taxon as BaseTaxon;
 
 class Taxon extends BaseTaxon
 {

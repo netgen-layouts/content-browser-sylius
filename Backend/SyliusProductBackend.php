@@ -2,6 +2,7 @@
 
 namespace Netgen\Bundle\ContentBrowserBundle\Backend;
 
+use Netgen\Bundle\ContentBrowserBundle\Backend\Sylius\ProductRepositoryInterface;
 use Netgen\Bundle\ContentBrowserBundle\Exceptions\NotFoundException;
 use Netgen\Bundle\ContentBrowserBundle\Item\LocationInterface;
 use Netgen\Bundle\ContentBrowserBundle\Item\Sylius\Product\Location;
@@ -10,9 +11,6 @@ use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
-use Sylius\Component\Core\Repository\ProductRepositoryInterface;
-use Pagerfanta\Adapter\DoctrineORMAdapter;
-use Pagerfanta\Pagerfanta;
 
 class SyliusProductBackend implements BackendInterface
 {
@@ -22,7 +20,7 @@ class SyliusProductBackend implements BackendInterface
     protected $taxonRepository;
 
     /**
-     * @var \Sylius\Component\Core\Repository\ProductRepositoryInterface
+     * @var \Netgen\Bundle\ContentBrowserBundle\Backend\Sylius\ProductRepositoryInterface
      */
     protected $productRepository;
 
@@ -35,7 +33,7 @@ class SyliusProductBackend implements BackendInterface
      * Constructor.
      *
      * @param \Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface $taxonRepository
-     * @param \Sylius\Component\Core\Repository\ProductRepositoryInterface $productRepository
+     * @param \Netgen\Bundle\ContentBrowserBundle\Backend\Sylius\ProductRepositoryInterface $productRepository
      * @param \Sylius\Component\Locale\Context\LocaleContextInterface $localeContext
      */
     public function __construct(
@@ -151,7 +149,7 @@ class SyliusProductBackend implements BackendInterface
      */
     public function getSubItems(LocationInterface $location, $offset = 0, $limit = 25)
     {
-        $paginator = $this->createByTaxonPaginator(
+        $paginator = $this->productRepository->createByTaxonPaginator(
             $location->getTaxon(),
             $this->localeContext->getLocaleCode()
         );
@@ -174,7 +172,7 @@ class SyliusProductBackend implements BackendInterface
      */
     public function getSubItemsCount(LocationInterface $location)
     {
-        $paginator = $this->createByTaxonPaginator(
+        $paginator = $this->productRepository->createByTaxonPaginator(
             $location->getTaxon(),
             $this->localeContext->getLocaleCode()
         );
@@ -193,7 +191,7 @@ class SyliusProductBackend implements BackendInterface
      */
     public function search($searchText, $offset = 0, $limit = 25)
     {
-        $paginator = $this->createSearchPaginator(
+        $paginator = $this->productRepository->createSearchPaginator(
             $searchText,
             $this->localeContext->getLocaleCode()
         );
@@ -215,7 +213,7 @@ class SyliusProductBackend implements BackendInterface
      */
     public function searchCount($searchText)
     {
-        $paginator = $this->createSearchPaginator(
+        $paginator = $this->productRepository->createSearchPaginator(
             $searchText,
             $this->localeContext->getLocaleCode()
         );
@@ -282,44 +280,5 @@ class SyliusProductBackend implements BackendInterface
         }
 
         return $items;
-    }
-
-    /**
-     * Creates a paginator that finds all products with specific taxon.
-     *
-     * @param \Sylius\Component\Taxonomy\Model\TaxonInterface $taxon
-     * @param string $locale
-     *
-     * @return \Pagerfanta\Pagerfanta
-     */
-    protected function createByTaxonPaginator(TaxonInterface $taxon, $locale)
-    {
-        $queryBuilder = $this->productRepository->createQueryBuilderWithLocaleCodeAndTaxonId(
-            $locale,
-            $taxon->getId()
-        );
-
-        return new Pagerfanta(new DoctrineORMAdapter($queryBuilder, true, false));
-    }
-
-    /**
-     * Creates a paginator that searches products by name.
-     *
-     * @param string $searchText
-     * @param string $locale
-     *
-     * @return \Pagerfanta\Pagerfanta
-     */
-    protected function createSearchPaginator($searchText, $locale)
-    {
-        $queryBuilder = $this->productRepository->createQueryBuilderWithLocaleCodeAndTaxonId($locale);
-
-        $queryBuilder
-            ->andWhere(
-                $queryBuilder->expr()->like('translation.name', ':name')
-            )
-            ->setParameter('name', '%' . $searchText . '%');
-
-        return new Pagerfanta(new DoctrineORMAdapter($queryBuilder, true, false));
     }
 }

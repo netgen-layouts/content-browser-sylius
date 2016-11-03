@@ -10,7 +10,7 @@ use Netgen\Bundle\ContentBrowserBundle\Tests\Backend\Stubs\Taxon;
 use Netgen\Bundle\ContentBrowserBundle\Tests\Backend\Stubs\Product;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
-use Sylius\Component\Core\Repository\ProductRepositoryInterface;
+use Netgen\Bundle\ContentBrowserBundle\Backend\Sylius\ProductRepositoryInterface;
 use Pagerfanta\Adapter\AdapterInterface;
 use Pagerfanta\Pagerfanta;
 use PHPUnit\Framework\TestCase;
@@ -43,6 +43,11 @@ class SyliusProductBackendTest extends TestCase
         $this->taxonRepositoryMock = $this->createMock(TaxonRepositoryInterface::class);
         $this->productRepositoryMock = $this->createMock(ProductRepositoryInterface::class);
         $this->localeContextMock = $this->createMock(LocaleContextInterface::class);
+
+        $this->localeContextMock
+            ->expects($this->any())
+            ->method('getLocaleCode')
+            ->will($this->returnValue('en'));
 
         $this->backend = new SyliusProductBackend(
             $this->taxonRepositoryMock,
@@ -200,7 +205,7 @@ class SyliusProductBackendTest extends TestCase
         $this->productRepositoryMock
             ->expects($this->once())
             ->method('createByTaxonPaginator')
-            ->with($this->equalTo($this->getTaxon(1)))
+            ->with($this->equalTo($this->getTaxon(1)), $this->equalTo('en'))
             ->will($this->returnValue(new Pagerfanta($pagerfantaAdapterMock)));
 
         $items = $this->backend->getSubItems(
@@ -236,7 +241,7 @@ class SyliusProductBackendTest extends TestCase
         $this->productRepositoryMock
             ->expects($this->once())
             ->method('createByTaxonPaginator')
-            ->with($this->equalTo($this->getTaxon(1)))
+            ->with($this->equalTo($this->getTaxon(1)), $this->equalTo('en'))
             ->will($this->returnValue(new Pagerfanta($pagerfantaAdapterMock)));
 
         $items = $this->backend->getSubItems(
@@ -265,7 +270,7 @@ class SyliusProductBackendTest extends TestCase
         $this->productRepositoryMock
             ->expects($this->once())
             ->method('createByTaxonPaginator')
-            ->with($this->equalTo($this->getTaxon(1)))
+            ->with($this->equalTo($this->getTaxon(1)), $this->equalTo('en'))
             ->will($this->returnValue(new Pagerfanta($pagerfantaAdapterMock)));
 
         $count = $this->backend->getSubItemsCount(
@@ -291,8 +296,8 @@ class SyliusProductBackendTest extends TestCase
 
         $this->productRepositoryMock
             ->expects($this->once())
-            ->method('createFilterPaginator')
-            ->with($this->equalTo(array('name' => 'test')))
+            ->method('createSearchPaginator')
+            ->with($this->equalTo('test'), $this->equalTo('en'))
             ->will($this->returnValue(new Pagerfanta($pagerfantaAdapterMock)));
 
         $items = $this->backend->search('test');
@@ -325,8 +330,8 @@ class SyliusProductBackendTest extends TestCase
 
         $this->productRepositoryMock
             ->expects($this->once())
-            ->method('createFilterPaginator')
-            ->with($this->equalTo(array('name' => 'test')))
+            ->method('createSearchPaginator')
+            ->with($this->equalTo('test'), $this->equalTo('en'))
             ->will($this->returnValue(new Pagerfanta($pagerfantaAdapterMock)));
 
         $items = $this->backend->search('test', 8, 2);
@@ -350,8 +355,8 @@ class SyliusProductBackendTest extends TestCase
 
         $this->productRepositoryMock
             ->expects($this->once())
-            ->method('createFilterPaginator')
-            ->with($this->equalTo(array('name' => 'test')))
+            ->method('createSearchPaginator')
+            ->with($this->equalTo('test'), $this->equalTo('en'))
             ->will($this->returnValue(new Pagerfanta($pagerfantaAdapterMock)));
 
         $count = $this->backend->searchCount('test');

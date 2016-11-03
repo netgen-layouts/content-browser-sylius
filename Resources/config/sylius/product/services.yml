@@ -1,4 +1,6 @@
 parameters:
+    netgen_content_browser.sylius.product_repository.class: Netgen\Bundle\ContentBrowserBundle\Backend\Sylius\ProductRepository
+
     netgen_content_browser.backend.sylius_product.class: Netgen\Bundle\ContentBrowserBundle\Backend\SyliusProductBackend
 
     netgen_content_browser.serializer.handler.sylius_product.class: Netgen\Bundle\ContentBrowserBundle\Item\Serializer\Handler\SyliusProductSerializerHandler
@@ -7,11 +9,15 @@ parameters:
     netgen_content_browser.column_value_provider.sylius_product.product_id.class: Netgen\Bundle\ContentBrowserBundle\Item\ColumnProvider\ColumnValueProvider\SyliusProduct\ProductId
 
 services:
+    netgen_content_browser.sylius.product_repository:
+        class: "%netgen_content_browser.sylius.product_repository.class%"
+        parent: sylius.repository.product
+
     netgen_content_browser.backend.sylius_product:
         class: "%netgen_content_browser.backend.sylius_product.class%"
         arguments:
             - "@sylius.repository.taxon"
-            - "@sylius.repository.product"
+            - "@netgen_content_browser.sylius.product_repository"
             - "@sylius.context.locale"
         tags:
             - { name: netgen_content_browser.backend, item_type: sylius_product }
