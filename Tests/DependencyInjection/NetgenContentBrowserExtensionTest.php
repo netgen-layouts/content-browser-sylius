@@ -84,4 +84,27 @@ class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
 
         $this->assertContainerBuilderHasSyntheticService('netgen_content_browser.current_config');
     }
+
+    /**
+     * @covers \Netgen\Bundle\ContentBrowserBundle\DependencyInjection\NetgenContentBrowserExtension::load
+     * @expectedException \Netgen\Bundle\ContentBrowserBundle\Exceptions\RuntimeException
+     */
+    public function testLoadThrowsRuntimeExceptionOnInvalidItemType()
+    {
+        $this->container->setParameter('kernel.bundles', array());
+
+        $this->load(
+            array(
+                'item_types' => array(
+                    'Item type' => array(
+                        'name' => 'item_types.ezcontent',
+                        'sections' => array(42),
+                        'preview' => array(
+                            'template' => 'template.html.twig',
+                        ),
+                    ),
+                ),
+            )
+        );
+    }
 }
