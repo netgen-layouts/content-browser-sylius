@@ -7,7 +7,7 @@ Use Composer
 Run the following command to install Netgen Content Browser:
 
 ```
-composer require netgen/content-browser-bundle:^1.0
+composer require netgen/content-browser:^1.0
 ```
 
 Activate the bundle
