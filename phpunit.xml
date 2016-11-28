@@ -16,20 +16,22 @@
     beStrictAboutChangesToGlobalState="true"
 >
     <testsuites>
-        <testsuite name="NetgenContentBrowserBundle">
-            <directory>Tests</directory>
-            <exclude>Tests/Controller</exclude>
+        <testsuite name="Netgen\ContentBrowser">
+            <directory>lib/Tests</directory>
+        </testsuite>
+        <testsuite name="Netgen\Bundle\ContentBrowserBundle">
+            <directory>bundle/Tests</directory>
         </testsuite>
     </testsuites>
 
     <filter>
         <whitelist>
-            <directory suffix=".php">.</directory>
+            <directory suffix=".php">lib</directory>
+            <directory suffix=".php">bundle</directory>
             <exclude>
-                <directory>Controller</directory>
-                <directory>Tests</directory>
-                <directory>Resources</directory>
-                <directory>vendor</directory>
+                <directory>lib/Tests</directory>
+                <directory>bundle/Tests</directory>
+                <directory>bundle/Resources</directory>
             </exclude>
         </whitelist>
     </filter>
