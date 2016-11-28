@@ -1,6 +1,6 @@
 {
-    "name": "netgen/content-browser-bundle",
-    "description": "Netgen Content Browser Bundle",
+    "name": "netgen/content-browser",
+    "description": "Netgen Content Browser",
     "authors": [
         {
             "name": "Netgen",
