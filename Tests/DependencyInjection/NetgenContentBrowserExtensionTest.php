@@ -107,4 +107,38 @@ class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
             )
         );
     }
+
+    /**
+     * We test for existence of one config value from each of the config files.
+     *
+     * @covers \Netgen\Bundle\ContentBrowserBundle\DependencyInjection\NetgenContentBrowserExtension::prepend
+     * @covers \Netgen\Bundle\ContentBrowserBundle\DependencyInjection\NetgenContentBrowserExtension::doPrepend
+     */
+    public function testPrepend()
+    {
+        $this->container->setParameter(
+            'kernel.bundles',
+            array(
+                'EzPublishCoreBundle' => 'EzPublishCoreBundle',
+                'NetgenTagsBundle' => 'NetgenTagsBundle',
+                'SyliusCoreBundle' => 'SyliusCoreBundle',
+            )
+        );
+
+        $extension = $this->container->getExtension('netgen_content_browser');
+        $extension->prepend($this->container);
+
+        $config = call_user_func_array(
+            'array_merge_recursive',
+            $this->container->getExtensionConfig('netgen_content_browser')
+        );
+
+        $this->assertInternalType('array', $config);
+        $this->assertArrayHasKey('item_types', $config);
+
+        $this->assertArrayHasKey('ezcontent', $config['item_types']);
+        $this->assertArrayHasKey('ezlocation', $config['item_types']);
+        $this->assertArrayHasKey('eztags', $config['item_types']);
+        $this->assertArrayHasKey('sylius_product', $config['item_types']);
+    }
 }
