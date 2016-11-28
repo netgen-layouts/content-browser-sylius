@@ -9,14 +9,14 @@
     ],
     "require": {
         "php": "^5.6|^7.0",
-        "symfony/symfony": "^2.8|^3.0",
+        "symfony/symfony": "^2.8|^3.1",
         "sensio/framework-extra-bundle": "^3.0",
         "netgen/content-browser-ui-bundle": "^1.0@dev",
         "white-october/pagerfanta-bundle": "^1.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^5.5",
-        "symfony/phpunit-bridge": "^2.8|^3.0",
+        "symfony/phpunit-bridge": "^2.8|^3.1",
         "matthiasnoback/symfony-dependency-injection-test": "^1.0",
         "ezsystems/ezpublish-kernel": "^6.0",
         "netgen/tagsbundle": "^2.1",
