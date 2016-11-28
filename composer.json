@@ -22,7 +22,8 @@
         "netgen/tagsbundle": "^2.1",
         "sylius/product": "^1.0",
         "sylius/taxonomy": "^1.0",
-        "sylius/locale": "^1.0"
+        "sylius/locale": "^1.0",
+        "franzl/studio": "*"
     },
     "repositories": [
         { "type": "composer", "url": "https://packagist.netgen.biz" }
