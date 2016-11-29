@@ -1,20 +1,10 @@
-parameters:
-    netgen_content_browser.sylius.product_repository.class: Netgen\ContentBrowser\Backend\Sylius\ProductRepository
-
-    netgen_content_browser.backend.sylius_product.class: Netgen\ContentBrowser\Backend\SyliusProductBackend
-
-    netgen_content_browser.serializer.handler.sylius_product.class: Netgen\ContentBrowser\Item\Serializer\Handler\SyliusProductSerializerHandler
-    netgen_content_browser.template_value_provider.sylius_product.class: Netgen\ContentBrowser\Item\Renderer\TemplateValueProvider\SyliusProductTemplateValueProvider
-
-    netgen_content_browser.column_value_provider.sylius_product.product_id.class: Netgen\ContentBrowser\Item\ColumnProvider\ColumnValueProvider\SyliusProduct\ProductId
-
 services:
     netgen_content_browser.sylius.product_repository:
-        class: "%netgen_content_browser.sylius.product_repository.class%"
+        class: Netgen\ContentBrowser\Backend\Sylius\ProductRepository
         parent: sylius.repository.product
 
     netgen_content_browser.backend.sylius_product:
-        class: "%netgen_content_browser.backend.sylius_product.class%"
+        class: Netgen\ContentBrowser\Backend\SyliusProductBackend
         arguments:
             - "@sylius.repository.taxon"
             - "@netgen_content_browser.sylius.product_repository"
@@ -23,16 +13,16 @@ services:
             - { name: netgen_content_browser.backend, item_type: sylius_product }
 
     netgen_content_browser.serializer.handler.sylius_product:
-        class: "%netgen_content_browser.serializer.handler.sylius_product.class%"
+        class: Netgen\ContentBrowser\Item\Serializer\Handler\SyliusProductSerializerHandler
         tags:
             - { name: netgen_content_browser.serializer.handler, item_type: sylius_product }
 
     netgen_content_browser.template_value_provider.sylius_product:
-        class: "%netgen_content_browser.template_value_provider.sylius_product.class%"
+        class: Netgen\ContentBrowser\Item\Renderer\TemplateValueProvider\SyliusProductTemplateValueProvider
         tags:
             - { name: netgen_content_browser.template_value_provider, item_type: sylius_product }
 
     netgen_content_browser.column_value_provider.sylius_product.product_id:
-        class: "%netgen_content_browser.column_value_provider.sylius_product.product_id.class%"
+        class: Netgen\ContentBrowser\Item\ColumnProvider\ColumnValueProvider\SyliusProduct\ProductId
         tags:
             - { name: netgen_content_browser.column_value_provider, identifier: sylius_product\product_id }
