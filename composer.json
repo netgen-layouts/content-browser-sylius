@@ -32,10 +32,13 @@
         "psr-4": {
             "Netgen\\ContentBrowser\\": "lib/",
             "Netgen\\Bundle\\ContentBrowserBundle\\": "bundle/"
-        },
-        "exclude-from-classmap": [
-            "**/Tests/"
-        ]
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Netgen\\ContentBrowser\\Tests\\": "tests/lib/",
+            "Netgen\\Bundle\\ContentBrowserBundle\\Tests\\": "tests/bundle/"
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
