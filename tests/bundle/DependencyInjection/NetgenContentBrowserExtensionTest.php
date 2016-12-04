@@ -2,24 +2,11 @@
 
 namespace Netgen\Bundle\ContentBrowserBundle\Tests\DependencyInjection;
 
-use Netgen\Bundle\ContentBrowserBundle\DependencyInjection\NetgenContentBrowserExtension;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
+use Netgen\Bundle\ContentBrowserBundle\DependencyInjection\NetgenContentBrowserExtension;
 
 class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
 {
-    /**
-     * Return an array of container extensions that need to be registered for
-     * each test (usually just the container extension you are testing).
-     *
-     * @return \Symfony\Component\DependencyInjection\Extension\ExtensionInterface[]
-     */
-    protected function getContainerExtensions()
-    {
-        return array(
-            new NetgenContentBrowserExtension(),
-        );
-    }
-
     /**
      * We test for existence of one service from each of the config files.
      *
@@ -140,5 +127,18 @@ class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
         $this->assertArrayHasKey('ezlocation', $config['item_types']);
         $this->assertArrayHasKey('eztags', $config['item_types']);
         $this->assertArrayHasKey('sylius_product', $config['item_types']);
+    }
+
+    /**
+     * Return an array of container extensions that need to be registered for
+     * each test (usually just the container extension you are testing).
+     *
+     * @return \Symfony\Component\DependencyInjection\Extension\ExtensionInterface[]
+     */
+    protected function getContainerExtensions()
+    {
+        return array(
+            new NetgenContentBrowserExtension(),
+        );
     }
 }

@@ -2,8 +2,8 @@
 
 namespace Netgen\ContentBrowser\Tests\Item\Renderer\TemplateValueProvider;
 
-use Netgen\ContentBrowser\Item\Sylius\Product\Item;
 use Netgen\ContentBrowser\Item\Renderer\TemplateValueProvider\SyliusProductTemplateValueProvider;
+use Netgen\ContentBrowser\Item\Sylius\Product\Item;
 use Netgen\ContentBrowser\Tests\Backend\Stubs\Product;
 use PHPUnit\Framework\TestCase;
 

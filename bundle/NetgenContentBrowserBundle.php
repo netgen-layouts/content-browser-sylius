@@ -2,9 +2,9 @@
 
 namespace Netgen\Bundle\ContentBrowserBundle;
 
-use Symfony\Component\HttpKernel\Bundle\Bundle;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Netgen\Bundle\ContentBrowserBundle\DependencyInjection\CompilerPass;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class NetgenContentBrowserBundle extends Bundle
 {

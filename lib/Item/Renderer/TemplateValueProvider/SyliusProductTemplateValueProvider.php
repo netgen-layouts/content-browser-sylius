@@ -2,8 +2,8 @@
 
 namespace Netgen\ContentBrowser\Item\Renderer\TemplateValueProvider;
 
-use Netgen\ContentBrowser\Item\Renderer\TemplateValueProviderInterface;
 use Netgen\ContentBrowser\Item\ItemInterface;
+use Netgen\ContentBrowser\Item\Renderer\TemplateValueProviderInterface;
 
 class SyliusProductTemplateValueProvider implements TemplateValueProviderInterface
 {

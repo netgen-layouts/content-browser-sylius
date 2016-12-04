@@ -3,13 +3,13 @@
 namespace Netgen\Bundle\ContentBrowserBundle\DependencyInjection;
 
 use Netgen\ContentBrowser\Exceptions\RuntimeException;
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\Config\Resource\FileResource;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\DefinitionDecorator;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\Config\Resource\FileResource;
-use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Yaml\Yaml;
 
 class NetgenContentBrowserExtension extends Extension implements PrependExtensionInterface
@@ -63,15 +63,15 @@ class NetgenContentBrowserExtension extends Extension implements PrependExtensio
 
         $activatedBundles = array_keys($container->getParameter('kernel.bundles'));
 
-        if (in_array('SyliusCoreBundle', $activatedBundles)) {
+        if (in_array('SyliusCoreBundle', $activatedBundles, true)) {
             $loader->load('sylius/product/services.yml');
         }
 
-        if (in_array('EzPublishCoreBundle', $activatedBundles)) {
+        if (in_array('EzPublishCoreBundle', $activatedBundles, true)) {
             $loader->load('ezplatform/services.yml');
         }
 
-        if (in_array('NetgenTagsBundle', $activatedBundles)) {
+        if (in_array('NetgenTagsBundle', $activatedBundles, true)) {
             $loader->load('eztags/services.yml');
         }
     }
@@ -94,15 +94,15 @@ class NetgenContentBrowserExtension extends Extension implements PrependExtensio
 
         $activatedBundles = array_keys($container->getParameter('kernel.bundles'));
 
-        if (in_array('SyliusCoreBundle', $activatedBundles)) {
+        if (in_array('SyliusCoreBundle', $activatedBundles, true)) {
             $this->doPrepend($container, 'sylius/product/config.yml', 'netgen_content_browser');
         }
 
-        if (in_array('EzPublishCoreBundle', $activatedBundles)) {
+        if (in_array('EzPublishCoreBundle', $activatedBundles, true)) {
             $this->doPrepend($container, 'ezplatform/config.yml', 'netgen_content_browser');
             $this->doPrepend($container, 'ezplatform/image.yml', 'ezpublish');
 
-            if (in_array('NetgenTagsBundle', $activatedBundles)) {
+            if (in_array('NetgenTagsBundle', $activatedBundles, true)) {
                 $this->doPrepend($container, 'eztags/config.yml', 'netgen_content_browser');
             }
         }

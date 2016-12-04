@@ -5,11 +5,11 @@ namespace Netgen\ContentBrowser\Backend;
 use Netgen\ContentBrowser\Backend\Sylius\ProductRepositoryInterface;
 use Netgen\ContentBrowser\Exceptions\NotFoundException;
 use Netgen\ContentBrowser\Item\LocationInterface;
-use Netgen\ContentBrowser\Item\Sylius\Product\Location;
 use Netgen\ContentBrowser\Item\Sylius\Product\Item;
+use Netgen\ContentBrowser\Item\Sylius\Product\Location;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
-use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 
 class SyliusProductBackend implements BackendInterface

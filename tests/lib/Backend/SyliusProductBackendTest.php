@@ -2,19 +2,19 @@
 
 namespace Netgen\ContentBrowser\Tests\Backend;
 
+use ArrayIterator;
+use Netgen\ContentBrowser\Backend\Sylius\ProductRepositoryInterface;
 use Netgen\ContentBrowser\Backend\SyliusProductBackend;
 use Netgen\ContentBrowser\Item\ItemInterface;
 use Netgen\ContentBrowser\Item\LocationInterface;
 use Netgen\ContentBrowser\Item\Sylius\Product\Location;
-use Netgen\ContentBrowser\Tests\Backend\Stubs\Taxon;
 use Netgen\ContentBrowser\Tests\Backend\Stubs\Product;
-use Sylius\Component\Locale\Context\LocaleContextInterface;
-use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
-use Netgen\ContentBrowser\Backend\Sylius\ProductRepositoryInterface;
+use Netgen\ContentBrowser\Tests\Backend\Stubs\Taxon;
 use Pagerfanta\Adapter\AdapterInterface;
 use Pagerfanta\Pagerfanta;
 use PHPUnit\Framework\TestCase;
-use ArrayIterator;
+use Sylius\Component\Locale\Context\LocaleContextInterface;
+use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 
 class SyliusProductBackendTest extends TestCase
 {

@@ -2,8 +2,8 @@
 
 namespace Netgen\ContentBrowser\Tests\Item\Serializer\Handler;
 
-use Netgen\ContentBrowser\Item\Sylius\Product\Item;
 use Netgen\ContentBrowser\Item\Serializer\Handler\SyliusProductSerializerHandler;
+use Netgen\ContentBrowser\Item\Sylius\Product\Item;
 use Netgen\ContentBrowser\Tests\Backend\Stubs\Product;
 use PHPUnit\Framework\TestCase;
 
