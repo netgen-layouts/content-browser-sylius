@@ -155,7 +155,7 @@ class SyliusProductBackend implements BackendInterface
         );
 
         $paginator->setMaxPerPage($limit);
-        $paginator->setCurrentPage((int)($offset / $limit) + 1);
+        $paginator->setCurrentPage((int) ($offset / $limit) + 1);
 
         return $this->buildItems(
             $paginator->getCurrentPageResults(),
@@ -197,7 +197,7 @@ class SyliusProductBackend implements BackendInterface
         );
 
         $paginator->setMaxPerPage($limit);
-        $paginator->setCurrentPage((int)($offset / $limit) + 1);
+        $paginator->setCurrentPage((int) ($offset / $limit) + 1);
 
         return $this->buildItems(
             $paginator->getCurrentPageResults()
