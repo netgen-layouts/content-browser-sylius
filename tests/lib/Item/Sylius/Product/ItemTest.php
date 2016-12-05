@@ -76,7 +76,7 @@ class ItemTest extends TestCase
      */
     public function testGetParentIdWithNoTaxon()
     {
-        $this->item = new Item(new Product(42));
+        $this->item = new Item(new Product());
 
         $this->assertNull($this->item->getParentId());
     }
