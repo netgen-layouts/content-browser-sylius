@@ -21,7 +21,8 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
 
         $queryBuilder = $this->createQueryBuilderWithLocaleCode($localeCode);
         $queryBuilder
-            ->innerJoin('o.taxons', 'taxon')
+            ->innerJoin('o.productTaxons', 'product_taxon')
+            ->innerJoin('product_taxon.taxon', 'taxon')
             ->andWhere($queryBuilder->expr()->eq('taxon.root', ':root'))
             ->andWhere(
                 $queryBuilder->expr()->orX(
