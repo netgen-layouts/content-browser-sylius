@@ -2,11 +2,11 @@
 
 namespace Netgen\Bundle\ContentBrowserBundle\DependencyInjection;
 
+use Netgen\ContentBrowser\Config\Configuration as BrowserConfiguration;
 use Netgen\ContentBrowser\Exceptions\RuntimeException;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Netgen\ContentBrowser\Config\Configuration as BrowserConfiguration;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
