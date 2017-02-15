@@ -34,8 +34,7 @@ class NetgenContentBrowserExtension extends Extension implements PrependExtensio
         foreach ($config['item_types'] as $itemType => $itemConfig) {
             if (!preg_match('/^[A-Za-z]([A-Za-z0-9_])*$/', $itemType)) {
                 throw new RuntimeException(
-                    'Item type must begin with a letter and be followed by' .
-                    'any combination of letters, digits and underscore.'
+                    'Item type must begin with a letter and be followed by any combination of letters, digits and underscore.'
                 );
             }
 

@@ -74,7 +74,7 @@ class SyliusProductBackend implements BackendInterface
         if (!$taxon instanceof TaxonInterface) {
             throw new NotFoundException(
                 sprintf(
-                    'Location with "%s" ID not found.',
+                    'Location with ID %s not found.',
                     $id
                 )
             );
@@ -99,7 +99,7 @@ class SyliusProductBackend implements BackendInterface
         if (!$product instanceof ProductInterface) {
             throw new NotFoundException(
                 sprintf(
-                    'Item with "%s" ID not found.',
+                    'Item with ID %s not found.',
                     $id
                 )
             );
