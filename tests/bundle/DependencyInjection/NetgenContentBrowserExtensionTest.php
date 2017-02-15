@@ -75,6 +75,7 @@ class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
     /**
      * @covers \Netgen\Bundle\ContentBrowserBundle\DependencyInjection\NetgenContentBrowserExtension::load
      * @expectedException \Netgen\ContentBrowser\Exceptions\RuntimeException
+     * @expectedExceptionMessage Item type must begin with a letter and be followed by any combination of letters, digits and underscore.
      */
     public function testLoadThrowsRuntimeExceptionOnInvalidItemType()
     {
