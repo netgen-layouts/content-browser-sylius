@@ -16,9 +16,9 @@
         "white-october/pagerfanta-bundle": "^1.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^5.7",
-        "symfony/phpunit-bridge": "^2.8|^3.2",
-        "matthiasnoback/symfony-dependency-injection-test": "^1.0",
+        "phpunit/phpunit": "^5.7|^6.1",
+        "symfony/phpunit-bridge": "^3.3@dev",
+        "matthiasnoback/symfony-dependency-injection-test": "^1.0|^2.0",
         "ezsystems/ezpublish-kernel": "^6.0",
         "netgen/tagsbundle": "^2.1|^3.0",
         "sylius/product": "^1.0",
