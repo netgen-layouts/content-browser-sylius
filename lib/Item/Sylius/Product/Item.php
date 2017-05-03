@@ -85,6 +85,16 @@ class Item implements ItemInterface, ProductInterface
     }
 
     /**
+     * Returns if the item is selectable.
+     *
+     * @return bool
+     */
+    public function isSelectable()
+    {
+        return true;
+    }
+
+    /**
      * Returns the Sylius product.
      *
      * @return \Sylius\Component\Product\Model\ProductInterface

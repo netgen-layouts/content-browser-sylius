@@ -12,11 +12,6 @@ services:
         tags:
             - { name: netgen_content_browser.backend, item_type: sylius_product }
 
-    netgen_content_browser.serializer.handler.sylius_product:
-        class: Netgen\ContentBrowser\Item\Serializer\Handler\SyliusProductSerializerHandler
-        tags:
-            - { name: netgen_content_browser.serializer.handler, item_type: sylius_product }
-
     netgen_content_browser.template_value_provider.sylius_product:
         class: Netgen\ContentBrowser\Item\Renderer\TemplateValueProvider\SyliusProductTemplateValueProvider
         tags:
