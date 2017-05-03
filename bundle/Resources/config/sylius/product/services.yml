@@ -12,11 +12,6 @@ services:
         tags:
             - { name: netgen_content_browser.backend, item_type: sylius_product }
 
-    netgen_content_browser.template_value_provider.sylius_product:
-        class: Netgen\ContentBrowser\Item\Renderer\TemplateValueProvider\SyliusProductTemplateValueProvider
-        tags:
-            - { name: netgen_content_browser.template_value_provider, item_type: sylius_product }
-
     netgen_content_browser.column_value_provider.sylius_product.product_id:
         class: Netgen\ContentBrowser\Item\ColumnProvider\ColumnValueProvider\SyliusProduct\ProductId
         tags:

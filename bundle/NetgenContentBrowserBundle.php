@@ -19,7 +19,6 @@ class NetgenContentBrowserBundle extends Bundle
     {
         $container->addCompilerPass(new CompilerPass\ConfigLoaderPass());
         $container->addCompilerPass(new CompilerPass\BackendRegistryPass());
-        $container->addCompilerPass(new CompilerPass\ItemRendererPass());
         $container->addCompilerPass(new CompilerPass\ColumnProviderPass());
         $container->addCompilerPass(new CompilerPass\EzPublishDefaultPreviewPass());
     }
