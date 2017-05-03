@@ -8,8 +8,6 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface as BaseTaxonInterface;
 
 class Item implements ItemInterface, ProductInterface
 {
-    const TYPE = 'sylius_product';
-
     /**
      * @var \Sylius\Component\Product\Model\ProductInterface
      */
@@ -39,7 +37,7 @@ class Item implements ItemInterface, ProductInterface
      */
     public function getType()
     {
-        return static::TYPE;
+        return 'sylius_product';
     }
 
     /**
