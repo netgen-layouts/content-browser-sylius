@@ -24,9 +24,7 @@ class NetgenContentBrowserExtension extends Extension implements PrependExtensio
      */
     public function load(array $configs, ContainerBuilder $container)
     {
-        $extensionAlias = $this->getAlias();
-
-        $configuration = new Configuration($extensionAlias);
+        $configuration = $this->getConfiguration($configs, $container);
         $config = $this->processConfiguration($configuration, $configs);
 
         $availableItemTypes = array();
