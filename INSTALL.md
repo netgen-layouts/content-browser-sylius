@@ -18,6 +18,9 @@ Activate the Content Browser in your kernel class:
 ```
 ...
 
+$bundles[] = new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle();
+$bundles[] = new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle();
+$bundles[] = new Netgen\Bundle\CoreUIBundle\NetgenCoreUIBundle();
 $bundles[] = new Netgen\Bundle\ContentBrowserBundle\NetgenContentBrowserBundle();
 $bundles[] = new Netgen\Bundle\ContentBrowserUIBundle\NetgenContentBrowserUIBundle();
 
