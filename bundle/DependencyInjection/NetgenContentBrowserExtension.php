@@ -36,9 +36,13 @@ class NetgenContentBrowserExtension extends Extension implements PrependExtensio
                 );
             }
 
+            $configParameters = $itemConfig['parameters'];
+            unset($itemConfig['parameters']);
+
             $container->register('netgen_content_browser.config.' . $itemType, BrowserConfiguration::class)
                 ->addArgument($itemType)
-                ->addArgument($itemConfig);
+                ->addArgument($itemConfig)
+                ->addArgument($configParameters);
 
             $availableItemTypes[$itemType] = $itemConfig['name'];
         }
