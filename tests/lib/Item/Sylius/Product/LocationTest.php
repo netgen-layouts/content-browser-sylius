@@ -48,14 +48,6 @@ class LocationTest extends TestCase
     }
 
     /**
-     * @covers \Netgen\ContentBrowser\Item\Sylius\Product\Location::getType
-     */
-    public function testGetType()
-    {
-        $this->assertEquals('sylius_product', $this->location->getType());
-    }
-
-    /**
      * @covers \Netgen\ContentBrowser\Item\Sylius\Product\Location::getName
      */
     public function testGetName()

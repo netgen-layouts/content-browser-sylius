@@ -33,16 +33,6 @@ class Location implements LocationInterface, TaxonInterface
     }
 
     /**
-     * Returns the type.
-     *
-     * @return int|string
-     */
-    public function getType()
-    {
-        return 'sylius_product';
-    }
-
-    /**
      * Returns the name.
      *
      * @return string

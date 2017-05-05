@@ -31,16 +31,6 @@ class Item implements ItemInterface, ProductInterface
     }
 
     /**
-     * Returns the type.
-     *
-     * @return int|string
-     */
-    public function getType()
-    {
-        return 'sylius_product';
-    }
-
-    /**
      * Returns the value.
      *
      * @return mixed

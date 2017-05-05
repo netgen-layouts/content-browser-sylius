@@ -40,14 +40,6 @@ class ItemTest extends TestCase
 
     /**
      * @covers \Netgen\ContentBrowser\Item\Sylius\Product\Item::__construct
-     * @covers \Netgen\ContentBrowser\Item\Sylius\Product\Item::getType
-     */
-    public function testGetType()
-    {
-        $this->assertEquals('sylius_product', $this->item->getType());
-    }
-
-    /**
      * @covers \Netgen\ContentBrowser\Item\Sylius\Product\Item::getValue
      */
     public function testGetValue()
