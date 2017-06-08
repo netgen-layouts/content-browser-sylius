@@ -60,6 +60,7 @@ class NetgenContentBrowserExtension extends Extension implements PrependExtensio
 
         if (in_array('SyliusCoreBundle', $activatedBundles, true)) {
             $loader->load('sylius/product/services.yml');
+            $loader->load('sylius/taxon/services.yml');
         }
 
         if (in_array('EzPublishCoreBundle', $activatedBundles, true)) {
@@ -91,6 +92,7 @@ class NetgenContentBrowserExtension extends Extension implements PrependExtensio
 
         if (in_array('SyliusCoreBundle', $activatedBundles, true)) {
             $this->doPrepend($container, 'sylius/product/config.yml', 'netgen_content_browser');
+            $this->doPrepend($container, 'sylius/taxon/config.yml', 'netgen_content_browser');
         }
 
         if (in_array('EzPublishCoreBundle', $activatedBundles, true)) {

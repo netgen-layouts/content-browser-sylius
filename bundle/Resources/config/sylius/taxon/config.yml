@@ -1,0 +1,17 @@
+item_types:
+    sylius_taxon:
+        name: item_types.sylius_taxon
+        min_selected: 1
+        max_selected: 0
+        preview:
+            template: '%netgen_content_browser.sylius_taxon.default_item_template%'
+        columns:
+            name:
+                name: columns.name
+                value_provider: name
+            product_id:
+                name: columns.sylius_taxon.taxon_id
+                value_provider: sylius_taxon\taxon_id
+        default_columns:
+            - name
+            - taxon_id

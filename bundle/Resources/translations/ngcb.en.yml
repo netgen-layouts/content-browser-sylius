@@ -2,6 +2,7 @@ item_types.ezcontent: 'eZ content'
 item_types.ezlocation: 'eZ location'
 item_types.eztags: 'eZ Tags'
 item_types.sylius_product: 'Sylius product'
+item_types.sylius_taxon: 'Sylius taxon'
 
 form.messages.invalid_item: '(INVALID ITEM)'
 form.messages.no_item_selected: '(NO ITEM SELECTED)'
@@ -27,3 +28,4 @@ columns.eztags.parent_tag: 'Parent tag'
 columns.eztags.modified: 'Modified'
 
 columns.sylius_product.product_id: 'Product ID'
+columns.sylius_taxon.taxon_id: 'Taxon ID'
