@@ -28,7 +28,6 @@ class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
                 'item_types' => array(
                     'ezcontent' => array(
                         'name' => 'item_types.ezcontent',
-                        'sections' => array(42),
                         'preview' => array(
                             'template' => 'template.html.twig',
                         ),
@@ -84,7 +83,6 @@ class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
                 'item_types' => array(
                     'Item type' => array(
                         'name' => 'item_types.ezcontent',
-                        'sections' => array(42),
                         'preview' => array(
                             'template' => 'template.html.twig',
                         ),
