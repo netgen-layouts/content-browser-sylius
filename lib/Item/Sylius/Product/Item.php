@@ -4,7 +4,6 @@ namespace Netgen\ContentBrowser\Item\Sylius\Product;
 
 use Netgen\ContentBrowser\Item\ItemInterface;
 use Sylius\Component\Product\Model\ProductInterface as BaseProductInterface;
-use Sylius\Component\Taxonomy\Model\TaxonInterface as BaseTaxonInterface;
 
 class Item implements ItemInterface, ProductInterface
 {
@@ -14,20 +13,13 @@ class Item implements ItemInterface, ProductInterface
     protected $product;
 
     /**
-     * @var \Sylius\Component\Taxonomy\Model\TaxonInterface
-     */
-    protected $parentTaxon;
-
-    /**
      * Constructor.
      *
      * @param \Sylius\Component\Product\Model\ProductInterface $product
-     * @param \Sylius\Component\Taxonomy\Model\TaxonInterface $parentTaxon
      */
-    public function __construct(BaseProductInterface $product, BaseTaxonInterface $parentTaxon = null)
+    public function __construct(BaseProductInterface $product)
     {
         $this->product = $product;
-        $this->parentTaxon = $parentTaxon;
     }
 
     /**
@@ -48,18 +40,6 @@ class Item implements ItemInterface, ProductInterface
     public function getName()
     {
         return $this->product->getName();
-    }
-
-    /**
-     * Returns the parent ID.
-     *
-     * @return int|string
-     */
-    public function getParentId()
-    {
-        return $this->parentTaxon instanceof BaseTaxonInterface ?
-            $this->parentTaxon->getId() :
-            null;
     }
 
     /**
