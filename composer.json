@@ -12,6 +12,7 @@
         "ext-mbstring": "*",
         "netgen/content-browser-ui": "~0.8.0@dev",
         "symfony/symfony": "^2.8|^3.2",
+        "twig/twig": "^1.30|^2.0",
         "sensio/framework-extra-bundle": "^3.0",
         "white-october/pagerfanta-bundle": "^1.0"
     },
