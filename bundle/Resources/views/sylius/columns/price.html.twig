@@ -1,0 +1,5 @@
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+
+{% if not item.product.variants.empty %}
+    {{ money.calculatePrice(item.product|sylius_resolve_variant) }}
+{% endif %}

@@ -28,4 +28,6 @@ columns.eztags.parent_tag: 'Parent tag'
 columns.eztags.modified: 'Modified'
 
 columns.sylius_product.product_id: 'Product ID'
+columns.sylius_product.price: 'Price'
+
 columns.sylius_taxon.taxon_id: 'Taxon ID'
