@@ -55,6 +55,14 @@ class ItemTest extends TestCase
     }
 
     /**
+     * @covers \Netgen\ContentBrowser\Item\Sylius\Product\Item::isSelectable
+     */
+    public function testIsSelectable()
+    {
+        $this->assertTrue($this->item->isSelectable());
+    }
+
+    /**
      * @covers \Netgen\ContentBrowser\Item\Sylius\Product\Item::getProduct
      */
     public function testGetProduct()
