@@ -21,6 +21,7 @@
         </testsuite>
         <testsuite name="Netgen\Bundle\ContentBrowserBundle">
             <directory>tests/bundle</directory>
+            <exclude>tests/bundle/Controller</exclude>
         </testsuite>
     </testsuites>
 
@@ -30,6 +31,7 @@
             <directory suffix=".php">bundle</directory>
             <exclude>
                 <file>bundle/NetgenContentBrowserBundle.php</file>
+                <directory>bundle/Controller</directory>
                 <directory>bundle/Resources</directory>
             </exclude>
         </whitelist>
