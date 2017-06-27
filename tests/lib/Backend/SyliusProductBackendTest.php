@@ -15,6 +15,7 @@ use Pagerfanta\Pagerfanta;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
+use Symfony\Component\HttpKernel\Kernel;
 
 class SyliusProductBackendTest extends TestCase
 {
@@ -40,6 +41,10 @@ class SyliusProductBackendTest extends TestCase
 
     public function setUp()
     {
+        if (Kernel::VERSION_ID < 30200) {
+            $this->markTestSkipped('Sylius tests require Symfony 3.2 or later to run.');
+        }
+
         $this->taxonRepositoryMock = $this->createMock(TaxonRepositoryInterface::class);
         $this->productRepositoryMock = $this->createMock(ProductRepositoryInterface::class);
         $this->localeContextMock = $this->createMock(LocaleContextInterface::class);

@@ -5,6 +5,7 @@ namespace Netgen\ContentBrowser\Tests\Item\Sylius\Taxon;
 use Netgen\ContentBrowser\Item\Sylius\Taxon\Item;
 use Netgen\ContentBrowser\Tests\Backend\Stubs\Taxon;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\HttpKernel\Kernel;
 
 class ItemTest extends TestCase
 {
@@ -20,6 +21,10 @@ class ItemTest extends TestCase
 
     public function setUp()
     {
+        if (Kernel::VERSION_ID < 30200) {
+            $this->markTestSkipped('Sylius tests require Symfony 3.2 or later to run.');
+        }
+
         $parentTaxon = new Taxon();
         $parentTaxon->setId(24);
 

@@ -6,6 +6,7 @@ use Netgen\ContentBrowser\Item\ColumnProvider\ColumnValueProvider\SyliusProduct\
 use Netgen\ContentBrowser\Item\Sylius\Product\Item;
 use Netgen\ContentBrowser\Tests\Backend\Stubs\Product;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\HttpKernel\Kernel;
 
 class ProductIdTest extends TestCase
 {
@@ -16,6 +17,10 @@ class ProductIdTest extends TestCase
 
     public function setUp()
     {
+        if (Kernel::VERSION_ID < 30200) {
+            $this->markTestSkipped('Sylius tests require Symfony 3.2 or later to run.');
+        }
+
         $this->provider = new ProductId();
     }
 

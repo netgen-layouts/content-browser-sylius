@@ -5,6 +5,7 @@ namespace Netgen\ContentBrowser\Tests\Item\Sylius\Product;
 use Netgen\ContentBrowser\Item\Sylius\Product\Location;
 use Netgen\ContentBrowser\Tests\Backend\Stubs\Taxon;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\HttpKernel\Kernel;
 
 class LocationTest extends TestCase
 {
@@ -25,6 +26,10 @@ class LocationTest extends TestCase
 
     public function setUp()
     {
+        if (Kernel::VERSION_ID < 30200) {
+            $this->markTestSkipped('Sylius tests require Symfony 3.2 or later to run.');
+        }
+
         $this->taxon = new Taxon();
         $this->taxon->setId(42);
         $this->taxon->setCurrentLocale('en');

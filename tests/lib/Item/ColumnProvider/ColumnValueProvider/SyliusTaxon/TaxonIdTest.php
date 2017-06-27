@@ -6,6 +6,7 @@ use Netgen\ContentBrowser\Item\ColumnProvider\ColumnValueProvider\SyliusTaxon\Ta
 use Netgen\ContentBrowser\Item\Sylius\Taxon\Item;
 use Netgen\ContentBrowser\Tests\Backend\Stubs\Taxon;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\HttpKernel\Kernel;
 
 class TaxonIdTest extends TestCase
 {
@@ -16,6 +17,10 @@ class TaxonIdTest extends TestCase
 
     public function setUp()
     {
+        if (Kernel::VERSION_ID < 30200) {
+            $this->markTestSkipped('Sylius tests require Symfony 3.2 or later to run.');
+        }
+
         $this->provider = new TaxonId();
     }
 
