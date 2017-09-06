@@ -1,10 +1,12 @@
 services:
     netgen_content_browser.sylius.product_repository:
         class: Netgen\ContentBrowser\Backend\Sylius\ProductRepository
+        public: false
         parent: sylius.repository.product
 
     netgen_content_browser.backend.sylius_product:
         class: Netgen\ContentBrowser\Backend\SyliusProductBackend
+        public: false
         arguments:
             - "@sylius.repository.taxon"
             - "@netgen_content_browser.sylius.product_repository"
@@ -14,5 +16,6 @@ services:
 
     netgen_content_browser.column_value_provider.sylius_product.product_id:
         class: Netgen\ContentBrowser\Item\ColumnProvider\ColumnValueProvider\SyliusProduct\ProductId
+        public: false
         tags:
             - { name: netgen_content_browser.column_value_provider, identifier: sylius_product\product_id }
