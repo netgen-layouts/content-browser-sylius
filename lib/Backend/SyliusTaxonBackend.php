@@ -21,12 +21,6 @@ class SyliusTaxonBackend implements BackendInterface
      */
     protected $localeContext;
 
-    /**
-     * Constructor.
-     *
-     * @param \Netgen\ContentBrowser\Backend\Sylius\TaxonRepositoryInterface $taxonRepository
-     * @param \Sylius\Component\Locale\Context\LocaleContextInterface $localeContext
-     */
     public function __construct(
         TaxonRepositoryInterface $taxonRepository,
         LocaleContextInterface $localeContext
@@ -35,11 +29,6 @@ class SyliusTaxonBackend implements BackendInterface
         $this->localeContext = $localeContext;
     }
 
-    /**
-     * Returns the default sections available in the backend.
-     *
-     * @return \Netgen\ContentBrowser\Item\LocationInterface[]
-     */
     public function getDefaultSections()
     {
         return $this->buildItems(
@@ -47,29 +36,11 @@ class SyliusTaxonBackend implements BackendInterface
         );
     }
 
-    /**
-     * Loads a  location by its ID.
-     *
-     * @param int|string $id
-     *
-     * @throws \Netgen\ContentBrowser\Exceptions\NotFoundException If location does not exist
-     *
-     * @return \Netgen\ContentBrowser\Item\LocationInterface
-     */
     public function loadLocation($id)
     {
         return $this->loadItem($id);
     }
 
-    /**
-     * Loads the item by its ID.
-     *
-     * @param int|string $id
-     *
-     * @throws \Netgen\ContentBrowser\Exceptions\NotFoundException If item does not exist
-     *
-     * @return \Netgen\ContentBrowser\Item\ItemInterface
-     */
     public function loadItem($id)
     {
         $taxon = $this->taxonRepository->find($id);
@@ -86,13 +57,6 @@ class SyliusTaxonBackend implements BackendInterface
         return $this->buildItem($taxon);
     }
 
-    /**
-     * Returns the locations below provided location.
-     *
-     * @param \Netgen\ContentBrowser\Item\LocationInterface $location
-     *
-     * @return \Netgen\ContentBrowser\Item\LocationInterface[]
-     */
     public function getSubLocations(LocationInterface $location)
     {
         $taxons = $this->taxonRepository->findChildren(
@@ -103,27 +67,11 @@ class SyliusTaxonBackend implements BackendInterface
         return $this->buildItems($taxons);
     }
 
-    /**
-     * Returns the count of locations below provided location.
-     *
-     * @param \Netgen\ContentBrowser\Item\LocationInterface $location
-     *
-     * @return int
-     */
     public function getSubLocationsCount(LocationInterface $location)
     {
         return count($this->getSubLocations($location));
     }
 
-    /**
-     * Returns the location items.
-     *
-     * @param \Netgen\ContentBrowser\Item\LocationInterface $location
-     * @param int $offset
-     * @param int $limit
-     *
-     * @return \Netgen\ContentBrowser\Item\ItemInterface[]
-     */
     public function getSubItems(LocationInterface $location, $offset = 0, $limit = 25)
     {
         $paginator = $this->taxonRepository->createListPaginator(
@@ -137,13 +85,6 @@ class SyliusTaxonBackend implements BackendInterface
         return $this->buildItems($paginator->getCurrentPageResults());
     }
 
-    /**
-     * Returns the location items count.
-     *
-     * @param \Netgen\ContentBrowser\Item\LocationInterface $location
-     *
-     * @return int
-     */
     public function getSubItemsCount(LocationInterface $location)
     {
         $paginator = $this->taxonRepository->createListPaginator(
@@ -154,15 +95,6 @@ class SyliusTaxonBackend implements BackendInterface
         return $paginator->getNbResults();
     }
 
-    /**
-     * Searches for items.
-     *
-     * @param string $searchText
-     * @param int $offset
-     * @param int $limit
-     *
-     * @return \Netgen\ContentBrowser\Item\ItemInterface[]
-     */
     public function search($searchText, $offset = 0, $limit = 25)
     {
         $paginator = $this->taxonRepository->createSearchPaginator(
@@ -178,13 +110,6 @@ class SyliusTaxonBackend implements BackendInterface
         );
     }
 
-    /**
-     * Returns the count of searched items.
-     *
-     * @param string $searchText
-     *
-     * @return int
-     */
     public function searchCount($searchText)
     {
         $paginator = $this->taxonRepository->createSearchPaginator(

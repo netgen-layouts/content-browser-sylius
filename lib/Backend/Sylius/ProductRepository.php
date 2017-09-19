@@ -7,14 +7,6 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 class ProductRepository extends BaseProductRepository implements ProductRepositoryInterface
 {
-    /**
-     * Creates a paginator which is used to filter products by taxon.
-     *
-     * @param \Sylius\Component\Taxonomy\Model\TaxonInterface $taxon
-     * @param string $localeCode
-     *
-     * @return \Pagerfanta\Pagerfanta
-     */
     public function createByTaxonPaginator(TaxonInterface $taxon, $localeCode)
     {
         $root = $taxon->isRoot() ? $taxon : $taxon->getRoot();
@@ -42,14 +34,6 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
         return $this->getPaginator($queryBuilder);
     }
 
-    /**
-     * Creates a paginator which is used to search for products.
-     *
-     * @param string $searchText
-     * @param string $localeCode
-     *
-     * @return \Pagerfanta\Pagerfanta
-     */
     public function createSearchPaginator($searchText, $localeCode)
     {
         $queryBuilder = $this->createQueryBuilderWithLocaleCode($localeCode);

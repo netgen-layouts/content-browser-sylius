@@ -14,14 +14,6 @@ use Symfony\Component\Yaml\Yaml;
 
 class NetgenContentBrowserExtension extends Extension implements PrependExtensionInterface
 {
-    /**
-     * Loads a specific configuration.
-     *
-     * @param array $configs
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     *
-     * @throws \Netgen\ContentBrowser\Exceptions\RuntimeException
-     */
     public function load(array $configs, ContainerBuilder $container)
     {
         $configuration = $this->getConfiguration($configs, $container);
@@ -72,11 +64,6 @@ class NetgenContentBrowserExtension extends Extension implements PrependExtensio
         }
     }
 
-    /**
-     * Allow an extension to prepend the extension configurations.
-     *
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     */
     public function prepend(ContainerBuilder $container)
     {
         $loader = new YamlFileLoader(

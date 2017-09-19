@@ -6,14 +6,6 @@ use Sylius\Bundle\TaxonomyBundle\Doctrine\ORM\TaxonRepository as BaseTaxonReposi
 
 class TaxonRepository extends BaseTaxonRepository implements TaxonRepositoryInterface
 {
-    /**
-     * Creates a paginator which is used to filter taxons.
-     *
-     * @param string $parentCode
-     * @param string $localeCode
-     *
-     * @return \Pagerfanta\Pagerfanta
-     */
     public function createListPaginator($parentCode, $localeCode)
     {
         $queryBuilder = $this->createQueryBuilder('o')
@@ -30,14 +22,6 @@ class TaxonRepository extends BaseTaxonRepository implements TaxonRepositoryInte
         return $this->getPaginator($queryBuilder);
     }
 
-    /**
-     * Creates a paginator which is used to search for taxons.
-     *
-     * @param string $searchText
-     * @param string $localeCode
-     *
-     * @return \Pagerfanta\Pagerfanta
-     */
     public function createSearchPaginator($searchText, $localeCode)
     {
         $queryBuilder = $this->createQueryBuilder('o')
