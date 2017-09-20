@@ -13,7 +13,7 @@ class TaxonIdTest extends TestCase
     /**
      * @var \Netgen\ContentBrowser\Item\ColumnProvider\ColumnValueProvider\SyliusTaxon\TaxonId
      */
-    protected $provider;
+    private $provider;
 
     public function setUp()
     {

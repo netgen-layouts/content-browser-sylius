@@ -54,7 +54,7 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
      *
      * @return \Doctrine\ORM\QueryBuilder
      */
-    protected function createQueryBuilderWithLocaleCode($localeCode)
+    private function createQueryBuilderWithLocaleCode($localeCode)
     {
         $queryBuilder = $this->createQueryBuilder('o');
         $queryBuilder

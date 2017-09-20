@@ -14,12 +14,12 @@ class SyliusTaxonBackend implements BackendInterface
     /**
      * @var \Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface
      */
-    protected $taxonRepository;
+    private $taxonRepository;
 
     /**
      * @var \Sylius\Component\Locale\Context\LocaleContextInterface
      */
-    protected $localeContext;
+    private $localeContext;
 
     public function __construct(
         TaxonRepositoryInterface $taxonRepository,
@@ -127,7 +127,7 @@ class SyliusTaxonBackend implements BackendInterface
      *
      * @return \Netgen\ContentBrowser\Item\Sylius\Taxon\Item
      */
-    protected function buildItem(TaxonInterface $taxon)
+    private function buildItem(TaxonInterface $taxon)
     {
         return new Item($taxon);
     }
@@ -139,7 +139,7 @@ class SyliusTaxonBackend implements BackendInterface
      *
      * @return \Netgen\ContentBrowser\Item\Sylius\Taxon\Item[]
      */
-    protected function buildItems($taxons)
+    private function buildItems($taxons)
     {
         $items = array();
 

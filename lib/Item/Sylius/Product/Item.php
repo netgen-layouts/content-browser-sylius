@@ -10,7 +10,7 @@ class Item implements ItemInterface, ProductInterface
     /**
      * @var \Sylius\Component\Product\Model\ProductInterface
      */
-    protected $product;
+    private $product;
 
     public function __construct(BaseProductInterface $product)
     {

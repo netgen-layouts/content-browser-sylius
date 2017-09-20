@@ -17,17 +17,17 @@ class SyliusProductBackend implements BackendInterface
     /**
      * @var \Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface
      */
-    protected $taxonRepository;
+    private $taxonRepository;
 
     /**
      * @var \Netgen\ContentBrowser\Backend\Sylius\ProductRepositoryInterface
      */
-    protected $productRepository;
+    private $productRepository;
 
     /**
      * @var \Sylius\Component\Locale\Context\LocaleContextInterface
      */
-    protected $localeContext;
+    private $localeContext;
 
     public function __construct(
         TaxonRepositoryInterface $taxonRepository,
@@ -151,7 +151,7 @@ class SyliusProductBackend implements BackendInterface
      *
      * @return \Netgen\ContentBrowser\Item\Sylius\Product\Location
      */
-    protected function buildLocation(TaxonInterface $taxon)
+    private function buildLocation(TaxonInterface $taxon)
     {
         return new Location($taxon);
     }
@@ -163,7 +163,7 @@ class SyliusProductBackend implements BackendInterface
      *
      * @return \Netgen\ContentBrowser\Item\Sylius\Product\Location[]
      */
-    protected function buildLocations(array $taxons)
+    private function buildLocations(array $taxons)
     {
         return array_map(
             function (TaxonInterface $taxon) {
@@ -180,7 +180,7 @@ class SyliusProductBackend implements BackendInterface
      *
      * @return \Netgen\ContentBrowser\Item\Sylius\Product\Item
      */
-    protected function buildItem(ProductInterface $product)
+    private function buildItem(ProductInterface $product)
     {
         return new Item($product);
     }
@@ -192,7 +192,7 @@ class SyliusProductBackend implements BackendInterface
      *
      * @return \Netgen\ContentBrowser\Item\Sylius\Product\Item[]
      */
-    protected function buildItems($products)
+    private function buildItems($products)
     {
         $items = array();
 

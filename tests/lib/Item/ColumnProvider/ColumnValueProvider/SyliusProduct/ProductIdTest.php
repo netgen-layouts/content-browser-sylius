@@ -13,7 +13,7 @@ class ProductIdTest extends TestCase
     /**
      * @var \Netgen\ContentBrowser\Item\ColumnProvider\ColumnValueProvider\SyliusProduct\ProductId
      */
-    protected $provider;
+    private $provider;
 
     public function setUp()
     {

@@ -12,17 +12,17 @@ class LocationTest extends TestCase
     /**
      * @var \Sylius\Component\Taxonomy\Model\TaxonInterface
      */
-    protected $taxon;
+    private $taxon;
 
     /**
      * @var \Sylius\Component\Taxonomy\Model\TaxonInterface
      */
-    protected $parentTaxon;
+    private $parentTaxon;
 
     /**
      * @var \Netgen\ContentBrowser\Item\Sylius\Product\Location
      */
-    protected $location;
+    private $location;
 
     public function setUp()
     {

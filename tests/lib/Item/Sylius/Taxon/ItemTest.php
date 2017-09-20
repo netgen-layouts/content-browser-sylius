@@ -12,12 +12,12 @@ class ItemTest extends TestCase
     /**
      * @var \Sylius\Component\Taxonomy\Model\TaxonInterface
      */
-    protected $taxon;
+    private $taxon;
 
     /**
      * @var \Netgen\ContentBrowser\Item\Sylius\Taxon\Item
      */
-    protected $item;
+    private $item;
 
     public function setUp()
     {

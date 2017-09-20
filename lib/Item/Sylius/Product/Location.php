@@ -10,7 +10,7 @@ class Location implements LocationInterface, TaxonInterface
     /**
      * @var \Sylius\Component\Taxonomy\Model\TaxonInterface
      */
-    protected $taxon;
+    private $taxon;
 
     public function __construct(BaseTaxonInterface $taxon)
     {

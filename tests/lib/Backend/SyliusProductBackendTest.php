@@ -22,22 +22,22 @@ class SyliusProductBackendTest extends TestCase
     /**
      * @var \PHPUnit_Framework_MockObject_MockObject
      */
-    protected $taxonRepositoryMock;
+    private $taxonRepositoryMock;
 
     /**
      * @var \PHPUnit_Framework_MockObject_MockObject
      */
-    protected $productRepositoryMock;
+    private $productRepositoryMock;
 
     /**
      * @var \PHPUnit_Framework_MockObject_MockObject
      */
-    protected $localeContextMock;
+    private $localeContextMock;
 
     /**
      * @var \Netgen\ContentBrowser\Backend\SyliusProductBackend
      */
-    protected $backend;
+    private $backend;
 
     public function setUp()
     {
@@ -379,7 +379,7 @@ class SyliusProductBackendTest extends TestCase
      *
      * @return \Sylius\Component\Taxonomy\Model\Taxon
      */
-    protected function getTaxon($id = null, $parentId = null)
+    private function getTaxon($id = null, $parentId = null)
     {
         $taxon = new Taxon();
         $taxon->setId($id);
@@ -400,7 +400,7 @@ class SyliusProductBackendTest extends TestCase
      *
      * @return \Sylius\Component\Product\Model\Product
      */
-    protected function getProduct($id = null)
+    private function getProduct($id = null)
     {
         $product = new Product();
         $product->setId($id);

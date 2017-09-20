@@ -20,17 +20,17 @@ class SyliusTaxonBackendTest extends TestCase
     /**
      * @var \PHPUnit_Framework_MockObject_MockObject
      */
-    protected $taxonRepositoryMock;
+    private $taxonRepositoryMock;
 
     /**
      * @var \PHPUnit_Framework_MockObject_MockObject
      */
-    protected $localeContextMock;
+    private $localeContextMock;
 
     /**
      * @var \Netgen\ContentBrowser\Backend\SyliusTaxonBackend
      */
-    protected $backend;
+    private $backend;
 
     public function setUp()
     {
@@ -373,7 +373,7 @@ class SyliusTaxonBackendTest extends TestCase
      *
      * @return \Sylius\Component\Taxonomy\Model\Taxon
      */
-    protected function getTaxon($id = null, $parentId = null, $code = null)
+    private function getTaxon($id = null, $parentId = null, $code = null)
     {
         $taxon = new Taxon();
         $taxon->setId($id);

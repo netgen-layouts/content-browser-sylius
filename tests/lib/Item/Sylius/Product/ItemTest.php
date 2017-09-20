@@ -12,12 +12,12 @@ class ItemTest extends TestCase
     /**
      * @var \Sylius\Component\Product\Model\ProductInterface
      */
-    protected $product;
+    private $product;
 
     /**
      * @var \Netgen\ContentBrowser\Item\Sylius\Product\Item
      */
-    protected $item;
+    private $item;
 
     public function setUp()
     {
