@@ -34,24 +34,4 @@ class TaxonRepository extends BaseTaxonRepository implements TaxonRepositoryInte
 
         return $this->getPaginator($queryBuilder);
     }
-
-    /**
-     * Creates a query builder to filter products by locale.
-     *
-     * @param string $localeCode
-     *
-     * @return \Doctrine\ORM\QueryBuilder
-     */
-    protected function createQueryBuilderWithLocaleCode($localeCode)
-    {
-        $queryBuilder = $this->createQueryBuilder('o');
-        $queryBuilder
-            ->addSelect('translation')
-            ->leftJoin('o.translations', 'translation')
-            ->andWhere('translation.locale = :localeCode')
-            ->setParameter('localeCode', $localeCode)
-        ;
-
-        return $queryBuilder;
-    }
 }
