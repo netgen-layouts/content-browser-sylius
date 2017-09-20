@@ -28,8 +28,6 @@
         "sylius/taxonomy-bundle": "^1.0",
         "sylius/locale": "^1.0",
         "sylius/locale-bundle": "^1.0",
-        "lakion/api-test-case": "^1.0|^2.0",
-        "phpstan/phpstan": "^0.8",
         "franzl/studio": "*"
     },
     "scripts": {
