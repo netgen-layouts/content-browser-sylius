@@ -6,7 +6,6 @@ services:
 
     netgen_content_browser.backend.sylius_product:
         class: Netgen\ContentBrowser\Backend\SyliusProductBackend
-        public: false
         arguments:
             - "@sylius.repository.taxon"
             - "@netgen_content_browser.sylius.product_repository"
