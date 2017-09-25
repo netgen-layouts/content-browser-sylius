@@ -5,7 +5,7 @@ namespace Netgen\ContentBrowser\Item\Sylius\Product;
 use Netgen\ContentBrowser\Item\ItemInterface;
 use Sylius\Component\Product\Model\ProductInterface as BaseProductInterface;
 
-class Item implements ItemInterface, ProductInterface
+final class Item implements ItemInterface, ProductInterface
 {
     /**
      * @var \Sylius\Component\Product\Model\ProductInterface

@@ -6,7 +6,7 @@ use Netgen\Bundle\ContentBrowserBundle\DependencyInjection\CompilerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class NetgenContentBrowserBundle extends Bundle
+final class NetgenContentBrowserBundle extends Bundle
 {
     public function build(ContainerBuilder $container)
     {

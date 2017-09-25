@@ -6,7 +6,7 @@ use Netgen\ContentBrowser\Item\ItemInterface;
 use Netgen\ContentBrowser\Item\LocationInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface as BaseTaxonInterface;
 
-class Item implements ItemInterface, LocationInterface, TaxonInterface
+final class Item implements ItemInterface, LocationInterface, TaxonInterface
 {
     /**
      * @var \Sylius\Component\Taxonomy\Model\TaxonInterface

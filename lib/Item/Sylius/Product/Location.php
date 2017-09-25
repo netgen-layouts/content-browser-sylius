@@ -5,7 +5,7 @@ namespace Netgen\ContentBrowser\Item\Sylius\Product;
 use Netgen\ContentBrowser\Item\LocationInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface as BaseTaxonInterface;
 
-class Location implements LocationInterface, TaxonInterface
+final class Location implements LocationInterface, TaxonInterface
 {
     /**
      * @var \Sylius\Component\Taxonomy\Model\TaxonInterface

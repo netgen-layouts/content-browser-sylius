@@ -5,7 +5,7 @@ namespace Netgen\ContentBrowser\Backend\Sylius;
 use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
-class ProductRepository extends BaseProductRepository implements ProductRepositoryInterface
+final class ProductRepository extends BaseProductRepository implements ProductRepositoryInterface
 {
     public function createByTaxonPaginator(TaxonInterface $taxon, $localeCode)
     {

@@ -4,7 +4,7 @@ namespace Netgen\ContentBrowser\Backend\Sylius;
 
 use Sylius\Bundle\TaxonomyBundle\Doctrine\ORM\TaxonRepository as BaseTaxonRepository;
 
-class TaxonRepository extends BaseTaxonRepository implements TaxonRepositoryInterface
+final class TaxonRepository extends BaseTaxonRepository implements TaxonRepositoryInterface
 {
     public function createListPaginator($parentCode, $localeCode)
     {
