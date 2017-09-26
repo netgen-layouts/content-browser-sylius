@@ -44,9 +44,9 @@ class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
         );
 
         $this->assertContainerBuilderHasService('netgen_content_browser.backend.ezlocation');
+        $this->assertContainerBuilderHasService('netgen_content_browser.backend.ezcontent');
         $this->assertContainerBuilderHasService('netgen_content_browser.backend.eztags');
         $this->assertContainerBuilderHasService('netgen_content_browser.backend.sylius_product');
-        $this->assertContainerBuilderHasService('netgen_content_browser.config.ezcontent');
 
         $this->assertContainerBuilderHasSyntheticService('netgen_content_browser.current_config');
     }
@@ -63,6 +63,7 @@ class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
         $this->load();
 
         $this->assertContainerBuilderNotHasService('netgen_content_browser.backend.ezlocation');
+        $this->assertContainerBuilderNotHasService('netgen_content_browser.backend.ezcontent');
         $this->assertContainerBuilderNotHasService('netgen_content_browser.backend.eztags');
         $this->assertContainerBuilderNotHasService('netgen_content_browser.backend.sylius_product');
 
