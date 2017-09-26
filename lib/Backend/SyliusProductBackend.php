@@ -7,6 +7,7 @@ use Netgen\ContentBrowser\Exceptions\NotFoundException;
 use Netgen\ContentBrowser\Item\LocationInterface;
 use Netgen\ContentBrowser\Item\Sylius\Product\Item;
 use Netgen\ContentBrowser\Item\Sylius\Product\Location;
+use Netgen\ContentBrowser\Item\Sylius\Product\TaxonInterface as ContentBrowserTaxonInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
@@ -80,6 +81,10 @@ class SyliusProductBackend implements BackendInterface
 
     public function getSubLocations(LocationInterface $location)
     {
+        if (!$location instanceof ContentBrowserTaxonInterface) {
+            return array();
+        }
+
         $taxons = $this->taxonRepository->findBy(
             array(
                 'parent' => $location->getTaxon(),
@@ -96,6 +101,10 @@ class SyliusProductBackend implements BackendInterface
 
     public function getSubItems(LocationInterface $location, $offset = 0, $limit = 25)
     {
+        if (!$location instanceof ContentBrowserTaxonInterface) {
+            return array();
+        }
+
         $paginator = $this->productRepository->createByTaxonPaginator(
             $location->getTaxon(),
             $this->localeContext->getLocaleCode()
@@ -111,6 +120,10 @@ class SyliusProductBackend implements BackendInterface
 
     public function getSubItemsCount(LocationInterface $location)
     {
+        if (!$location instanceof ContentBrowserTaxonInterface) {
+            return 0;
+        }
+
         $paginator = $this->productRepository->createByTaxonPaginator(
             $location->getTaxon(),
             $this->localeContext->getLocaleCode()

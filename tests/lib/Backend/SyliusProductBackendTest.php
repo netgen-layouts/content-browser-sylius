@@ -10,6 +10,7 @@ use Netgen\ContentBrowser\Item\LocationInterface;
 use Netgen\ContentBrowser\Item\Sylius\Product\Location;
 use Netgen\ContentBrowser\Tests\Backend\Stubs\Product;
 use Netgen\ContentBrowser\Tests\Backend\Stubs\Taxon;
+use Netgen\ContentBrowser\Tests\Stubs\Location as StubLocation;
 use Pagerfanta\Adapter\AdapterInterface;
 use Pagerfanta\Pagerfanta;
 use PHPUnit\Framework\TestCase;
@@ -178,6 +179,20 @@ class SyliusProductBackendTest extends TestCase
     }
 
     /**
+     * @covers \Netgen\ContentBrowser\Backend\SyliusProductBackend::getSubLocations
+     */
+    public function testGetSubLocationsWithInvalidItem()
+    {
+        $this->taxonRepositoryMock
+            ->expects($this->never())
+            ->method('findBy');
+
+        $locations = $this->backend->getSubLocations(new StubLocation(0));
+
+        $this->assertEquals(array(), $locations);
+    }
+
+    /**
      * @covers \Netgen\ContentBrowser\Backend\SyliusProductBackend::getSubLocationsCount
      */
     public function testGetSubLocationsCount()
@@ -223,6 +238,20 @@ class SyliusProductBackendTest extends TestCase
         foreach ($items as $item) {
             $this->assertInstanceOf(ItemInterface::class, $item);
         }
+    }
+
+    /**
+     * @covers \Netgen\ContentBrowser\Backend\SyliusProductBackend::getSubItems
+     */
+    public function testGetSubItemsWithInvalidItem()
+    {
+        $this->productRepositoryMock
+            ->expects($this->never())
+            ->method('createByTaxonPaginator');
+
+        $items = $this->backend->getSubItems(new StubLocation(0));
+
+        $this->assertEquals(array(), $items);
     }
 
     /**
@@ -285,6 +314,20 @@ class SyliusProductBackendTest extends TestCase
         );
 
         $this->assertEquals(2, $count);
+    }
+
+    /**
+     * @covers \Netgen\ContentBrowser\Backend\SyliusProductBackend::getSubItemsCount
+     */
+    public function testGetSubItemsCountWithInvalidItem()
+    {
+        $this->productRepositoryMock
+            ->expects($this->never())
+            ->method('createByTaxonPaginator');
+
+        $count = $this->backend->getSubItemsCount(new StubLocation(0));
+
+        $this->assertEquals(0, $count);
     }
 
     /**
