@@ -30,7 +30,8 @@ return $bundles;
 Activate the routes
 -------------------
 
-Add the following to your main `routing.yml` file to activate Content Browser routes:
+Add the following to your main `routing.yml` file to activate Content Browser
+routes:
 
 ```
 netgen_content_browser:

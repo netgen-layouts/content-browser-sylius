@@ -7,7 +7,8 @@ Netgen Content Browser
 
 # Running tests
 
-Running tests requires that you have complete vendors installed, so run `composer install` before running the tests.
+Running tests requires that you have complete vendors installed, so run
+`composer install` before running the tests.
 
 You can run unit tests by simply calling `phpunit` from the repo root.
 
@@ -17,7 +18,8 @@ $ vendor/bin/phpunit
 
 # Running API tests
 
-API tests are functional tests, meaning they need a fully functional Symfony app with Content Browser enabled.
+API tests are functional tests, meaning they need a fully functional Symfony app
+with Content Browser enabled.
 
 To run the tests, you need to require some Composer packages:
 
