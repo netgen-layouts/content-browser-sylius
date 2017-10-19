@@ -32,6 +32,7 @@ final class NetgenContentBrowserExtension extends Extension implements PrependEx
             unset($itemConfig['parameters']);
 
             $container->register('netgen_content_browser.config.' . $itemType, BrowserConfiguration::class)
+                ->setPublic(true)
                 ->addArgument($itemType)
                 ->addArgument($itemConfig)
                 ->addArgument($configParameters);

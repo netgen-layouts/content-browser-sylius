@@ -6,6 +6,7 @@ services:
 
     netgen_content_browser.backend.sylius_taxon:
         class: Netgen\ContentBrowser\Backend\SyliusTaxonBackend
+        public: true
         arguments:
             - "@netgen_content_browser.sylius.taxon_repository"
             - "@sylius.context.locale"
