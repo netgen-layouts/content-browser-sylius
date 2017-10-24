@@ -40,16 +40,14 @@
     "autoload": {
         "psr-4": {
             "Netgen\\ContentBrowser\\": "lib/",
-            "Netgen\\Bundle\\ContentBrowserBundle\\": "bundle/",
-
+            "Netgen\\Bundle\\ContentBrowserBundle\\": "bundle/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
             "Netgen\\ContentBrowser\\Tests\\": "tests/lib/",
             "Netgen\\Bundle\\ContentBrowserBundle\\Tests\\": "tests/bundle/"
         },
-        "exclude-from-classmap": [
-            "/tests/"
-        ]
-    },
-    "autoload-dev": {
         "files": [
             "vendor/symfony/symfony/src/Symfony/Component/VarDumper/Resources/functions/dump.php"
         ]
