@@ -10,7 +10,7 @@ use Netgen\ContentBrowser\Item\Sylius\Taxon\TaxonInterface as ContentBrowserTaxo
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
-class SyliusTaxonBackend implements BackendInterface
+final class SyliusTaxonBackend implements BackendInterface
 {
     /**
      * @var \Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface

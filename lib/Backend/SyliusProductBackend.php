@@ -13,7 +13,7 @@ use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 
-class SyliusProductBackend implements BackendInterface
+final class SyliusProductBackend implements BackendInterface
 {
     /**
      * @var \Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface

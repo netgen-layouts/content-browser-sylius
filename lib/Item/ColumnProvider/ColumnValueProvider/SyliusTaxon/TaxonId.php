@@ -6,7 +6,7 @@ use Netgen\ContentBrowser\Item\ColumnProvider\ColumnValueProviderInterface;
 use Netgen\ContentBrowser\Item\ItemInterface;
 use Netgen\ContentBrowser\Item\Sylius\Taxon\TaxonInterface;
 
-class TaxonId implements ColumnValueProviderInterface
+final class TaxonId implements ColumnValueProviderInterface
 {
     public function getValue(ItemInterface $item)
     {

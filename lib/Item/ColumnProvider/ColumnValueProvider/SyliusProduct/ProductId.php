@@ -6,7 +6,7 @@ use Netgen\ContentBrowser\Item\ColumnProvider\ColumnValueProviderInterface;
 use Netgen\ContentBrowser\Item\ItemInterface;
 use Netgen\ContentBrowser\Item\Sylius\Product\ProductInterface;
 
-class ProductId implements ColumnValueProviderInterface
+final class ProductId implements ColumnValueProviderInterface
 {
     public function getValue(ItemInterface $item)
     {
