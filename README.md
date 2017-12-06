@@ -10,10 +10,10 @@ Netgen Content Browser
 Running tests requires that you have complete vendors installed, so run
 `composer install` before running the tests.
 
-You can run unit tests by simply calling `phpunit` from the repo root.
+You can run unit tests by simply calling Composer `test` from the repo root:
 
 ```
-$ vendor/bin/phpunit
+$ composer test
 ```
 
 # Running API tests
