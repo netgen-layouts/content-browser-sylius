@@ -24,11 +24,22 @@ with Content Browser enabled.
 To run the tests, you need to require some Composer packages:
 
 ```
-composer require lakion/api-test-case:^1.0|^2.0
+composer require lakion/api-test-case
+```
+
+Simplest way for tests to authenticate to your app is to enable basic auth in your `security.yml`:
+
+```
+security:
+    firewalls:
+        main:
+            http_basic: ~
 ```
 
 Afterwards, running tests is as simple as calling the following command:
 
 ```
-EZ_USERNAME=admin EZ_PASSWORD=publish vendor/bin/phpunit --bootstrap app/autoload.php -c vendor/netgen/content-browser/phpunit-api.xml
+SF_USERNAME=user SF_PASSWORD=password vendor/bin/phpunit --bootstrap vendor/autoload.php -c vendor/netgen/content-browser/phpunit-api.xml
 ```
+
+Notice that you need to specify username and password for your Symfony app.
