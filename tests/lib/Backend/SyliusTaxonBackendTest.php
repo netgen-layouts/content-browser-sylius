@@ -16,7 +16,7 @@ use PHPUnit\Framework\TestCase;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Symfony\Component\HttpKernel\Kernel;
 
-class SyliusTaxonBackendTest extends TestCase
+final class SyliusTaxonBackendTest extends TestCase
 {
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject

@@ -7,7 +7,7 @@ use Netgen\ContentBrowser\Tests\Backend\Stubs\Taxon;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpKernel\Kernel;
 
-class LocationTest extends TestCase
+final class LocationTest extends TestCase
 {
     /**
      * @var \Sylius\Component\Taxonomy\Model\TaxonInterface

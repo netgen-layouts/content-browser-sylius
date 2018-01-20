@@ -18,7 +18,7 @@ use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Symfony\Component\HttpKernel\Kernel;
 
-class SyliusProductBackendTest extends TestCase
+final class SyliusProductBackendTest extends TestCase
 {
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject

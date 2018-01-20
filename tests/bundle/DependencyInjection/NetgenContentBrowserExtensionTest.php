@@ -5,7 +5,7 @@ namespace Netgen\Bundle\ContentBrowserBundle\Tests\DependencyInjection;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Netgen\Bundle\ContentBrowserBundle\DependencyInjection\NetgenContentBrowserExtension;
 
-class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
+final class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
 {
     /**
      * We test for existence of one service from each of the config files.

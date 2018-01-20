@@ -7,7 +7,7 @@ use Netgen\ContentBrowser\Tests\Backend\Stubs\Taxon;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpKernel\Kernel;
 
-class ItemTest extends TestCase
+final class ItemTest extends TestCase
 {
     /**
      * @var \Sylius\Component\Taxonomy\Model\TaxonInterface
