@@ -20,7 +20,7 @@
         "phpunit/phpunit": "^5.7|^6.5",
         "symfony/phpunit-bridge": "^4.0",
         "matthiasnoback/symfony-dependency-injection-test": "^1.2|^2.3",
-        "ezsystems/ezpublish-kernel": "^7.0",
+        "ezsystems/ezpublish-kernel": "^6.0|^7.0",
         "netgen/tagsbundle": "^3.0",
         "sylius/product": "^1.1",
         "sylius/product-bundle": "^1.1",
