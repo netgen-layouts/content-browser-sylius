@@ -1,5 +1,6 @@
 .idea/
 coverage/
+coverage_api/
 vendor/
 composer.phar
 composer.lock
