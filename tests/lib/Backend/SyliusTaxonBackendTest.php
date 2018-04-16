@@ -110,8 +110,8 @@ final class SyliusTaxonBackendTest extends TestCase
     }
 
     /**
-     * @covers \Netgen\ContentBrowser\Backend\SyliusTaxonBackend::loadItem
      * @covers \Netgen\ContentBrowser\Backend\SyliusTaxonBackend::buildItem
+     * @covers \Netgen\ContentBrowser\Backend\SyliusTaxonBackend::loadItem
      */
     public function testLoadItem()
     {
@@ -204,9 +204,9 @@ final class SyliusTaxonBackendTest extends TestCase
     }
 
     /**
-     * @covers \Netgen\ContentBrowser\Backend\SyliusTaxonBackend::getSubItems
      * @covers \Netgen\ContentBrowser\Backend\SyliusTaxonBackend::buildItem
      * @covers \Netgen\ContentBrowser\Backend\SyliusTaxonBackend::buildItems
+     * @covers \Netgen\ContentBrowser\Backend\SyliusTaxonBackend::getSubItems
      */
     public function testGetSubItems()
     {
@@ -248,9 +248,9 @@ final class SyliusTaxonBackendTest extends TestCase
     }
 
     /**
-     * @covers \Netgen\ContentBrowser\Backend\SyliusTaxonBackend::getSubItems
      * @covers \Netgen\ContentBrowser\Backend\SyliusTaxonBackend::buildItem
      * @covers \Netgen\ContentBrowser\Backend\SyliusTaxonBackend::buildItems
+     * @covers \Netgen\ContentBrowser\Backend\SyliusTaxonBackend::getSubItems
      */
     public function testGetSubItemsWithOffsetAndLimit()
     {
@@ -324,9 +324,9 @@ final class SyliusTaxonBackendTest extends TestCase
     }
 
     /**
-     * @covers \Netgen\ContentBrowser\Backend\SyliusTaxonBackend::search
      * @covers \Netgen\ContentBrowser\Backend\SyliusTaxonBackend::buildItem
      * @covers \Netgen\ContentBrowser\Backend\SyliusTaxonBackend::buildItems
+     * @covers \Netgen\ContentBrowser\Backend\SyliusTaxonBackend::search
      */
     public function testSearch()
     {
@@ -352,9 +352,9 @@ final class SyliusTaxonBackendTest extends TestCase
     }
 
     /**
-     * @covers \Netgen\ContentBrowser\Backend\SyliusTaxonBackend::search
      * @covers \Netgen\ContentBrowser\Backend\SyliusTaxonBackend::buildItem
      * @covers \Netgen\ContentBrowser\Backend\SyliusTaxonBackend::buildItems
+     * @covers \Netgen\ContentBrowser\Backend\SyliusTaxonBackend::search
      */
     public function testSearchWithOffsetAndLimit()
     {

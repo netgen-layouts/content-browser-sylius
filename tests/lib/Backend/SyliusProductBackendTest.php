@@ -64,8 +64,8 @@ final class SyliusProductBackendTest extends TestCase
 
     /**
      * @covers \Netgen\ContentBrowser\Backend\SyliusProductBackend::__construct
-     * @covers \Netgen\ContentBrowser\Backend\SyliusProductBackend::getDefaultSections
      * @covers \Netgen\ContentBrowser\Backend\SyliusProductBackend::buildLocations
+     * @covers \Netgen\ContentBrowser\Backend\SyliusProductBackend::getDefaultSections
      */
     public function testGetDefaultSections()
     {
@@ -87,8 +87,8 @@ final class SyliusProductBackendTest extends TestCase
     }
 
     /**
-     * @covers \Netgen\ContentBrowser\Backend\SyliusProductBackend::loadLocation
      * @covers \Netgen\ContentBrowser\Backend\SyliusProductBackend::buildLocation
+     * @covers \Netgen\ContentBrowser\Backend\SyliusProductBackend::loadLocation
      */
     public function testLoadLocation()
     {
@@ -121,8 +121,8 @@ final class SyliusProductBackendTest extends TestCase
     }
 
     /**
-     * @covers \Netgen\ContentBrowser\Backend\SyliusProductBackend::loadItem
      * @covers \Netgen\ContentBrowser\Backend\SyliusProductBackend::buildItem
+     * @covers \Netgen\ContentBrowser\Backend\SyliusProductBackend::loadItem
      */
     public function testLoadItem()
     {
@@ -155,9 +155,9 @@ final class SyliusProductBackendTest extends TestCase
     }
 
     /**
-     * @covers \Netgen\ContentBrowser\Backend\SyliusProductBackend::getSubLocations
      * @covers \Netgen\ContentBrowser\Backend\SyliusProductBackend::buildLocation
      * @covers \Netgen\ContentBrowser\Backend\SyliusProductBackend::buildLocations
+     * @covers \Netgen\ContentBrowser\Backend\SyliusProductBackend::getSubLocations
      */
     public function testGetSubLocations()
     {
@@ -211,9 +211,9 @@ final class SyliusProductBackendTest extends TestCase
     }
 
     /**
-     * @covers \Netgen\ContentBrowser\Backend\SyliusProductBackend::getSubItems
      * @covers \Netgen\ContentBrowser\Backend\SyliusProductBackend::buildItem
      * @covers \Netgen\ContentBrowser\Backend\SyliusProductBackend::buildItems
+     * @covers \Netgen\ContentBrowser\Backend\SyliusProductBackend::getSubItems
      */
     public function testGetSubItems()
     {
@@ -255,9 +255,9 @@ final class SyliusProductBackendTest extends TestCase
     }
 
     /**
-     * @covers \Netgen\ContentBrowser\Backend\SyliusProductBackend::getSubItems
      * @covers \Netgen\ContentBrowser\Backend\SyliusProductBackend::buildItem
      * @covers \Netgen\ContentBrowser\Backend\SyliusProductBackend::buildItems
+     * @covers \Netgen\ContentBrowser\Backend\SyliusProductBackend::getSubItems
      */
     public function testGetSubItemsWithOffsetAndLimit()
     {
@@ -331,9 +331,9 @@ final class SyliusProductBackendTest extends TestCase
     }
 
     /**
-     * @covers \Netgen\ContentBrowser\Backend\SyliusProductBackend::search
      * @covers \Netgen\ContentBrowser\Backend\SyliusProductBackend::buildItem
      * @covers \Netgen\ContentBrowser\Backend\SyliusProductBackend::buildItems
+     * @covers \Netgen\ContentBrowser\Backend\SyliusProductBackend::search
      */
     public function testSearch()
     {
@@ -359,9 +359,9 @@ final class SyliusProductBackendTest extends TestCase
     }
 
     /**
-     * @covers \Netgen\ContentBrowser\Backend\SyliusProductBackend::search
      * @covers \Netgen\ContentBrowser\Backend\SyliusProductBackend::buildItem
      * @covers \Netgen\ContentBrowser\Backend\SyliusProductBackend::buildItems
+     * @covers \Netgen\ContentBrowser\Backend\SyliusProductBackend::search
      */
     public function testSearchWithOffsetAndLimit()
     {

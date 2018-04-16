@@ -96,8 +96,8 @@ final class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
     /**
      * We test for existence of one config value from each of the config files.
      *
-     * @covers \Netgen\Bundle\ContentBrowserBundle\DependencyInjection\NetgenContentBrowserExtension::prepend
      * @covers \Netgen\Bundle\ContentBrowserBundle\DependencyInjection\NetgenContentBrowserExtension::doPrepend
+     * @covers \Netgen\Bundle\ContentBrowserBundle\DependencyInjection\NetgenContentBrowserExtension::prepend
      */
     public function testPrepend()
     {
