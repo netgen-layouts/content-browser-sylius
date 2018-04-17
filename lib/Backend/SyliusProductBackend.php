@@ -82,13 +82,13 @@ final class SyliusProductBackend implements BackendInterface
     public function getSubLocations(LocationInterface $location)
     {
         if (!$location instanceof ContentBrowserTaxonInterface) {
-            return array();
+            return [];
         }
 
         $taxons = $this->taxonRepository->findBy(
-            array(
+            [
                 'parent' => $location->getTaxon(),
-            )
+            ]
         );
 
         return $this->buildLocations($taxons);
@@ -102,7 +102,7 @@ final class SyliusProductBackend implements BackendInterface
     public function getSubItems(LocationInterface $location, $offset = 0, $limit = 25)
     {
         if (!$location instanceof ContentBrowserTaxonInterface) {
-            return array();
+            return [];
         }
 
         $paginator = $this->productRepository->createByTaxonPaginator(
@@ -207,7 +207,7 @@ final class SyliusProductBackend implements BackendInterface
      */
     private function buildItems($products)
     {
-        $items = array();
+        $items = [];
 
         foreach ($products as $product) {
             $items[] = $this->buildItem($product);

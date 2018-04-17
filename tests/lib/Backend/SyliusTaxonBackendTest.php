@@ -62,7 +62,7 @@ final class SyliusTaxonBackendTest extends TestCase
         $this->taxonRepositoryMock
             ->expects($this->once())
             ->method('findRootNodes')
-            ->will($this->returnValue(array($this->getTaxon(1), $this->getTaxon(2))));
+            ->will($this->returnValue([$this->getTaxon(1), $this->getTaxon(2)]));
 
         $locations = $this->backend->getDefaultSections();
 
@@ -155,7 +155,7 @@ final class SyliusTaxonBackendTest extends TestCase
                 $this->equalTo('code'),
                 $this->equalTo('en')
             )
-            ->will($this->returnValue(array($this->getTaxon(2, 1), $this->getTaxon(3, 1))));
+            ->will($this->returnValue([$this->getTaxon(2, 1), $this->getTaxon(3, 1)]));
 
         $locations = $this->backend->getSubLocations(
             new Item($this->getTaxon(1, null, 'code'))
@@ -179,7 +179,7 @@ final class SyliusTaxonBackendTest extends TestCase
 
         $locations = $this->backend->getSubLocations(new StubLocation(0));
 
-        $this->assertEquals(array(), $locations);
+        $this->assertEquals([], $locations);
     }
 
     /**
@@ -194,7 +194,7 @@ final class SyliusTaxonBackendTest extends TestCase
                 $this->equalTo('code'),
                 $this->equalTo('en')
             )
-            ->will($this->returnValue(array($this->getTaxon(2), $this->getTaxon(3))));
+            ->will($this->returnValue([$this->getTaxon(2), $this->getTaxon(3)]));
 
         $count = $this->backend->getSubLocationsCount(
             new Item($this->getTaxon(1, null, 'code'))
@@ -215,7 +215,7 @@ final class SyliusTaxonBackendTest extends TestCase
             ->expects($this->any())
             ->method('getSlice')
             ->with($this->equalTo(0), $this->equalTo(25))
-            ->will($this->returnValue(new ArrayIterator(array($this->getTaxon(), $this->getTaxon()))));
+            ->will($this->returnValue(new ArrayIterator([$this->getTaxon(), $this->getTaxon()])));
 
         $this->taxonRepositoryMock
             ->expects($this->once())
@@ -244,7 +244,7 @@ final class SyliusTaxonBackendTest extends TestCase
 
         $items = $this->backend->getSubItems(new StubLocation(0));
 
-        $this->assertEquals(array(), $items);
+        $this->assertEquals([], $items);
     }
 
     /**
@@ -265,7 +265,7 @@ final class SyliusTaxonBackendTest extends TestCase
             ->expects($this->any())
             ->method('getSlice')
             ->with($this->equalTo(8), $this->equalTo(2))
-            ->will($this->returnValue(new ArrayIterator(array($this->getTaxon(), $this->getTaxon()))));
+            ->will($this->returnValue(new ArrayIterator([$this->getTaxon(), $this->getTaxon()])));
 
         $this->taxonRepositoryMock
             ->expects($this->once())
@@ -335,7 +335,7 @@ final class SyliusTaxonBackendTest extends TestCase
             ->expects($this->any())
             ->method('getSlice')
             ->with($this->equalTo(0), $this->equalTo(25))
-            ->will($this->returnValue(new ArrayIterator(array($this->getTaxon(), $this->getTaxon()))));
+            ->will($this->returnValue(new ArrayIterator([$this->getTaxon(), $this->getTaxon()])));
 
         $this->taxonRepositoryMock
             ->expects($this->once())
@@ -369,7 +369,7 @@ final class SyliusTaxonBackendTest extends TestCase
             ->expects($this->any())
             ->method('getSlice')
             ->with($this->equalTo(8), $this->equalTo(2))
-            ->will($this->returnValue(new ArrayIterator(array($this->getTaxon(), $this->getTaxon()))));
+            ->will($this->returnValue(new ArrayIterator([$this->getTaxon(), $this->getTaxon()])));
 
         $this->taxonRepositoryMock
             ->expects($this->once())

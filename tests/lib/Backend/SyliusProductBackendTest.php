@@ -72,7 +72,7 @@ final class SyliusProductBackendTest extends TestCase
         $this->taxonRepositoryMock
             ->expects($this->once())
             ->method('findRootNodes')
-            ->will($this->returnValue(array($this->getTaxon(1), $this->getTaxon(2))));
+            ->will($this->returnValue([$this->getTaxon(1), $this->getTaxon(2)]));
 
         $locations = $this->backend->getDefaultSections();
 
@@ -164,8 +164,8 @@ final class SyliusProductBackendTest extends TestCase
         $this->taxonRepositoryMock
             ->expects($this->once())
             ->method('findBy')
-            ->with($this->equalTo(array('parent' => $this->getTaxon(1))))
-            ->will($this->returnValue(array($this->getTaxon(2, 1), $this->getTaxon(3, 1))));
+            ->with($this->equalTo(['parent' => $this->getTaxon(1)]))
+            ->will($this->returnValue([$this->getTaxon(2, 1), $this->getTaxon(3, 1)]));
 
         $locations = $this->backend->getSubLocations(
             new Location($this->getTaxon(1))
@@ -189,7 +189,7 @@ final class SyliusProductBackendTest extends TestCase
 
         $locations = $this->backend->getSubLocations(new StubLocation(0));
 
-        $this->assertEquals(array(), $locations);
+        $this->assertEquals([], $locations);
     }
 
     /**
@@ -200,8 +200,8 @@ final class SyliusProductBackendTest extends TestCase
         $this->taxonRepositoryMock
             ->expects($this->once())
             ->method('findBy')
-            ->with($this->equalTo(array('parent' => $this->getTaxon(1))))
-            ->will($this->returnValue(array($this->getTaxon(2), $this->getTaxon(3))));
+            ->with($this->equalTo(['parent' => $this->getTaxon(1)]))
+            ->will($this->returnValue([$this->getTaxon(2), $this->getTaxon(3)]));
 
         $count = $this->backend->getSubLocationsCount(
             new Location($this->getTaxon(1))
@@ -222,7 +222,7 @@ final class SyliusProductBackendTest extends TestCase
             ->expects($this->any())
             ->method('getSlice')
             ->with($this->equalTo(0), $this->equalTo(25))
-            ->will($this->returnValue(new ArrayIterator(array($this->getProduct(), $this->getProduct()))));
+            ->will($this->returnValue(new ArrayIterator([$this->getProduct(), $this->getProduct()])));
 
         $this->productRepositoryMock
             ->expects($this->once())
@@ -251,7 +251,7 @@ final class SyliusProductBackendTest extends TestCase
 
         $items = $this->backend->getSubItems(new StubLocation(0));
 
-        $this->assertEquals(array(), $items);
+        $this->assertEquals([], $items);
     }
 
     /**
@@ -272,7 +272,7 @@ final class SyliusProductBackendTest extends TestCase
             ->expects($this->any())
             ->method('getSlice')
             ->with($this->equalTo(8), $this->equalTo(2))
-            ->will($this->returnValue(new ArrayIterator(array($this->getProduct(), $this->getProduct()))));
+            ->will($this->returnValue(new ArrayIterator([$this->getProduct(), $this->getProduct()])));
 
         $this->productRepositoryMock
             ->expects($this->once())
@@ -342,7 +342,7 @@ final class SyliusProductBackendTest extends TestCase
             ->expects($this->any())
             ->method('getSlice')
             ->with($this->equalTo(0), $this->equalTo(25))
-            ->will($this->returnValue(new ArrayIterator(array($this->getProduct(), $this->getProduct()))));
+            ->will($this->returnValue(new ArrayIterator([$this->getProduct(), $this->getProduct()])));
 
         $this->productRepositoryMock
             ->expects($this->once())
@@ -376,7 +376,7 @@ final class SyliusProductBackendTest extends TestCase
             ->expects($this->any())
             ->method('getSlice')
             ->with($this->equalTo(8), $this->equalTo(2))
-            ->will($this->returnValue(new ArrayIterator(array($this->getProduct(), $this->getProduct()))));
+            ->will($this->returnValue(new ArrayIterator([$this->getProduct(), $this->getProduct()])));
 
         $this->productRepositoryMock
             ->expects($this->once())

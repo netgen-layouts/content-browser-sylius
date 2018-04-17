@@ -19,7 +19,7 @@ final class NetgenContentBrowserExtension extends Extension implements PrependEx
         $configuration = $this->getConfiguration($configs, $container);
         $config = $this->processConfiguration($configuration, $configs);
 
-        $availableItemTypes = array();
+        $availableItemTypes = [];
 
         foreach ($config['item_types'] as $itemType => $itemConfig) {
             if (!preg_match('/^[A-Za-z]([A-Za-z0-9_])*$/', $itemType)) {

@@ -16,31 +16,31 @@ final class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
     {
         $this->container->setParameter(
             'kernel.bundles',
-            array(
+            [
                 'EzPublishCoreBundle' => 'EzPublishCoreBundle',
                 'NetgenTagsBundle' => 'NetgenTagsBundle',
                 'SyliusCoreBundle' => 'SyliusCoreBundle',
-            )
+            ]
         );
 
         $this->load(
-            array(
-                'item_types' => array(
-                    'ezcontent' => array(
+            [
+                'item_types' => [
+                    'ezcontent' => [
                         'name' => 'item_types.ezcontent',
-                        'preview' => array(
+                        'preview' => [
                             'template' => 'template.html.twig',
-                        ),
-                    ),
-                ),
-            )
+                        ],
+                    ],
+                ],
+            ]
         );
 
         $this->assertContainerBuilderHasParameter(
             'netgen_content_browser.item_types',
-            array(
+            [
                 'ezcontent' => 'item_types.ezcontent',
-            )
+            ]
         );
 
         $this->assertContainerBuilderHasService('netgen_content_browser.backend.ezlocation');
@@ -58,7 +58,7 @@ final class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
      */
     public function testServicesWithoutBundles()
     {
-        $this->container->setParameter('kernel.bundles', array());
+        $this->container->setParameter('kernel.bundles', []);
 
         $this->load();
 
@@ -77,19 +77,19 @@ final class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
      */
     public function testLoadThrowsRuntimeExceptionOnInvalidItemType()
     {
-        $this->container->setParameter('kernel.bundles', array());
+        $this->container->setParameter('kernel.bundles', []);
 
         $this->load(
-            array(
-                'item_types' => array(
-                    'Item type' => array(
+            [
+                'item_types' => [
+                    'Item type' => [
                         'name' => 'item_types.ezcontent',
-                        'preview' => array(
+                        'preview' => [
                             'template' => 'template.html.twig',
-                        ),
-                    ),
-                ),
-            )
+                        ],
+                    ],
+                ],
+            ]
         );
     }
 
@@ -103,11 +103,11 @@ final class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
     {
         $this->container->setParameter(
             'kernel.bundles',
-            array(
+            [
                 'EzPublishCoreBundle' => 'EzPublishCoreBundle',
                 'NetgenTagsBundle' => 'NetgenTagsBundle',
                 'SyliusCoreBundle' => 'SyliusCoreBundle',
-            )
+            ]
         );
 
         $extension = $this->container->getExtension('netgen_content_browser');
@@ -135,8 +135,8 @@ final class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
      */
     protected function getContainerExtensions()
     {
-        return array(
+        return [
             new NetgenContentBrowserExtension(),
-        );
+        ];
     }
 }
