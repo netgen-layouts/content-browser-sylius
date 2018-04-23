@@ -1,6 +1,7 @@
 {
     "name": "netgen/content-browser",
     "description": "Netgen Content Browser",
+    "license": "proprietary",
     "authors": [
         {
             "name": "Netgen",
