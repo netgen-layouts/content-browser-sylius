@@ -1,0 +1,14 @@
+parameters:
+    ignoreErrors:
+        - "#Casting to bool something that's already bool#"
+
+        # Symfony Config component
+        - '#Call to an undefined method Symfony\\Component\\Config\\Definition\\Builder\\NodeDefinition::children\(\)#'
+
+        # eZ Publish
+        - '#Call to an undefined method eZ\\Publish\\API\\Repository\\Repository::sudo\(\)#'
+        - '#Call to an undefined method Netgen\\TagsBundle\\API\\Repository\\TagsService::sudo\(\)#'
+        - '#Criterion\\ParentLocationId constructor expects array<int>|int, int|string given.#'
+
+        # Pagerfanta
+        - '#array|Traversable given.#'
