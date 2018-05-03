@@ -19,12 +19,12 @@ use Symfony\Component\HttpKernel\Kernel;
 final class SyliusTaxonBackendTest extends TestCase
 {
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject
+     * @var \Netgen\ContentBrowser\Backend\Sylius\TaxonRepositoryInterface&\PHPUnit\Framework\MockObject\MockObject
      */
     private $taxonRepositoryMock;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject
+     * @var \Sylius\Component\Locale\Context\LocaleContextInterface&\PHPUnit\Framework\MockObject\MockObject
      */
     private $localeContextMock;
 

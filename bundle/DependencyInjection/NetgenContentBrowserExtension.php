@@ -93,6 +93,11 @@ final class NetgenContentBrowserExtension extends Extension implements PrependEx
         }
     }
 
+    public function getConfiguration(array $config, ContainerBuilder $container)
+    {
+        return new Configuration();
+    }
+
     /**
      * Allow an extension to prepend the extension configurations.
      *

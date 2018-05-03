@@ -13,7 +13,7 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
 final class SyliusTaxonBackend implements BackendInterface
 {
     /**
-     * @var \Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface
+     * @var \Netgen\ContentBrowser\Backend\Sylius\TaxonRepositoryInterface
      */
     private $taxonRepository;
 
@@ -65,7 +65,7 @@ final class SyliusTaxonBackend implements BackendInterface
         }
 
         $taxons = $this->taxonRepository->findChildren(
-            $location->getTaxon()->getCode(),
+            (string) $location->getTaxon()->getCode(),
             $this->localeContext->getLocaleCode()
         );
 
@@ -84,7 +84,7 @@ final class SyliusTaxonBackend implements BackendInterface
         }
 
         $paginator = $this->taxonRepository->createListPaginator(
-            $location->getTaxon()->getCode(),
+            (string) $location->getTaxon()->getCode(),
             $this->localeContext->getLocaleCode()
         );
 
@@ -101,7 +101,7 @@ final class SyliusTaxonBackend implements BackendInterface
         }
 
         $paginator = $this->taxonRepository->createListPaginator(
-            $location->getTaxon()->getCode(),
+            (string) $location->getTaxon()->getCode(),
             $this->localeContext->getLocaleCode()
         );
 

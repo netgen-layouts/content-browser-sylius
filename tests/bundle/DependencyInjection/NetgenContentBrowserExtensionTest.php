@@ -110,6 +110,7 @@ final class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
             ]
         );
 
+        /** @var \Netgen\Bundle\ContentBrowserBundle\DependencyInjection\NetgenContentBrowserExtension $extension */
         $extension = $this->container->getExtension('netgen_content_browser');
         $extension->prepend($this->container);
 
