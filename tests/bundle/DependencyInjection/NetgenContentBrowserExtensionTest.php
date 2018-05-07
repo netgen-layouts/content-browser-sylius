@@ -3,10 +3,26 @@
 namespace Netgen\Bundle\ContentBrowserBundle\Tests\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
+use Netgen\Bundle\ContentBrowserBundle\DependencyInjection\Configuration;
 use Netgen\Bundle\ContentBrowserBundle\DependencyInjection\NetgenContentBrowserExtension;
 
 final class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
 {
+    /**
+     * @var \Netgen\Bundle\ContentBrowserBundle\DependencyInjection\NetgenContentBrowserExtension
+     */
+    private $extension;
+
+    public function setUp()
+    {
+        parent::setUp();
+
+        /** @var \Netgen\Bundle\ContentBrowserBundle\DependencyInjection\NetgenContentBrowserExtension $extension */
+        $extension = $this->container->getExtension('netgen_content_browser');
+
+        $this->extension = $extension;
+    }
+
     /**
      * We test for existence of one service from each of the config files.
      *
@@ -94,6 +110,15 @@ final class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
     }
 
     /**
+     * @covers \Netgen\Bundle\ContentBrowserBundle\DependencyInjection\NetgenContentBrowserExtension::getConfiguration
+     */
+    public function testGetConfiguration()
+    {
+        $configuration = $this->extension->getConfiguration([], $this->container);
+        $this->assertInstanceOf(Configuration::class, $configuration);
+    }
+
+    /**
      * We test for existence of one config value from each of the config files.
      *
      * @covers \Netgen\Bundle\ContentBrowserBundle\DependencyInjection\NetgenContentBrowserExtension::doPrepend
@@ -110,9 +135,7 @@ final class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
             ]
         );
 
-        /** @var \Netgen\Bundle\ContentBrowserBundle\DependencyInjection\NetgenContentBrowserExtension $extension */
-        $extension = $this->container->getExtension('netgen_content_browser');
-        $extension->prepend($this->container);
+        $this->extension->prepend($this->container);
 
         $config = call_user_func_array(
             'array_merge_recursive',
