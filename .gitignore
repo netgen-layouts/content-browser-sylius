@@ -2,8 +2,8 @@
 coverage/
 coverage_api/
 vendor/
-composer.phar
+.php_cs.cache
 composer.lock
+composer.phar
 phpunit.phar
 studio.json
-.php_cs.cache
