@@ -52,6 +52,7 @@
     "autoload-dev": {
         "psr-4": {
             "Netgen\\ContentBrowser\\Tests\\": "tests/lib/",
+            "Netgen\\ContentBrowser\\Tests\\Kernel\\": "tests/kernel/",
             "Netgen\\Bundle\\ContentBrowserBundle\\Tests\\": "tests/bundle/"
         },
         "files": [
