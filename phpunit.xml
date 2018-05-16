@@ -12,7 +12,6 @@
     forceCoversAnnotation="true"
     beStrictAboutTestsThatDoNotTestAnything="true"
     beStrictAboutOutputDuringTests="true"
-    beStrictAboutTestSize="true"
     beStrictAboutChangesToGlobalState="true"
 >
     <testsuites>
@@ -31,6 +30,8 @@
             <directory suffix=".php">bundle</directory>
             <exclude>
                 <file>bundle/NetgenContentBrowserBundle.php</file>
+            </exclude>
+            <exclude>
                 <directory>bundle/Controller</directory>
                 <directory>bundle/Resources</directory>
             </exclude>
