@@ -3,6 +3,7 @@ coverage/
 coverage_api/
 vendor/
 .php_cs.cache
+.web-server-pid
 composer.lock
 composer.phar
 phpunit.phar

@@ -3,6 +3,9 @@ includes:
     - vendor/phpstan/phpstan-phpunit/rules.neon
 
 parameters:
+    excludes_analyse:
+        - tests/application/web/bundles/
+
     ignoreErrors:
         # Symfony Form component
         - '#Parameter \#2 \$dataClass of class Symfony\\Component\\Form\\FormBuilder constructor expects string, null given.#'
