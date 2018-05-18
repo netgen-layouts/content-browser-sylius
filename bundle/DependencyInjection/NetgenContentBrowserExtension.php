@@ -108,7 +108,7 @@ final class NetgenContentBrowserExtension extends Extension implements PrependEx
     private function doPrepend(ContainerBuilder $container, $fileName, $configName)
     {
         $configFile = __DIR__ . '/../Resources/config/' . $fileName;
-        $config = Yaml::parse(file_get_contents($configFile));
+        $config = Yaml::parse((string) file_get_contents($configFile));
         $container->prependExtensionConfig($configName, $config);
         $container->addResource(new FileResource($configFile));
     }
