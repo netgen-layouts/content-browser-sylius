@@ -1,6 +1,6 @@
 parameters:
     ignoreErrors:
-        - "#Casting to bool something that's already bool#"
+        - "#Casting to int something that's already int#"
 
         # Symfony Config component
         - '#Call to an undefined method Symfony\\Component\\Config\\Definition\\Builder\\NodeDefinition::children\(\)#'
