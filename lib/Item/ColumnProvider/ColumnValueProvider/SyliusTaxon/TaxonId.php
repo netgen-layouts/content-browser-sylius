@@ -11,7 +11,7 @@ final class TaxonId implements ColumnValueProviderInterface
     public function getValue(ItemInterface $item)
     {
         if (!$item instanceof TaxonInterface) {
-            return;
+            return null;
         }
 
         return $item->getTaxon()->getId();

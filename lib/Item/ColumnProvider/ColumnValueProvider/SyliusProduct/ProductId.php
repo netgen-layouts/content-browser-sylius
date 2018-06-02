@@ -11,7 +11,7 @@ final class ProductId implements ColumnValueProviderInterface
     public function getValue(ItemInterface $item)
     {
         if (!$item instanceof ProductInterface) {
-            return;
+            return null;
         }
 
         return $item->getProduct()->getId();
