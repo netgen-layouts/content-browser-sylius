@@ -15,7 +15,7 @@ final class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
      */
     private $extension;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -30,7 +30,7 @@ final class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
      *
      * @covers \Netgen\Bundle\ContentBrowserBundle\DependencyInjection\NetgenContentBrowserExtension::load
      */
-    public function testServices()
+    public function testServices(): void
     {
         $this->container->setParameter(
             'kernel.bundles',
@@ -74,7 +74,7 @@ final class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
      *
      * @covers \Netgen\Bundle\ContentBrowserBundle\DependencyInjection\NetgenContentBrowserExtension::load
      */
-    public function testServicesWithoutBundles()
+    public function testServicesWithoutBundles(): void
     {
         $this->container->setParameter('kernel.bundles', []);
 
@@ -93,7 +93,7 @@ final class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
      * @expectedException \Netgen\ContentBrowser\Exceptions\RuntimeException
      * @expectedExceptionMessage Item type must begin with a letter and be followed by any combination of letters, digits and underscore.
      */
-    public function testLoadThrowsRuntimeExceptionOnInvalidItemType()
+    public function testLoadThrowsRuntimeExceptionOnInvalidItemType(): void
     {
         $this->container->setParameter('kernel.bundles', []);
 
@@ -114,7 +114,7 @@ final class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
     /**
      * @covers \Netgen\Bundle\ContentBrowserBundle\DependencyInjection\NetgenContentBrowserExtension::getConfiguration
      */
-    public function testGetConfiguration()
+    public function testGetConfiguration(): void
     {
         $configuration = $this->extension->getConfiguration([], $this->container);
         $this->assertInstanceOf(Configuration::class, $configuration);
@@ -126,7 +126,7 @@ final class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
      * @covers \Netgen\Bundle\ContentBrowserBundle\DependencyInjection\NetgenContentBrowserExtension::doPrepend
      * @covers \Netgen\Bundle\ContentBrowserBundle\DependencyInjection\NetgenContentBrowserExtension::prepend
      */
-    public function testPrepend()
+    public function testPrepend(): void
     {
         $this->container->setParameter(
             'kernel.bundles',
@@ -153,13 +153,7 @@ final class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
         $this->assertArrayHasKey('sylius_product', $config['item_types']);
     }
 
-    /**
-     * Return an array of container extensions that need to be registered for
-     * each test (usually just the container extension you are testing).
-     *
-     * @return \Symfony\Component\DependencyInjection\Extension\ExtensionInterface[]
-     */
-    protected function getContainerExtensions()
+    protected function getContainerExtensions(): array
     {
         return [
             new NetgenContentBrowserExtension(),

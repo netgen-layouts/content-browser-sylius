@@ -16,7 +16,7 @@ use Symfony\Component\Yaml\Yaml;
 
 final class NetgenContentBrowserExtension extends Extension implements PrependExtensionInterface
 {
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
         $configuration = $this->getConfiguration($configs, $container);
         $config = $this->processConfiguration($configuration, $configs);
@@ -67,7 +67,7 @@ final class NetgenContentBrowserExtension extends Extension implements PrependEx
         }
     }
 
-    public function prepend(ContainerBuilder $container)
+    public function prepend(ContainerBuilder $container): void
     {
         $loader = new YamlFileLoader(
             $container,
@@ -102,12 +102,8 @@ final class NetgenContentBrowserExtension extends Extension implements PrependEx
 
     /**
      * Allow an extension to prepend the extension configurations.
-     *
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     * @param string $fileName
-     * @param string $configName
      */
-    private function doPrepend(ContainerBuilder $container, $fileName, $configName)
+    private function doPrepend(ContainerBuilder $container, string $fileName, string $configName): void
     {
         $configFile = __DIR__ . '/../Resources/config/' . $fileName;
         $config = Yaml::parse((string) file_get_contents($configFile));

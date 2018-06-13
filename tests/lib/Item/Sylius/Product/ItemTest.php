@@ -21,7 +21,7 @@ final class ItemTest extends TestCase
      */
     private $item;
 
-    public function setUp()
+    public function setUp(): void
     {
         if (Kernel::VERSION_ID < 30200) {
             $this->markTestSkipped('Sylius tests require Symfony 3.2 or later to run.');
@@ -40,7 +40,7 @@ final class ItemTest extends TestCase
      * @covers \Netgen\ContentBrowser\Item\Sylius\Product\Item::__construct
      * @covers \Netgen\ContentBrowser\Item\Sylius\Product\Item::getValue
      */
-    public function testGetValue()
+    public function testGetValue(): void
     {
         $this->assertEquals(42, $this->item->getValue());
     }
@@ -48,7 +48,7 @@ final class ItemTest extends TestCase
     /**
      * @covers \Netgen\ContentBrowser\Item\Sylius\Product\Item::getName
      */
-    public function testGetName()
+    public function testGetName(): void
     {
         $this->assertEquals('Some name', $this->item->getName());
     }
@@ -56,7 +56,7 @@ final class ItemTest extends TestCase
     /**
      * @covers \Netgen\ContentBrowser\Item\Sylius\Product\Item::isVisible
      */
-    public function testIsVisible()
+    public function testIsVisible(): void
     {
         $this->assertTrue($this->item->isVisible());
     }
@@ -64,7 +64,7 @@ final class ItemTest extends TestCase
     /**
      * @covers \Netgen\ContentBrowser\Item\Sylius\Product\Item::isSelectable
      */
-    public function testIsSelectable()
+    public function testIsSelectable(): void
     {
         $this->assertTrue($this->item->isSelectable());
     }
@@ -72,7 +72,7 @@ final class ItemTest extends TestCase
     /**
      * @covers \Netgen\ContentBrowser\Item\Sylius\Product\Item::getProduct
      */
-    public function testGetProduct()
+    public function testGetProduct(): void
     {
         $this->assertEquals($this->product, $this->item->getProduct());
     }

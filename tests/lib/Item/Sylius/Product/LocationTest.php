@@ -26,7 +26,7 @@ final class LocationTest extends TestCase
      */
     private $location;
 
-    public function setUp()
+    public function setUp(): void
     {
         if (Kernel::VERSION_ID < 30200) {
             $this->markTestSkipped('Sylius tests require Symfony 3.2 or later to run.');
@@ -49,7 +49,7 @@ final class LocationTest extends TestCase
      * @covers \Netgen\ContentBrowser\Item\Sylius\Product\Location::__construct
      * @covers \Netgen\ContentBrowser\Item\Sylius\Product\Location::getLocationId
      */
-    public function testGetLocationId()
+    public function testGetLocationId(): void
     {
         $this->assertEquals(42, $this->location->getLocationId());
     }
@@ -57,7 +57,7 @@ final class LocationTest extends TestCase
     /**
      * @covers \Netgen\ContentBrowser\Item\Sylius\Product\Location::getName
      */
-    public function testGetName()
+    public function testGetName(): void
     {
         $this->assertEquals('Some name', $this->location->getName());
     }
@@ -65,7 +65,7 @@ final class LocationTest extends TestCase
     /**
      * @covers \Netgen\ContentBrowser\Item\Sylius\Product\Location::getParentId
      */
-    public function testGetParentId()
+    public function testGetParentId(): void
     {
         $this->assertEquals(24, $this->location->getParentId());
     }
@@ -73,7 +73,7 @@ final class LocationTest extends TestCase
     /**
      * @covers \Netgen\ContentBrowser\Item\Sylius\Product\Location::getParentId
      */
-    public function testGetParentIdWithNoParentTaxon()
+    public function testGetParentIdWithNoParentTaxon(): void
     {
         $this->location = new Location(new Taxon());
 
@@ -83,7 +83,7 @@ final class LocationTest extends TestCase
     /**
      * @covers \Netgen\ContentBrowser\Item\Sylius\Product\Location::getTaxon
      */
-    public function testGetProduct()
+    public function testGetProduct(): void
     {
         $this->assertEquals($this->taxon, $this->location->getTaxon());
     }

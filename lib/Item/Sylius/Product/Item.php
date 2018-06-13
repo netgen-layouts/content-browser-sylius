@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Netgen\ContentBrowser\Item\Sylius\Product;
 
 use Netgen\ContentBrowser\Item\ItemInterface;
-use Sylius\Component\Product\Model\ProductInterface as BaseProductInterface;
+use Sylius\Component\Product\Model\ProductInterface as SyliusProductInterface;
 
 final class Item implements ItemInterface, ProductInterface
 {
@@ -14,7 +14,7 @@ final class Item implements ItemInterface, ProductInterface
      */
     private $product;
 
-    public function __construct(BaseProductInterface $product)
+    public function __construct(SyliusProductInterface $product)
     {
         $this->product = $product;
     }
@@ -24,22 +24,22 @@ final class Item implements ItemInterface, ProductInterface
         return $this->product->getId();
     }
 
-    public function getName()
+    public function getName(): string
     {
-        return $this->product->getName();
+        return (string) $this->product->getName();
     }
 
-    public function isVisible()
-    {
-        return true;
-    }
-
-    public function isSelectable()
+    public function isVisible(): bool
     {
         return true;
     }
 
-    public function getProduct()
+    public function isSelectable(): bool
+    {
+        return true;
+    }
+
+    public function getProduct(): SyliusProductInterface
     {
         return $this->product;
     }

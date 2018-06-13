@@ -35,7 +35,7 @@ final class SyliusTaxonBackendTest extends TestCase
      */
     private $backend;
 
-    public function setUp()
+    public function setUp(): void
     {
         if (Kernel::VERSION_ID < 30200) {
             $this->markTestSkipped('Sylius tests require Symfony 3.2 or later to run.');
@@ -59,7 +59,7 @@ final class SyliusTaxonBackendTest extends TestCase
      * @covers \Netgen\ContentBrowser\Backend\SyliusTaxonBackend::__construct
      * @covers \Netgen\ContentBrowser\Backend\SyliusTaxonBackend::getDefaultSections
      */
-    public function testGetDefaultSections()
+    public function testGetDefaultSections(): void
     {
         $this->taxonRepositoryMock
             ->expects($this->once())
@@ -81,7 +81,7 @@ final class SyliusTaxonBackendTest extends TestCase
     /**
      * @covers \Netgen\ContentBrowser\Backend\SyliusTaxonBackend::loadLocation
      */
-    public function testLoadLocation()
+    public function testLoadLocation(): void
     {
         $this->taxonRepositoryMock
             ->expects($this->once())
@@ -100,7 +100,7 @@ final class SyliusTaxonBackendTest extends TestCase
      * @expectedException \Netgen\ContentBrowser\Exceptions\NotFoundException
      * @expectedExceptionMessage Item with ID 1 not found.
      */
-    public function testLoadLocationThrowsNotFoundException()
+    public function testLoadLocationThrowsNotFoundException(): void
     {
         $this->taxonRepositoryMock
             ->expects($this->once())
@@ -115,7 +115,7 @@ final class SyliusTaxonBackendTest extends TestCase
      * @covers \Netgen\ContentBrowser\Backend\SyliusTaxonBackend::buildItem
      * @covers \Netgen\ContentBrowser\Backend\SyliusTaxonBackend::loadItem
      */
-    public function testLoadItem()
+    public function testLoadItem(): void
     {
         $this->taxonRepositoryMock
             ->expects($this->once())
@@ -134,7 +134,7 @@ final class SyliusTaxonBackendTest extends TestCase
      * @expectedException \Netgen\ContentBrowser\Exceptions\NotFoundException
      * @expectedExceptionMessage Item with ID 1 not found.
      */
-    public function testLoadItemThrowsNotFoundException()
+    public function testLoadItemThrowsNotFoundException(): void
     {
         $this->taxonRepositoryMock
             ->expects($this->once())
@@ -148,7 +148,7 @@ final class SyliusTaxonBackendTest extends TestCase
     /**
      * @covers \Netgen\ContentBrowser\Backend\SyliusTaxonBackend::getSubLocations
      */
-    public function testGetSubLocations()
+    public function testGetSubLocations(): void
     {
         $this->taxonRepositoryMock
             ->expects($this->once())
@@ -173,7 +173,7 @@ final class SyliusTaxonBackendTest extends TestCase
     /**
      * @covers \Netgen\ContentBrowser\Backend\SyliusTaxonBackend::getSubLocations
      */
-    public function testGetSubLocationsWithInvalidItem()
+    public function testGetSubLocationsWithInvalidItem(): void
     {
         $this->taxonRepositoryMock
             ->expects($this->never())
@@ -187,7 +187,7 @@ final class SyliusTaxonBackendTest extends TestCase
     /**
      * @covers \Netgen\ContentBrowser\Backend\SyliusTaxonBackend::getSubLocationsCount
      */
-    public function testGetSubLocationsCount()
+    public function testGetSubLocationsCount(): void
     {
         $this->taxonRepositoryMock
             ->expects($this->once())
@@ -210,7 +210,7 @@ final class SyliusTaxonBackendTest extends TestCase
      * @covers \Netgen\ContentBrowser\Backend\SyliusTaxonBackend::buildItems
      * @covers \Netgen\ContentBrowser\Backend\SyliusTaxonBackend::getSubItems
      */
-    public function testGetSubItems()
+    public function testGetSubItems(): void
     {
         $pagerfantaAdapterMock = $this->createMock(AdapterInterface::class);
         $pagerfantaAdapterMock
@@ -238,7 +238,7 @@ final class SyliusTaxonBackendTest extends TestCase
     /**
      * @covers \Netgen\ContentBrowser\Backend\SyliusTaxonBackend::getSubItems
      */
-    public function testGetSubItemsWithInvalidItem()
+    public function testGetSubItemsWithInvalidItem(): void
     {
         $this->taxonRepositoryMock
             ->expects($this->never())
@@ -254,7 +254,7 @@ final class SyliusTaxonBackendTest extends TestCase
      * @covers \Netgen\ContentBrowser\Backend\SyliusTaxonBackend::buildItems
      * @covers \Netgen\ContentBrowser\Backend\SyliusTaxonBackend::getSubItems
      */
-    public function testGetSubItemsWithOffsetAndLimit()
+    public function testGetSubItemsWithOffsetAndLimit(): void
     {
         $pagerfantaAdapterMock = $this->createMock(AdapterInterface::class);
 
@@ -290,7 +290,7 @@ final class SyliusTaxonBackendTest extends TestCase
     /**
      * @covers \Netgen\ContentBrowser\Backend\SyliusTaxonBackend::getSubItemsCount
      */
-    public function testGetSubItemsCount()
+    public function testGetSubItemsCount(): void
     {
         $pagerfantaAdapterMock = $this->createMock(AdapterInterface::class);
         $pagerfantaAdapterMock
@@ -314,7 +314,7 @@ final class SyliusTaxonBackendTest extends TestCase
     /**
      * @covers \Netgen\ContentBrowser\Backend\SyliusTaxonBackend::getSubItemsCount
      */
-    public function testGetSubItemsCountWithInvalidItem()
+    public function testGetSubItemsCountWithInvalidItem(): void
     {
         $this->taxonRepositoryMock
             ->expects($this->never())
@@ -330,7 +330,7 @@ final class SyliusTaxonBackendTest extends TestCase
      * @covers \Netgen\ContentBrowser\Backend\SyliusTaxonBackend::buildItems
      * @covers \Netgen\ContentBrowser\Backend\SyliusTaxonBackend::search
      */
-    public function testSearch()
+    public function testSearch(): void
     {
         $pagerfantaAdapterMock = $this->createMock(AdapterInterface::class);
         $pagerfantaAdapterMock
@@ -358,7 +358,7 @@ final class SyliusTaxonBackendTest extends TestCase
      * @covers \Netgen\ContentBrowser\Backend\SyliusTaxonBackend::buildItems
      * @covers \Netgen\ContentBrowser\Backend\SyliusTaxonBackend::search
      */
-    public function testSearchWithOffsetAndLimit()
+    public function testSearchWithOffsetAndLimit(): void
     {
         $pagerfantaAdapterMock = $this->createMock(AdapterInterface::class);
 
@@ -390,7 +390,7 @@ final class SyliusTaxonBackendTest extends TestCase
     /**
      * @covers \Netgen\ContentBrowser\Backend\SyliusTaxonBackend::searchCount
      */
-    public function testSearchCount()
+    public function testSearchCount(): void
     {
         $pagerfantaAdapterMock = $this->createMock(AdapterInterface::class);
         $pagerfantaAdapterMock
@@ -416,9 +416,9 @@ final class SyliusTaxonBackendTest extends TestCase
      * @param int $parentId
      * @param string $code
      *
-     * @return \Sylius\Component\Taxonomy\Model\Taxon
+     * @return \Netgen\ContentBrowser\Tests\Backend\Stubs\Taxon
      */
-    private function getTaxon($id = null, $parentId = null, $code = null)
+    private function getTaxon($id = null, $parentId = null, string $code = null): Taxon
     {
         $taxon = new Taxon();
         $taxon->setId($id);

@@ -10,12 +10,12 @@ use Netgen\ContentBrowser\Item\Sylius\Product\ProductInterface;
 
 final class ProductId implements ColumnValueProviderInterface
 {
-    public function getValue(ItemInterface $item)
+    public function getValue(ItemInterface $item): ?string
     {
         if (!$item instanceof ProductInterface) {
             return null;
         }
 
-        return $item->getProduct()->getId();
+        return (string) $item->getProduct()->getId();
     }
 }

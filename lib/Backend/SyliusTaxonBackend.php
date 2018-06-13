@@ -6,6 +6,7 @@ namespace Netgen\ContentBrowser\Backend;
 
 use Netgen\ContentBrowser\Backend\Sylius\TaxonRepositoryInterface;
 use Netgen\ContentBrowser\Exceptions\NotFoundException;
+use Netgen\ContentBrowser\Item\ItemInterface;
 use Netgen\ContentBrowser\Item\LocationInterface;
 use Netgen\ContentBrowser\Item\Sylius\Taxon\Item;
 use Netgen\ContentBrowser\Item\Sylius\Taxon\TaxonInterface as ContentBrowserTaxonInterface;
@@ -39,12 +40,12 @@ final class SyliusTaxonBackend implements BackendInterface
         );
     }
 
-    public function loadLocation($id)
+    public function loadLocation($id): LocationInterface
     {
         return $this->loadItem($id);
     }
 
-    public function loadItem($id)
+    public function loadItem($id): ItemInterface
     {
         $taxon = $this->taxonRepository->find($id);
 
@@ -74,7 +75,7 @@ final class SyliusTaxonBackend implements BackendInterface
         return $this->buildItems($taxons);
     }
 
-    public function getSubLocationsCount(LocationInterface $location)
+    public function getSubLocationsCount(LocationInterface $location): int
     {
         return count($this->getSubLocations($location));
     }
@@ -96,7 +97,7 @@ final class SyliusTaxonBackend implements BackendInterface
         return $this->buildItems($paginator->getCurrentPageResults());
     }
 
-    public function getSubItemsCount(LocationInterface $location)
+    public function getSubItemsCount(LocationInterface $location): int
     {
         if (!$location instanceof ContentBrowserTaxonInterface) {
             return 0;
@@ -125,7 +126,7 @@ final class SyliusTaxonBackend implements BackendInterface
         );
     }
 
-    public function searchCount($searchText)
+    public function searchCount($searchText): int
     {
         $paginator = $this->taxonRepository->createSearchPaginator(
             $searchText,
@@ -137,12 +138,8 @@ final class SyliusTaxonBackend implements BackendInterface
 
     /**
      * Builds the item from provided taxon.
-     *
-     * @param \Sylius\Component\Taxonomy\Model\TaxonInterface $taxon
-     *
-     * @return \Netgen\ContentBrowser\Item\Sylius\Taxon\Item
      */
-    private function buildItem(TaxonInterface $taxon)
+    private function buildItem(TaxonInterface $taxon): Item
     {
         return new Item($taxon);
     }
@@ -154,7 +151,7 @@ final class SyliusTaxonBackend implements BackendInterface
      *
      * @return \Netgen\ContentBrowser\Item\Sylius\Taxon\Item[]
      */
-    private function buildItems($taxons)
+    private function buildItems(iterable $taxons): array
     {
         $items = [];
 

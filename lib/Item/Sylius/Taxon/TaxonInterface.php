@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Netgen\ContentBrowser\Item\Sylius\Taxon;
 
+use Sylius\Component\Taxonomy\Model\TaxonInterface as SyliusTaxonInterface;
+
 interface TaxonInterface
 {
     /**
      * Returns the Sylius taxon.
-     *
-     * @return \Sylius\Component\Taxonomy\Model\TaxonInterface
      */
-    public function getTaxon();
+    public function getTaxon(): SyliusTaxonInterface;
 }

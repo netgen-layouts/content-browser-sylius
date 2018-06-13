@@ -21,7 +21,7 @@ final class ItemTest extends TestCase
      */
     private $item;
 
-    public function setUp()
+    public function setUp(): void
     {
         if (Kernel::VERSION_ID < 30200) {
             $this->markTestSkipped('Sylius tests require Symfony 3.2 or later to run.');
@@ -44,7 +44,7 @@ final class ItemTest extends TestCase
      * @covers \Netgen\ContentBrowser\Item\Sylius\Taxon\Item::__construct
      * @covers \Netgen\ContentBrowser\Item\Sylius\Taxon\Item::getLocationId
      */
-    public function testGetLocationId()
+    public function testGetLocationId(): void
     {
         $this->assertEquals(42, $this->item->getLocationId());
     }
@@ -52,7 +52,7 @@ final class ItemTest extends TestCase
     /**
      * @covers \Netgen\ContentBrowser\Item\Sylius\Taxon\Item::getValue
      */
-    public function testGetValue()
+    public function testGetValue(): void
     {
         $this->assertEquals(42, $this->item->getValue());
     }
@@ -60,7 +60,7 @@ final class ItemTest extends TestCase
     /**
      * @covers \Netgen\ContentBrowser\Item\Sylius\Taxon\Item::getName
      */
-    public function testGetName()
+    public function testGetName(): void
     {
         $this->assertEquals('Some name', $this->item->getName());
     }
@@ -68,7 +68,7 @@ final class ItemTest extends TestCase
     /**
      * @covers \Netgen\ContentBrowser\Item\Sylius\Taxon\Item::getParentId
      */
-    public function testGetParentId()
+    public function testGetParentId(): void
     {
         $this->assertEquals(24, $this->item->getParentId());
     }
@@ -76,7 +76,7 @@ final class ItemTest extends TestCase
     /**
      * @covers \Netgen\ContentBrowser\Item\Sylius\Taxon\Item::getParentId
      */
-    public function testGetParentIdWithNoParentTaxon()
+    public function testGetParentIdWithNoParentTaxon(): void
     {
         $this->item = new Item(new Taxon());
 
@@ -86,7 +86,7 @@ final class ItemTest extends TestCase
     /**
      * @covers \Netgen\ContentBrowser\Item\Sylius\Taxon\Item::isVisible
      */
-    public function testIsVisible()
+    public function testIsVisible(): void
     {
         $this->assertTrue($this->item->isVisible());
     }
@@ -94,7 +94,7 @@ final class ItemTest extends TestCase
     /**
      * @covers \Netgen\ContentBrowser\Item\Sylius\Taxon\Item::isSelectable
      */
-    public function testIsSelectable()
+    public function testIsSelectable(): void
     {
         $this->assertTrue($this->item->isSelectable());
     }
@@ -102,7 +102,7 @@ final class ItemTest extends TestCase
     /**
      * @covers \Netgen\ContentBrowser\Item\Sylius\Taxon\Item::getTaxon
      */
-    public function testGetTaxon()
+    public function testGetTaxon(): void
     {
         $this->assertEquals($this->taxon, $this->item->getTaxon());
     }

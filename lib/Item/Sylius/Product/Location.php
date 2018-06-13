@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Netgen\ContentBrowser\Item\Sylius\Product;
 
 use Netgen\ContentBrowser\Item\LocationInterface;
-use Sylius\Component\Taxonomy\Model\TaxonInterface as BaseTaxonInterface;
+use Sylius\Component\Taxonomy\Model\TaxonInterface as SyliusTaxonInterface;
 
 final class Location implements LocationInterface, TaxonInterface
 {
@@ -14,7 +14,7 @@ final class Location implements LocationInterface, TaxonInterface
      */
     private $taxon;
 
-    public function __construct(BaseTaxonInterface $taxon)
+    public function __construct(SyliusTaxonInterface $taxon)
     {
         $this->taxon = $taxon;
     }
@@ -24,21 +24,21 @@ final class Location implements LocationInterface, TaxonInterface
         return $this->taxon->getId();
     }
 
-    public function getName()
+    public function getName(): string
     {
-        return $this->taxon->getName();
+        return (string) $this->taxon->getName();
     }
 
     public function getParentId()
     {
         $parentTaxon = $this->taxon->getParent();
 
-        return $parentTaxon instanceof BaseTaxonInterface ?
+        return $parentTaxon instanceof SyliusTaxonInterface ?
             $parentTaxon->getId() :
             null;
     }
 
-    public function getTaxon()
+    public function getTaxon(): SyliusTaxonInterface
     {
         return $this->taxon;
     }

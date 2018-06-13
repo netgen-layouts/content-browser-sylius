@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Netgen\ContentBrowser\Backend\Sylius;
 
+use Doctrine\ORM\QueryBuilder;
+use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 final class ProductRepository extends BaseProductRepository implements ProductRepositoryInterface
 {
-    public function createByTaxonPaginator(TaxonInterface $taxon, $localeCode)
+    public function createByTaxonPaginator(TaxonInterface $taxon, string $localeCode): Pagerfanta
     {
         $root = $taxon->isRoot() ? $taxon : $taxon->getRoot();
 
@@ -36,7 +38,7 @@ final class ProductRepository extends BaseProductRepository implements ProductRe
         return $this->getPaginator($queryBuilder);
     }
 
-    public function createSearchPaginator($searchText, $localeCode)
+    public function createSearchPaginator(string $searchText, string $localeCode): Pagerfanta
     {
         $queryBuilder = $this->createQueryBuilderWithLocaleCode($localeCode);
         $queryBuilder
@@ -51,12 +53,8 @@ final class ProductRepository extends BaseProductRepository implements ProductRe
 
     /**
      * Creates a query builder to filter products by locale.
-     *
-     * @param string $localeCode
-     *
-     * @return \Doctrine\ORM\QueryBuilder
      */
-    private function createQueryBuilderWithLocaleCode($localeCode)
+    private function createQueryBuilderWithLocaleCode(string $localeCode): QueryBuilder
     {
         $queryBuilder = $this->createQueryBuilder('o');
         $queryBuilder

@@ -10,12 +10,12 @@ use Netgen\ContentBrowser\Item\Sylius\Taxon\TaxonInterface;
 
 final class TaxonId implements ColumnValueProviderInterface
 {
-    public function getValue(ItemInterface $item)
+    public function getValue(ItemInterface $item): ?string
     {
         if (!$item instanceof TaxonInterface) {
             return null;
         }
 
-        return $item->getTaxon()->getId();
+        return (string) $item->getTaxon()->getId();
     }
 }

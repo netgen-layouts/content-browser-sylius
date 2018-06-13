@@ -6,6 +6,7 @@ namespace Netgen\ContentBrowser\Backend;
 
 use Netgen\ContentBrowser\Backend\Sylius\ProductRepositoryInterface;
 use Netgen\ContentBrowser\Exceptions\NotFoundException;
+use Netgen\ContentBrowser\Item\ItemInterface;
 use Netgen\ContentBrowser\Item\LocationInterface;
 use Netgen\ContentBrowser\Item\Sylius\Product\Item;
 use Netgen\ContentBrowser\Item\Sylius\Product\Location;
@@ -49,7 +50,7 @@ final class SyliusProductBackend implements BackendInterface
         );
     }
 
-    public function loadLocation($id)
+    public function loadLocation($id): LocationInterface
     {
         $taxon = $this->taxonRepository->find($id);
 
@@ -65,7 +66,7 @@ final class SyliusProductBackend implements BackendInterface
         return $this->buildLocation($taxon);
     }
 
-    public function loadItem($id)
+    public function loadItem($id): ItemInterface
     {
         $product = $this->productRepository->find($id);
 
@@ -96,7 +97,7 @@ final class SyliusProductBackend implements BackendInterface
         return $this->buildLocations($taxons);
     }
 
-    public function getSubLocationsCount(LocationInterface $location)
+    public function getSubLocationsCount(LocationInterface $location): int
     {
         return count($this->getSubLocations($location));
     }
@@ -120,7 +121,7 @@ final class SyliusProductBackend implements BackendInterface
         );
     }
 
-    public function getSubItemsCount(LocationInterface $location)
+    public function getSubItemsCount(LocationInterface $location): int
     {
         if (!$location instanceof ContentBrowserTaxonInterface) {
             return 0;
@@ -149,7 +150,7 @@ final class SyliusProductBackend implements BackendInterface
         );
     }
 
-    public function searchCount($searchText)
+    public function searchCount($searchText): int
     {
         $paginator = $this->productRepository->createSearchPaginator(
             $searchText,
@@ -161,12 +162,8 @@ final class SyliusProductBackend implements BackendInterface
 
     /**
      * Builds the location from provided taxon.
-     *
-     * @param \Sylius\Component\Taxonomy\Model\TaxonInterface $taxon
-     *
-     * @return \Netgen\ContentBrowser\Item\Sylius\Product\Location
      */
-    private function buildLocation(TaxonInterface $taxon)
+    private function buildLocation(TaxonInterface $taxon): Location
     {
         return new Location($taxon);
     }
@@ -178,10 +175,10 @@ final class SyliusProductBackend implements BackendInterface
      *
      * @return \Netgen\ContentBrowser\Item\Sylius\Product\Location[]
      */
-    private function buildLocations(array $taxons)
+    private function buildLocations(array $taxons): array
     {
         return array_map(
-            function (TaxonInterface $taxon) {
+            function (TaxonInterface $taxon): Location {
                 return $this->buildLocation($taxon);
             },
             $taxons
@@ -190,12 +187,8 @@ final class SyliusProductBackend implements BackendInterface
 
     /**
      * Builds the item from provided product.
-     *
-     * @param \Sylius\Component\Product\Model\ProductInterface $product
-     *
-     * @return \Netgen\ContentBrowser\Item\Sylius\Product\Item
      */
-    private function buildItem(ProductInterface $product)
+    private function buildItem(ProductInterface $product): Item
     {
         return new Item($product);
     }
@@ -203,11 +196,11 @@ final class SyliusProductBackend implements BackendInterface
     /**
      * Builds the items from provided products.
      *
-     * @param \Sylius\Component\Product\Model\ProductInterface[]|\Iterator $products
+     * @param \Sylius\Component\Product\Model\ProductInterface[] $products
      *
      * @return \Netgen\ContentBrowser\Item\Sylius\Product\Item[]
      */
-    private function buildItems($products)
+    private function buildItems(iterable $products): array
     {
         $items = [];
 
