@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\ContentBrowser\Tests\Item\Sylius\Product;
 
 use Netgen\ContentBrowser\Item\Sylius\Product\Item;

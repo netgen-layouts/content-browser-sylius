@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\ContentBrowser\Backend;
 
 use Netgen\ContentBrowser\Backend\Sylius\ProductRepositoryInterface;

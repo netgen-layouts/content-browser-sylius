@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\ContentBrowser\Item\ColumnProvider\ColumnValueProvider\SyliusTaxon;
 
 use Netgen\ContentBrowser\Item\ColumnProvider\ColumnValueProviderInterface;

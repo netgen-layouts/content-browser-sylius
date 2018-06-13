@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\ContentBrowser\Tests\Item\Sylius\Taxon;
 
 use Netgen\ContentBrowser\Item\Sylius\Taxon\Item;
