@@ -1,7 +1,6 @@
 parameters:
     ignoreErrors:
         # Content Browser specifics
-        - "#Casting to string something that's already string.#"
         - '#Method Netgen\\ContentBrowser\\Backend\\EzTagsBackend::loadLocation\(\) should return Netgen\\ContentBrowser\\Item\\LocationInterface but returns Netgen\\ContentBrowser\\Item\\ItemInterface.#'
         - '#Method Netgen\\ContentBrowser\\Backend\\SyliusTaxonBackend::loadLocation\(\) should return Netgen\\ContentBrowser\\Item\\LocationInterface but returns Netgen\\ContentBrowser\\Item\\ItemInterface.#'
 
