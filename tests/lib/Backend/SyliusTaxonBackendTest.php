@@ -412,8 +412,8 @@ final class SyliusTaxonBackendTest extends TestCase
     /**
      * Returns the taxon object used in tests.
      *
-     * @param int $id
-     * @param int $parentId
+     * @param int|string $id
+     * @param int|string $parentId
      * @param string $code
      *
      * @return \Netgen\ContentBrowser\Tests\Backend\Stubs\Taxon

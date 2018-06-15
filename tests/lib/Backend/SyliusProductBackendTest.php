@@ -419,8 +419,8 @@ final class SyliusProductBackendTest extends TestCase
     /**
      * Returns the taxon object used in tests.
      *
-     * @param int $id
-     * @param int $parentId
+     * @param int|string $id
+     * @param int|string $parentId
      *
      * @return \Netgen\ContentBrowser\Tests\Backend\Stubs\Taxon
      */
@@ -441,7 +441,7 @@ final class SyliusProductBackendTest extends TestCase
     /**
      * Returns the product object used in tests.
      *
-     * @param int $id
+     * @param int|string $id
      *
      * @return \Netgen\ContentBrowser\Tests\Backend\Stubs\Product
      */
