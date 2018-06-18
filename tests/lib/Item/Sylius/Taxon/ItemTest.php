@@ -46,7 +46,7 @@ final class ItemTest extends TestCase
      */
     public function testGetLocationId(): void
     {
-        $this->assertEquals(42, $this->item->getLocationId());
+        $this->assertSame(42, $this->item->getLocationId());
     }
 
     /**
@@ -54,7 +54,7 @@ final class ItemTest extends TestCase
      */
     public function testGetValue(): void
     {
-        $this->assertEquals(42, $this->item->getValue());
+        $this->assertSame(42, $this->item->getValue());
     }
 
     /**
@@ -62,7 +62,7 @@ final class ItemTest extends TestCase
      */
     public function testGetName(): void
     {
-        $this->assertEquals('Some name', $this->item->getName());
+        $this->assertSame('Some name', $this->item->getName());
     }
 
     /**
@@ -70,7 +70,7 @@ final class ItemTest extends TestCase
      */
     public function testGetParentId(): void
     {
-        $this->assertEquals(24, $this->item->getParentId());
+        $this->assertSame(24, $this->item->getParentId());
     }
 
     /**
@@ -104,6 +104,6 @@ final class ItemTest extends TestCase
      */
     public function testGetTaxon(): void
     {
-        $this->assertEquals($this->taxon, $this->item->getTaxon());
+        $this->assertSame($this->taxon, $this->item->getTaxon());
     }
 }

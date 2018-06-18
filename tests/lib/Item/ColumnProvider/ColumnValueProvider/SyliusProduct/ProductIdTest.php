@@ -37,7 +37,7 @@ final class ProductIdTest extends TestCase
 
         $item = new Item($product);
 
-        $this->assertEquals(
+        $this->assertSame(
             '42',
             $this->provider->getValue($item)
         );

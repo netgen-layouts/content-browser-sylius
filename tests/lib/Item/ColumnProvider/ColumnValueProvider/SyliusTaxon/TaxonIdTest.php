@@ -37,7 +37,7 @@ final class TaxonIdTest extends TestCase
 
         $item = new Item($taxon);
 
-        $this->assertEquals(
+        $this->assertSame(
             '42',
             $this->provider->getValue($item)
         );

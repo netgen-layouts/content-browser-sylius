@@ -74,8 +74,8 @@ final class SyliusTaxonBackendTest extends TestCase
             $this->assertInstanceOf(LocationInterface::class, $location);
         }
 
-        $this->assertEquals(1, $locations[0]->getLocationId());
-        $this->assertEquals(2, $locations[1]->getLocationId());
+        $this->assertSame(1, $locations[0]->getLocationId());
+        $this->assertSame(2, $locations[1]->getLocationId());
     }
 
     /**
@@ -92,7 +92,7 @@ final class SyliusTaxonBackendTest extends TestCase
         $location = $this->backend->loadLocation(1);
 
         $this->assertInstanceOf(LocationInterface::class, $location);
-        $this->assertEquals(1, $location->getLocationId());
+        $this->assertSame(1, $location->getLocationId());
     }
 
     /**
@@ -126,7 +126,7 @@ final class SyliusTaxonBackendTest extends TestCase
         $item = $this->backend->loadItem(1);
 
         $this->assertInstanceOf(ItemInterface::class, $item);
-        $this->assertEquals(1, $item->getValue());
+        $this->assertSame(1, $item->getValue());
     }
 
     /**
@@ -166,7 +166,7 @@ final class SyliusTaxonBackendTest extends TestCase
         $this->assertCount(2, $locations);
         foreach ($locations as $location) {
             $this->assertInstanceOf(LocationInterface::class, $location);
-            $this->assertEquals(1, $location->getParentId());
+            $this->assertSame(1, $location->getParentId());
         }
     }
 
@@ -181,7 +181,7 @@ final class SyliusTaxonBackendTest extends TestCase
 
         $locations = $this->backend->getSubLocations(new StubLocation(0));
 
-        $this->assertEquals([], $locations);
+        $this->assertSame([], $locations);
     }
 
     /**
@@ -202,7 +202,7 @@ final class SyliusTaxonBackendTest extends TestCase
             new Item($this->getTaxon(1, null, 'code'))
         );
 
-        $this->assertEquals(2, $count);
+        $this->assertSame(2, $count);
     }
 
     /**
@@ -246,7 +246,7 @@ final class SyliusTaxonBackendTest extends TestCase
 
         $items = $this->backend->getSubItems(new StubLocation(0));
 
-        $this->assertEquals([], $items);
+        $this->assertSame([], $items);
     }
 
     /**
@@ -308,7 +308,7 @@ final class SyliusTaxonBackendTest extends TestCase
             new Item($this->getTaxon(1, null, 'code'))
         );
 
-        $this->assertEquals(2, $count);
+        $this->assertSame(2, $count);
     }
 
     /**
@@ -322,7 +322,7 @@ final class SyliusTaxonBackendTest extends TestCase
 
         $count = $this->backend->getSubItemsCount(new StubLocation(0));
 
-        $this->assertEquals(0, $count);
+        $this->assertSame(0, $count);
     }
 
     /**
@@ -406,7 +406,7 @@ final class SyliusTaxonBackendTest extends TestCase
 
         $count = $this->backend->searchCount('test');
 
-        $this->assertEquals(2, $count);
+        $this->assertSame(2, $count);
     }
 
     /**
