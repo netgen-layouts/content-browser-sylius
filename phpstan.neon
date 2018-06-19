@@ -10,7 +10,7 @@ parameters:
         # eZ Platform
         - '#Call to an undefined method eZ\\Publish\\API\\Repository\\Repository::sudo\(\)#'
         - '#Call to an undefined method Netgen\\TagsBundle\\API\\Repository\\TagsService::sudo\(\)#'
-        - '#Criterion\\ParentLocationId constructor expects array<int>|int, int|string given.#'
+        - '#Criterion\\ParentLocationId constructor expects array<int>\|int, int\|string given.#'
 
         # Pagerfanta
-        - '#expects iterable<.+>, array|Traversable given.#'
+        - '#expects iterable<.+>, array\|Traversable given.#'
