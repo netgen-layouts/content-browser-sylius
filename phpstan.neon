@@ -13,4 +13,4 @@ parameters:
         - '#Criterion\\ParentLocationId constructor expects array<int>|int, int|string given.#'
 
         # Pagerfanta
-        - '#array|Traversable given.#'
+        - '#expects iterable<.+>, array|Traversable given.#'
