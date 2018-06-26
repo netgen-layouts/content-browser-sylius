@@ -418,7 +418,7 @@ final class SyliusTaxonBackendTest extends TestCase
      *
      * @return \Netgen\ContentBrowser\Tests\Backend\Stubs\Taxon
      */
-    private function getTaxon($id = null, $parentId = null, string $code = null): Taxon
+    private function getTaxon($id = null, $parentId = null, ?string $code = null): Taxon
     {
         $taxon = new Taxon();
         $taxon->setId($id);
