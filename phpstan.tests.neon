@@ -13,5 +13,3 @@ parameters:
         # JSON API Test Case
         - '#(Json)?ApiTestCase::(\w+)\(\) expects Symfony\\Component\\HttpFoundation\\Response, Symfony\\Component\\HttpFoundation\\Response\|null given.#'
 
-        # Content Browser tests specifics
-        - '#on possibly null value of type#'
