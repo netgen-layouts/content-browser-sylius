@@ -14,7 +14,7 @@
         "netgen/content-browser-ui": "~0.12.0",
         "symfony/symfony": "^2.8.16 || ^3.4.4 || ^4.1",
         "twig/twig": "^1.35 || ^2.4.4",
-        "sensio/framework-extra-bundle": "^3.0.12 || ^4.0 || ^5.0",
+        "sensio/framework-extra-bundle": "^3.0.12 || ^5.2",
         "white-october/pagerfanta-bundle": "^1.2",
         "jean85/pretty-package-versions": "^1.2"
     },
