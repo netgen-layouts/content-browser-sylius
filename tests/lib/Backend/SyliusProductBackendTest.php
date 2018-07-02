@@ -9,6 +9,7 @@ use Netgen\ContentBrowser\Backend\Sylius\ProductRepositoryInterface;
 use Netgen\ContentBrowser\Backend\SyliusProductBackend;
 use Netgen\ContentBrowser\Item\ItemInterface;
 use Netgen\ContentBrowser\Item\LocationInterface;
+use Netgen\ContentBrowser\Item\Sylius\Product\Item;
 use Netgen\ContentBrowser\Item\Sylius\Product\Location;
 use Netgen\ContentBrowser\Tests\Backend\Stubs\Product;
 use Netgen\ContentBrowser\Tests\Backend\Stubs\Taxon;
@@ -81,6 +82,7 @@ final class SyliusProductBackendTest extends TestCase
         $this->assertCount(2, $locations);
 
         foreach ($locations as $location) {
+            $this->assertInstanceOf(Location::class, $location);
             $this->assertInstanceOf(LocationInterface::class, $location);
         }
 
@@ -102,7 +104,7 @@ final class SyliusProductBackendTest extends TestCase
 
         $location = $this->backend->loadLocation(1);
 
-        $this->assertInstanceOf(LocationInterface::class, $location);
+        $this->assertInstanceOf(Location::class, $location);
         $this->assertSame(1, $location->getLocationId());
     }
 
@@ -136,7 +138,7 @@ final class SyliusProductBackendTest extends TestCase
 
         $item = $this->backend->loadItem(1);
 
-        $this->assertInstanceOf(ItemInterface::class, $item);
+        $this->assertInstanceOf(Item::class, $item);
         $this->assertSame(1, $item->getValue());
     }
 
@@ -175,6 +177,7 @@ final class SyliusProductBackendTest extends TestCase
 
         $this->assertCount(2, $locations);
         foreach ($locations as $location) {
+            $this->assertInstanceOf(Location::class, $location);
             $this->assertInstanceOf(LocationInterface::class, $location);
             $this->assertSame(1, $location->getParentId());
         }
@@ -238,6 +241,7 @@ final class SyliusProductBackendTest extends TestCase
 
         $this->assertCount(2, $items);
         foreach ($items as $item) {
+            $this->assertInstanceOf(Item::class, $item);
             $this->assertInstanceOf(ItemInterface::class, $item);
         }
     }
@@ -290,6 +294,7 @@ final class SyliusProductBackendTest extends TestCase
 
         $this->assertCount(2, $items);
         foreach ($items as $item) {
+            $this->assertInstanceOf(Item::class, $item);
             $this->assertInstanceOf(ItemInterface::class, $item);
         }
     }
@@ -356,6 +361,7 @@ final class SyliusProductBackendTest extends TestCase
 
         $this->assertCount(2, $items);
         foreach ($items as $item) {
+            $this->assertInstanceOf(Item::class, $item);
             $this->assertInstanceOf(ItemInterface::class, $item);
         }
     }
@@ -390,6 +396,7 @@ final class SyliusProductBackendTest extends TestCase
 
         $this->assertCount(2, $items);
         foreach ($items as $item) {
+            $this->assertInstanceOf(Item::class, $item);
             $this->assertInstanceOf(ItemInterface::class, $item);
         }
     }

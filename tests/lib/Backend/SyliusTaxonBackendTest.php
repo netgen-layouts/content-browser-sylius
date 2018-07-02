@@ -71,7 +71,7 @@ final class SyliusTaxonBackendTest extends TestCase
         $this->assertCount(2, $locations);
 
         foreach ($locations as $location) {
-            $this->assertInstanceOf(LocationInterface::class, $location);
+            $this->assertInstanceOf(Item::class, $location);
         }
 
         $this->assertSame(1, $locations[0]->getLocationId());
@@ -91,7 +91,7 @@ final class SyliusTaxonBackendTest extends TestCase
 
         $location = $this->backend->loadLocation(1);
 
-        $this->assertInstanceOf(LocationInterface::class, $location);
+        $this->assertInstanceOf(Item::class, $location);
         $this->assertSame(1, $location->getLocationId());
     }
 
@@ -125,7 +125,7 @@ final class SyliusTaxonBackendTest extends TestCase
 
         $item = $this->backend->loadItem(1);
 
-        $this->assertInstanceOf(ItemInterface::class, $item);
+        $this->assertInstanceOf(Item::class, $item);
         $this->assertSame(1, $item->getValue());
     }
 
@@ -165,6 +165,7 @@ final class SyliusTaxonBackendTest extends TestCase
 
         $this->assertCount(2, $locations);
         foreach ($locations as $location) {
+            $this->assertInstanceOf(Item::class, $location);
             $this->assertInstanceOf(LocationInterface::class, $location);
             $this->assertSame(1, $location->getParentId());
         }
@@ -231,6 +232,7 @@ final class SyliusTaxonBackendTest extends TestCase
 
         $this->assertCount(2, $items);
         foreach ($items as $item) {
+            $this->assertInstanceOf(Item::class, $item);
             $this->assertInstanceOf(ItemInterface::class, $item);
         }
     }
@@ -283,6 +285,7 @@ final class SyliusTaxonBackendTest extends TestCase
 
         $this->assertCount(2, $items);
         foreach ($items as $item) {
+            $this->assertInstanceOf(Item::class, $item);
             $this->assertInstanceOf(ItemInterface::class, $item);
         }
     }
@@ -349,6 +352,7 @@ final class SyliusTaxonBackendTest extends TestCase
 
         $this->assertCount(2, $items);
         foreach ($items as $item) {
+            $this->assertInstanceOf(Item::class, $item);
             $this->assertInstanceOf(ItemInterface::class, $item);
         }
     }
@@ -383,6 +387,7 @@ final class SyliusTaxonBackendTest extends TestCase
 
         $this->assertCount(2, $items);
         foreach ($items as $item) {
+            $this->assertInstanceOf(Item::class, $item);
             $this->assertInstanceOf(ItemInterface::class, $item);
         }
     }
