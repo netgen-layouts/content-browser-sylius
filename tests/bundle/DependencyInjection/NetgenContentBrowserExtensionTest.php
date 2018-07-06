@@ -36,8 +36,8 @@ final class NetgenContentBrowserExtensionTest extends AbstractExtensionTestCase
         $this->load(
             [
                 'item_types' => [
-                    'Item type' => [
-                        'name' => 'item_types.ezcontent',
+                    'item type' => [
+                        'name' => 'item_types.item_type',
                         'preview' => [
                             'template' => 'template.html.twig',
                         ],
