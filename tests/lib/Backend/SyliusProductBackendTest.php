@@ -99,7 +99,7 @@ final class SyliusProductBackendTest extends TestCase
         $this->taxonRepositoryMock
             ->expects($this->once())
             ->method('find')
-            ->with($this->equalTo(1))
+            ->with($this->identicalTo(1))
             ->will($this->returnValue($this->getTaxon(1)));
 
         $location = $this->backend->loadLocation(1);
@@ -118,7 +118,7 @@ final class SyliusProductBackendTest extends TestCase
         $this->taxonRepositoryMock
             ->expects($this->once())
             ->method('find')
-            ->with($this->equalTo(1))
+            ->with($this->identicalTo(1))
             ->will($this->returnValue(null));
 
         $this->backend->loadLocation(1);
@@ -133,7 +133,7 @@ final class SyliusProductBackendTest extends TestCase
         $this->productRepositoryMock
             ->expects($this->once())
             ->method('find')
-            ->with($this->equalTo(1))
+            ->with($this->identicalTo(1))
             ->will($this->returnValue($this->getProduct(1)));
 
         $item = $this->backend->loadItem(1);
@@ -152,7 +152,7 @@ final class SyliusProductBackendTest extends TestCase
         $this->productRepositoryMock
             ->expects($this->once())
             ->method('find')
-            ->with($this->equalTo(1))
+            ->with($this->identicalTo(1))
             ->will($this->returnValue(null));
 
         $this->backend->loadItem(1);
@@ -165,14 +165,16 @@ final class SyliusProductBackendTest extends TestCase
      */
     public function testGetSubLocations(): void
     {
+        $taxon = $this->getTaxon(1);
+
         $this->taxonRepositoryMock
             ->expects($this->once())
             ->method('findBy')
-            ->with($this->equalTo(['parent' => $this->getTaxon(1)]))
+            ->with($this->identicalTo(['parent' => $taxon]))
             ->will($this->returnValue([$this->getTaxon(2, 1), $this->getTaxon(3, 1)]));
 
         $locations = $this->backend->getSubLocations(
-            new Location($this->getTaxon(1))
+            new Location($taxon)
         );
 
         $this->assertCount(2, $locations);
@@ -202,14 +204,16 @@ final class SyliusProductBackendTest extends TestCase
      */
     public function testGetSubLocationsCount(): void
     {
+        $taxon = $this->getTaxon(1);
+
         $this->taxonRepositoryMock
             ->expects($this->once())
             ->method('findBy')
-            ->with($this->equalTo(['parent' => $this->getTaxon(1)]))
+            ->with($this->identicalTo(['parent' => $taxon]))
             ->will($this->returnValue([$this->getTaxon(2), $this->getTaxon(3)]));
 
         $count = $this->backend->getSubLocationsCount(
-            new Location($this->getTaxon(1))
+            new Location($taxon)
         );
 
         $this->assertSame(2, $count);
@@ -222,21 +226,23 @@ final class SyliusProductBackendTest extends TestCase
      */
     public function testGetSubItems(): void
     {
+        $taxon = $this->getTaxon(1);
+
         $pagerfantaAdapterMock = $this->createMock(AdapterInterface::class);
         $pagerfantaAdapterMock
             ->expects($this->any())
             ->method('getSlice')
-            ->with($this->equalTo(0), $this->equalTo(25))
+            ->with($this->identicalTo(0), $this->identicalTo(25))
             ->will($this->returnValue(new ArrayIterator([$this->getProduct(), $this->getProduct()])));
 
         $this->productRepositoryMock
             ->expects($this->once())
             ->method('createByTaxonPaginator')
-            ->with($this->equalTo($this->getTaxon(1)), $this->equalTo('en'))
+            ->with($this->identicalTo($taxon), $this->identicalTo('en'))
             ->will($this->returnValue(new Pagerfanta($pagerfantaAdapterMock)));
 
         $items = $this->backend->getSubItems(
-            new Location($this->getTaxon(1))
+            new Location($taxon)
         );
 
         $this->assertCount(2, $items);
@@ -277,17 +283,19 @@ final class SyliusProductBackendTest extends TestCase
         $pagerfantaAdapterMock
             ->expects($this->any())
             ->method('getSlice')
-            ->with($this->equalTo(8), $this->equalTo(2))
+            ->with($this->identicalTo(8), $this->identicalTo(2))
             ->will($this->returnValue(new ArrayIterator([$this->getProduct(), $this->getProduct()])));
+
+        $taxon = $this->getTaxon(1);
 
         $this->productRepositoryMock
             ->expects($this->once())
             ->method('createByTaxonPaginator')
-            ->with($this->equalTo($this->getTaxon(1)), $this->equalTo('en'))
+            ->with($this->identicalTo($taxon), $this->identicalTo('en'))
             ->will($this->returnValue(new Pagerfanta($pagerfantaAdapterMock)));
 
         $items = $this->backend->getSubItems(
-            new Location($this->getTaxon(1)),
+            new Location($taxon),
             8,
             2
         );
@@ -304,6 +312,8 @@ final class SyliusProductBackendTest extends TestCase
      */
     public function testGetSubItemsCount(): void
     {
+        $taxon = $this->getTaxon(1);
+
         $pagerfantaAdapterMock = $this->createMock(AdapterInterface::class);
         $pagerfantaAdapterMock
             ->expects($this->any())
@@ -313,11 +323,11 @@ final class SyliusProductBackendTest extends TestCase
         $this->productRepositoryMock
             ->expects($this->once())
             ->method('createByTaxonPaginator')
-            ->with($this->equalTo($this->getTaxon(1)), $this->equalTo('en'))
+            ->with($this->identicalTo($taxon), $this->identicalTo('en'))
             ->will($this->returnValue(new Pagerfanta($pagerfantaAdapterMock)));
 
         $count = $this->backend->getSubItemsCount(
-            new Location($this->getTaxon(1))
+            new Location($taxon)
         );
 
         $this->assertSame(2, $count);
@@ -348,13 +358,13 @@ final class SyliusProductBackendTest extends TestCase
         $pagerfantaAdapterMock
             ->expects($this->any())
             ->method('getSlice')
-            ->with($this->equalTo(0), $this->equalTo(25))
+            ->with($this->identicalTo(0), $this->identicalTo(25))
             ->will($this->returnValue(new ArrayIterator([$this->getProduct(), $this->getProduct()])));
 
         $this->productRepositoryMock
             ->expects($this->once())
             ->method('createSearchPaginator')
-            ->with($this->equalTo('test'), $this->equalTo('en'))
+            ->with($this->identicalTo('test'), $this->identicalTo('en'))
             ->will($this->returnValue(new Pagerfanta($pagerfantaAdapterMock)));
 
         $items = $this->backend->search('test');
@@ -383,13 +393,13 @@ final class SyliusProductBackendTest extends TestCase
         $pagerfantaAdapterMock
             ->expects($this->any())
             ->method('getSlice')
-            ->with($this->equalTo(8), $this->equalTo(2))
+            ->with($this->identicalTo(8), $this->identicalTo(2))
             ->will($this->returnValue(new ArrayIterator([$this->getProduct(), $this->getProduct()])));
 
         $this->productRepositoryMock
             ->expects($this->once())
             ->method('createSearchPaginator')
-            ->with($this->equalTo('test'), $this->equalTo('en'))
+            ->with($this->identicalTo('test'), $this->identicalTo('en'))
             ->will($this->returnValue(new Pagerfanta($pagerfantaAdapterMock)));
 
         $items = $this->backend->search('test', 8, 2);
@@ -415,7 +425,7 @@ final class SyliusProductBackendTest extends TestCase
         $this->productRepositoryMock
             ->expects($this->once())
             ->method('createSearchPaginator')
-            ->with($this->equalTo('test'), $this->equalTo('en'))
+            ->with($this->identicalTo('test'), $this->identicalTo('en'))
             ->will($this->returnValue(new Pagerfanta($pagerfantaAdapterMock)));
 
         $count = $this->backend->searchCount('test');

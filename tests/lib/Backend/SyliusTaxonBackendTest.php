@@ -86,7 +86,7 @@ final class SyliusTaxonBackendTest extends TestCase
         $this->taxonRepositoryMock
             ->expects($this->once())
             ->method('find')
-            ->with($this->equalTo(1))
+            ->with($this->identicalTo(1))
             ->will($this->returnValue($this->getTaxon(1)));
 
         $location = $this->backend->loadLocation(1);
@@ -105,7 +105,7 @@ final class SyliusTaxonBackendTest extends TestCase
         $this->taxonRepositoryMock
             ->expects($this->once())
             ->method('find')
-            ->with($this->equalTo(1))
+            ->with($this->identicalTo(1))
             ->will($this->returnValue(null));
 
         $this->backend->loadLocation(1);
@@ -120,7 +120,7 @@ final class SyliusTaxonBackendTest extends TestCase
         $this->taxonRepositoryMock
             ->expects($this->once())
             ->method('find')
-            ->with($this->equalTo(1))
+            ->with($this->identicalTo(1))
             ->will($this->returnValue($this->getTaxon(1)));
 
         $item = $this->backend->loadItem(1);
@@ -139,7 +139,7 @@ final class SyliusTaxonBackendTest extends TestCase
         $this->taxonRepositoryMock
             ->expects($this->once())
             ->method('find')
-            ->with($this->equalTo(1))
+            ->with($this->identicalTo(1))
             ->will($this->returnValue(null));
 
         $this->backend->loadItem(1);
@@ -154,8 +154,8 @@ final class SyliusTaxonBackendTest extends TestCase
             ->expects($this->once())
             ->method('findChildren')
             ->with(
-                $this->equalTo('code'),
-                $this->equalTo('en')
+                $this->identicalTo('code'),
+                $this->identicalTo('en')
             )
             ->will($this->returnValue([$this->getTaxon(2, 1), $this->getTaxon(3, 1)]));
 
@@ -194,8 +194,8 @@ final class SyliusTaxonBackendTest extends TestCase
             ->expects($this->once())
             ->method('findChildren')
             ->with(
-                $this->equalTo('code'),
-                $this->equalTo('en')
+                $this->identicalTo('code'),
+                $this->identicalTo('en')
             )
             ->will($this->returnValue([$this->getTaxon(2), $this->getTaxon(3)]));
 
@@ -217,13 +217,13 @@ final class SyliusTaxonBackendTest extends TestCase
         $pagerfantaAdapterMock
             ->expects($this->any())
             ->method('getSlice')
-            ->with($this->equalTo(0), $this->equalTo(25))
+            ->with($this->identicalTo(0), $this->identicalTo(25))
             ->will($this->returnValue(new ArrayIterator([$this->getTaxon(), $this->getTaxon()])));
 
         $this->taxonRepositoryMock
             ->expects($this->once())
             ->method('createListPaginator')
-            ->with($this->equalTo('code'), $this->equalTo('en'))
+            ->with($this->identicalTo('code'), $this->identicalTo('en'))
             ->will($this->returnValue(new Pagerfanta($pagerfantaAdapterMock)));
 
         $items = $this->backend->getSubItems(
@@ -268,13 +268,13 @@ final class SyliusTaxonBackendTest extends TestCase
         $pagerfantaAdapterMock
             ->expects($this->any())
             ->method('getSlice')
-            ->with($this->equalTo(8), $this->equalTo(2))
+            ->with($this->identicalTo(8), $this->identicalTo(2))
             ->will($this->returnValue(new ArrayIterator([$this->getTaxon(), $this->getTaxon()])));
 
         $this->taxonRepositoryMock
             ->expects($this->once())
             ->method('createListPaginator')
-            ->with($this->equalTo('code'), $this->equalTo('en'))
+            ->with($this->identicalTo('code'), $this->identicalTo('en'))
             ->will($this->returnValue(new Pagerfanta($pagerfantaAdapterMock)));
 
         $items = $this->backend->getSubItems(
@@ -304,7 +304,7 @@ final class SyliusTaxonBackendTest extends TestCase
         $this->taxonRepositoryMock
             ->expects($this->once())
             ->method('createListPaginator')
-            ->with($this->equalTo('code'), $this->equalTo('en'))
+            ->with($this->identicalTo('code'), $this->identicalTo('en'))
             ->will($this->returnValue(new Pagerfanta($pagerfantaAdapterMock)));
 
         $count = $this->backend->getSubItemsCount(
@@ -339,13 +339,13 @@ final class SyliusTaxonBackendTest extends TestCase
         $pagerfantaAdapterMock
             ->expects($this->any())
             ->method('getSlice')
-            ->with($this->equalTo(0), $this->equalTo(25))
+            ->with($this->identicalTo(0), $this->identicalTo(25))
             ->will($this->returnValue(new ArrayIterator([$this->getTaxon(), $this->getTaxon()])));
 
         $this->taxonRepositoryMock
             ->expects($this->once())
             ->method('createSearchPaginator')
-            ->with($this->equalTo('test'), $this->equalTo('en'))
+            ->with($this->identicalTo('test'), $this->identicalTo('en'))
             ->will($this->returnValue(new Pagerfanta($pagerfantaAdapterMock)));
 
         $items = $this->backend->search('test');
@@ -374,13 +374,13 @@ final class SyliusTaxonBackendTest extends TestCase
         $pagerfantaAdapterMock
             ->expects($this->any())
             ->method('getSlice')
-            ->with($this->equalTo(8), $this->equalTo(2))
+            ->with($this->identicalTo(8), $this->identicalTo(2))
             ->will($this->returnValue(new ArrayIterator([$this->getTaxon(), $this->getTaxon()])));
 
         $this->taxonRepositoryMock
             ->expects($this->once())
             ->method('createSearchPaginator')
-            ->with($this->equalTo('test'), $this->equalTo('en'))
+            ->with($this->identicalTo('test'), $this->identicalTo('en'))
             ->will($this->returnValue(new Pagerfanta($pagerfantaAdapterMock)));
 
         $items = $this->backend->search('test', 8, 2);
@@ -406,7 +406,7 @@ final class SyliusTaxonBackendTest extends TestCase
         $this->taxonRepositoryMock
             ->expects($this->once())
             ->method('createSearchPaginator')
-            ->with($this->equalTo('test'), $this->equalTo('en'))
+            ->with($this->identicalTo('test'), $this->identicalTo('en'))
             ->will($this->returnValue(new Pagerfanta($pagerfantaAdapterMock)));
 
         $count = $this->backend->searchCount('test');
