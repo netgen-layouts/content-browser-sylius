@@ -12,7 +12,7 @@ final class NetgenContentBrowserBundle extends Bundle
 {
     public function build(ContainerBuilder $container): void
     {
-        $container->addCompilerPass(new CompilerPass\BackendRegistryPass());
+        $container->addCompilerPass(new CompilerPass\BackendPass());
         $container->addCompilerPass(new CompilerPass\ColumnProviderPass());
         $container->addCompilerPass(new CompilerPass\EzPublishDefaultPreviewPass());
     }
