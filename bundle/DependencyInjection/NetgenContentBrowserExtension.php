@@ -21,28 +21,7 @@ final class NetgenContentBrowserExtension extends Extension implements PrependEx
         $configuration = $this->getConfiguration($configs, $container);
         $config = $this->processConfiguration($configuration, $configs);
 
-        $availableItemTypes = [];
-
-        foreach ($config['item_types'] as $itemType => $itemConfig) {
-            if (preg_match('/^[A-Za-z]([A-Za-z0-9_])*$/', $itemType) !== 1) {
-                throw new RuntimeException(
-                    'Item type must begin with a letter and be followed by any combination of letters, digits and underscore.'
-                );
-            }
-
-            $configParameters = $itemConfig['parameters'];
-            unset($itemConfig['parameters']);
-
-            $container->register('netgen_content_browser.config.' . $itemType, BrowserConfiguration::class)
-                ->setPublic(true)
-                ->addArgument($itemType)
-                ->addArgument($itemConfig)
-                ->addArgument($configParameters);
-
-            $availableItemTypes[$itemType] = $itemConfig['name'];
-        }
-
-        $container->setParameter('netgen_content_browser.item_types', $availableItemTypes);
+        $this->registerItemTypeConfig($config, $container);
 
         $loader = new YamlFileLoader(
             $container,
@@ -98,6 +77,32 @@ final class NetgenContentBrowserExtension extends Extension implements PrependEx
     public function getConfiguration(array $config, ContainerBuilder $container)
     {
         return new Configuration();
+    }
+
+    private function registerItemTypeConfig(array $config, ContainerBuilder $container)
+    {
+        $availableItemTypes = [];
+
+        foreach ($config['item_types'] as $itemType => $itemConfig) {
+            if (preg_match('/^[A-Za-z]([A-Za-z0-9_])*$/', $itemType) !== 1) {
+                throw new RuntimeException(
+                    'Item type must begin with a letter and be followed by any combination of letters, digits and underscore.'
+                );
+            }
+
+            $configParameters = $itemConfig['parameters'];
+            unset($itemConfig['parameters']);
+
+            $container->register('netgen_content_browser.config.' . $itemType, BrowserConfiguration::class)
+                ->setPublic(true)
+                ->addArgument($itemType)
+                ->addArgument($itemConfig)
+                ->addArgument($configParameters);
+
+            $availableItemTypes[$itemType] = $itemConfig['name'];
+        }
+
+        $container->setParameter('netgen_content_browser.item_types', $availableItemTypes);
     }
 
     /**
