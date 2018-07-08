@@ -111,7 +111,7 @@ final class SyliusProductBackendTest extends TestCase
     /**
      * @covers \Netgen\ContentBrowser\Backend\SyliusProductBackend::loadLocation
      * @expectedException \Netgen\ContentBrowser\Exceptions\NotFoundException
-     * @expectedExceptionMessage Location with ID 1 not found.
+     * @expectedExceptionMessage Location with ID "1" not found.
      */
     public function testLoadLocationThrowsNotFoundException(): void
     {
@@ -145,7 +145,7 @@ final class SyliusProductBackendTest extends TestCase
     /**
      * @covers \Netgen\ContentBrowser\Backend\SyliusProductBackend::loadItem
      * @expectedException \Netgen\ContentBrowser\Exceptions\NotFoundException
-     * @expectedExceptionMessage Item with ID 1 not found.
+     * @expectedExceptionMessage Item with value "1" not found.
      */
     public function testLoadItemThrowsNotFoundException(): void
     {

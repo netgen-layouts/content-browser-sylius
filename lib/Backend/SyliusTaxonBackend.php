@@ -45,15 +45,15 @@ final class SyliusTaxonBackend implements BackendInterface
         return $this->loadItem($id);
     }
 
-    public function loadItem($id): ItemInterface
+    public function loadItem($value): ItemInterface
     {
-        $taxon = $this->taxonRepository->find($id);
+        $taxon = $this->taxonRepository->find($value);
 
         if (!$taxon instanceof TaxonInterface) {
             throw new NotFoundException(
                 sprintf(
-                    'Item with ID %s not found.',
-                    $id
+                    'Item with value "%s" not found.',
+                    $value
                 )
             );
         }

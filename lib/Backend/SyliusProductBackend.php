@@ -57,7 +57,7 @@ final class SyliusProductBackend implements BackendInterface
         if (!$taxon instanceof TaxonInterface) {
             throw new NotFoundException(
                 sprintf(
-                    'Location with ID %s not found.',
+                    'Location with ID "%s" not found.',
                     $id
                 )
             );
@@ -66,15 +66,15 @@ final class SyliusProductBackend implements BackendInterface
         return $this->buildLocation($taxon);
     }
 
-    public function loadItem($id): ItemInterface
+    public function loadItem($value): ItemInterface
     {
-        $product = $this->productRepository->find($id);
+        $product = $this->productRepository->find($value);
 
         if (!$product instanceof ProductInterface) {
             throw new NotFoundException(
                 sprintf(
-                    'Item with ID %s not found.',
-                    $id
+                    'Item with value "%s" not found.',
+                    $value
                 )
             );
         }
