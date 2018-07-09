@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\ContentBrowserBundle\DependencyInjection;
 
-use Netgen\ContentBrowser\Config\Configuration as BrowserConfiguration;
-use Netgen\ContentBrowser\Exceptions\RuntimeException;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -21,7 +19,10 @@ final class NetgenContentBrowserExtension extends Extension implements PrependEx
         $configuration = $this->getConfiguration($configs, $container);
         $config = $this->processConfiguration($configuration, $configs);
 
-        $this->registerItemTypeConfig($config, $container);
+        $container->setParameter(
+            sprintf('%s.%s', $this->getAlias(), 'item_types'),
+            $config['item_types']
+        );
 
         $loader = new YamlFileLoader(
             $container,
@@ -77,32 +78,6 @@ final class NetgenContentBrowserExtension extends Extension implements PrependEx
     public function getConfiguration(array $config, ContainerBuilder $container)
     {
         return new Configuration();
-    }
-
-    private function registerItemTypeConfig(array $config, ContainerBuilder $container)
-    {
-        $availableItemTypes = [];
-
-        foreach ($config['item_types'] as $itemType => $itemConfig) {
-            if (preg_match('/^[A-Za-z]([A-Za-z0-9_])*$/', $itemType) !== 1) {
-                throw new RuntimeException(
-                    'Item type must begin with a letter and be followed by any combination of letters, digits and underscore.'
-                );
-            }
-
-            $configParameters = $itemConfig['parameters'];
-            unset($itemConfig['parameters']);
-
-            $container->register('netgen_content_browser.config.' . $itemType, BrowserConfiguration::class)
-                ->setPublic(true)
-                ->addArgument($itemType)
-                ->addArgument($itemConfig)
-                ->addArgument($configParameters);
-
-            $availableItemTypes[$itemType] = $itemConfig['name'];
-        }
-
-        $container->setParameter('netgen_content_browser.item_types', $availableItemTypes);
     }
 
     /**

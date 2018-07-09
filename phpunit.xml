@@ -30,6 +30,7 @@
             <directory suffix=".php">bundle</directory>
             <exclude>
                 <file>bundle/NetgenContentBrowserBundle.php</file>
+                <file>bundle/DependencyInjection/NetgenContentBrowserExtension.php</file>
             </exclude>
             <exclude>
                 <directory>bundle/Controller</directory>
