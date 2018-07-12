@@ -10,10 +10,10 @@ Run the following command to install Netgen Content Browser:
 composer require netgen/content-browser:^1.0
 ```
 
-Activate the bundle
--------------------
+Activate the bundles
+--------------------
 
-Activate the Content Browser in your kernel class:
+Activate the Content Browser in your kernel class with all required bundles:
 
 ```
 ...
