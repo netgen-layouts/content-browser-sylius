@@ -88,6 +88,7 @@ final class SyliusProductBackend implements BackendInterface
             return [];
         }
 
+        /** @var \Sylius\Component\Taxonomy\Model\TaxonInterface[] $taxons */
         $taxons = $this->taxonRepository->findBy(
             [
                 'parent' => $location->getTaxon(),
