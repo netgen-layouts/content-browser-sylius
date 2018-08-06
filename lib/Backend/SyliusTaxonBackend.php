@@ -33,7 +33,7 @@ final class SyliusTaxonBackend implements BackendInterface
         $this->localeContext = $localeContext;
     }
 
-    public function getDefaultSections()
+    public function getSections()
     {
         return $this->buildItems(
             $this->taxonRepository->findRootNodes()

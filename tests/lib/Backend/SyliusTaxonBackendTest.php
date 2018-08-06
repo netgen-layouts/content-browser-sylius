@@ -57,16 +57,16 @@ final class SyliusTaxonBackendTest extends TestCase
 
     /**
      * @covers \Netgen\ContentBrowser\Backend\SyliusTaxonBackend::__construct
-     * @covers \Netgen\ContentBrowser\Backend\SyliusTaxonBackend::getDefaultSections
+     * @covers \Netgen\ContentBrowser\Backend\SyliusTaxonBackend::getSections
      */
-    public function testGetDefaultSections(): void
+    public function testGetSections(): void
     {
         $this->taxonRepositoryMock
             ->expects($this->once())
             ->method('findRootNodes')
             ->will($this->returnValue([$this->getTaxon(1), $this->getTaxon(2)]));
 
-        $locations = $this->backend->getDefaultSections();
+        $locations = $this->backend->getSections();
 
         $this->assertCount(2, $locations);
 
