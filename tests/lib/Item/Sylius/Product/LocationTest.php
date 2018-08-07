@@ -29,7 +29,7 @@ final class LocationTest extends TestCase
     public function setUp(): void
     {
         if (Kernel::VERSION_ID < 30200) {
-            $this->markTestSkipped('Sylius tests require Symfony 3.2 or later to run.');
+            self::markTestSkipped('Sylius tests require Symfony 3.2 or later to run.');
         }
 
         $this->taxon = new Taxon();
@@ -51,7 +51,7 @@ final class LocationTest extends TestCase
      */
     public function testGetLocationId(): void
     {
-        $this->assertSame(42, $this->location->getLocationId());
+        self::assertSame(42, $this->location->getLocationId());
     }
 
     /**
@@ -59,7 +59,7 @@ final class LocationTest extends TestCase
      */
     public function testGetName(): void
     {
-        $this->assertSame('Some name', $this->location->getName());
+        self::assertSame('Some name', $this->location->getName());
     }
 
     /**
@@ -67,7 +67,7 @@ final class LocationTest extends TestCase
      */
     public function testGetParentId(): void
     {
-        $this->assertSame(24, $this->location->getParentId());
+        self::assertSame(24, $this->location->getParentId());
     }
 
     /**
@@ -77,7 +77,7 @@ final class LocationTest extends TestCase
     {
         $this->location = new Location(new Taxon());
 
-        $this->assertNull($this->location->getParentId());
+        self::assertNull($this->location->getParentId());
     }
 
     /**
@@ -85,6 +85,6 @@ final class LocationTest extends TestCase
      */
     public function testGetProduct(): void
     {
-        $this->assertSame($this->taxon, $this->location->getTaxon());
+        self::assertSame($this->taxon, $this->location->getTaxon());
     }
 }

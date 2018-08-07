@@ -38,16 +38,16 @@ final class SyliusTaxonBackendTest extends TestCase
     public function setUp(): void
     {
         if (Kernel::VERSION_ID < 30200) {
-            $this->markTestSkipped('Sylius tests require Symfony 3.2 or later to run.');
+            self::markTestSkipped('Sylius tests require Symfony 3.2 or later to run.');
         }
 
         $this->taxonRepositoryMock = $this->createMock(TaxonRepositoryInterface::class);
         $this->localeContextMock = $this->createMock(LocaleContextInterface::class);
 
         $this->localeContextMock
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('getLocaleCode')
-            ->will($this->returnValue('en'));
+            ->will(self::returnValue('en'));
 
         $this->backend = new SyliusTaxonBackend(
             $this->taxonRepositoryMock,
@@ -62,20 +62,20 @@ final class SyliusTaxonBackendTest extends TestCase
     public function testGetSections(): void
     {
         $this->taxonRepositoryMock
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('findRootNodes')
-            ->will($this->returnValue([$this->getTaxon(1), $this->getTaxon(2)]));
+            ->will(self::returnValue([$this->getTaxon(1), $this->getTaxon(2)]));
 
         $locations = $this->backend->getSections();
 
-        $this->assertCount(2, $locations);
+        self::assertCount(2, $locations);
 
         foreach ($locations as $location) {
-            $this->assertInstanceOf(Item::class, $location);
+            self::assertInstanceOf(Item::class, $location);
         }
 
-        $this->assertSame(1, $locations[0]->getLocationId());
-        $this->assertSame(2, $locations[1]->getLocationId());
+        self::assertSame(1, $locations[0]->getLocationId());
+        self::assertSame(2, $locations[1]->getLocationId());
     }
 
     /**
@@ -84,15 +84,15 @@ final class SyliusTaxonBackendTest extends TestCase
     public function testLoadLocation(): void
     {
         $this->taxonRepositoryMock
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('find')
-            ->with($this->identicalTo(1))
-            ->will($this->returnValue($this->getTaxon(1)));
+            ->with(self::identicalTo(1))
+            ->will(self::returnValue($this->getTaxon(1)));
 
         $location = $this->backend->loadLocation(1);
 
-        $this->assertInstanceOf(Item::class, $location);
-        $this->assertSame(1, $location->getLocationId());
+        self::assertInstanceOf(Item::class, $location);
+        self::assertSame(1, $location->getLocationId());
     }
 
     /**
@@ -103,10 +103,10 @@ final class SyliusTaxonBackendTest extends TestCase
     public function testLoadLocationThrowsNotFoundException(): void
     {
         $this->taxonRepositoryMock
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('find')
-            ->with($this->identicalTo(1))
-            ->will($this->returnValue(null));
+            ->with(self::identicalTo(1))
+            ->will(self::returnValue(null));
 
         $this->backend->loadLocation(1);
     }
@@ -118,15 +118,15 @@ final class SyliusTaxonBackendTest extends TestCase
     public function testLoadItem(): void
     {
         $this->taxonRepositoryMock
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('find')
-            ->with($this->identicalTo(1))
-            ->will($this->returnValue($this->getTaxon(1)));
+            ->with(self::identicalTo(1))
+            ->will(self::returnValue($this->getTaxon(1)));
 
         $item = $this->backend->loadItem(1);
 
-        $this->assertInstanceOf(Item::class, $item);
-        $this->assertSame(1, $item->getValue());
+        self::assertInstanceOf(Item::class, $item);
+        self::assertSame(1, $item->getValue());
     }
 
     /**
@@ -137,10 +137,10 @@ final class SyliusTaxonBackendTest extends TestCase
     public function testLoadItemThrowsNotFoundException(): void
     {
         $this->taxonRepositoryMock
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('find')
-            ->with($this->identicalTo(1))
-            ->will($this->returnValue(null));
+            ->with(self::identicalTo(1))
+            ->will(self::returnValue(null));
 
         $this->backend->loadItem(1);
     }
@@ -151,23 +151,23 @@ final class SyliusTaxonBackendTest extends TestCase
     public function testGetSubLocations(): void
     {
         $this->taxonRepositoryMock
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('findChildren')
             ->with(
-                $this->identicalTo('code'),
-                $this->identicalTo('en')
+                self::identicalTo('code'),
+                self::identicalTo('en')
             )
-            ->will($this->returnValue([$this->getTaxon(2, 1), $this->getTaxon(3, 1)]));
+            ->will(self::returnValue([$this->getTaxon(2, 1), $this->getTaxon(3, 1)]));
 
         $locations = $this->backend->getSubLocations(
             new Item($this->getTaxon(1, null, 'code'))
         );
 
-        $this->assertCount(2, $locations);
+        self::assertCount(2, $locations);
         foreach ($locations as $location) {
-            $this->assertInstanceOf(Item::class, $location);
-            $this->assertInstanceOf(LocationInterface::class, $location);
-            $this->assertSame(1, $location->getParentId());
+            self::assertInstanceOf(Item::class, $location);
+            self::assertInstanceOf(LocationInterface::class, $location);
+            self::assertSame(1, $location->getParentId());
         }
     }
 
@@ -177,12 +177,12 @@ final class SyliusTaxonBackendTest extends TestCase
     public function testGetSubLocationsWithInvalidItem(): void
     {
         $this->taxonRepositoryMock
-            ->expects($this->never())
+            ->expects(self::never())
             ->method('findChildren');
 
         $locations = $this->backend->getSubLocations(new StubLocation(0));
 
-        $this->assertSame([], $locations);
+        self::assertSame([], $locations);
     }
 
     /**
@@ -191,19 +191,19 @@ final class SyliusTaxonBackendTest extends TestCase
     public function testGetSubLocationsCount(): void
     {
         $this->taxonRepositoryMock
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('findChildren')
             ->with(
-                $this->identicalTo('code'),
-                $this->identicalTo('en')
+                self::identicalTo('code'),
+                self::identicalTo('en')
             )
-            ->will($this->returnValue([$this->getTaxon(2), $this->getTaxon(3)]));
+            ->will(self::returnValue([$this->getTaxon(2), $this->getTaxon(3)]));
 
         $count = $this->backend->getSubLocationsCount(
             new Item($this->getTaxon(1, null, 'code'))
         );
 
-        $this->assertSame(2, $count);
+        self::assertSame(2, $count);
     }
 
     /**
@@ -215,25 +215,25 @@ final class SyliusTaxonBackendTest extends TestCase
     {
         $pagerfantaAdapterMock = $this->createMock(AdapterInterface::class);
         $pagerfantaAdapterMock
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('getSlice')
-            ->with($this->identicalTo(0), $this->identicalTo(25))
-            ->will($this->returnValue(new ArrayIterator([$this->getTaxon(), $this->getTaxon()])));
+            ->with(self::identicalTo(0), self::identicalTo(25))
+            ->will(self::returnValue(new ArrayIterator([$this->getTaxon(), $this->getTaxon()])));
 
         $this->taxonRepositoryMock
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('createListPaginator')
-            ->with($this->identicalTo('code'), $this->identicalTo('en'))
-            ->will($this->returnValue(new Pagerfanta($pagerfantaAdapterMock)));
+            ->with(self::identicalTo('code'), self::identicalTo('en'))
+            ->will(self::returnValue(new Pagerfanta($pagerfantaAdapterMock)));
 
         $items = $this->backend->getSubItems(
             new Item($this->getTaxon(1, null, 'code'))
         );
 
-        $this->assertCount(2, $items);
+        self::assertCount(2, $items);
         foreach ($items as $item) {
-            $this->assertInstanceOf(Item::class, $item);
-            $this->assertInstanceOf(ItemInterface::class, $item);
+            self::assertInstanceOf(Item::class, $item);
+            self::assertInstanceOf(ItemInterface::class, $item);
         }
     }
 
@@ -243,12 +243,12 @@ final class SyliusTaxonBackendTest extends TestCase
     public function testGetSubItemsWithInvalidItem(): void
     {
         $this->taxonRepositoryMock
-            ->expects($this->never())
+            ->expects(self::never())
             ->method('createListPaginator');
 
         $items = $this->backend->getSubItems(new StubLocation(0));
 
-        $this->assertSame([], $items);
+        self::assertSame([], $items);
     }
 
     /**
@@ -261,21 +261,21 @@ final class SyliusTaxonBackendTest extends TestCase
         $pagerfantaAdapterMock = $this->createMock(AdapterInterface::class);
 
         $pagerfantaAdapterMock
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('getNbResults')
-            ->will($this->returnValue(15));
+            ->will(self::returnValue(15));
 
         $pagerfantaAdapterMock
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('getSlice')
-            ->with($this->identicalTo(8), $this->identicalTo(2))
-            ->will($this->returnValue(new ArrayIterator([$this->getTaxon(), $this->getTaxon()])));
+            ->with(self::identicalTo(8), self::identicalTo(2))
+            ->will(self::returnValue(new ArrayIterator([$this->getTaxon(), $this->getTaxon()])));
 
         $this->taxonRepositoryMock
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('createListPaginator')
-            ->with($this->identicalTo('code'), $this->identicalTo('en'))
-            ->will($this->returnValue(new Pagerfanta($pagerfantaAdapterMock)));
+            ->with(self::identicalTo('code'), self::identicalTo('en'))
+            ->will(self::returnValue(new Pagerfanta($pagerfantaAdapterMock)));
 
         $items = $this->backend->getSubItems(
             new Item($this->getTaxon(1, null, 'code')),
@@ -283,10 +283,10 @@ final class SyliusTaxonBackendTest extends TestCase
             2
         );
 
-        $this->assertCount(2, $items);
+        self::assertCount(2, $items);
         foreach ($items as $item) {
-            $this->assertInstanceOf(Item::class, $item);
-            $this->assertInstanceOf(ItemInterface::class, $item);
+            self::assertInstanceOf(Item::class, $item);
+            self::assertInstanceOf(ItemInterface::class, $item);
         }
     }
 
@@ -297,21 +297,21 @@ final class SyliusTaxonBackendTest extends TestCase
     {
         $pagerfantaAdapterMock = $this->createMock(AdapterInterface::class);
         $pagerfantaAdapterMock
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('getNbResults')
-            ->will($this->returnValue(2));
+            ->will(self::returnValue(2));
 
         $this->taxonRepositoryMock
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('createListPaginator')
-            ->with($this->identicalTo('code'), $this->identicalTo('en'))
-            ->will($this->returnValue(new Pagerfanta($pagerfantaAdapterMock)));
+            ->with(self::identicalTo('code'), self::identicalTo('en'))
+            ->will(self::returnValue(new Pagerfanta($pagerfantaAdapterMock)));
 
         $count = $this->backend->getSubItemsCount(
             new Item($this->getTaxon(1, null, 'code'))
         );
 
-        $this->assertSame(2, $count);
+        self::assertSame(2, $count);
     }
 
     /**
@@ -320,12 +320,12 @@ final class SyliusTaxonBackendTest extends TestCase
     public function testGetSubItemsCountWithInvalidItem(): void
     {
         $this->taxonRepositoryMock
-            ->expects($this->never())
+            ->expects(self::never())
             ->method('createListPaginator');
 
         $count = $this->backend->getSubItemsCount(new StubLocation(0));
 
-        $this->assertSame(0, $count);
+        self::assertSame(0, $count);
     }
 
     /**
@@ -337,23 +337,23 @@ final class SyliusTaxonBackendTest extends TestCase
     {
         $pagerfantaAdapterMock = $this->createMock(AdapterInterface::class);
         $pagerfantaAdapterMock
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('getSlice')
-            ->with($this->identicalTo(0), $this->identicalTo(25))
-            ->will($this->returnValue(new ArrayIterator([$this->getTaxon(), $this->getTaxon()])));
+            ->with(self::identicalTo(0), self::identicalTo(25))
+            ->will(self::returnValue(new ArrayIterator([$this->getTaxon(), $this->getTaxon()])));
 
         $this->taxonRepositoryMock
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('createSearchPaginator')
-            ->with($this->identicalTo('test'), $this->identicalTo('en'))
-            ->will($this->returnValue(new Pagerfanta($pagerfantaAdapterMock)));
+            ->with(self::identicalTo('test'), self::identicalTo('en'))
+            ->will(self::returnValue(new Pagerfanta($pagerfantaAdapterMock)));
 
         $items = $this->backend->search('test');
 
-        $this->assertCount(2, $items);
+        self::assertCount(2, $items);
         foreach ($items as $item) {
-            $this->assertInstanceOf(Item::class, $item);
-            $this->assertInstanceOf(ItemInterface::class, $item);
+            self::assertInstanceOf(Item::class, $item);
+            self::assertInstanceOf(ItemInterface::class, $item);
         }
     }
 
@@ -367,28 +367,28 @@ final class SyliusTaxonBackendTest extends TestCase
         $pagerfantaAdapterMock = $this->createMock(AdapterInterface::class);
 
         $pagerfantaAdapterMock
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('getNbResults')
-            ->will($this->returnValue(15));
+            ->will(self::returnValue(15));
 
         $pagerfantaAdapterMock
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('getSlice')
-            ->with($this->identicalTo(8), $this->identicalTo(2))
-            ->will($this->returnValue(new ArrayIterator([$this->getTaxon(), $this->getTaxon()])));
+            ->with(self::identicalTo(8), self::identicalTo(2))
+            ->will(self::returnValue(new ArrayIterator([$this->getTaxon(), $this->getTaxon()])));
 
         $this->taxonRepositoryMock
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('createSearchPaginator')
-            ->with($this->identicalTo('test'), $this->identicalTo('en'))
-            ->will($this->returnValue(new Pagerfanta($pagerfantaAdapterMock)));
+            ->with(self::identicalTo('test'), self::identicalTo('en'))
+            ->will(self::returnValue(new Pagerfanta($pagerfantaAdapterMock)));
 
         $items = $this->backend->search('test', 8, 2);
 
-        $this->assertCount(2, $items);
+        self::assertCount(2, $items);
         foreach ($items as $item) {
-            $this->assertInstanceOf(Item::class, $item);
-            $this->assertInstanceOf(ItemInterface::class, $item);
+            self::assertInstanceOf(Item::class, $item);
+            self::assertInstanceOf(ItemInterface::class, $item);
         }
     }
 
@@ -399,19 +399,19 @@ final class SyliusTaxonBackendTest extends TestCase
     {
         $pagerfantaAdapterMock = $this->createMock(AdapterInterface::class);
         $pagerfantaAdapterMock
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('getNbResults')
-            ->will($this->returnValue(2));
+            ->will(self::returnValue(2));
 
         $this->taxonRepositoryMock
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('createSearchPaginator')
-            ->with($this->identicalTo('test'), $this->identicalTo('en'))
-            ->will($this->returnValue(new Pagerfanta($pagerfantaAdapterMock)));
+            ->with(self::identicalTo('test'), self::identicalTo('en'))
+            ->will(self::returnValue(new Pagerfanta($pagerfantaAdapterMock)));
 
         $count = $this->backend->searchCount('test');
 
-        $this->assertSame(2, $count);
+        self::assertSame(2, $count);
     }
 
     /**

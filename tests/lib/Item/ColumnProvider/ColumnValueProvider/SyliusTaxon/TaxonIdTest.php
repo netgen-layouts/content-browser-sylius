@@ -21,7 +21,7 @@ final class TaxonIdTest extends TestCase
     public function setUp(): void
     {
         if (Kernel::VERSION_ID < 30200) {
-            $this->markTestSkipped('Sylius tests require Symfony 3.2 or later to run.');
+            self::markTestSkipped('Sylius tests require Symfony 3.2 or later to run.');
         }
 
         $this->provider = new TaxonId();
@@ -37,7 +37,7 @@ final class TaxonIdTest extends TestCase
 
         $item = new Item($taxon);
 
-        $this->assertSame(
+        self::assertSame(
             '42',
             $this->provider->getValue($item)
         );
@@ -48,6 +48,6 @@ final class TaxonIdTest extends TestCase
      */
     public function testGetValueWithInvalidItem(): void
     {
-        $this->assertNull($this->provider->getValue(new StubItem()));
+        self::assertNull($this->provider->getValue(new StubItem()));
     }
 }

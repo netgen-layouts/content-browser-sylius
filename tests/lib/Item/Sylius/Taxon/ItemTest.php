@@ -24,7 +24,7 @@ final class ItemTest extends TestCase
     public function setUp(): void
     {
         if (Kernel::VERSION_ID < 30200) {
-            $this->markTestSkipped('Sylius tests require Symfony 3.2 or later to run.');
+            self::markTestSkipped('Sylius tests require Symfony 3.2 or later to run.');
         }
 
         $parentTaxon = new Taxon();
@@ -46,7 +46,7 @@ final class ItemTest extends TestCase
      */
     public function testGetLocationId(): void
     {
-        $this->assertSame(42, $this->item->getLocationId());
+        self::assertSame(42, $this->item->getLocationId());
     }
 
     /**
@@ -54,7 +54,7 @@ final class ItemTest extends TestCase
      */
     public function testGetValue(): void
     {
-        $this->assertSame(42, $this->item->getValue());
+        self::assertSame(42, $this->item->getValue());
     }
 
     /**
@@ -62,7 +62,7 @@ final class ItemTest extends TestCase
      */
     public function testGetName(): void
     {
-        $this->assertSame('Some name', $this->item->getName());
+        self::assertSame('Some name', $this->item->getName());
     }
 
     /**
@@ -70,7 +70,7 @@ final class ItemTest extends TestCase
      */
     public function testGetParentId(): void
     {
-        $this->assertSame(24, $this->item->getParentId());
+        self::assertSame(24, $this->item->getParentId());
     }
 
     /**
@@ -80,7 +80,7 @@ final class ItemTest extends TestCase
     {
         $this->item = new Item(new Taxon());
 
-        $this->assertNull($this->item->getParentId());
+        self::assertNull($this->item->getParentId());
     }
 
     /**
@@ -88,7 +88,7 @@ final class ItemTest extends TestCase
      */
     public function testIsVisible(): void
     {
-        $this->assertTrue($this->item->isVisible());
+        self::assertTrue($this->item->isVisible());
     }
 
     /**
@@ -96,7 +96,7 @@ final class ItemTest extends TestCase
      */
     public function testIsSelectable(): void
     {
-        $this->assertTrue($this->item->isSelectable());
+        self::assertTrue($this->item->isSelectable());
     }
 
     /**
@@ -104,6 +104,6 @@ final class ItemTest extends TestCase
      */
     public function testGetTaxon(): void
     {
-        $this->assertSame($this->taxon, $this->item->getTaxon());
+        self::assertSame($this->taxon, $this->item->getTaxon());
     }
 }
