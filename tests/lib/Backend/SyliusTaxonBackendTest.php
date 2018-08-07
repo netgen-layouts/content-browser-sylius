@@ -7,8 +7,6 @@ namespace Netgen\ContentBrowser\Tests\Backend;
 use ArrayIterator;
 use Netgen\ContentBrowser\Backend\Sylius\TaxonRepositoryInterface;
 use Netgen\ContentBrowser\Backend\SyliusTaxonBackend;
-use Netgen\ContentBrowser\Item\ItemInterface;
-use Netgen\ContentBrowser\Item\LocationInterface;
 use Netgen\ContentBrowser\Item\Sylius\Taxon\Item;
 use Netgen\ContentBrowser\Tests\Backend\Stubs\Taxon;
 use Netgen\ContentBrowser\Tests\Stubs\Location as StubLocation;
@@ -69,10 +67,7 @@ final class SyliusTaxonBackendTest extends TestCase
         $locations = $this->backend->getSections();
 
         self::assertCount(2, $locations);
-
-        foreach ($locations as $location) {
-            self::assertInstanceOf(Item::class, $location);
-        }
+        self::assertContainsOnlyInstancesOf(Item::class, $locations);
 
         self::assertSame(1, $locations[0]->getLocationId());
         self::assertSame(2, $locations[1]->getLocationId());
@@ -164,9 +159,9 @@ final class SyliusTaxonBackendTest extends TestCase
         );
 
         self::assertCount(2, $locations);
+        self::assertContainsOnlyInstancesOf(Item::class, $locations);
+
         foreach ($locations as $location) {
-            self::assertInstanceOf(Item::class, $location);
-            self::assertInstanceOf(LocationInterface::class, $location);
             self::assertSame(1, $location->getParentId());
         }
     }
@@ -231,10 +226,7 @@ final class SyliusTaxonBackendTest extends TestCase
         );
 
         self::assertCount(2, $items);
-        foreach ($items as $item) {
-            self::assertInstanceOf(Item::class, $item);
-            self::assertInstanceOf(ItemInterface::class, $item);
-        }
+        self::assertContainsOnlyInstancesOf(Item::class, $items);
     }
 
     /**
@@ -284,10 +276,7 @@ final class SyliusTaxonBackendTest extends TestCase
         );
 
         self::assertCount(2, $items);
-        foreach ($items as $item) {
-            self::assertInstanceOf(Item::class, $item);
-            self::assertInstanceOf(ItemInterface::class, $item);
-        }
+        self::assertContainsOnlyInstancesOf(Item::class, $items);
     }
 
     /**
@@ -351,10 +340,7 @@ final class SyliusTaxonBackendTest extends TestCase
         $items = $this->backend->search('test');
 
         self::assertCount(2, $items);
-        foreach ($items as $item) {
-            self::assertInstanceOf(Item::class, $item);
-            self::assertInstanceOf(ItemInterface::class, $item);
-        }
+        self::assertContainsOnlyInstancesOf(Item::class, $items);
     }
 
     /**
@@ -386,10 +372,7 @@ final class SyliusTaxonBackendTest extends TestCase
         $items = $this->backend->search('test', 8, 2);
 
         self::assertCount(2, $items);
-        foreach ($items as $item) {
-            self::assertInstanceOf(Item::class, $item);
-            self::assertInstanceOf(ItemInterface::class, $item);
-        }
+        self::assertContainsOnlyInstancesOf(Item::class, $items);
     }
 
     /**
