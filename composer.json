@@ -47,9 +47,6 @@
         "phpstan": "@php vendor/bin/phpstan analyse -c phpstan.neon --level=7 --ansi lib bundle",
         "phpstan-tests": "@php vendor/bin/phpstan analyse -c phpstan.tests.neon --level=7 --ansi tests"
     },
-    "repositories": [
-        { "type": "composer", "url": "https://packagist.netgen.biz" }
-    ],
     "autoload": {
         "psr-4": {
             "Netgen\\ContentBrowser\\": "lib/",
