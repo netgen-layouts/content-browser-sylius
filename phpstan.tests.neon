@@ -1,12 +1,3 @@
 includes:
     - vendor/phpstan/phpstan-phpunit/extension.neon
     - vendor/phpstan/phpstan-phpunit/rules.neon
-
-parameters:
-    excludes_analyse:
-        - tests/application/web/bundles/
-
-    ignoreErrors:
-        # JSON API Test Case
-        - '#(Json)?ApiTestCase::(\w+)\(\) expects Symfony\\Component\\HttpFoundation\\Response, Symfony\\Component\\HttpFoundation\\Response\|null given.#'
-

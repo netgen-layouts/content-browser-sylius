@@ -15,12 +15,11 @@
     beStrictAboutChangesToGlobalState="true"
 >
     <testsuites>
-        <testsuite name="Netgen\ContentBrowser">
+        <testsuite name="Netgen\ContentBrowser\Sylius">
             <directory>tests/lib</directory>
         </testsuite>
-        <testsuite name="Netgen\Bundle\ContentBrowserBundle">
+        <testsuite name="Netgen\Bundle\ContentBrowserSyliusBundle">
             <directory>tests/bundle</directory>
-            <exclude>tests/bundle/Controller</exclude>
         </testsuite>
     </testsuites>
 
@@ -29,11 +28,10 @@
             <directory suffix=".php">lib</directory>
             <directory suffix=".php">bundle</directory>
             <exclude>
-                <file>bundle/NetgenContentBrowserBundle.php</file>
-                <file>bundle/DependencyInjection/NetgenContentBrowserExtension.php</file>
+                <file>bundle/NetgenContentBrowserSyliusBundle.php</file>
+                <file>bundle/DependencyInjection/NetgenContentBrowserSyliusExtension.php</file>
             </exclude>
             <exclude>
-                <directory>bundle/Controller</directory>
                 <directory>bundle/Resources</directory>
             </exclude>
         </whitelist>

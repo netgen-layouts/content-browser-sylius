@@ -1,0 +1,20 @@
+services:
+    netgen_content_browser.sylius.taxon_repository:
+        class: Netgen\ContentBrowser\Sylius\Repository\TaxonRepository
+        public: false
+        parent: sylius.repository.taxon
+
+    netgen_content_browser.backend.sylius_taxon:
+        class: Netgen\ContentBrowser\Sylius\Backend\TaxonBackend
+        public: false
+        arguments:
+            - "@netgen_content_browser.sylius.taxon_repository"
+            - "@sylius.context.locale"
+        tags:
+            - { name: netgen_content_browser.backend, item_type: sylius_taxon }
+
+    netgen_content_browser.column_value_provider.sylius_taxon.taxon_id:
+        class: Netgen\ContentBrowser\Sylius\Item\ColumnProvider\ColumnValueProvider\Taxon\TaxonId
+        public: false
+        tags:
+            - { name: netgen_content_browser.column_value_provider, identifier: sylius_taxon\taxon_id }

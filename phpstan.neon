@@ -1,16 +1,7 @@
 parameters:
     ignoreErrors:
         # Content Browser specifics
-        - '#Method Netgen\\ContentBrowser\\Backend\\EzTagsBackend::loadLocation\(\) should return Netgen\\ContentBrowser\\Item\\LocationInterface but returns Netgen\\ContentBrowser\\Item\\ItemInterface.#'
-        - '#Method Netgen\\ContentBrowser\\Backend\\SyliusTaxonBackend::loadLocation\(\) should return Netgen\\ContentBrowser\\Item\\LocationInterface but returns Netgen\\ContentBrowser\\Item\\ItemInterface.#'
-
-        # Symfony Config component
-        - '#Call to an undefined method Symfony\\Component\\Config\\Definition\\Builder\\NodeDefinition::children\(\)#'
-
-        # eZ Platform
-        - '#Call to an undefined method eZ\\Publish\\API\\Repository\\Repository::sudo\(\)#'
-        - '#Call to an undefined method Netgen\\TagsBundle\\API\\Repository\\TagsService::sudo\(\)#'
-        - '#Criterion\\ParentLocationId constructor expects array<int>\|int, int\|string given.#'
+        - '#Method Netgen\\ContentBrowser\\Sylius\\Backend\\TaxonBackend::loadLocation\(\) should return Netgen\\ContentBrowser\\Item\\LocationInterface but returns Netgen\\ContentBrowser\\Item\\ItemInterface.#'
 
         # Pagerfanta
         - '#expects iterable<.+>, array\|Traversable given.#'

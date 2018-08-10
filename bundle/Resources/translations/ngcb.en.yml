@@ -1,31 +1,5 @@
-item_types.ezcontent: 'eZ content'
-item_types.ezlocation: 'eZ location'
-item_types.eztags: 'eZ Tags'
-item_types.sylius_product: 'Sylius product'
+tem_types.sylius_product: 'Sylius product'
 item_types.sylius_taxon: 'Sylius taxon'
-
-form.messages.invalid_item: '(INVALID ITEM)'
-form.messages.no_item_selected: '(NO ITEM SELECTED)'
-form.messages.no_items_selected: '(NO ITEMS SELECTED)'
-form.add_items: 'Add items'
-
-columns.name: 'Name'
-
-columns.ezpublish.location_id: 'Location ID'
-columns.ezpublish.content_id: 'Content ID'
-columns.ezpublish.thumbnail: 'Thumbnail'
-columns.ezpublish.type: 'Type'
-columns.ezpublish.visible: 'Visible'
-columns.ezpublish.owner: 'Owner'
-columns.ezpublish.modified: 'Modified'
-columns.ezpublish.published: 'Published'
-columns.ezpublish.priority: 'Priority'
-columns.ezpublish.section: 'Section'
-
-columns.eztags.tag_id: 'Tag ID'
-columns.eztags.parent_tag_id: 'Parent tag ID'
-columns.eztags.parent_tag: 'Parent tag'
-columns.eztags.modified: 'Modified'
 
 columns.sylius_product.product_id: 'Product ID'
 columns.sylius_product.price: 'Price'
