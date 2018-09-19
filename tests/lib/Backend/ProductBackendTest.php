@@ -74,8 +74,6 @@ final class ProductBackendTest extends TestCase
 
         self::assertCount(2, $locations);
         self::assertContainsOnlyInstancesOf(Location::class, $locations);
-        self::assertSame(1, $locations[0]->getLocationId());
-        self::assertSame(2, $locations[1]->getLocationId());
     }
 
     /**
@@ -184,7 +182,8 @@ final class ProductBackendTest extends TestCase
 
         $locations = $this->backend->getSubLocations(new StubLocation(0));
 
-        self::assertSame([], $locations);
+        self::assertInternalType('array', $locations);
+        self::assertEmpty($locations);
     }
 
     /**
@@ -248,7 +247,8 @@ final class ProductBackendTest extends TestCase
 
         $items = $this->backend->getSubItems(new StubLocation(0));
 
-        self::assertSame([], $items);
+        self::assertInternalType('array', $items);
+        self::assertEmpty($items);
     }
 
     /**

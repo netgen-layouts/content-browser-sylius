@@ -34,7 +34,7 @@ final class TaxonBackend implements BackendInterface
         $this->localeContext = $localeContext;
     }
 
-    public function getSections()
+    public function getSections(): iterable
     {
         return $this->buildItems(
             $this->taxonRepository->findRootNodes()
@@ -62,7 +62,7 @@ final class TaxonBackend implements BackendInterface
         return $this->buildItem($taxon);
     }
 
-    public function getSubLocations(LocationInterface $location)
+    public function getSubLocations(LocationInterface $location): iterable
     {
         if (!$location instanceof ContentBrowserTaxonInterface) {
             return [];
@@ -78,10 +78,12 @@ final class TaxonBackend implements BackendInterface
 
     public function getSubLocationsCount(LocationInterface $location): int
     {
-        return count($this->getSubLocations($location));
+        $subLocations = $this->getSubLocations($location);
+
+        return is_countable($subLocations) ? count($subLocations) : 0;
     }
 
-    public function getSubItems(LocationInterface $location, $offset = 0, $limit = 25)
+    public function getSubItems(LocationInterface $location, int $offset = 0, int $limit = 25): iterable
     {
         if (!$location instanceof ContentBrowserTaxonInterface) {
             return [];
@@ -112,7 +114,7 @@ final class TaxonBackend implements BackendInterface
         return $paginator->getNbResults();
     }
 
-    public function search($searchText, $offset = 0, $limit = 25)
+    public function search(string $searchText, int $offset = 0, int $limit = 25): iterable
     {
         $paginator = $this->taxonRepository->createSearchPaginator(
             $searchText,
@@ -127,7 +129,7 @@ final class TaxonBackend implements BackendInterface
         );
     }
 
-    public function searchCount($searchText): int
+    public function searchCount(string $searchText): int
     {
         $paginator = $this->taxonRepository->createSearchPaginator(
             $searchText,

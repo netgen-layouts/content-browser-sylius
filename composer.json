@@ -10,7 +10,8 @@
     ],
     "require": {
         "netgen/content-browser": "~0.12.0",
-        "sylius/sylius": "^1.0"
+        "sylius/sylius": "^1.0",
+        "symfony/polyfill-php73": "^1.9"
     },
     "require-dev": {
         "phpunit/phpunit": "^7.3",
