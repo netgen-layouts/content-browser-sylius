@@ -10,12 +10,13 @@
     ],
     "require": {
         "netgen/content-browser": "~0.12.0",
-        "sylius/sylius": "^1.0",
+        "sylius/sylius": "^1.3",
         "symfony/polyfill-php73": "^1.9"
     },
     "require-dev": {
         "phpunit/phpunit": "^7.3",
         "symfony/phpunit-bridge": "^4.1",
+        "symfony/var-dumper": "^3.4 || ^4.1",
         "phpstan/phpstan": "^0.10",
         "phpstan/phpstan-phpunit": "^0.10",
         "franzl/studio": "*"
@@ -38,7 +39,7 @@
             "Netgen\\ContentBrowser\\": "vendor/netgen/content-browser/lib/"
         },
         "files": [
-            "vendor/symfony/symfony/src/Symfony/Component/VarDumper/Resources/functions/dump.php"
+            "vendor/symfony/var-dumper/Resources/functions/dump.php"
         ]
     },
     "minimum-stability": "dev",
