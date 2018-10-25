@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Netgen\ContentBrowser\Sylius\Tests\Backend;
 
 use ArrayIterator;
+use Netgen\ContentBrowser\Exceptions\NotFoundException;
 use Netgen\ContentBrowser\Sylius\Backend\ProductBackend;
 use Netgen\ContentBrowser\Sylius\Item\Product\Item;
 use Netgen\ContentBrowser\Sylius\Item\Product\Location;
@@ -96,11 +97,12 @@ final class ProductBackendTest extends TestCase
 
     /**
      * @covers \Netgen\ContentBrowser\Sylius\Backend\ProductBackend::loadLocation
-     * @expectedException \Netgen\ContentBrowser\Exceptions\NotFoundException
-     * @expectedExceptionMessage Location with ID "1" not found.
      */
     public function testLoadLocationThrowsNotFoundException(): void
     {
+        $this->expectException(NotFoundException::class);
+        $this->expectExceptionMessage('Location with ID "1" not found.');
+
         $this->taxonRepositoryMock
             ->expects(self::once())
             ->method('find')
@@ -130,11 +132,12 @@ final class ProductBackendTest extends TestCase
 
     /**
      * @covers \Netgen\ContentBrowser\Sylius\Backend\ProductBackend::loadItem
-     * @expectedException \Netgen\ContentBrowser\Exceptions\NotFoundException
-     * @expectedExceptionMessage Item with value "1" not found.
      */
     public function testLoadItemThrowsNotFoundException(): void
     {
+        $this->expectException(NotFoundException::class);
+        $this->expectExceptionMessage('Item with value "1" not found.');
+
         $this->productRepositoryMock
             ->expects(self::once())
             ->method('find')

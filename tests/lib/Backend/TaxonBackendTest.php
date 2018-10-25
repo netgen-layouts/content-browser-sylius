@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Netgen\ContentBrowser\Sylius\Tests\Backend;
 
 use ArrayIterator;
+use Netgen\ContentBrowser\Exceptions\NotFoundException;
 use Netgen\ContentBrowser\Sylius\Backend\TaxonBackend;
 use Netgen\ContentBrowser\Sylius\Item\Taxon\Item;
 use Netgen\ContentBrowser\Sylius\Repository\TaxonRepositoryInterface;
@@ -84,11 +85,12 @@ final class TaxonBackendTest extends TestCase
 
     /**
      * @covers \Netgen\ContentBrowser\Sylius\Backend\TaxonBackend::loadLocation
-     * @expectedException \Netgen\ContentBrowser\Exceptions\NotFoundException
-     * @expectedExceptionMessage Item with value "1" not found.
      */
     public function testLoadLocationThrowsNotFoundException(): void
     {
+        $this->expectException(NotFoundException::class);
+        $this->expectExceptionMessage('Item with value "1" not found.');
+
         $this->taxonRepositoryMock
             ->expects(self::once())
             ->method('find')
@@ -118,11 +120,12 @@ final class TaxonBackendTest extends TestCase
 
     /**
      * @covers \Netgen\ContentBrowser\Sylius\Backend\TaxonBackend::loadItem
-     * @expectedException \Netgen\ContentBrowser\Exceptions\NotFoundException
-     * @expectedExceptionMessage Item with value "1" not found.
      */
     public function testLoadItemThrowsNotFoundException(): void
     {
+        $this->expectException(NotFoundException::class);
+        $this->expectExceptionMessage('Item with value "1" not found.');
+
         $this->taxonRepositoryMock
             ->expects(self::once())
             ->method('find')
