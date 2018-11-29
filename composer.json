@@ -1,7 +1,7 @@
 {
     "name": "netgen/content-browser-sylius",
     "description": "Netgen Content Browser & Sylius integration",
-    "license": "GPL-2.0-or-later",
+    "license": "MIT",
     "type": "symfony-bundle",
     "authors": [
         {
