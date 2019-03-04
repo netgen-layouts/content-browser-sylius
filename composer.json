@@ -15,7 +15,7 @@
         "symfony/polyfill-php73": "^1.9"
     },
     "require-dev": {
-        "phpunit/phpunit": "^7.5",
+        "phpunit/phpunit": "^8.0",
         "symfony/phpunit-bridge": "^4.2",
         "symfony/var-dumper": "^3.4 || ^4.2",
         "phpstan/phpstan": "^0.11",
@@ -37,7 +37,7 @@
     "autoload-dev": {
         "psr-4": {
             "Netgen\\ContentBrowser\\Sylius\\Tests\\": "tests/lib/",
-            "Netgen\\ContentBrowser\\": "vendor/netgen/content-browser/lib/"
+            "Netgen\\ContentBrowser\\Tests\\": "vendor/netgen/content-browser/tests/lib/"
         },
         "files": [
             "vendor/symfony/var-dumper/Resources/functions/dump.php"

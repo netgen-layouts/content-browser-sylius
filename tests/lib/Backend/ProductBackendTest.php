@@ -13,6 +13,7 @@ use Netgen\ContentBrowser\Sylius\Repository\ProductRepositoryInterface;
 use Netgen\ContentBrowser\Sylius\Tests\Stubs\Location as StubLocation;
 use Netgen\ContentBrowser\Sylius\Tests\Stubs\Product;
 use Netgen\ContentBrowser\Sylius\Tests\Stubs\Taxon;
+use Netgen\ContentBrowser\Tests\TestCase\LegacyTestCaseTrait;
 use Pagerfanta\Adapter\AdapterInterface;
 use Pagerfanta\Pagerfanta;
 use PHPUnit\Framework\TestCase;
@@ -21,6 +22,8 @@ use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 
 final class ProductBackendTest extends TestCase
 {
+    use LegacyTestCaseTrait;
+
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject
      */
@@ -185,7 +188,7 @@ final class ProductBackendTest extends TestCase
 
         $locations = $this->backend->getSubLocations(new StubLocation(0));
 
-        self::assertInternalType('array', $locations);
+        self::assertIsArray($locations);
         self::assertEmpty($locations);
     }
 
@@ -250,7 +253,7 @@ final class ProductBackendTest extends TestCase
 
         $items = $this->backend->getSubItems(new StubLocation(0));
 
-        self::assertInternalType('array', $items);
+        self::assertIsArray($items);
         self::assertEmpty($items);
     }
 
