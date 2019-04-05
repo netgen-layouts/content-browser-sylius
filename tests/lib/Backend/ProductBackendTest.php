@@ -53,7 +53,7 @@ final class ProductBackendTest extends TestCase
         $this->localeContextMock
             ->expects(self::any())
             ->method('getLocaleCode')
-            ->will(self::returnValue('en'));
+            ->willReturn('en');
 
         $this->backend = new ProductBackend(
             $this->taxonRepositoryMock,
@@ -72,7 +72,7 @@ final class ProductBackendTest extends TestCase
         $this->taxonRepositoryMock
             ->expects(self::once())
             ->method('findRootNodes')
-            ->will(self::returnValue([$this->getTaxon(1), $this->getTaxon(2)]));
+            ->willReturn([$this->getTaxon(1), $this->getTaxon(2)]);
 
         $locations = $this->backend->getSections();
 
@@ -90,7 +90,7 @@ final class ProductBackendTest extends TestCase
             ->expects(self::once())
             ->method('find')
             ->with(self::identicalTo(1))
-            ->will(self::returnValue($this->getTaxon(1)));
+            ->willReturn($this->getTaxon(1));
 
         $location = $this->backend->loadLocation(1);
 
@@ -110,7 +110,7 @@ final class ProductBackendTest extends TestCase
             ->expects(self::once())
             ->method('find')
             ->with(self::identicalTo(1))
-            ->will(self::returnValue(null));
+            ->willReturn(null);
 
         $this->backend->loadLocation(1);
     }
@@ -125,7 +125,7 @@ final class ProductBackendTest extends TestCase
             ->expects(self::once())
             ->method('find')
             ->with(self::identicalTo(1))
-            ->will(self::returnValue($this->getProduct(1)));
+            ->willReturn($this->getProduct(1));
 
         $item = $this->backend->loadItem(1);
 
@@ -145,7 +145,7 @@ final class ProductBackendTest extends TestCase
             ->expects(self::once())
             ->method('find')
             ->with(self::identicalTo(1))
-            ->will(self::returnValue(null));
+            ->willReturn(null);
 
         $this->backend->loadItem(1);
     }
@@ -163,7 +163,7 @@ final class ProductBackendTest extends TestCase
             ->expects(self::once())
             ->method('findBy')
             ->with(self::identicalTo(['parent' => $taxon]))
-            ->will(self::returnValue([$this->getTaxon(2, 1), $this->getTaxon(3, 1)]));
+            ->willReturn([$this->getTaxon(2, 1), $this->getTaxon(3, 1)]);
 
         $locations = $this->backend->getSubLocations(
             new Location($taxon)
@@ -203,7 +203,7 @@ final class ProductBackendTest extends TestCase
             ->expects(self::once())
             ->method('findBy')
             ->with(self::identicalTo(['parent' => $taxon]))
-            ->will(self::returnValue([$this->getTaxon(2), $this->getTaxon(3)]));
+            ->willReturn([$this->getTaxon(2), $this->getTaxon(3)]);
 
         $count = $this->backend->getSubLocationsCount(
             new Location($taxon)
@@ -226,13 +226,13 @@ final class ProductBackendTest extends TestCase
             ->expects(self::any())
             ->method('getSlice')
             ->with(self::identicalTo(0), self::identicalTo(25))
-            ->will(self::returnValue(new ArrayIterator([$this->getProduct(), $this->getProduct()])));
+            ->willReturn(new ArrayIterator([$this->getProduct(), $this->getProduct()]));
 
         $this->productRepositoryMock
             ->expects(self::once())
             ->method('createByTaxonPaginator')
             ->with(self::identicalTo($taxon), self::identicalTo('en'))
-            ->will(self::returnValue(new Pagerfanta($pagerfantaAdapterMock)));
+            ->willReturn(new Pagerfanta($pagerfantaAdapterMock));
 
         $items = $this->backend->getSubItems(
             new Location($taxon)
@@ -269,13 +269,13 @@ final class ProductBackendTest extends TestCase
         $pagerfantaAdapterMock
             ->expects(self::any())
             ->method('getNbResults')
-            ->will(self::returnValue(15));
+            ->willReturn(15);
 
         $pagerfantaAdapterMock
             ->expects(self::any())
             ->method('getSlice')
             ->with(self::identicalTo(8), self::identicalTo(2))
-            ->will(self::returnValue(new ArrayIterator([$this->getProduct(), $this->getProduct()])));
+            ->willReturn(new ArrayIterator([$this->getProduct(), $this->getProduct()]));
 
         $taxon = $this->getTaxon(1);
 
@@ -283,7 +283,7 @@ final class ProductBackendTest extends TestCase
             ->expects(self::once())
             ->method('createByTaxonPaginator')
             ->with(self::identicalTo($taxon), self::identicalTo('en'))
-            ->will(self::returnValue(new Pagerfanta($pagerfantaAdapterMock)));
+            ->willReturn(new Pagerfanta($pagerfantaAdapterMock));
 
         $items = $this->backend->getSubItems(
             new Location($taxon),
@@ -306,13 +306,13 @@ final class ProductBackendTest extends TestCase
         $pagerfantaAdapterMock
             ->expects(self::any())
             ->method('getNbResults')
-            ->will(self::returnValue(2));
+            ->willReturn(2);
 
         $this->productRepositoryMock
             ->expects(self::once())
             ->method('createByTaxonPaginator')
             ->with(self::identicalTo($taxon), self::identicalTo('en'))
-            ->will(self::returnValue(new Pagerfanta($pagerfantaAdapterMock)));
+            ->willReturn(new Pagerfanta($pagerfantaAdapterMock));
 
         $count = $this->backend->getSubItemsCount(
             new Location($taxon)
@@ -347,13 +347,13 @@ final class ProductBackendTest extends TestCase
             ->expects(self::any())
             ->method('getSlice')
             ->with(self::identicalTo(0), self::identicalTo(25))
-            ->will(self::returnValue(new ArrayIterator([$this->getProduct(), $this->getProduct()])));
+            ->willReturn(new ArrayIterator([$this->getProduct(), $this->getProduct()]));
 
         $this->productRepositoryMock
             ->expects(self::once())
             ->method('createSearchPaginator')
             ->with(self::identicalTo('test'), self::identicalTo('en'))
-            ->will(self::returnValue(new Pagerfanta($pagerfantaAdapterMock)));
+            ->willReturn(new Pagerfanta($pagerfantaAdapterMock));
 
         $items = $this->backend->search('test');
 
@@ -373,19 +373,19 @@ final class ProductBackendTest extends TestCase
         $pagerfantaAdapterMock
             ->expects(self::any())
             ->method('getNbResults')
-            ->will(self::returnValue(15));
+            ->willReturn(15);
 
         $pagerfantaAdapterMock
             ->expects(self::any())
             ->method('getSlice')
             ->with(self::identicalTo(8), self::identicalTo(2))
-            ->will(self::returnValue(new ArrayIterator([$this->getProduct(), $this->getProduct()])));
+            ->willReturn(new ArrayIterator([$this->getProduct(), $this->getProduct()]));
 
         $this->productRepositoryMock
             ->expects(self::once())
             ->method('createSearchPaginator')
             ->with(self::identicalTo('test'), self::identicalTo('en'))
-            ->will(self::returnValue(new Pagerfanta($pagerfantaAdapterMock)));
+            ->willReturn(new Pagerfanta($pagerfantaAdapterMock));
 
         $items = $this->backend->search('test', 8, 2);
 
@@ -402,13 +402,13 @@ final class ProductBackendTest extends TestCase
         $pagerfantaAdapterMock
             ->expects(self::any())
             ->method('getNbResults')
-            ->will(self::returnValue(2));
+            ->willReturn(2);
 
         $this->productRepositoryMock
             ->expects(self::once())
             ->method('createSearchPaginator')
             ->with(self::identicalTo('test'), self::identicalTo('en'))
-            ->will(self::returnValue(new Pagerfanta($pagerfantaAdapterMock)));
+            ->willReturn(new Pagerfanta($pagerfantaAdapterMock));
 
         $count = $this->backend->searchCount('test');
 
