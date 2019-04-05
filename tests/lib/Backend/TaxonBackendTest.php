@@ -42,6 +42,7 @@ final class TaxonBackendTest extends TestCase
         $this->localeContextMock = $this->createMock(LocaleContextInterface::class);
 
         $this->localeContextMock
+            ->expects(self::any())
             ->method('getLocaleCode')
             ->willReturn('en');
 
@@ -208,6 +209,7 @@ final class TaxonBackendTest extends TestCase
     {
         $pagerfantaAdapterMock = $this->createMock(AdapterInterface::class);
         $pagerfantaAdapterMock
+            ->expects(self::any())
             ->method('getSlice')
             ->with(self::identicalTo(0), self::identicalTo(25))
             ->willReturn(new ArrayIterator([$this->getTaxon(), $this->getTaxon()]));
@@ -251,10 +253,12 @@ final class TaxonBackendTest extends TestCase
         $pagerfantaAdapterMock = $this->createMock(AdapterInterface::class);
 
         $pagerfantaAdapterMock
+            ->expects(self::any())
             ->method('getNbResults')
             ->willReturn(15);
 
         $pagerfantaAdapterMock
+            ->expects(self::any())
             ->method('getSlice')
             ->with(self::identicalTo(8), self::identicalTo(2))
             ->willReturn(new ArrayIterator([$this->getTaxon(), $this->getTaxon()]));
@@ -282,6 +286,7 @@ final class TaxonBackendTest extends TestCase
     {
         $pagerfantaAdapterMock = $this->createMock(AdapterInterface::class);
         $pagerfantaAdapterMock
+            ->expects(self::any())
             ->method('getNbResults')
             ->willReturn(2);
 
@@ -321,6 +326,7 @@ final class TaxonBackendTest extends TestCase
     {
         $pagerfantaAdapterMock = $this->createMock(AdapterInterface::class);
         $pagerfantaAdapterMock
+            ->expects(self::any())
             ->method('getSlice')
             ->with(self::identicalTo(0), self::identicalTo(25))
             ->willReturn(new ArrayIterator([$this->getTaxon(), $this->getTaxon()]));
@@ -347,10 +353,12 @@ final class TaxonBackendTest extends TestCase
         $pagerfantaAdapterMock = $this->createMock(AdapterInterface::class);
 
         $pagerfantaAdapterMock
+            ->expects(self::any())
             ->method('getNbResults')
             ->willReturn(15);
 
         $pagerfantaAdapterMock
+            ->expects(self::any())
             ->method('getSlice')
             ->with(self::identicalTo(8), self::identicalTo(2))
             ->willReturn(new ArrayIterator([$this->getTaxon(), $this->getTaxon()]));
@@ -374,6 +382,7 @@ final class TaxonBackendTest extends TestCase
     {
         $pagerfantaAdapterMock = $this->createMock(AdapterInterface::class);
         $pagerfantaAdapterMock
+            ->expects(self::any())
             ->method('getNbResults')
             ->willReturn(2);
 
