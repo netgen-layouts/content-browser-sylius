@@ -13,7 +13,6 @@ use Netgen\ContentBrowser\Sylius\Repository\ProductRepositoryInterface;
 use Netgen\ContentBrowser\Sylius\Tests\Stubs\Location as StubLocation;
 use Netgen\ContentBrowser\Sylius\Tests\Stubs\Product;
 use Netgen\ContentBrowser\Sylius\Tests\Stubs\Taxon;
-use Netgen\ContentBrowser\Tests\TestCase\LegacyTestCaseTrait;
 use Pagerfanta\Adapter\AdapterInterface;
 use Pagerfanta\Pagerfanta;
 use PHPUnit\Framework\TestCase;
@@ -22,8 +21,6 @@ use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 
 final class ProductBackendTest extends TestCase
 {
-    use LegacyTestCaseTrait;
-
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject
      */

@@ -11,7 +11,6 @@ use Netgen\ContentBrowser\Sylius\Item\Taxon\Item;
 use Netgen\ContentBrowser\Sylius\Repository\TaxonRepositoryInterface;
 use Netgen\ContentBrowser\Sylius\Tests\Stubs\Location as StubLocation;
 use Netgen\ContentBrowser\Sylius\Tests\Stubs\Taxon;
-use Netgen\ContentBrowser\Tests\TestCase\LegacyTestCaseTrait;
 use Pagerfanta\Adapter\AdapterInterface;
 use Pagerfanta\Pagerfanta;
 use PHPUnit\Framework\TestCase;
@@ -19,8 +18,6 @@ use Sylius\Component\Locale\Context\LocaleContextInterface;
 
 final class TaxonBackendTest extends TestCase
 {
-    use LegacyTestCaseTrait;
-
     /**
      * @var \Netgen\ContentBrowser\Sylius\Repository\TaxonRepositoryInterface&\PHPUnit\Framework\MockObject\MockObject
      */
