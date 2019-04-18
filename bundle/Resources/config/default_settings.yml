@@ -1,4 +1,4 @@
 parameters:
-    netgen_content_browser.sylius_product.default_item_template: '@@NetgenContentBrowserSylius/product_item.html.twig'
-    netgen_content_browser.sylius_product.default_price_template: '@@NetgenContentBrowserSylius/columns/price.html.twig'
-    netgen_content_browser.sylius_taxon.default_item_template: '@@NetgenContentBrowserSylius/taxon_item.html.twig'
+    netgen_content_browser.sylius_product.item_template: '@@NetgenContentBrowserSylius/product_item.html.twig'
+    netgen_content_browser.sylius_product.price_template: '@@NetgenContentBrowserSylius/columns/price.html.twig'
+    netgen_content_browser.sylius_taxon.item_template: '@@NetgenContentBrowserSylius/taxon_item.html.twig'

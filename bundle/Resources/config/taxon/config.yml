@@ -2,7 +2,7 @@ item_types:
     sylius_taxon:
         name: item_types.sylius_taxon
         preview:
-            template: '%netgen_content_browser.sylius_taxon.default_item_template%'
+            template: '%netgen_content_browser.sylius_taxon.item_template%'
         columns:
             name:
                 name: columns.name
