@@ -25,7 +25,7 @@ final class LocationTest extends TestCase
      */
     private $location;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->taxon = new Taxon();
         $this->taxon->setId(42);

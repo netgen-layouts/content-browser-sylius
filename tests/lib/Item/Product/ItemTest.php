@@ -20,7 +20,7 @@ final class ItemTest extends TestCase
      */
     private $item;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->product = new Product();
         $this->product->setId(42);

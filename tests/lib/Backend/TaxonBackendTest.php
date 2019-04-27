@@ -33,7 +33,7 @@ final class TaxonBackendTest extends TestCase
      */
     private $backend;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->taxonRepositoryMock = $this->createMock(TaxonRepositoryInterface::class);
         $this->localeContextMock = $this->createMock(LocaleContextInterface::class);

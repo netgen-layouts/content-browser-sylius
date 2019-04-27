@@ -17,7 +17,7 @@ final class ProductIdTest extends TestCase
      */
     private $provider;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->provider = new ProductId();
     }

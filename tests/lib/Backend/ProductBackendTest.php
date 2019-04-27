@@ -41,7 +41,7 @@ final class ProductBackendTest extends TestCase
      */
     private $backend;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->taxonRepositoryMock = $this->createMock(TaxonRepositoryInterface::class);
         $this->productRepositoryMock = $this->createMock(ProductRepositoryInterface::class);
