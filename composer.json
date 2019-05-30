@@ -11,7 +11,7 @@
     ],
     "require": {
         "netgen/content-browser": "~1.0.0",
-        "sylius/sylius": "^1.4",
+        "sylius/sylius": "^1.5",
         "symfony/polyfill-php73": "^1.11"
     },
     "require-dev": {
