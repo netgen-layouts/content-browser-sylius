@@ -43,23 +43,12 @@ final class TaxonBackend implements BackendInterface
 
     public function loadLocation($id): LocationInterface
     {
-        return $this->loadItem($id);
+        return $this->internalLoadItem($id);
     }
 
     public function loadItem($value): ItemInterface
     {
-        $taxon = $this->taxonRepository->find($value);
-
-        if (!$taxon instanceof TaxonInterface) {
-            throw new NotFoundException(
-                sprintf(
-                    'Item with value "%s" not found.',
-                    $value
-                )
-            );
-        }
-
-        return $this->buildItem($taxon);
+        return $this->internalLoadItem($value);
     }
 
     public function getSubLocations(LocationInterface $location): iterable
@@ -137,6 +126,29 @@ final class TaxonBackend implements BackendInterface
         );
 
         return $paginator->getNbResults();
+    }
+
+    /**
+     * Returns the item for provided value.
+     *
+     * @param int|string $value
+     *
+     * @return \Netgen\ContentBrowser\Sylius\Item\Taxon\Item
+     */
+    private function internalLoadItem($value): Item
+    {
+        $taxon = $this->taxonRepository->find($value);
+
+        if (!$taxon instanceof TaxonInterface) {
+            throw new NotFoundException(
+                sprintf(
+                    'Item with value "%s" not found.',
+                    $value
+                )
+            );
+        }
+
+        return $this->buildItem($taxon);
     }
 
     /**

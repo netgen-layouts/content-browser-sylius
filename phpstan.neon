@@ -5,8 +5,3 @@ parameters:
     ignoreErrors:
         # Pagerfanta
         - '#expects iterable<.+>, array\|Traversable given.#'
-
-        # Content Browser specifics
-        -
-            message: '#Method Netgen\\ContentBrowser\\Sylius\\Backend\\TaxonBackend::loadLocation\(\) should return Netgen\\ContentBrowser\\Item\\LocationInterface but returns Netgen\\ContentBrowser\\Item\\ItemInterface.#'
-            path: lib/Backend/TaxonBackend.php

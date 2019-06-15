@@ -67,6 +67,7 @@ final class TaxonBackendTest extends TestCase
     }
 
     /**
+     * @covers \Netgen\ContentBrowser\Sylius\Backend\TaxonBackend::internalLoadItem
      * @covers \Netgen\ContentBrowser\Sylius\Backend\TaxonBackend::loadLocation
      */
     public function testLoadLocation(): void
@@ -84,6 +85,7 @@ final class TaxonBackendTest extends TestCase
     }
 
     /**
+     * @covers \Netgen\ContentBrowser\Sylius\Backend\TaxonBackend::internalLoadItem
      * @covers \Netgen\ContentBrowser\Sylius\Backend\TaxonBackend::loadLocation
      */
     public function testLoadLocationThrowsNotFoundException(): void
@@ -102,6 +104,7 @@ final class TaxonBackendTest extends TestCase
 
     /**
      * @covers \Netgen\ContentBrowser\Sylius\Backend\TaxonBackend::buildItem
+     * @covers \Netgen\ContentBrowser\Sylius\Backend\TaxonBackend::internalLoadItem
      * @covers \Netgen\ContentBrowser\Sylius\Backend\TaxonBackend::loadItem
      */
     public function testLoadItem(): void
@@ -119,6 +122,7 @@ final class TaxonBackendTest extends TestCase
     }
 
     /**
+     * @covers \Netgen\ContentBrowser\Sylius\Backend\TaxonBackend::internalLoadItem
      * @covers \Netgen\ContentBrowser\Sylius\Backend\TaxonBackend::loadItem
      */
     public function testLoadItemThrowsNotFoundException(): void
