@@ -1,7 +1,2 @@
 includes:
     - vendor/phpstan/phpstan-strict-rules/rules.neon
-
-parameters:
-    ignoreErrors:
-        # Pagerfanta
-        - '#expects iterable<.+>, array\|Traversable given.#'
