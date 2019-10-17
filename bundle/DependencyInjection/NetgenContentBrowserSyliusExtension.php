@@ -21,8 +21,8 @@ final class NetgenContentBrowserSyliusExtension extends Extension implements Pre
             new FileLocator(__DIR__ . '/../Resources/config')
         );
 
-        $loader->load('product/services.yml');
-        $loader->load('taxon/services.yml');
+        $loader->load('product/services.yaml');
+        $loader->load('taxon/services.yaml');
     }
 
     public function prepend(ContainerBuilder $container): void
@@ -32,10 +32,10 @@ final class NetgenContentBrowserSyliusExtension extends Extension implements Pre
             new FileLocator(__DIR__ . '/../Resources/config')
         );
 
-        $loader->load('default_settings.yml');
+        $loader->load('default_settings.yaml');
 
-        $this->doPrepend($container, 'product/config.yml', 'netgen_content_browser');
-        $this->doPrepend($container, 'taxon/config.yml', 'netgen_content_browser');
+        $this->doPrepend($container, 'product/config.yaml', 'netgen_content_browser');
+        $this->doPrepend($container, 'taxon/config.yaml', 'netgen_content_browser');
     }
 
     /**
