@@ -14,6 +14,9 @@ use Symfony\Component\Yaml\Yaml;
 
 final class NetgenContentBrowserSyliusExtension extends Extension implements PrependExtensionInterface
 {
+    /**
+     * @param mixed[] $configs
+     */
     public function load(array $configs, ContainerBuilder $container): void
     {
         $loader = new YamlFileLoader(
