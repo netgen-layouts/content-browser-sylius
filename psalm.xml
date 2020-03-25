@@ -21,13 +21,5 @@
                 <referencedFunction name="Doctrine\ORM\Query\Expr::orX" />
             </errorLevel>
         </TooManyArguments>
-
-        <!-- Deprecations -->
-
-        <DeprecatedInterface>
-            <errorLevel type="suppress">
-                <referencedClass name="Doctrine\Common\Persistence\ObjectRepository" />
-            </errorLevel>
-        </DeprecatedInterface>
     </issueHandlers>
 </psalm>
