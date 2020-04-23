@@ -13,6 +13,9 @@ use Netgen\ContentBrowser\Sylius\Item\Taxon\TaxonInterface as ContentBrowserTaxo
 use Netgen\ContentBrowser\Sylius\Repository\TaxonRepositoryInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use function count;
+use function is_countable;
+use function sprintf;
 
 final class TaxonBackend implements BackendInterface
 {

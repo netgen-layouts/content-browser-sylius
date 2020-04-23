@@ -16,6 +16,10 @@ use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
+use function array_map;
+use function count;
+use function is_countable;
+use function sprintf;
 
 final class ProductBackend implements BackendInterface
 {
