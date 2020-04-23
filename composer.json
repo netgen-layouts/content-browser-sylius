@@ -15,6 +15,7 @@
         "symfony/polyfill-php73": "^1.14"
     },
     "require-dev": {
+        "netgen/layouts-coding-standard": "^1.0",
         "phpunit/phpunit": "^9.0",
         "symfony/phpunit-bridge": "^5.0",
         "symfony/var-dumper": "^4.4",
