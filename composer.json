@@ -41,10 +41,7 @@
         "psr-4": {
             "Netgen\\ContentBrowser\\Sylius\\Tests\\": "tests/lib/",
             "Netgen\\ContentBrowser\\Tests\\": "vendor/netgen/content-browser/tests/lib/"
-        },
-        "files": [
-            "vendor/symfony/var-dumper/Resources/functions/dump.php"
-        ]
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
