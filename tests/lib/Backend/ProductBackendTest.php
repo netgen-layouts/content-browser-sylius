@@ -417,8 +417,6 @@ final class ProductBackendTest extends TestCase
      *
      * @param int|string $id
      * @param int|string $parentId
-     *
-     * @return \Netgen\ContentBrowser\Sylius\Tests\Stubs\Taxon
      */
     private function getTaxon($id = null, $parentId = null): Taxon
     {
@@ -438,8 +436,6 @@ final class ProductBackendTest extends TestCase
      * Returns the product object used in tests.
      *
      * @param int|string $id
-     *
-     * @return \Netgen\ContentBrowser\Sylius\Tests\Stubs\Product
      */
     private function getProduct($id = null): Product
     {

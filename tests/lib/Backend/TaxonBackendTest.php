@@ -403,9 +403,6 @@ final class TaxonBackendTest extends TestCase
      *
      * @param int|string $id
      * @param int|string $parentId
-     * @param string $code
-     *
-     * @return \Netgen\ContentBrowser\Sylius\Tests\Stubs\Taxon
      */
     private function getTaxon($id = null, $parentId = null, ?string $code = null): Taxon
     {

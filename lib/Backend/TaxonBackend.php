@@ -135,8 +135,6 @@ final class TaxonBackend implements BackendInterface
      * Returns the item for provided value.
      *
      * @param int|string $value
-     *
-     * @return \Netgen\ContentBrowser\Sylius\Item\Taxon\Item
      */
     private function internalLoadItem($value): Item
     {
