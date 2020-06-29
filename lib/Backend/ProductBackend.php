@@ -204,7 +204,7 @@ final class ProductBackend implements BackendInterface
     /**
      * Builds the items from provided products.
      *
-     * @param \Sylius\Component\Product\Model\ProductInterface[] $products
+     * @param iterable<\Sylius\Component\Product\Model\ProductInterface> $products
      *
      * @return \Netgen\ContentBrowser\Sylius\Item\Product\Item[]
      */

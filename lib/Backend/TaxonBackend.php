@@ -39,9 +39,10 @@ final class TaxonBackend implements BackendInterface
 
     public function getSections(): iterable
     {
-        return $this->buildItems(
-            $this->taxonRepository->findRootNodes()
-        );
+        /** @var iterable<\Sylius\Component\Taxonomy\Model\TaxonInterface> $rootNodes */
+        $rootNodes = $this->taxonRepository->findRootNodes();
+
+        return $this->buildItems($rootNodes);
     }
 
     public function loadLocation($id): LocationInterface
@@ -60,6 +61,7 @@ final class TaxonBackend implements BackendInterface
             return [];
         }
 
+        /** @var iterable<\Sylius\Component\Taxonomy\Model\TaxonInterface> $taxons */
         $taxons = $this->taxonRepository->findChildren(
             (string) $location->getTaxon()->getCode(),
             $this->localeContext->getLocaleCode()
@@ -163,7 +165,7 @@ final class TaxonBackend implements BackendInterface
     /**
      * Builds the items from provided products.
      *
-     * @param \Sylius\Component\Taxonomy\Model\TaxonInterface[] $taxons
+     * @param iterable<\Sylius\Component\Taxonomy\Model\TaxonInterface> $taxons
      *
      * @return \Netgen\ContentBrowser\Sylius\Item\Taxon\Item[]
      */
