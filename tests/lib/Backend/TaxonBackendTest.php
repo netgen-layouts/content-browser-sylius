@@ -19,12 +19,12 @@ use Sylius\Component\Locale\Context\LocaleContextInterface;
 final class TaxonBackendTest extends TestCase
 {
     /**
-     * @var \Netgen\ContentBrowser\Sylius\Repository\TaxonRepositoryInterface&\PHPUnit\Framework\MockObject\MockObject
+     * @var \PHPUnit\Framework\MockObject\MockObject
      */
     private $taxonRepositoryMock;
 
     /**
-     * @var \Sylius\Component\Locale\Context\LocaleContextInterface&\PHPUnit\Framework\MockObject\MockObject
+     * @var \PHPUnit\Framework\MockObject\MockObject
      */
     private $localeContextMock;
 
