@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace Netgen\ContentBrowser\Sylius\Backend;
 
 use Netgen\ContentBrowser\Backend\BackendInterface;
+use Netgen\ContentBrowser\Backend\SearchQuery;
+use Netgen\ContentBrowser\Backend\SearchResult;
+use Netgen\ContentBrowser\Backend\SearchResultInterface;
 use Netgen\ContentBrowser\Exceptions\NotFoundException;
 use Netgen\ContentBrowser\Item\ItemInterface;
 use Netgen\ContentBrowser\Item\LocationInterface;
@@ -143,29 +146,47 @@ final class ProductBackend implements BackendInterface
         return $paginator->getNbResults();
     }
 
-    public function search(string $searchText, int $offset = 0, int $limit = 25): iterable
+    public function searchItems(SearchQuery $searchQuery): SearchResultInterface
     {
         $paginator = $this->productRepository->createSearchPaginator(
-            $searchText,
+            $searchQuery->getSearchText(),
             $this->localeContext->getLocaleCode()
         );
 
-        $paginator->setMaxPerPage($limit);
-        $paginator->setCurrentPage((int) ($offset / $limit) + 1);
+        $paginator->setMaxPerPage($searchQuery->getLimit());
+        $paginator->setCurrentPage((int) ($searchQuery->getOffset() / $searchQuery->getLimit()) + 1);
 
-        return $this->buildItems(
-            $paginator->getCurrentPageResults()
+        return new SearchResult(
+            $this->buildItems(
+                $paginator->getCurrentPageResults()
+            )
         );
     }
 
-    public function searchCount(string $searchText): int
+    public function searchItemsCount(SearchQuery $searchQuery): int
     {
         $paginator = $this->productRepository->createSearchPaginator(
-            $searchText,
+            $searchQuery->getSearchText(),
             $this->localeContext->getLocaleCode()
         );
 
         return $paginator->getNbResults();
+    }
+
+    public function search(string $searchText, int $offset = 0, int $limit = 25): iterable
+    {
+        $searchQuery = new SearchQuery($searchText);
+        $searchQuery->setOffset($offset);
+        $searchQuery->setLimit($limit);
+
+        $searchResult = $this->searchItems($searchQuery);
+
+        return $searchResult->getResults();
+    }
+
+    public function searchCount(string $searchText): int
+    {
+        return $this->searchItemsCount(new SearchQuery($searchText));
     }
 
     /**

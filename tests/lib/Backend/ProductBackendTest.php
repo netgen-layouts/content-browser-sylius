@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Netgen\ContentBrowser\Sylius\Tests\Backend;
 
 use ArrayIterator;
+use Netgen\ContentBrowser\Backend\SearchQuery;
 use Netgen\ContentBrowser\Exceptions\NotFoundException;
 use Netgen\ContentBrowser\Sylius\Backend\ProductBackend;
 use Netgen\ContentBrowser\Sylius\Item\Product\Item;
@@ -330,6 +331,90 @@ final class ProductBackendTest extends TestCase
         $count = $this->backend->getSubItemsCount(new StubLocation(0));
 
         self::assertSame(0, $count);
+    }
+
+    /**
+     * @covers \Netgen\ContentBrowser\Sylius\Backend\ProductBackend::buildItem
+     * @covers \Netgen\ContentBrowser\Sylius\Backend\ProductBackend::buildItems
+     * @covers \Netgen\ContentBrowser\Sylius\Backend\ProductBackend::searchItems
+     */
+    public function testSearchItems(): void
+    {
+        $pagerfantaAdapterMock = $this->createMock(AdapterInterface::class);
+        $pagerfantaAdapterMock
+            ->expects(self::any())
+            ->method('getSlice')
+            ->with(self::identicalTo(0), self::identicalTo(25))
+            ->willReturn(new ArrayIterator([$this->getProduct(), $this->getProduct()]));
+
+        $this->productRepositoryMock
+            ->expects(self::once())
+            ->method('createSearchPaginator')
+            ->with(self::identicalTo('test'), self::identicalTo('en'))
+            ->willReturn(new Pagerfanta($pagerfantaAdapterMock));
+
+        $searchResult = $this->backend->searchItems(new SearchQuery('test'));
+
+        self::assertCount(2, $searchResult->getResults());
+        self::assertContainsOnlyInstancesOf(Item::class, $searchResult->getResults());
+    }
+
+    /**
+     * @covers \Netgen\ContentBrowser\Sylius\Backend\ProductBackend::buildItem
+     * @covers \Netgen\ContentBrowser\Sylius\Backend\ProductBackend::buildItems
+     * @covers \Netgen\ContentBrowser\Sylius\Backend\ProductBackend::searchItems
+     */
+    public function testSearchItemsWithOffsetAndLimit(): void
+    {
+        $pagerfantaAdapterMock = $this->createMock(AdapterInterface::class);
+
+        $pagerfantaAdapterMock
+            ->expects(self::any())
+            ->method('getNbResults')
+            ->willReturn(15);
+
+        $pagerfantaAdapterMock
+            ->expects(self::any())
+            ->method('getSlice')
+            ->with(self::identicalTo(8), self::identicalTo(2))
+            ->willReturn(new ArrayIterator([$this->getProduct(), $this->getProduct()]));
+
+        $this->productRepositoryMock
+            ->expects(self::once())
+            ->method('createSearchPaginator')
+            ->with(self::identicalTo('test'), self::identicalTo('en'))
+            ->willReturn(new Pagerfanta($pagerfantaAdapterMock));
+
+        $searchQuery = new SearchQuery('test');
+        $searchQuery->setOffset(8);
+        $searchQuery->setLimit(2);
+
+        $searchResult = $this->backend->searchItems($searchQuery);
+
+        self::assertCount(2, $searchResult->getResults());
+        self::assertContainsOnlyInstancesOf(Item::class, $searchResult->getResults());
+    }
+
+    /**
+     * @covers \Netgen\ContentBrowser\Sylius\Backend\ProductBackend::searchItemsCount
+     */
+    public function testSearchItemsCount(): void
+    {
+        $pagerfantaAdapterMock = $this->createMock(AdapterInterface::class);
+        $pagerfantaAdapterMock
+            ->expects(self::any())
+            ->method('getNbResults')
+            ->willReturn(2);
+
+        $this->productRepositoryMock
+            ->expects(self::once())
+            ->method('createSearchPaginator')
+            ->with(self::identicalTo('test'), self::identicalTo('en'))
+            ->willReturn(new Pagerfanta($pagerfantaAdapterMock));
+
+        $count = $this->backend->searchItemsCount(new SearchQuery('test'));
+
+        self::assertSame(2, $count);
     }
 
     /**
