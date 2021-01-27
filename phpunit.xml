@@ -17,20 +17,11 @@
         <testsuite name="Netgen\ContentBrowser\Sylius">
             <directory>tests/lib</directory>
         </testsuite>
-        <testsuite name="Netgen\Bundle\ContentBrowserSyliusBundle">
-            <directory>tests/bundle</directory>
-        </testsuite>
     </testsuites>
 
     <coverage>
         <include>
             <directory suffix=".php">lib</directory>
-            <directory suffix=".php">bundle</directory>
         </include>
-        <exclude>
-            <directory>bundle/Resources</directory>
-            <file>bundle/NetgenContentBrowserSyliusBundle.php</file>
-            <file>bundle/DependencyInjection/NetgenContentBrowserSyliusExtension.php</file>
-        </exclude>
     </coverage>
 </phpunit>
