@@ -14,25 +14,17 @@ use Netgen\ContentBrowser\Sylius\Tests\Stubs\Location as StubLocation;
 use Netgen\ContentBrowser\Sylius\Tests\Stubs\Taxon;
 use Pagerfanta\Adapter\AdapterInterface;
 use Pagerfanta\Pagerfanta;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 
 final class TaxonBackendTest extends TestCase
 {
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject
-     */
-    private $taxonRepositoryMock;
+    private MockObject $taxonRepositoryMock;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject
-     */
-    private $localeContextMock;
+    private MockObject $localeContextMock;
 
-    /**
-     * @var \Netgen\ContentBrowser\Sylius\Backend\TaxonBackend
-     */
-    private $backend;
+    private TaxonBackend $backend;
 
     protected function setUp(): void
     {

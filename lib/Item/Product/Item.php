@@ -9,17 +9,14 @@ use Sylius\Component\Product\Model\ProductInterface as SyliusProductInterface;
 
 final class Item implements ItemInterface, ProductInterface
 {
-    /**
-     * @var \Sylius\Component\Product\Model\ProductInterface
-     */
-    private $product;
+    private SyliusProductInterface $product;
 
     public function __construct(SyliusProductInterface $product)
     {
         $this->product = $product;
     }
 
-    public function getValue()
+    public function getValue(): int
     {
         return $this->product->getId();
     }

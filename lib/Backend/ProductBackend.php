@@ -26,20 +26,11 @@ use function sprintf;
 
 final class ProductBackend implements BackendInterface
 {
-    /**
-     * @var \Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface
-     */
-    private $taxonRepository;
+    private TaxonRepositoryInterface $taxonRepository;
 
-    /**
-     * @var \Netgen\ContentBrowser\Sylius\Repository\ProductRepositoryInterface
-     */
-    private $productRepository;
+    private ProductRepositoryInterface $productRepository;
 
-    /**
-     * @var \Sylius\Component\Locale\Context\LocaleContextInterface
-     */
-    private $localeContext;
+    private LocaleContextInterface $localeContext;
 
     public function __construct(
         TaxonRepositoryInterface $taxonRepository,
@@ -207,9 +198,7 @@ final class ProductBackend implements BackendInterface
     private function buildLocations(array $taxons): array
     {
         return array_map(
-            function (TaxonInterface $taxon): Location {
-                return $this->buildLocation($taxon);
-            },
+            fn (TaxonInterface $taxon): Location => $this->buildLocation($taxon),
             $taxons
         );
     }

@@ -22,15 +22,9 @@ use function sprintf;
 
 final class TaxonBackend implements BackendInterface
 {
-    /**
-     * @var \Netgen\ContentBrowser\Sylius\Repository\TaxonRepositoryInterface
-     */
-    private $taxonRepository;
+    private TaxonRepositoryInterface $taxonRepository;
 
-    /**
-     * @var \Sylius\Component\Locale\Context\LocaleContextInterface
-     */
-    private $localeContext;
+    private LocaleContextInterface $localeContext;
 
     public function __construct(
         TaxonRepositoryInterface $taxonRepository,

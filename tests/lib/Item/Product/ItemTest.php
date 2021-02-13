@@ -7,18 +7,13 @@ namespace Netgen\ContentBrowser\Sylius\Tests\Item\Product;
 use Netgen\ContentBrowser\Sylius\Item\Product\Item;
 use Netgen\ContentBrowser\Sylius\Tests\Stubs\Product;
 use PHPUnit\Framework\TestCase;
+use Sylius\Component\Product\Model\ProductInterface;
 
 final class ItemTest extends TestCase
 {
-    /**
-     * @var \Sylius\Component\Product\Model\ProductInterface
-     */
-    private $product;
+    private ProductInterface $product;
 
-    /**
-     * @var \Netgen\ContentBrowser\Sylius\Item\Product\Item
-     */
-    private $item;
+    private Item $item;
 
     protected function setUp(): void
     {

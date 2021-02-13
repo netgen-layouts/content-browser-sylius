@@ -9,17 +9,14 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface as SyliusTaxonInterface;
 
 final class Location implements LocationInterface, TaxonInterface
 {
-    /**
-     * @var \Sylius\Component\Taxonomy\Model\TaxonInterface
-     */
-    private $taxon;
+    private SyliusTaxonInterface $taxon;
 
     public function __construct(SyliusTaxonInterface $taxon)
     {
         $this->taxon = $taxon;
     }
 
-    public function getLocationId()
+    public function getLocationId(): int
     {
         return $this->taxon->getId();
     }
@@ -29,7 +26,7 @@ final class Location implements LocationInterface, TaxonInterface
         return (string) $this->taxon->getName();
     }
 
-    public function getParentId()
+    public function getParentId(): ?int
     {
         $parentTaxon = $this->taxon->getParent();
 

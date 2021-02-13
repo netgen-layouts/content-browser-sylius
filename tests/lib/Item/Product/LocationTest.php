@@ -7,23 +7,15 @@ namespace Netgen\ContentBrowser\Sylius\Tests\Item\Product;
 use Netgen\ContentBrowser\Sylius\Item\Product\Location;
 use Netgen\ContentBrowser\Sylius\Tests\Stubs\Taxon;
 use PHPUnit\Framework\TestCase;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 final class LocationTest extends TestCase
 {
-    /**
-     * @var \Sylius\Component\Taxonomy\Model\TaxonInterface
-     */
-    private $taxon;
+    private TaxonInterface $taxon;
 
-    /**
-     * @var \Sylius\Component\Taxonomy\Model\TaxonInterface
-     */
-    private $parentTaxon;
+    private TaxonInterface $parentTaxon;
 
-    /**
-     * @var \Netgen\ContentBrowser\Sylius\Item\Product\Location
-     */
-    private $location;
+    private Location $location;
 
     protected function setUp(): void
     {

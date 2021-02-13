@@ -28,9 +28,9 @@ final class Location implements LocationInterface
         $this->parentId = $parentId;
     }
 
-    public function getLocationId()
+    public function getLocationId(): int
     {
-        return $this->id;
+        return (int) $this->id;
     }
 
     public function getName(): string
@@ -38,8 +38,8 @@ final class Location implements LocationInterface
         return 'This is a name';
     }
 
-    public function getParentId()
+    public function getParentId(): ?int
     {
-        return $this->parentId;
+        return $this->parentId !== null ? (int) $this->parentId : null;
     }
 }

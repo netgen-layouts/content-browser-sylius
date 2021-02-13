@@ -12,10 +12,7 @@ use PHPUnit\Framework\TestCase;
 
 final class TaxonIdTest extends TestCase
 {
-    /**
-     * @var \Netgen\ContentBrowser\Sylius\Item\ColumnProvider\ColumnValueProvider\Taxon\TaxonId
-     */
-    private $provider;
+    private TaxonId $provider;
 
     protected function setUp(): void
     {
@@ -32,10 +29,7 @@ final class TaxonIdTest extends TestCase
 
         $item = new Item($taxon);
 
-        self::assertSame(
-            '42',
-            $this->provider->getValue($item)
-        );
+        self::assertSame('42', $this->provider->getValue($item));
     }
 
     /**

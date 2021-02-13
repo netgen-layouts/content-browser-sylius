@@ -12,10 +12,7 @@ use PHPUnit\Framework\TestCase;
 
 final class ProductIdTest extends TestCase
 {
-    /**
-     * @var \Netgen\ContentBrowser\Sylius\Item\ColumnProvider\ColumnValueProvider\Product\ProductId
-     */
-    private $provider;
+    private ProductId $provider;
 
     protected function setUp(): void
     {
@@ -32,10 +29,7 @@ final class ProductIdTest extends TestCase
 
         $item = new Item($product);
 
-        self::assertSame(
-            '42',
-            $this->provider->getValue($item)
-        );
+        self::assertSame('42', $this->provider->getValue($item));
     }
 
     /**
@@ -43,6 +37,6 @@ final class ProductIdTest extends TestCase
      */
     public function testGetValueWithInvalidItem(): void
     {
-        self::assertNull($this->provider->getValue(new StubItem()));
+        self::assertNull($this->provider->getValue(new StubItem(null)));
     }
 }

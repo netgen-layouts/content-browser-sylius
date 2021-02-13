@@ -7,18 +7,13 @@ namespace Netgen\ContentBrowser\Sylius\Tests\Item\Taxon;
 use Netgen\ContentBrowser\Sylius\Item\Taxon\Item;
 use Netgen\ContentBrowser\Sylius\Tests\Stubs\Taxon;
 use PHPUnit\Framework\TestCase;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 final class ItemTest extends TestCase
 {
-    /**
-     * @var \Sylius\Component\Taxonomy\Model\TaxonInterface
-     */
-    private $taxon;
+    private TaxonInterface $taxon;
 
-    /**
-     * @var \Netgen\ContentBrowser\Sylius\Item\Taxon\Item
-     */
-    private $item;
+    private Item $item;
 
     protected function setUp(): void
     {
