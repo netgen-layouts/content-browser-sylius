@@ -44,12 +44,12 @@ final class TaxonBackend implements BackendInterface
 
     public function loadLocation($id): LocationInterface
     {
-        return $this->internalLoadItem($id);
+        return $this->internalLoadItem((int) $id);
     }
 
     public function loadItem($value): ItemInterface
     {
-        return $this->internalLoadItem($value);
+        return $this->internalLoadItem((int) $value);
     }
 
     public function getSubLocations(LocationInterface $location): iterable
@@ -150,10 +150,8 @@ final class TaxonBackend implements BackendInterface
 
     /**
      * Returns the item for provided value.
-     *
-     * @param int|string $value
      */
-    private function internalLoadItem($value): Item
+    private function internalLoadItem(int $value): Item
     {
         $taxon = $this->taxonRepository->find($value);
 

@@ -8,10 +8,7 @@ use Sylius\Component\Taxonomy\Model\Taxon as BaseTaxon;
 
 final class Taxon extends BaseTaxon
 {
-    /**
-     * @param mixed $id
-     */
-    public function setId($id): void
+    public function setId(?int $id): void
     {
         $this->id = $id;
     }

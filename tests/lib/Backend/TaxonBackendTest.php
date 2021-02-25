@@ -477,11 +477,8 @@ final class TaxonBackendTest extends TestCase
 
     /**
      * Returns the taxon object used in tests.
-     *
-     * @param int|string $id
-     * @param int|string $parentId
      */
-    private function getTaxon($id = null, $parentId = null, ?string $code = null): Taxon
+    private function getTaxon(?int $id = null, ?int $parentId = null, ?string $code = null): Taxon
     {
         $taxon = new Taxon();
         $taxon->setId($id);

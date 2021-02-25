@@ -488,11 +488,8 @@ final class ProductBackendTest extends TestCase
 
     /**
      * Returns the taxon object used in tests.
-     *
-     * @param int|string $id
-     * @param int|string $parentId
      */
-    private function getTaxon($id = null, $parentId = null): Taxon
+    private function getTaxon(?int $id = null, ?int $parentId = null): Taxon
     {
         $taxon = new Taxon();
         $taxon->setId($id);
@@ -508,10 +505,8 @@ final class ProductBackendTest extends TestCase
 
     /**
      * Returns the product object used in tests.
-     *
-     * @param int|string $id
      */
-    private function getProduct($id = null): Product
+    private function getProduct(?int $id = null): Product
     {
         $product = new Product();
         $product->setId($id);
