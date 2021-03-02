@@ -6,7 +6,6 @@ namespace Netgen\ContentBrowser\Sylius\Tests\Item\ColumnProvider\ColumnValueProv
 
 use Netgen\ContentBrowser\Sylius\Item\ColumnProvider\ColumnValueProvider\Product\ProductId;
 use Netgen\ContentBrowser\Sylius\Item\Product\Item;
-use Netgen\ContentBrowser\Sylius\Tests\Stubs\Item as StubItem;
 use Netgen\ContentBrowser\Sylius\Tests\Stubs\Product;
 use PHPUnit\Framework\TestCase;
 
@@ -30,13 +29,5 @@ final class ProductIdTest extends TestCase
         $item = new Item($product);
 
         self::assertSame('42', $this->provider->getValue($item));
-    }
-
-    /**
-     * @covers \Netgen\ContentBrowser\Sylius\Item\ColumnProvider\ColumnValueProvider\Product\ProductId::getValue
-     */
-    public function testGetValueWithInvalidItem(): void
-    {
-        self::assertNull($this->provider->getValue(new StubItem(null)));
     }
 }
