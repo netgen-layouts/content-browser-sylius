@@ -22,13 +22,7 @@ final class Item implements ItemInterface
 
     public function getName(): string
     {
-        $name = 'This is a name';
-
-        if ($this->value !== null) {
-            $name .= ' (' . $this->value . ')';
-        }
-
-        return $name;
+        return 'This is a name';
     }
 
     public function isVisible(): bool
