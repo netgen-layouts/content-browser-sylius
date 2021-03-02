@@ -11,7 +11,7 @@
     ],
     "require": {
         "netgen/content-browser": "~1.3.0",
-        "sylius/sylius": "^1.8"
+        "sylius/sylius": "^1.9"
     },
     "require-dev": {
         "netgen/layouts-coding-standard": "^1.0",
