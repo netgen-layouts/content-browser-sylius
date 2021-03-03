@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace Netgen\ContentBrowser\Sylius\Repository;
 
 use Doctrine\ORM\QueryBuilder;
-use Pagerfanta\Pagerfanta;
+use Pagerfanta\PagerfantaInterface;
 use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 final class ProductRepository extends BaseProductRepository implements ProductRepositoryInterface
 {
-    public function createByTaxonPaginator(TaxonInterface $taxon, string $localeCode): Pagerfanta
+    public function createByTaxonPaginator(TaxonInterface $taxon, string $localeCode): PagerfantaInterface
     {
         $root = $taxon->isRoot() ? $taxon : $taxon->getRoot();
 
@@ -38,7 +38,7 @@ final class ProductRepository extends BaseProductRepository implements ProductRe
         return $this->getPaginator($queryBuilder);
     }
 
-    public function createSearchPaginator(string $searchText, string $localeCode): Pagerfanta
+    public function createSearchPaginator(string $searchText, string $localeCode): PagerfantaInterface
     {
         $queryBuilder = $this->createQueryBuilderWithLocaleCode($localeCode);
         $queryBuilder
