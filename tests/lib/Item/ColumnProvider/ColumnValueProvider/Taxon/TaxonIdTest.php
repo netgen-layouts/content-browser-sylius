@@ -6,6 +6,7 @@ namespace Netgen\ContentBrowser\Sylius\Tests\Item\ColumnProvider\ColumnValueProv
 
 use Netgen\ContentBrowser\Sylius\Item\ColumnProvider\ColumnValueProvider\Taxon\TaxonId;
 use Netgen\ContentBrowser\Sylius\Item\Taxon\Item;
+use Netgen\ContentBrowser\Sylius\Tests\Stubs\Item as StubItem;
 use Netgen\ContentBrowser\Sylius\Tests\Stubs\Taxon;
 use PHPUnit\Framework\TestCase;
 
@@ -29,5 +30,13 @@ final class TaxonIdTest extends TestCase
         $item = new Item($taxon);
 
         self::assertSame('42', $this->provider->getValue($item));
+    }
+
+    /**
+     * @covers \Netgen\ContentBrowser\Sylius\Item\ColumnProvider\ColumnValueProvider\Taxon\TaxonId::getValue
+     */
+    public function testGetValueWithInvalidItem(): void
+    {
+        self::assertNull($this->provider->getValue(new StubItem('value')));
     }
 }
