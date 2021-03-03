@@ -73,7 +73,6 @@ final class TaxonBackendTest extends TestCase
 
         $location = $this->backend->loadLocation(1);
 
-        self::assertInstanceOf(Item::class, $location);
         self::assertSame(1, $location->getLocationId());
     }
 
@@ -110,7 +109,6 @@ final class TaxonBackendTest extends TestCase
 
         $item = $this->backend->loadItem(1);
 
-        self::assertInstanceOf(Item::class, $item);
         self::assertSame(1, $item->getValue());
     }
 

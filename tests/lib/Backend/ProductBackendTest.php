@@ -81,7 +81,6 @@ final class ProductBackendTest extends TestCase
 
         $location = $this->backend->loadLocation(1);
 
-        self::assertInstanceOf(Location::class, $location);
         self::assertSame(1, $location->getLocationId());
     }
 
@@ -116,7 +115,6 @@ final class ProductBackendTest extends TestCase
 
         $item = $this->backend->loadItem(1);
 
-        self::assertInstanceOf(Item::class, $item);
         self::assertSame(1, $item->getValue());
     }
 

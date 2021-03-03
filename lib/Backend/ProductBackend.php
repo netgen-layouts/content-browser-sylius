@@ -9,7 +9,6 @@ use Netgen\ContentBrowser\Backend\SearchQuery;
 use Netgen\ContentBrowser\Backend\SearchResult;
 use Netgen\ContentBrowser\Backend\SearchResultInterface;
 use Netgen\ContentBrowser\Exceptions\NotFoundException;
-use Netgen\ContentBrowser\Item\ItemInterface;
 use Netgen\ContentBrowser\Item\LocationInterface;
 use Netgen\ContentBrowser\Sylius\Item\Product\Item;
 use Netgen\ContentBrowser\Sylius\Item\Product\Location;
@@ -49,7 +48,7 @@ final class ProductBackend implements BackendInterface
         );
     }
 
-    public function loadLocation($id): LocationInterface
+    public function loadLocation($id): Location
     {
         $taxon = $this->taxonRepository->find($id);
 
@@ -65,7 +64,7 @@ final class ProductBackend implements BackendInterface
         return $this->buildLocation($taxon);
     }
 
-    public function loadItem($value): ItemInterface
+    public function loadItem($value): Item
     {
         $product = $this->productRepository->find($value);
 

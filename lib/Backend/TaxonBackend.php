@@ -9,7 +9,6 @@ use Netgen\ContentBrowser\Backend\SearchQuery;
 use Netgen\ContentBrowser\Backend\SearchResult;
 use Netgen\ContentBrowser\Backend\SearchResultInterface;
 use Netgen\ContentBrowser\Exceptions\NotFoundException;
-use Netgen\ContentBrowser\Item\ItemInterface;
 use Netgen\ContentBrowser\Item\LocationInterface;
 use Netgen\ContentBrowser\Sylius\Item\Taxon\Item;
 use Netgen\ContentBrowser\Sylius\Item\Taxon\TaxonInterface as ContentBrowserTaxonInterface;
@@ -42,12 +41,12 @@ final class TaxonBackend implements BackendInterface
         return $this->buildItems($rootNodes);
     }
 
-    public function loadLocation($id): LocationInterface
+    public function loadLocation($id): Item
     {
         return $this->internalLoadItem((int) $id);
     }
 
-    public function loadItem($value): ItemInterface
+    public function loadItem($value): Item
     {
         return $this->internalLoadItem((int) $value);
     }
