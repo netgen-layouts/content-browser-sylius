@@ -45,7 +45,7 @@ final class ProductBackendTest extends TestCase
         $this->backend = new ProductBackend(
             $this->taxonRepositoryMock,
             $this->productRepositoryMock,
-            $this->localeContextMock
+            $this->localeContextMock,
         );
     }
 
@@ -151,7 +151,7 @@ final class ProductBackendTest extends TestCase
             ->willReturn([$this->getTaxon(2, 1), $this->getTaxon(3, 1)]);
 
         $locations = $this->backend->getSubLocations(
-            new Location($taxon)
+            new Location($taxon),
         );
 
         self::assertCount(2, $locations);
@@ -191,7 +191,7 @@ final class ProductBackendTest extends TestCase
             ->willReturn([$this->getTaxon(2), $this->getTaxon(3)]);
 
         $count = $this->backend->getSubLocationsCount(
-            new Location($taxon)
+            new Location($taxon),
         );
 
         self::assertSame(2, $count);
@@ -220,7 +220,7 @@ final class ProductBackendTest extends TestCase
             ->willReturn(new Pagerfanta($pagerfantaAdapterMock));
 
         $items = $this->backend->getSubItems(
-            new Location($taxon)
+            new Location($taxon),
         );
 
         self::assertCount(2, $items);
@@ -273,7 +273,7 @@ final class ProductBackendTest extends TestCase
         $items = $this->backend->getSubItems(
             new Location($taxon),
             8,
-            2
+            2,
         );
 
         self::assertCount(2, $items);
@@ -300,7 +300,7 @@ final class ProductBackendTest extends TestCase
             ->willReturn(new Pagerfanta($pagerfantaAdapterMock));
 
         $count = $this->backend->getSubItemsCount(
-            new Location($taxon)
+            new Location($taxon),
         );
 
         self::assertSame(2, $count);
@@ -494,7 +494,7 @@ final class ProductBackendTest extends TestCase
 
         if ($parentId !== null) {
             $taxon->setParent(
-                $this->getTaxon($parentId)
+                $this->getTaxon($parentId),
             );
         }
 

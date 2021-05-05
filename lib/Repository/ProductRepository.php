@@ -25,9 +25,9 @@ final class ProductRepository extends BaseProductRepository implements ProductRe
                     $queryBuilder->expr()->eq('taxon', ':taxon'),
                     $queryBuilder->expr()->andX(
                         $queryBuilder->expr()->lt(':left', 'taxon.left'),
-                        $queryBuilder->expr()->lt('taxon.right', ':right')
-                    )
-                )
+                        $queryBuilder->expr()->lt('taxon.right', ':right'),
+                    ),
+                ),
             )
             ->setParameter('root', $root)
             ->setParameter('taxon', $taxon)
@@ -43,7 +43,7 @@ final class ProductRepository extends BaseProductRepository implements ProductRe
         $queryBuilder = $this->createQueryBuilderWithLocaleCode($localeCode);
         $queryBuilder
             ->andWhere(
-                $queryBuilder->expr()->like('translation.name', ':name')
+                $queryBuilder->expr()->like('translation.name', ':name'),
             )
             ->setParameter('name', '%' . $searchText . '%')
         ;

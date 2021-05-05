@@ -60,7 +60,7 @@ final class TaxonBackend implements BackendInterface
         /** @var iterable<\Sylius\Component\Taxonomy\Model\TaxonInterface> $taxons */
         $taxons = $this->taxonRepository->findChildren(
             (string) $location->getTaxon()->getCode(),
-            $this->localeContext->getLocaleCode()
+            $this->localeContext->getLocaleCode(),
         );
 
         return $this->buildItems($taxons);
@@ -81,7 +81,7 @@ final class TaxonBackend implements BackendInterface
 
         $paginator = $this->taxonRepository->createListPaginator(
             (string) $location->getTaxon()->getCode(),
-            $this->localeContext->getLocaleCode()
+            $this->localeContext->getLocaleCode(),
         );
 
         $paginator->setMaxPerPage($limit);
@@ -98,7 +98,7 @@ final class TaxonBackend implements BackendInterface
 
         $paginator = $this->taxonRepository->createListPaginator(
             (string) $location->getTaxon()->getCode(),
-            $this->localeContext->getLocaleCode()
+            $this->localeContext->getLocaleCode(),
         );
 
         return $paginator->getNbResults();
@@ -108,7 +108,7 @@ final class TaxonBackend implements BackendInterface
     {
         $paginator = $this->taxonRepository->createSearchPaginator(
             $searchQuery->getSearchText(),
-            $this->localeContext->getLocaleCode()
+            $this->localeContext->getLocaleCode(),
         );
 
         $paginator->setMaxPerPage($searchQuery->getLimit());
@@ -116,8 +116,8 @@ final class TaxonBackend implements BackendInterface
 
         return new SearchResult(
             $this->buildItems(
-                $paginator->getCurrentPageResults()
-            )
+                $paginator->getCurrentPageResults(),
+            ),
         );
     }
 
@@ -125,7 +125,7 @@ final class TaxonBackend implements BackendInterface
     {
         $paginator = $this->taxonRepository->createSearchPaginator(
             $searchQuery->getSearchText(),
-            $this->localeContext->getLocaleCode()
+            $this->localeContext->getLocaleCode(),
         );
 
         return $paginator->getNbResults();
@@ -158,8 +158,8 @@ final class TaxonBackend implements BackendInterface
             throw new NotFoundException(
                 sprintf(
                     'Item with value "%s" not found.',
-                    $value
-                )
+                    $value,
+                ),
             );
         }
 

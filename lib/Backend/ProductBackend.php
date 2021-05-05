@@ -44,7 +44,7 @@ final class ProductBackend implements BackendInterface
     public function getSections(): iterable
     {
         return $this->buildLocations(
-            $this->taxonRepository->findRootNodes()
+            $this->taxonRepository->findRootNodes(),
         );
     }
 
@@ -56,8 +56,8 @@ final class ProductBackend implements BackendInterface
             throw new NotFoundException(
                 sprintf(
                     'Location with ID "%s" not found.',
-                    $id
-                )
+                    $id,
+                ),
             );
         }
 
@@ -72,8 +72,8 @@ final class ProductBackend implements BackendInterface
             throw new NotFoundException(
                 sprintf(
                     'Item with value "%s" not found.',
-                    $value
-                )
+                    $value,
+                ),
             );
         }
 
@@ -90,7 +90,7 @@ final class ProductBackend implements BackendInterface
         $taxons = $this->taxonRepository->findBy(
             [
                 'parent' => $location->getTaxon(),
-            ]
+            ],
         );
 
         return $this->buildLocations($taxons);
@@ -111,14 +111,14 @@ final class ProductBackend implements BackendInterface
 
         $paginator = $this->productRepository->createByTaxonPaginator(
             $location->getTaxon(),
-            $this->localeContext->getLocaleCode()
+            $this->localeContext->getLocaleCode(),
         );
 
         $paginator->setMaxPerPage($limit);
         $paginator->setCurrentPage((int) ($offset / $limit) + 1);
 
         return $this->buildItems(
-            $paginator->getCurrentPageResults()
+            $paginator->getCurrentPageResults(),
         );
     }
 
@@ -130,7 +130,7 @@ final class ProductBackend implements BackendInterface
 
         $paginator = $this->productRepository->createByTaxonPaginator(
             $location->getTaxon(),
-            $this->localeContext->getLocaleCode()
+            $this->localeContext->getLocaleCode(),
         );
 
         return $paginator->getNbResults();
@@ -140,7 +140,7 @@ final class ProductBackend implements BackendInterface
     {
         $paginator = $this->productRepository->createSearchPaginator(
             $searchQuery->getSearchText(),
-            $this->localeContext->getLocaleCode()
+            $this->localeContext->getLocaleCode(),
         );
 
         $paginator->setMaxPerPage($searchQuery->getLimit());
@@ -148,8 +148,8 @@ final class ProductBackend implements BackendInterface
 
         return new SearchResult(
             $this->buildItems(
-                $paginator->getCurrentPageResults()
-            )
+                $paginator->getCurrentPageResults(),
+            ),
         );
     }
 
@@ -157,7 +157,7 @@ final class ProductBackend implements BackendInterface
     {
         $paginator = $this->productRepository->createSearchPaginator(
             $searchQuery->getSearchText(),
-            $this->localeContext->getLocaleCode()
+            $this->localeContext->getLocaleCode(),
         );
 
         return $paginator->getNbResults();
@@ -198,7 +198,7 @@ final class ProductBackend implements BackendInterface
     {
         return array_map(
             fn (TaxonInterface $taxon): Location => $this->buildLocation($taxon),
-            $taxons
+            $taxons,
         );
     }
 

@@ -38,7 +38,7 @@ final class TaxonBackendTest extends TestCase
 
         $this->backend = new TaxonBackend(
             $this->taxonRepositoryMock,
-            $this->localeContextMock
+            $this->localeContextMock,
         );
     }
 
@@ -140,12 +140,12 @@ final class TaxonBackendTest extends TestCase
             ->method('findChildren')
             ->with(
                 self::identicalTo('code'),
-                self::identicalTo('en')
+                self::identicalTo('en'),
             )
             ->willReturn([$this->getTaxon(2, 1), $this->getTaxon(3, 1)]);
 
         $locations = $this->backend->getSubLocations(
-            new Item($this->getTaxon(1, null, 'code'))
+            new Item($this->getTaxon(1, null, 'code')),
         );
 
         self::assertCount(2, $locations);
@@ -181,12 +181,12 @@ final class TaxonBackendTest extends TestCase
             ->method('findChildren')
             ->with(
                 self::identicalTo('code'),
-                self::identicalTo('en')
+                self::identicalTo('en'),
             )
             ->willReturn([$this->getTaxon(2), $this->getTaxon(3)]);
 
         $count = $this->backend->getSubLocationsCount(
-            new Item($this->getTaxon(1, null, 'code'))
+            new Item($this->getTaxon(1, null, 'code')),
         );
 
         self::assertSame(2, $count);
@@ -213,7 +213,7 @@ final class TaxonBackendTest extends TestCase
             ->willReturn(new Pagerfanta($pagerfantaAdapterMock));
 
         $items = $this->backend->getSubItems(
-            new Item($this->getTaxon(1, null, 'code'))
+            new Item($this->getTaxon(1, null, 'code')),
         );
 
         self::assertCount(2, $items);
@@ -264,7 +264,7 @@ final class TaxonBackendTest extends TestCase
         $items = $this->backend->getSubItems(
             new Item($this->getTaxon(1, null, 'code')),
             8,
-            2
+            2,
         );
 
         self::assertCount(2, $items);
@@ -289,7 +289,7 @@ final class TaxonBackendTest extends TestCase
             ->willReturn(new Pagerfanta($pagerfantaAdapterMock));
 
         $count = $this->backend->getSubItemsCount(
-            new Item($this->getTaxon(1, null, 'code'))
+            new Item($this->getTaxon(1, null, 'code')),
         );
 
         self::assertSame(2, $count);
@@ -483,7 +483,7 @@ final class TaxonBackendTest extends TestCase
 
         if ($parentId !== null) {
             $taxon->setParent(
-                $this->getTaxon($parentId)
+                $this->getTaxon($parentId),
             );
         }
 

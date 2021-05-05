@@ -22,7 +22,7 @@ final class NetgenContentBrowserSyliusExtension extends Extension implements Pre
     {
         $loader = new YamlFileLoader(
             $container,
-            new FileLocator(__DIR__ . '/../Resources/config')
+            new FileLocator(__DIR__ . '/../Resources/config'),
         );
 
         $loader->load('product/services.yaml');
@@ -33,7 +33,7 @@ final class NetgenContentBrowserSyliusExtension extends Extension implements Pre
     {
         $loader = new YamlFileLoader(
             $container,
-            new FileLocator(__DIR__ . '/../Resources/config')
+            new FileLocator(__DIR__ . '/../Resources/config'),
         );
 
         $loader->load('default_settings.yaml');
