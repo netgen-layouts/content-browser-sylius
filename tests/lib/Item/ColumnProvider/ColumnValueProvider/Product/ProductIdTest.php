@@ -8,8 +8,10 @@ use Netgen\ContentBrowser\Sylius\Item\ColumnProvider\ColumnValueProvider\Product
 use Netgen\ContentBrowser\Sylius\Item\Product\Item;
 use Netgen\ContentBrowser\Sylius\Tests\Stubs\Item as StubItem;
 use Netgen\ContentBrowser\Sylius\Tests\Stubs\Product;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
+#[CoversClass(ProductId::class)]
 final class ProductIdTest extends TestCase
 {
     private ProductId $provider;
@@ -19,9 +21,6 @@ final class ProductIdTest extends TestCase
         $this->provider = new ProductId();
     }
 
-    /**
-     * @covers \Netgen\ContentBrowser\Sylius\Item\ColumnProvider\ColumnValueProvider\Product\ProductId::getValue
-     */
     public function testGetValue(): void
     {
         $product = new Product();
@@ -32,9 +31,6 @@ final class ProductIdTest extends TestCase
         self::assertSame('42', $this->provider->getValue($item));
     }
 
-    /**
-     * @covers \Netgen\ContentBrowser\Sylius\Item\ColumnProvider\ColumnValueProvider\Product\ProductId::getValue
-     */
     public function testGetValueWithInvalidItem(): void
     {
         self::assertNull($this->provider->getValue(new StubItem('value')));

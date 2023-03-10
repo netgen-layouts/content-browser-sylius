@@ -6,9 +6,11 @@ namespace Netgen\ContentBrowser\Sylius\Tests\Item\Taxon;
 
 use Netgen\ContentBrowser\Sylius\Item\Taxon\Item;
 use Netgen\ContentBrowser\Sylius\Tests\Stubs\Taxon;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
+#[CoversClass(Item::class)]
 final class ItemTest extends TestCase
 {
     private TaxonInterface $taxon;
@@ -30,42 +32,26 @@ final class ItemTest extends TestCase
         $this->item = new Item($this->taxon);
     }
 
-    /**
-     * @covers \Netgen\ContentBrowser\Sylius\Item\Taxon\Item::__construct
-     * @covers \Netgen\ContentBrowser\Sylius\Item\Taxon\Item::getLocationId
-     */
     public function testGetLocationId(): void
     {
         self::assertSame(42, $this->item->getLocationId());
     }
 
-    /**
-     * @covers \Netgen\ContentBrowser\Sylius\Item\Taxon\Item::getValue
-     */
     public function testGetValue(): void
     {
         self::assertSame(42, $this->item->getValue());
     }
 
-    /**
-     * @covers \Netgen\ContentBrowser\Sylius\Item\Taxon\Item::getName
-     */
     public function testGetName(): void
     {
         self::assertSame('Some name', $this->item->getName());
     }
 
-    /**
-     * @covers \Netgen\ContentBrowser\Sylius\Item\Taxon\Item::getParentId
-     */
     public function testGetParentId(): void
     {
         self::assertSame(24, $this->item->getParentId());
     }
 
-    /**
-     * @covers \Netgen\ContentBrowser\Sylius\Item\Taxon\Item::getParentId
-     */
     public function testGetParentIdWithNoParentTaxon(): void
     {
         $this->item = new Item(new Taxon());
@@ -73,25 +59,16 @@ final class ItemTest extends TestCase
         self::assertNull($this->item->getParentId());
     }
 
-    /**
-     * @covers \Netgen\ContentBrowser\Sylius\Item\Taxon\Item::isVisible
-     */
     public function testIsVisible(): void
     {
         self::assertTrue($this->item->isVisible());
     }
 
-    /**
-     * @covers \Netgen\ContentBrowser\Sylius\Item\Taxon\Item::isSelectable
-     */
     public function testIsSelectable(): void
     {
         self::assertTrue($this->item->isSelectable());
     }
 
-    /**
-     * @covers \Netgen\ContentBrowser\Sylius\Item\Taxon\Item::getTaxon
-     */
     public function testGetTaxon(): void
     {
         self::assertSame($this->taxon, $this->item->getTaxon());

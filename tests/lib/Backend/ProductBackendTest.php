@@ -16,11 +16,13 @@ use Netgen\ContentBrowser\Sylius\Tests\Stubs\Product;
 use Netgen\ContentBrowser\Sylius\Tests\Stubs\Taxon;
 use Pagerfanta\Adapter\AdapterInterface;
 use Pagerfanta\Pagerfanta;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 
+#[CoversClass(ProductBackend::class)]
 final class ProductBackendTest extends TestCase
 {
     private MockObject&TaxonRepositoryInterface $taxonRepositoryMock;
@@ -49,11 +51,6 @@ final class ProductBackendTest extends TestCase
         );
     }
 
-    /**
-     * @covers \Netgen\ContentBrowser\Sylius\Backend\ProductBackend::__construct
-     * @covers \Netgen\ContentBrowser\Sylius\Backend\ProductBackend::buildLocations
-     * @covers \Netgen\ContentBrowser\Sylius\Backend\ProductBackend::getSections
-     */
     public function testGetSections(): void
     {
         $this->taxonRepositoryMock
@@ -67,10 +64,6 @@ final class ProductBackendTest extends TestCase
         self::assertContainsOnlyInstancesOf(Location::class, $locations);
     }
 
-    /**
-     * @covers \Netgen\ContentBrowser\Sylius\Backend\ProductBackend::buildLocation
-     * @covers \Netgen\ContentBrowser\Sylius\Backend\ProductBackend::loadLocation
-     */
     public function testLoadLocation(): void
     {
         $this->taxonRepositoryMock
@@ -84,9 +77,6 @@ final class ProductBackendTest extends TestCase
         self::assertSame(1, $location->getLocationId());
     }
 
-    /**
-     * @covers \Netgen\ContentBrowser\Sylius\Backend\ProductBackend::loadLocation
-     */
     public function testLoadLocationThrowsNotFoundException(): void
     {
         $this->expectException(NotFoundException::class);
@@ -101,10 +91,6 @@ final class ProductBackendTest extends TestCase
         $this->backend->loadLocation(1);
     }
 
-    /**
-     * @covers \Netgen\ContentBrowser\Sylius\Backend\ProductBackend::buildItem
-     * @covers \Netgen\ContentBrowser\Sylius\Backend\ProductBackend::loadItem
-     */
     public function testLoadItem(): void
     {
         $this->productRepositoryMock
@@ -118,9 +104,6 @@ final class ProductBackendTest extends TestCase
         self::assertSame(1, $item->getValue());
     }
 
-    /**
-     * @covers \Netgen\ContentBrowser\Sylius\Backend\ProductBackend::loadItem
-     */
     public function testLoadItemThrowsNotFoundException(): void
     {
         $this->expectException(NotFoundException::class);
@@ -135,11 +118,6 @@ final class ProductBackendTest extends TestCase
         $this->backend->loadItem(1);
     }
 
-    /**
-     * @covers \Netgen\ContentBrowser\Sylius\Backend\ProductBackend::buildLocation
-     * @covers \Netgen\ContentBrowser\Sylius\Backend\ProductBackend::buildLocations
-     * @covers \Netgen\ContentBrowser\Sylius\Backend\ProductBackend::getSubLocations
-     */
     public function testGetSubLocations(): void
     {
         $taxon = $this->getTaxon(1);
@@ -162,9 +140,6 @@ final class ProductBackendTest extends TestCase
         }
     }
 
-    /**
-     * @covers \Netgen\ContentBrowser\Sylius\Backend\ProductBackend::getSubLocations
-     */
     public function testGetSubLocationsWithInvalidItem(): void
     {
         $this->taxonRepositoryMock
@@ -177,9 +152,6 @@ final class ProductBackendTest extends TestCase
         self::assertEmpty($locations);
     }
 
-    /**
-     * @covers \Netgen\ContentBrowser\Sylius\Backend\ProductBackend::getSubLocationsCount
-     */
     public function testGetSubLocationsCount(): void
     {
         $taxon = $this->getTaxon(1);
@@ -197,11 +169,6 @@ final class ProductBackendTest extends TestCase
         self::assertSame(2, $count);
     }
 
-    /**
-     * @covers \Netgen\ContentBrowser\Sylius\Backend\ProductBackend::buildItem
-     * @covers \Netgen\ContentBrowser\Sylius\Backend\ProductBackend::buildItems
-     * @covers \Netgen\ContentBrowser\Sylius\Backend\ProductBackend::getSubItems
-     */
     public function testGetSubItems(): void
     {
         $taxon = $this->getTaxon(1);
@@ -227,9 +194,6 @@ final class ProductBackendTest extends TestCase
         self::assertContainsOnlyInstancesOf(Item::class, $items);
     }
 
-    /**
-     * @covers \Netgen\ContentBrowser\Sylius\Backend\ProductBackend::getSubItems
-     */
     public function testGetSubItemsWithInvalidItem(): void
     {
         $this->productRepositoryMock
@@ -242,11 +206,6 @@ final class ProductBackendTest extends TestCase
         self::assertEmpty($items);
     }
 
-    /**
-     * @covers \Netgen\ContentBrowser\Sylius\Backend\ProductBackend::buildItem
-     * @covers \Netgen\ContentBrowser\Sylius\Backend\ProductBackend::buildItems
-     * @covers \Netgen\ContentBrowser\Sylius\Backend\ProductBackend::getSubItems
-     */
     public function testGetSubItemsWithOffsetAndLimit(): void
     {
         $pagerfantaAdapterMock = $this->createMock(AdapterInterface::class);
@@ -280,9 +239,6 @@ final class ProductBackendTest extends TestCase
         self::assertContainsOnlyInstancesOf(Item::class, $items);
     }
 
-    /**
-     * @covers \Netgen\ContentBrowser\Sylius\Backend\ProductBackend::getSubItemsCount
-     */
     public function testGetSubItemsCount(): void
     {
         $taxon = $this->getTaxon(1);
@@ -306,9 +262,6 @@ final class ProductBackendTest extends TestCase
         self::assertSame(2, $count);
     }
 
-    /**
-     * @covers \Netgen\ContentBrowser\Sylius\Backend\ProductBackend::getSubItemsCount
-     */
     public function testGetSubItemsCountWithInvalidItem(): void
     {
         $this->productRepositoryMock
@@ -320,11 +273,6 @@ final class ProductBackendTest extends TestCase
         self::assertSame(0, $count);
     }
 
-    /**
-     * @covers \Netgen\ContentBrowser\Sylius\Backend\ProductBackend::buildItem
-     * @covers \Netgen\ContentBrowser\Sylius\Backend\ProductBackend::buildItems
-     * @covers \Netgen\ContentBrowser\Sylius\Backend\ProductBackend::searchItems
-     */
     public function testSearchItems(): void
     {
         $pagerfantaAdapterMock = $this->createMock(AdapterInterface::class);
@@ -346,11 +294,6 @@ final class ProductBackendTest extends TestCase
         self::assertContainsOnlyInstancesOf(Item::class, $searchResult->getResults());
     }
 
-    /**
-     * @covers \Netgen\ContentBrowser\Sylius\Backend\ProductBackend::buildItem
-     * @covers \Netgen\ContentBrowser\Sylius\Backend\ProductBackend::buildItems
-     * @covers \Netgen\ContentBrowser\Sylius\Backend\ProductBackend::searchItems
-     */
     public function testSearchItemsWithOffsetAndLimit(): void
     {
         $pagerfantaAdapterMock = $this->createMock(AdapterInterface::class);
@@ -382,9 +325,6 @@ final class ProductBackendTest extends TestCase
         self::assertContainsOnlyInstancesOf(Item::class, $searchResult->getResults());
     }
 
-    /**
-     * @covers \Netgen\ContentBrowser\Sylius\Backend\ProductBackend::searchItemsCount
-     */
     public function testSearchItemsCount(): void
     {
         $pagerfantaAdapterMock = $this->createMock(AdapterInterface::class);
@@ -404,11 +344,6 @@ final class ProductBackendTest extends TestCase
         self::assertSame(2, $count);
     }
 
-    /**
-     * @covers \Netgen\ContentBrowser\Sylius\Backend\ProductBackend::buildItem
-     * @covers \Netgen\ContentBrowser\Sylius\Backend\ProductBackend::buildItems
-     * @covers \Netgen\ContentBrowser\Sylius\Backend\ProductBackend::search
-     */
     public function testSearch(): void
     {
         $pagerfantaAdapterMock = $this->createMock(AdapterInterface::class);
@@ -430,11 +365,6 @@ final class ProductBackendTest extends TestCase
         self::assertContainsOnlyInstancesOf(Item::class, $items);
     }
 
-    /**
-     * @covers \Netgen\ContentBrowser\Sylius\Backend\ProductBackend::buildItem
-     * @covers \Netgen\ContentBrowser\Sylius\Backend\ProductBackend::buildItems
-     * @covers \Netgen\ContentBrowser\Sylius\Backend\ProductBackend::search
-     */
     public function testSearchWithOffsetAndLimit(): void
     {
         $pagerfantaAdapterMock = $this->createMock(AdapterInterface::class);
@@ -462,9 +392,6 @@ final class ProductBackendTest extends TestCase
         self::assertContainsOnlyInstancesOf(Item::class, $items);
     }
 
-    /**
-     * @covers \Netgen\ContentBrowser\Sylius\Backend\ProductBackend::searchCount
-     */
     public function testSearchCount(): void
     {
         $pagerfantaAdapterMock = $this->createMock(AdapterInterface::class);
