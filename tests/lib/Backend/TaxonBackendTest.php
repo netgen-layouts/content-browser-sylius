@@ -20,9 +20,9 @@ use Sylius\Component\Locale\Context\LocaleContextInterface;
 
 final class TaxonBackendTest extends TestCase
 {
-    private MockObject $taxonRepositoryMock;
+    private MockObject&TaxonRepositoryInterface $taxonRepositoryMock;
 
-    private MockObject $localeContextMock;
+    private MockObject&LocaleContextInterface $localeContextMock;
 
     private TaxonBackend $backend;
 

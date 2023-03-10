@@ -10,11 +10,8 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface as SyliusTaxonInterface;
 
 final class Item implements ItemInterface, LocationInterface, TaxonInterface
 {
-    private SyliusTaxonInterface $taxon;
-
-    public function __construct(SyliusTaxonInterface $taxon)
+    public function __construct(private SyliusTaxonInterface $taxon)
     {
-        $this->taxon = $taxon;
     }
 
     public function getLocationId(): int
@@ -34,11 +31,7 @@ final class Item implements ItemInterface, LocationInterface, TaxonInterface
 
     public function getParentId(): ?int
     {
-        $parentTaxon = $this->taxon->getParent();
-
-        return $parentTaxon instanceof SyliusTaxonInterface ?
-            $parentTaxon->getId() :
-            null;
+        return $this->taxon->getParent()?->getId();
     }
 
     public function isVisible(): bool

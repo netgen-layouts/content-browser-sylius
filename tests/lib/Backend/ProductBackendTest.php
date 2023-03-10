@@ -23,11 +23,11 @@ use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 
 final class ProductBackendTest extends TestCase
 {
-    private MockObject $taxonRepositoryMock;
+    private MockObject&TaxonRepositoryInterface $taxonRepositoryMock;
 
-    private MockObject $productRepositoryMock;
+    private MockObject&ProductRepositoryInterface $productRepositoryMock;
 
-    private MockObject $localeContextMock;
+    private MockObject&LocaleContextInterface $localeContextMock;
 
     private ProductBackend $backend;
 

@@ -9,11 +9,8 @@ use Sylius\Component\Product\Model\ProductInterface as SyliusProductInterface;
 
 final class Item implements ItemInterface, ProductInterface
 {
-    private SyliusProductInterface $product;
-
-    public function __construct(SyliusProductInterface $product)
+    public function __construct(private SyliusProductInterface $product)
     {
-        $this->product = $product;
     }
 
     public function getValue(): int

@@ -22,16 +22,10 @@ use function sprintf;
 
 final class TaxonBackend implements BackendInterface
 {
-    private TaxonRepositoryInterface $taxonRepository;
-
-    private LocaleContextInterface $localeContext;
-
     public function __construct(
-        TaxonRepositoryInterface $taxonRepository,
-        LocaleContextInterface $localeContext
+        private TaxonRepositoryInterface $taxonRepository,
+        private LocaleContextInterface $localeContext,
     ) {
-        $this->taxonRepository = $taxonRepository;
-        $this->localeContext = $localeContext;
     }
 
     public function getSections(): iterable

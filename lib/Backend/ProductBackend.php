@@ -26,20 +26,11 @@ use function sprintf;
 
 final class ProductBackend implements BackendInterface
 {
-    private TaxonRepositoryInterface $taxonRepository;
-
-    private ProductRepositoryInterface $productRepository;
-
-    private LocaleContextInterface $localeContext;
-
     public function __construct(
-        TaxonRepositoryInterface $taxonRepository,
-        ProductRepositoryInterface $productRepository,
-        LocaleContextInterface $localeContext
+        private TaxonRepositoryInterface $taxonRepository,
+        private ProductRepositoryInterface $productRepository,
+        private LocaleContextInterface $localeContext,
     ) {
-        $this->taxonRepository = $taxonRepository;
-        $this->productRepository = $productRepository;
-        $this->localeContext = $localeContext;
     }
 
     public function getSections(): iterable
