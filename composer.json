@@ -10,6 +10,7 @@
         }
     ],
     "require": {
+        "php": "^8.1",
         "netgen/content-browser": "~1.4.0",
         "sylius/sylius": "^1.11.6"
     },
