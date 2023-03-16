@@ -13,14 +13,7 @@
         </ignoreFiles>
     </projectFiles>
 
-    <issueHandlers>
-        <!-- Doctrine ORM -->
-
-        <TooManyArguments>
-            <errorLevel type="suppress">
-                <referencedFunction name="Doctrine\ORM\Query\Expr::andX" />
-                <referencedFunction name="Doctrine\ORM\Query\Expr::orX" />
-            </errorLevel>
-        </TooManyArguments>
-    </issueHandlers>
+    <plugins>
+        <pluginClass class="Weirdan\DoctrinePsalmPlugin\Plugin" />
+    </plugins>
 </psalm>
