@@ -30,8 +30,7 @@ final class ProductBackend implements BackendInterface
         private TaxonRepositoryInterface $taxonRepository,
         private ProductRepositoryInterface $productRepository,
         private LocaleContextInterface $localeContext,
-    ) {
-    }
+    ) {}
 
     public function getSections(): iterable
     {

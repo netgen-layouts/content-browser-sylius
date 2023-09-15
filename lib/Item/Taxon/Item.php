@@ -10,9 +10,7 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface as SyliusTaxonInterface;
 
 final class Item implements ItemInterface, LocationInterface, TaxonInterface
 {
-    public function __construct(private SyliusTaxonInterface $taxon)
-    {
-    }
+    public function __construct(private SyliusTaxonInterface $taxon) {}
 
     public function getLocationId(): int
     {

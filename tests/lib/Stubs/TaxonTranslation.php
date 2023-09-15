@@ -6,6 +6,4 @@ namespace Netgen\ContentBrowser\Sylius\Tests\Stubs;
 
 use Sylius\Component\Taxonomy\Model\TaxonTranslation as BaseTaxonTranslation;
 
-final class TaxonTranslation extends BaseTaxonTranslation
-{
-}
+final class TaxonTranslation extends BaseTaxonTranslation {}

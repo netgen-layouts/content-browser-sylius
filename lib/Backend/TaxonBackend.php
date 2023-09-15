@@ -25,8 +25,7 @@ final class TaxonBackend implements BackendInterface
     public function __construct(
         private TaxonRepositoryInterface $taxonRepository,
         private LocaleContextInterface $localeContext,
-    ) {
-    }
+    ) {}
 
     public function getSections(): iterable
     {
