@@ -1,4 +1,4 @@
-tem_types.sylius_product: 'Sylius product'
+item_types.sylius_product: 'Sylius product'
 item_types.sylius_taxon: 'Sylius taxon'
 
 columns.sylius_product.product_id: 'Product ID'
