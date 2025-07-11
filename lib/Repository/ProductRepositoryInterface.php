@@ -8,6 +8,9 @@ use Pagerfanta\PagerfantaInterface;
 use Sylius\Component\Product\Repository\ProductRepositoryInterface as BaseProductRepositoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
+/**
+ * @extends \Sylius\Component\Product\Repository\ProductRepositoryInterface<\Sylius\Component\Product\Model\ProductInterface>
+ */
 interface ProductRepositoryInterface extends BaseProductRepositoryInterface
 {
     /**

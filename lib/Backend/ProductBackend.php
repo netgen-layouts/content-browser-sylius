@@ -26,6 +26,9 @@ use function sprintf;
 
 final class ProductBackend implements BackendInterface
 {
+    /**
+     * @param \Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface<\Sylius\Component\Taxonomy\Model\TaxonInterface> $taxonRepository
+     */
     public function __construct(
         private TaxonRepositoryInterface $taxonRepository,
         private ProductRepositoryInterface $productRepository,

@@ -7,6 +7,9 @@ namespace Netgen\ContentBrowser\Sylius\Repository;
 use Pagerfanta\PagerfantaInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface as BaseTaxonRepositoryInterface;
 
+/**
+ * @extends \Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface<\Sylius\Component\Taxonomy\Model\TaxonInterface>
+ */
 interface TaxonRepositoryInterface extends BaseTaxonRepositoryInterface
 {
     /**

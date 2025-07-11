@@ -2,3 +2,8 @@ includes:
     - vendor/phpstan/phpstan-strict-rules/rules.neon
     - vendor/phpstan/phpstan-doctrine/extension.neon
     - vendor/phpstan/phpstan-doctrine/rules.neon
+
+parameters:
+    ignoreErrors:
+        - '#Class Netgen\\ContentBrowser\\Sylius\\Repository\\ProductRepository extends generic class Sylius\\Bundle\\ProductBundle\\Doctrine\\ORM\\ProductRepository but does not specify its types: T#'
+        - '#Class Netgen\\ContentBrowser\\Sylius\\Repository\\TaxonRepository extends generic class Sylius\\Bundle\\TaxonomyBundle\\Doctrine\\ORM\\TaxonRepository but does not specify its types: T#'
