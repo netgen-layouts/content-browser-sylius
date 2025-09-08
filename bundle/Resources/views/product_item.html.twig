@@ -2,7 +2,7 @@
 
 <p>{{ item.product.name }}</p>
 
-<p>{% include '@SyliusShop/Product/_mainImage.html.twig' with {'product': item.product} %}</p>
+<p>{{ include('@SyliusShop/Product/_mainImage.html.twig', {'product': item.product}) }}</p>
 
 {% if not item.product.variants.empty %}
     <p>{{ money.calculatePrice(item.product|sylius_resolve_variant) }}</p>
