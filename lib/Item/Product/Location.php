@@ -9,7 +9,9 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface as SyliusTaxonInterface;
 
 final class Location implements LocationInterface, TaxonInterface
 {
-    public function __construct(private SyliusTaxonInterface $taxon) {}
+    public function __construct(
+        private SyliusTaxonInterface $taxon,
+    ) {}
 
     public function getLocationId(): int
     {

@@ -42,34 +42,28 @@ final class ProductBackend implements BackendInterface
         );
     }
 
-    public function loadLocation($id): Location
+    public function loadLocation(int|string $id): Location
     {
-        $taxon = $this->taxonRepository->find($id);
-
-        if (!$taxon instanceof TaxonInterface) {
+        $taxon = $this->taxonRepository->find($id) ??
             throw new NotFoundException(
                 sprintf(
                     'Location with ID "%s" not found.',
                     $id,
                 ),
             );
-        }
 
         return $this->buildLocation($taxon);
     }
 
-    public function loadItem($value): Item
+    public function loadItem(int|string $value): Item
     {
-        $product = $this->productRepository->find($value);
-
-        if (!$product instanceof ProductInterface) {
+        $product = $this->productRepository->find($value) ??
             throw new NotFoundException(
                 sprintf(
                     'Item with value "%s" not found.',
                     $value,
                 ),
             );
-        }
 
         return $this->buildItem($product);
     }
@@ -80,7 +74,6 @@ final class ProductBackend implements BackendInterface
             return [];
         }
 
-        /** @var \Sylius\Component\Taxonomy\Model\TaxonInterface[] $taxons */
         $taxons = $this->taxonRepository->findBy(
             [
                 'parent' => $location->getTaxon(),
@@ -163,9 +156,7 @@ final class ProductBackend implements BackendInterface
         $searchQuery->setOffset($offset);
         $searchQuery->setLimit($limit);
 
-        $searchResult = $this->searchItems($searchQuery);
-
-        return $searchResult->getResults();
+        return $this->searchItems($searchQuery)->getResults();
     }
 
     public function searchCount(string $searchText): int

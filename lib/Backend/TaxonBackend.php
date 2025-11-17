@@ -29,18 +29,15 @@ final class TaxonBackend implements BackendInterface
 
     public function getSections(): iterable
     {
-        /** @var iterable<\Sylius\Component\Taxonomy\Model\TaxonInterface> $rootNodes */
-        $rootNodes = $this->taxonRepository->findRootNodes();
-
-        return $this->buildItems($rootNodes);
+        return $this->buildItems($this->taxonRepository->findRootNodes());
     }
 
-    public function loadLocation($id): Item
+    public function loadLocation(int|string $id): Item
     {
         return $this->internalLoadItem((int) $id);
     }
 
-    public function loadItem($value): Item
+    public function loadItem(int|string $value): Item
     {
         return $this->internalLoadItem((int) $value);
     }
@@ -51,7 +48,6 @@ final class TaxonBackend implements BackendInterface
             return [];
         }
 
-        /** @var iterable<\Sylius\Component\Taxonomy\Model\TaxonInterface> $taxons */
         $taxons = $this->taxonRepository->findChildren(
             (string) $location->getTaxon()->getCode(),
             $this->localeContext->getLocaleCode(),
@@ -131,9 +127,7 @@ final class TaxonBackend implements BackendInterface
         $searchQuery->setOffset($offset);
         $searchQuery->setLimit($limit);
 
-        $searchResult = $this->searchItems($searchQuery);
-
-        return $searchResult->getResults();
+        return $this->searchItems($searchQuery)->getResults();
     }
 
     public function searchCount(string $searchText): int
@@ -146,16 +140,13 @@ final class TaxonBackend implements BackendInterface
      */
     private function internalLoadItem(int $value): Item
     {
-        $taxon = $this->taxonRepository->find($value);
-
-        if (!$taxon instanceof TaxonInterface) {
+        $taxon = $this->taxonRepository->find($value) ??
             throw new NotFoundException(
                 sprintf(
                     'Item with value "%s" not found.',
                     $value,
                 ),
             );
-        }
 
         return $this->buildItem($taxon);
     }

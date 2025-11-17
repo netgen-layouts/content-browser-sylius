@@ -26,7 +26,7 @@ use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 final class ProductBackendTest extends TestCase
 {
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface<\Sylius\Component\Taxonomy\Model\TaxonInterface>
+     * @var \PHPUnit\Framework\MockObject\MockObject&\Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface<\Sylius\Component\Taxonomy\Model\TaxonInterface>
      */
     private MockObject&TaxonRepositoryInterface $taxonRepositoryMock;
 
