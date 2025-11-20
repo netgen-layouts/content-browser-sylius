@@ -23,12 +23,12 @@ final class Item implements ItemInterface, ProductInterface
         return (string) $this->product->getName();
     }
 
-    public function isVisible(): bool
+    public function isVisible(): true
     {
         return true;
     }
 
-    public function isSelectable(): bool
+    public function isSelectable(): true
     {
         return true;
     }

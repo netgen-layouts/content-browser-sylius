@@ -34,12 +34,12 @@ final class Item implements ItemInterface, LocationInterface, TaxonInterface
         return $this->taxon->getParent()?->getId();
     }
 
-    public function isVisible(): bool
+    public function isVisible(): true
     {
         return true;
     }
 
-    public function isSelectable(): bool
+    public function isSelectable(): true
     {
         return true;
     }
