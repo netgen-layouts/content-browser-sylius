@@ -121,20 +121,6 @@ final class TaxonBackend implements BackendInterface
         return $paginator->getNbResults();
     }
 
-    public function search(string $searchText, int $offset = 0, int $limit = 25): iterable
-    {
-        $searchQuery = new SearchQuery($searchText);
-        $searchQuery->setOffset($offset);
-        $searchQuery->setLimit($limit);
-
-        return $this->searchItems($searchQuery)->getResults();
-    }
-
-    public function searchCount(string $searchText): int
-    {
-        return $this->searchItemsCount(new SearchQuery($searchText));
-    }
-
     /**
      * Returns the item for provided value.
      */

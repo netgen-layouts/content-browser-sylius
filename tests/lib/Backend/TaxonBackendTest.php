@@ -324,69 +324,6 @@ final class TaxonBackendTest extends TestCase
         self::assertSame(2, $count);
     }
 
-    public function testSearch(): void
-    {
-        $pagerfantaAdapterMock = $this->createMock(AdapterInterface::class);
-        $pagerfantaAdapterMock
-            ->method('getSlice')
-            ->with(self::identicalTo(0), self::identicalTo(25))
-            ->willReturn(new ArrayIterator([$this->getTaxon(), $this->getTaxon()]));
-
-        $this->taxonRepositoryMock
-            ->expects(self::once())
-            ->method('createSearchPaginator')
-            ->with(self::identicalTo('test'), self::identicalTo('en'))
-            ->willReturn(new Pagerfanta($pagerfantaAdapterMock));
-
-        $items = $this->backend->search('test');
-
-        self::assertCount(2, $items);
-        self::assertContainsOnlyInstancesOf(Item::class, $items);
-    }
-
-    public function testSearchWithOffsetAndLimit(): void
-    {
-        $pagerfantaAdapterMock = $this->createMock(AdapterInterface::class);
-
-        $pagerfantaAdapterMock
-            ->method('getNbResults')
-            ->willReturn(15);
-
-        $pagerfantaAdapterMock
-            ->method('getSlice')
-            ->with(self::identicalTo(8), self::identicalTo(2))
-            ->willReturn(new ArrayIterator([$this->getTaxon(), $this->getTaxon()]));
-
-        $this->taxonRepositoryMock
-            ->expects(self::once())
-            ->method('createSearchPaginator')
-            ->with(self::identicalTo('test'), self::identicalTo('en'))
-            ->willReturn(new Pagerfanta($pagerfantaAdapterMock));
-
-        $items = $this->backend->search('test', 8, 2);
-
-        self::assertCount(2, $items);
-        self::assertContainsOnlyInstancesOf(Item::class, $items);
-    }
-
-    public function testSearchCount(): void
-    {
-        $pagerfantaAdapterMock = $this->createMock(AdapterInterface::class);
-        $pagerfantaAdapterMock
-            ->method('getNbResults')
-            ->willReturn(2);
-
-        $this->taxonRepositoryMock
-            ->expects(self::once())
-            ->method('createSearchPaginator')
-            ->with(self::identicalTo('test'), self::identicalTo('en'))
-            ->willReturn(new Pagerfanta($pagerfantaAdapterMock));
-
-        $count = $this->backend->searchCount('test');
-
-        self::assertSame(2, $count);
-    }
-
     /**
      * Returns the taxon object used in tests.
      */
