@@ -32,24 +32,23 @@ final class ProductBackendTest extends TestCase
 
     private MockObject&ProductRepositoryInterface $productRepositoryMock;
 
-    private MockObject&LocaleContextInterface $localeContextMock;
-
     private ProductBackend $backend;
 
     protected function setUp(): void
     {
         $this->taxonRepositoryMock = $this->createMock(TaxonRepositoryInterface::class);
         $this->productRepositoryMock = $this->createMock(ProductRepositoryInterface::class);
-        $this->localeContextMock = $this->createMock(LocaleContextInterface::class);
 
-        $this->localeContextMock
+        $localeContextMock = $this->createMock(LocaleContextInterface::class);
+
+        $localeContextMock
             ->method('getLocaleCode')
             ->willReturn('en');
 
         $this->backend = new ProductBackend(
             $this->taxonRepositoryMock,
             $this->productRepositoryMock,
-            $this->localeContextMock,
+            $localeContextMock,
         );
     }
 

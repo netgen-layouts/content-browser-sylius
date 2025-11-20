@@ -15,8 +15,6 @@ final class LocationTest extends TestCase
 {
     private TaxonInterface $taxon;
 
-    private TaxonInterface $parentTaxon;
-
     private Location $location;
 
     protected function setUp(): void
@@ -27,9 +25,10 @@ final class LocationTest extends TestCase
         $this->taxon->setFallbackLocale('en');
         $this->taxon->setName('Some name');
 
-        $this->parentTaxon = new Taxon();
-        $this->parentTaxon->setId(24);
-        $this->taxon->setParent($this->parentTaxon);
+        $parentTaxon = new Taxon();
+        $parentTaxon->setId(24);
+
+        $this->taxon->setParent($parentTaxon);
 
         $this->location = new Location($this->taxon);
     }

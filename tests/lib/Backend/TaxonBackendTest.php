@@ -24,22 +24,21 @@ final class TaxonBackendTest extends TestCase
 {
     private MockObject&TaxonRepositoryInterface $taxonRepositoryMock;
 
-    private MockObject&LocaleContextInterface $localeContextMock;
-
     private TaxonBackend $backend;
 
     protected function setUp(): void
     {
         $this->taxonRepositoryMock = $this->createMock(TaxonRepositoryInterface::class);
-        $this->localeContextMock = $this->createMock(LocaleContextInterface::class);
 
-        $this->localeContextMock
+        $localeContextMock = $this->createMock(LocaleContextInterface::class);
+
+        $localeContextMock
             ->method('getLocaleCode')
             ->willReturn('en');
 
         $this->backend = new TaxonBackend(
             $this->taxonRepositoryMock,
-            $this->localeContextMock,
+            $localeContextMock,
         );
     }
 
