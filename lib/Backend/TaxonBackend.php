@@ -97,12 +97,12 @@ final class TaxonBackend implements BackendInterface
     public function searchItems(SearchQuery $searchQuery): SearchResultInterface
     {
         $paginator = $this->taxonRepository->createSearchPaginator(
-            $searchQuery->getSearchText(),
+            $searchQuery->searchText,
             $this->localeContext->getLocaleCode(),
         );
 
-        $paginator->setMaxPerPage($searchQuery->getLimit());
-        $paginator->setCurrentPage((int) ($searchQuery->getOffset() / $searchQuery->getLimit()) + 1);
+        $paginator->setMaxPerPage($searchQuery->limit);
+        $paginator->setCurrentPage((int) ($searchQuery->offset / $searchQuery->limit) + 1);
 
         return new SearchResult(
             $this->buildItems(
@@ -114,7 +114,7 @@ final class TaxonBackend implements BackendInterface
     public function searchItemsCount(SearchQuery $searchQuery): int
     {
         $paginator = $this->taxonRepository->createSearchPaginator(
-            $searchQuery->getSearchText(),
+            $searchQuery->searchText,
             $this->localeContext->getLocaleCode(),
         );
 

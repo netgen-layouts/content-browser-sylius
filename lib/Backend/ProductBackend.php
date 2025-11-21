@@ -126,12 +126,12 @@ final class ProductBackend implements BackendInterface
     public function searchItems(SearchQuery $searchQuery): SearchResultInterface
     {
         $paginator = $this->productRepository->createSearchPaginator(
-            $searchQuery->getSearchText(),
+            $searchQuery->searchText,
             $this->localeContext->getLocaleCode(),
         );
 
-        $paginator->setMaxPerPage($searchQuery->getLimit());
-        $paginator->setCurrentPage((int) ($searchQuery->getOffset() / $searchQuery->getLimit()) + 1);
+        $paginator->setMaxPerPage($searchQuery->limit);
+        $paginator->setCurrentPage((int) ($searchQuery->offset / $searchQuery->limit) + 1);
 
         return new SearchResult(
             $this->buildItems(
@@ -143,7 +143,7 @@ final class ProductBackend implements BackendInterface
     public function searchItemsCount(SearchQuery $searchQuery): int
     {
         $paginator = $this->productRepository->createSearchPaginator(
-            $searchQuery->getSearchText(),
+            $searchQuery->searchText,
             $this->localeContext->getLocaleCode(),
         );
 

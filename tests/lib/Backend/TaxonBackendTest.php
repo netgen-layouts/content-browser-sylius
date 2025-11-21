@@ -272,8 +272,8 @@ final class TaxonBackendTest extends TestCase
 
         $searchResult = $this->backend->searchItems(new SearchQuery('test'));
 
-        self::assertCount(2, $searchResult->getResults());
-        self::assertContainsOnlyInstancesOf(Item::class, $searchResult->getResults());
+        self::assertCount(2, $searchResult->results);
+        self::assertContainsOnlyInstancesOf(Item::class, $searchResult->results);
     }
 
     public function testSearchItemsWithOffsetAndLimit(): void
@@ -296,13 +296,13 @@ final class TaxonBackendTest extends TestCase
             ->willReturn(new Pagerfanta($pagerfantaAdapterMock));
 
         $searchQuery = new SearchQuery('test');
-        $searchQuery->setOffset(8);
-        $searchQuery->setLimit(2);
+        $searchQuery->offset = 8;
+        $searchQuery->limit = 2;
 
         $searchResult = $this->backend->searchItems($searchQuery);
 
-        self::assertCount(2, $searchResult->getResults());
-        self::assertContainsOnlyInstancesOf(Item::class, $searchResult->getResults());
+        self::assertCount(2, $searchResult->results);
+        self::assertContainsOnlyInstancesOf(Item::class, $searchResult->results);
     }
 
     public function testSearchItemsCount(): void
