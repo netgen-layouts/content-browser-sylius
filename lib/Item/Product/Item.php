@@ -9,32 +9,23 @@ use Sylius\Component\Product\Model\ProductInterface as SyliusProductInterface;
 
 final class Item implements ItemInterface, ProductInterface
 {
+    public int $value {
+        get => $this->product->getId();
+    }
+
+    public string $name {
+        get => $this->product->getName() ?? '';
+    }
+
+    public true $isVisible {
+        get => true;
+    }
+
+    public true $isSelectable {
+        get => true;
+    }
+
     public function __construct(
-        private SyliusProductInterface $product,
+        private(set) SyliusProductInterface $product,
     ) {}
-
-    public function getValue(): int
-    {
-        return $this->product->getId();
-    }
-
-    public function getName(): string
-    {
-        return (string) $this->product->getName();
-    }
-
-    public function isVisible(): true
-    {
-        return true;
-    }
-
-    public function isSelectable(): true
-    {
-        return true;
-    }
-
-    public function getProduct(): SyliusProductInterface
-    {
-        return $this->product;
-    }
 }

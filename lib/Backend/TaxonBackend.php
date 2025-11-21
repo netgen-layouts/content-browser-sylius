@@ -49,7 +49,7 @@ final class TaxonBackend implements BackendInterface
         }
 
         $taxons = $this->taxonRepository->findChildren(
-            (string) $location->getTaxon()->getCode(),
+            (string) $location->taxon->getCode(),
             $this->localeContext->getLocaleCode(),
         );
 
@@ -70,7 +70,7 @@ final class TaxonBackend implements BackendInterface
         }
 
         $paginator = $this->taxonRepository->createListPaginator(
-            (string) $location->getTaxon()->getCode(),
+            (string) $location->taxon->getCode(),
             $this->localeContext->getLocaleCode(),
         );
 
@@ -87,7 +87,7 @@ final class TaxonBackend implements BackendInterface
         }
 
         $paginator = $this->taxonRepository->createListPaginator(
-            (string) $location->getTaxon()->getCode(),
+            (string) $location->taxon->getCode(),
             $this->localeContext->getLocaleCode(),
         );
 

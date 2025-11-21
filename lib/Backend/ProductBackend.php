@@ -76,7 +76,7 @@ final class ProductBackend implements BackendInterface
 
         $taxons = $this->taxonRepository->findBy(
             [
-                'parent' => $location->getTaxon(),
+                'parent' => $location->taxon,
             ],
         );
 
@@ -97,7 +97,7 @@ final class ProductBackend implements BackendInterface
         }
 
         $paginator = $this->productRepository->createByTaxonPaginator(
-            $location->getTaxon(),
+            $location->taxon,
             $this->localeContext->getLocaleCode(),
         );
 
@@ -116,7 +116,7 @@ final class ProductBackend implements BackendInterface
         }
 
         $paginator = $this->productRepository->createByTaxonPaginator(
-            $location->getTaxon(),
+            $location->taxon,
             $this->localeContext->getLocaleCode(),
         );
 

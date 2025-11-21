@@ -16,6 +16,6 @@ final class ProductId implements ColumnValueProviderInterface
             return null;
         }
 
-        return (string) $item->getProduct()->getId();
+        return (string) $item->product->getId();
     }
 }

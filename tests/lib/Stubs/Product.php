@@ -8,8 +8,7 @@ use Sylius\Component\Product\Model\Product as BaseProduct;
 
 final class Product extends BaseProduct
 {
-    public function setId(?int $id): void
-    {
-        $this->id = $id;
+    public $id {
+        set { $this->id = $value; }
     }
 }

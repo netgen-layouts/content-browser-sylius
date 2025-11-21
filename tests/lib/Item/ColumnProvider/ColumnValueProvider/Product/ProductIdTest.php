@@ -24,7 +24,7 @@ final class ProductIdTest extends TestCase
     public function testGetValue(): void
     {
         $product = new Product();
-        $product->setId(42);
+        $product->id = 42;
 
         $item = new Item($product);
 

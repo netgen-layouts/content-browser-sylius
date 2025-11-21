@@ -24,7 +24,7 @@ final class TaxonIdTest extends TestCase
     public function testGetValue(): void
     {
         $taxon = new Taxon();
-        $taxon->setId(42);
+        $taxon->id = 42;
 
         $item = new Item($taxon);
 

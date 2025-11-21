@@ -11,5 +11,5 @@ interface ProductInterface
     /**
      * Returns the Sylius product.
      */
-    public function getProduct(): SyliusProductInterface;
+    public SyliusProductInterface $product { get; }
 }

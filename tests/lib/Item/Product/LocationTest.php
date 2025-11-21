@@ -20,13 +20,13 @@ final class LocationTest extends TestCase
     protected function setUp(): void
     {
         $this->taxon = new Taxon();
-        $this->taxon->setId(42);
+        $this->taxon->id = 42;
         $this->taxon->setCurrentLocale('en');
         $this->taxon->setFallbackLocale('en');
         $this->taxon->setName('Some name');
 
         $parentTaxon = new Taxon();
-        $parentTaxon->setId(24);
+        $parentTaxon->id = 24;
 
         $this->taxon->setParent($parentTaxon);
 
@@ -35,28 +35,28 @@ final class LocationTest extends TestCase
 
     public function testGetLocationId(): void
     {
-        self::assertSame(42, $this->location->getLocationId());
+        self::assertSame(42, $this->location->locationId);
     }
 
     public function testGetName(): void
     {
-        self::assertSame('Some name', $this->location->getName());
+        self::assertSame('Some name', $this->location->name);
     }
 
     public function testGetParentId(): void
     {
-        self::assertSame(24, $this->location->getParentId());
+        self::assertSame(24, $this->location->parentId);
     }
 
     public function testGetParentIdWithNoParentTaxon(): void
     {
         $this->location = new Location(new Taxon());
 
-        self::assertNull($this->location->getParentId());
+        self::assertNull($this->location->parentId);
     }
 
     public function testGetProduct(): void
     {
-        self::assertSame($this->taxon, $this->location->getTaxon());
+        self::assertSame($this->taxon, $this->location->taxon);
     }
 }

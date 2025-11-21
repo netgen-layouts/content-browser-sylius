@@ -11,5 +11,5 @@ interface TaxonInterface
     /**
      * Returns the Sylius taxon.
      */
-    public function getTaxon(): SyliusTaxonInterface;
+    public SyliusTaxonInterface $taxon { get; }
 }

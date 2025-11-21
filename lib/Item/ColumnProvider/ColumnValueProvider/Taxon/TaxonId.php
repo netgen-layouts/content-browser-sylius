@@ -16,6 +16,6 @@ final class TaxonId implements ColumnValueProviderInterface
             return null;
         }
 
-        return (string) $item->getTaxon()->getId();
+        return (string) $item->taxon->getId();
     }
 }

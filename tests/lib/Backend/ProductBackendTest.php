@@ -75,7 +75,7 @@ final class ProductBackendTest extends TestCase
 
         $location = $this->backend->loadLocation(1);
 
-        self::assertSame(1, $location->getLocationId());
+        self::assertSame(1, $location->locationId);
     }
 
     public function testLoadLocationThrowsNotFoundException(): void
@@ -102,7 +102,7 @@ final class ProductBackendTest extends TestCase
 
         $item = $this->backend->loadItem(1);
 
-        self::assertSame(1, $item->getValue());
+        self::assertSame(1, $item->value);
     }
 
     public function testLoadItemThrowsNotFoundException(): void
@@ -137,7 +137,7 @@ final class ProductBackendTest extends TestCase
         self::assertContainsOnlyInstancesOf(Location::class, $locations);
 
         foreach ($locations as $location) {
-            self::assertSame(1, $location->getParentId());
+            self::assertSame(1, $location->parentId);
         }
     }
 
@@ -343,7 +343,7 @@ final class ProductBackendTest extends TestCase
     private function getTaxon(?int $id = null, ?int $parentId = null): Taxon
     {
         $taxon = new Taxon();
-        $taxon->setId($id);
+        $taxon->id = $id;
 
         if ($parentId !== null) {
             $taxon->setParent(
@@ -360,7 +360,7 @@ final class ProductBackendTest extends TestCase
     private function getProduct(?int $id = null): Product
     {
         $product = new Product();
-        $product->setId($id);
+        $product->id = $id;
 
         return $product;
     }

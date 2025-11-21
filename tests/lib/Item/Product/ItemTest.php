@@ -20,7 +20,7 @@ final class ItemTest extends TestCase
     protected function setUp(): void
     {
         $this->product = new Product();
-        $this->product->setId(42);
+        $this->product->id = 42;
         $this->product->setCurrentLocale('en');
         $this->product->setFallbackLocale('en');
         $this->product->setName('Some name');
@@ -30,26 +30,16 @@ final class ItemTest extends TestCase
 
     public function testGetValue(): void
     {
-        self::assertSame(42, $this->item->getValue());
+        self::assertSame(42, $this->item->value);
     }
 
     public function testGetName(): void
     {
-        self::assertSame('Some name', $this->item->getName());
-    }
-
-    public function testIsVisible(): void
-    {
-        self::assertTrue($this->item->isVisible());
-    }
-
-    public function testIsSelectable(): void
-    {
-        self::assertTrue($this->item->isSelectable());
+        self::assertSame('Some name', $this->item->name);
     }
 
     public function testGetProduct(): void
     {
-        self::assertSame($this->product, $this->item->getProduct());
+        self::assertSame($this->product, $this->item->product);
     }
 }

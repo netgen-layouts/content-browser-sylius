@@ -20,10 +20,10 @@ final class ItemTest extends TestCase
     protected function setUp(): void
     {
         $parentTaxon = new Taxon();
-        $parentTaxon->setId(24);
+        $parentTaxon->id = 24;
 
         $this->taxon = new Taxon();
-        $this->taxon->setId(42);
+        $this->taxon->id = 42;
         $this->taxon->setCurrentLocale('en');
         $this->taxon->setFallbackLocale('en');
         $this->taxon->setName('Some name');
@@ -34,43 +34,33 @@ final class ItemTest extends TestCase
 
     public function testGetLocationId(): void
     {
-        self::assertSame(42, $this->item->getLocationId());
+        self::assertSame(42, $this->item->locationId);
     }
 
     public function testGetValue(): void
     {
-        self::assertSame(42, $this->item->getValue());
+        self::assertSame(42, $this->item->value);
     }
 
     public function testGetName(): void
     {
-        self::assertSame('Some name', $this->item->getName());
+        self::assertSame('Some name', $this->item->name);
     }
 
     public function testGetParentId(): void
     {
-        self::assertSame(24, $this->item->getParentId());
+        self::assertSame(24, $this->item->parentId);
     }
 
     public function testGetParentIdWithNoParentTaxon(): void
     {
         $this->item = new Item(new Taxon());
 
-        self::assertNull($this->item->getParentId());
-    }
-
-    public function testIsVisible(): void
-    {
-        self::assertTrue($this->item->isVisible());
-    }
-
-    public function testIsSelectable(): void
-    {
-        self::assertTrue($this->item->isSelectable());
+        self::assertNull($this->item->parentId);
     }
 
     public function testGetTaxon(): void
     {
-        self::assertSame($this->taxon, $this->item->getTaxon());
+        self::assertSame($this->taxon, $this->item->taxon);
     }
 }
