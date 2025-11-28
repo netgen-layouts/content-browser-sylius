@@ -35,6 +35,6 @@ final class Item implements ItemInterface, LocationInterface, TaxonInterface
     }
 
     public function __construct(
-        private(set) SyliusTaxonInterface $taxon,
+        public private(set) SyliusTaxonInterface $taxon,
     ) {}
 }

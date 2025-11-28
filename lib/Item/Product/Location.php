@@ -22,6 +22,6 @@ final class Location implements LocationInterface, TaxonInterface
     }
 
     public function __construct(
-        private(set) SyliusTaxonInterface $taxon,
+        public private(set) SyliusTaxonInterface $taxon,
     ) {}
 }

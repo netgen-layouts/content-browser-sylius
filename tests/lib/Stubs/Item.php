@@ -21,6 +21,6 @@ final class Item implements ItemInterface
     }
 
     public function __construct(
-        private(set) string $value,
+        public private(set) string $value,
     ) {}
 }

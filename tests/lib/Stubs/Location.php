@@ -13,7 +13,7 @@ final class Location implements LocationInterface
     }
 
     public function __construct(
-        private(set) int $locationId,
-        private(set) ?int $parentId = null,
+        public private(set) int $locationId,
+        public private(set) ?int $parentId = null,
     ) {}
 }

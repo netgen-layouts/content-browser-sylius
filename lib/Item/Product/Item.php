@@ -26,6 +26,6 @@ final class Item implements ItemInterface, ProductInterface
     }
 
     public function __construct(
-        private(set) SyliusProductInterface $product,
+        public private(set) SyliusProductInterface $product,
     ) {}
 }
