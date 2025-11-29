@@ -45,7 +45,7 @@ final class TaxonBackendTest extends TestCase
     public function testGetSections(): void
     {
         $this->taxonRepositoryMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('findRootNodes')
             ->willReturn([$this->getTaxon(1), $this->getTaxon(2)]);
 
@@ -58,7 +58,7 @@ final class TaxonBackendTest extends TestCase
     public function testLoadLocation(): void
     {
         $this->taxonRepositoryMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('find')
             ->with(self::identicalTo(1))
             ->willReturn($this->getTaxon(1));
@@ -74,7 +74,7 @@ final class TaxonBackendTest extends TestCase
         $this->expectExceptionMessage('Item with value "1" not found.');
 
         $this->taxonRepositoryMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('find')
             ->with(self::identicalTo(1))
             ->willReturn(null);
@@ -85,7 +85,7 @@ final class TaxonBackendTest extends TestCase
     public function testLoadItem(): void
     {
         $this->taxonRepositoryMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('find')
             ->with(self::identicalTo(1))
             ->willReturn($this->getTaxon(1));
@@ -101,7 +101,7 @@ final class TaxonBackendTest extends TestCase
         $this->expectExceptionMessage('Item with value "1" not found.');
 
         $this->taxonRepositoryMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('find')
             ->with(self::identicalTo(1))
             ->willReturn(null);
@@ -112,7 +112,7 @@ final class TaxonBackendTest extends TestCase
     public function testGetSubLocations(): void
     {
         $this->taxonRepositoryMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('findChildren')
             ->with(
                 self::identicalTo('code'),
@@ -135,7 +135,7 @@ final class TaxonBackendTest extends TestCase
     public function testGetSubLocationsWithInvalidItem(): void
     {
         $this->taxonRepositoryMock
-            ->expects(self::never())
+            ->expects($this->never())
             ->method('findChildren');
 
         $locations = $this->backend->getSubLocations(new StubLocation(0));
@@ -147,7 +147,7 @@ final class TaxonBackendTest extends TestCase
     public function testGetSubLocationsCount(): void
     {
         $this->taxonRepositoryMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('findChildren')
             ->with(
                 self::identicalTo('code'),
@@ -171,7 +171,7 @@ final class TaxonBackendTest extends TestCase
             ->willReturn(new ArrayIterator([$this->getTaxon(), $this->getTaxon()]));
 
         $this->taxonRepositoryMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('createListPaginator')
             ->with(self::identicalTo('code'), self::identicalTo('en'))
             ->willReturn(new Pagerfanta($pagerfantaAdapterMock));
@@ -187,7 +187,7 @@ final class TaxonBackendTest extends TestCase
     public function testGetSubItemsWithInvalidItem(): void
     {
         $this->taxonRepositoryMock
-            ->expects(self::never())
+            ->expects($this->never())
             ->method('createListPaginator');
 
         $items = $this->backend->getSubItems(new StubLocation(0));
@@ -210,7 +210,7 @@ final class TaxonBackendTest extends TestCase
             ->willReturn(new ArrayIterator([$this->getTaxon(), $this->getTaxon()]));
 
         $this->taxonRepositoryMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('createListPaginator')
             ->with(self::identicalTo('code'), self::identicalTo('en'))
             ->willReturn(new Pagerfanta($pagerfantaAdapterMock));
@@ -233,7 +233,7 @@ final class TaxonBackendTest extends TestCase
             ->willReturn(2);
 
         $this->taxonRepositoryMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('createListPaginator')
             ->with(self::identicalTo('code'), self::identicalTo('en'))
             ->willReturn(new Pagerfanta($pagerfantaAdapterMock));
@@ -248,7 +248,7 @@ final class TaxonBackendTest extends TestCase
     public function testGetSubItemsCountWithInvalidItem(): void
     {
         $this->taxonRepositoryMock
-            ->expects(self::never())
+            ->expects($this->never())
             ->method('createListPaginator');
 
         $count = $this->backend->getSubItemsCount(new StubLocation(0));
@@ -265,7 +265,7 @@ final class TaxonBackendTest extends TestCase
             ->willReturn(new ArrayIterator([$this->getTaxon(), $this->getTaxon()]));
 
         $this->taxonRepositoryMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('createSearchPaginator')
             ->with(self::identicalTo('test'), self::identicalTo('en'))
             ->willReturn(new Pagerfanta($pagerfantaAdapterMock));
@@ -290,7 +290,7 @@ final class TaxonBackendTest extends TestCase
             ->willReturn(new ArrayIterator([$this->getTaxon(), $this->getTaxon()]));
 
         $this->taxonRepositoryMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('createSearchPaginator')
             ->with(self::identicalTo('test'), self::identicalTo('en'))
             ->willReturn(new Pagerfanta($pagerfantaAdapterMock));
@@ -313,7 +313,7 @@ final class TaxonBackendTest extends TestCase
             ->willReturn(2);
 
         $this->taxonRepositoryMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('createSearchPaginator')
             ->with(self::identicalTo('test'), self::identicalTo('en'))
             ->willReturn(new Pagerfanta($pagerfantaAdapterMock));
