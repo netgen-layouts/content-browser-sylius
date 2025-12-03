@@ -1,0 +1,10 @@
+services:
+    netgen_content_browser.column_value_provider.sylius_product.product_id:
+        class: Netgen\ContentBrowser\Sylius\Item\ColumnProvider\ColumnValueProvider\Product\ProductId
+        tags:
+            - { name: netgen_content_browser.column_value_provider, identifier: sylius_product\product_id }
+
+    netgen_content_browser.column_value_provider.sylius_taxon.taxon_id:
+        class: Netgen\ContentBrowser\Sylius\Item\ColumnProvider\ColumnValueProvider\Taxon\TaxonId
+        tags:
+            - { name: netgen_content_browser.column_value_provider, identifier: sylius_taxon\taxon_id }

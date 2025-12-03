@@ -5,10 +5,13 @@ declare(strict_types=1);
 namespace Netgen\Bundle\ContentBrowserSyliusBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\Config\Loader\DelegatingLoader;
+use Symfony\Component\Config\Loader\LoaderResolver;
 use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
+use Symfony\Component\DependencyInjection\Loader\GlobFileLoader;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\Yaml\Yaml;
 
@@ -21,13 +24,18 @@ final class NetgenContentBrowserSyliusExtension extends Extension implements Pre
      */
     public function load(array $configs, ContainerBuilder $container): void
     {
-        $loader = new YamlFileLoader(
-            $container,
-            new FileLocator(__DIR__ . '/../Resources/config'),
+        $locator = new FileLocator(__DIR__ . '/../Resources/config');
+
+        $loader = new DelegatingLoader(
+            new LoaderResolver(
+                [
+                    new GlobFileLoader($container, $locator),
+                    new YamlFileLoader($container, $locator),
+                ],
+            ),
         );
 
-        $loader->load('product/services.yaml');
-        $loader->load('taxon/services.yaml');
+        $loader->load('services/**/*.yaml', 'glob');
     }
 
     public function prepend(ContainerBuilder $container): void
@@ -39,18 +47,15 @@ final class NetgenContentBrowserSyliusExtension extends Extension implements Pre
 
         $loader->load('default_settings.yaml');
 
-        $this->doPrepend($container, 'product/config.yaml', 'netgen_content_browser');
-        $this->doPrepend($container, 'taxon/config.yaml', 'netgen_content_browser');
-    }
+        $prependConfigs = [
+            'item_types.yaml' => 'netgen_content_browser',
+        ];
 
-    /**
-     * Allow an extension to prepend the extension configurations.
-     */
-    private function doPrepend(ContainerBuilder $container, string $fileName, string $configName): void
-    {
-        $configFile = __DIR__ . '/../Resources/config/' . $fileName;
-        $config = Yaml::parse((string) file_get_contents($configFile));
-        $container->prependExtensionConfig($configName, $config);
-        $container->addResource(new FileResource($configFile));
+        foreach ($prependConfigs as $configFile => $prependConfig) {
+            $configFile = __DIR__ . '/../Resources/config/' . $configFile;
+            $config = Yaml::parse((string) file_get_contents($configFile));
+            $container->prependExtensionConfig($prependConfig, $config);
+            $container->addResource(new FileResource($configFile));
+        }
     }
 }

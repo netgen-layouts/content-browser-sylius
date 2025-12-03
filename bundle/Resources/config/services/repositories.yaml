@@ -1,0 +1,8 @@
+services:
+    netgen_content_browser.sylius.product_repository:
+        class: Netgen\ContentBrowser\Sylius\Repository\ProductRepository
+        parent: sylius.repository.product
+
+    netgen_content_browser.sylius.taxon_repository:
+        class: Netgen\ContentBrowser\Sylius\Repository\TaxonRepository
+        parent: sylius.repository.taxon

@@ -1,0 +1,17 @@
+services:
+    netgen_content_browser.backend.sylius_product:
+        class: Netgen\ContentBrowser\Sylius\Backend\ProductBackend
+        arguments:
+            - "@sylius.repository.taxon"
+            - "@netgen_content_browser.sylius.product_repository"
+            - "@sylius.context.locale"
+        tags:
+            - { name: netgen_content_browser.backend, item_type: sylius_product }
+
+    netgen_content_browser.backend.sylius_taxon:
+        class: Netgen\ContentBrowser\Sylius\Backend\TaxonBackend
+        arguments:
+            - "@netgen_content_browser.sylius.taxon_repository"
+            - "@sylius.context.locale"
+        tags:
+            - { name: netgen_content_browser.backend, item_type: sylius_taxon }
