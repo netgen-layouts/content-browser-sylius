@@ -15,37 +15,36 @@ use Netgen\ContentBrowser\Sylius\Tests\Stubs\Taxon;
 use Pagerfanta\Adapter\AdapterInterface;
 use Pagerfanta\Pagerfanta;
 use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 
 #[CoversClass(TaxonBackend::class)]
 final class TaxonBackendTest extends TestCase
 {
-    private MockObject&TaxonRepositoryInterface $taxonRepositoryMock;
+    private Stub&TaxonRepositoryInterface $taxonRepositoryStub;
 
     private TaxonBackend $backend;
 
     protected function setUp(): void
     {
-        $this->taxonRepositoryMock = $this->createMock(TaxonRepositoryInterface::class);
+        $this->taxonRepositoryStub = self::createStub(TaxonRepositoryInterface::class);
 
-        $localeContextMock = $this->createMock(LocaleContextInterface::class);
+        $localeContextStub = self::createStub(LocaleContextInterface::class);
 
-        $localeContextMock
+        $localeContextStub
             ->method('getLocaleCode')
             ->willReturn('en');
 
         $this->backend = new TaxonBackend(
-            $this->taxonRepositoryMock,
-            $localeContextMock,
+            $this->taxonRepositoryStub,
+            $localeContextStub,
         );
     }
 
     public function testGetSections(): void
     {
-        $this->taxonRepositoryMock
-            ->expects($this->once())
+        $this->taxonRepositoryStub
             ->method('findRootNodes')
             ->willReturn([$this->getTaxon(1), $this->getTaxon(2)]);
 
@@ -57,8 +56,7 @@ final class TaxonBackendTest extends TestCase
 
     public function testLoadLocation(): void
     {
-        $this->taxonRepositoryMock
-            ->expects($this->once())
+        $this->taxonRepositoryStub
             ->method('find')
             ->with(self::identicalTo(1))
             ->willReturn($this->getTaxon(1));
@@ -73,8 +71,7 @@ final class TaxonBackendTest extends TestCase
         $this->expectException(NotFoundException::class);
         $this->expectExceptionMessage('Item with value "1" not found.');
 
-        $this->taxonRepositoryMock
-            ->expects($this->once())
+        $this->taxonRepositoryStub
             ->method('find')
             ->with(self::identicalTo(1))
             ->willReturn(null);
@@ -84,8 +81,7 @@ final class TaxonBackendTest extends TestCase
 
     public function testLoadItem(): void
     {
-        $this->taxonRepositoryMock
-            ->expects($this->once())
+        $this->taxonRepositoryStub
             ->method('find')
             ->with(self::identicalTo(1))
             ->willReturn($this->getTaxon(1));
@@ -100,8 +96,7 @@ final class TaxonBackendTest extends TestCase
         $this->expectException(NotFoundException::class);
         $this->expectExceptionMessage('Item with value "1" not found.');
 
-        $this->taxonRepositoryMock
-            ->expects($this->once())
+        $this->taxonRepositoryStub
             ->method('find')
             ->with(self::identicalTo(1))
             ->willReturn(null);
@@ -111,8 +106,7 @@ final class TaxonBackendTest extends TestCase
 
     public function testGetSubLocations(): void
     {
-        $this->taxonRepositoryMock
-            ->expects($this->once())
+        $this->taxonRepositoryStub
             ->method('findChildren')
             ->with(
                 self::identicalTo('code'),
@@ -134,10 +128,6 @@ final class TaxonBackendTest extends TestCase
 
     public function testGetSubLocationsWithInvalidItem(): void
     {
-        $this->taxonRepositoryMock
-            ->expects($this->never())
-            ->method('findChildren');
-
         $locations = $this->backend->getSubLocations(new StubLocation(0));
 
         self::assertIsArray($locations);
@@ -146,8 +136,7 @@ final class TaxonBackendTest extends TestCase
 
     public function testGetSubLocationsCount(): void
     {
-        $this->taxonRepositoryMock
-            ->expects($this->once())
+        $this->taxonRepositoryStub
             ->method('findChildren')
             ->with(
                 self::identicalTo('code'),
@@ -164,17 +153,16 @@ final class TaxonBackendTest extends TestCase
 
     public function testGetSubItems(): void
     {
-        $pagerfantaAdapterMock = $this->createMock(AdapterInterface::class);
-        $pagerfantaAdapterMock
+        $pagerfantaAdapterStub = self::createStub(AdapterInterface::class);
+        $pagerfantaAdapterStub
             ->method('getSlice')
             ->with(self::identicalTo(0), self::identicalTo(25))
             ->willReturn(new ArrayIterator([$this->getTaxon(), $this->getTaxon()]));
 
-        $this->taxonRepositoryMock
-            ->expects($this->once())
+        $this->taxonRepositoryStub
             ->method('createListPaginator')
             ->with(self::identicalTo('code'), self::identicalTo('en'))
-            ->willReturn(new Pagerfanta($pagerfantaAdapterMock));
+            ->willReturn(new Pagerfanta($pagerfantaAdapterStub));
 
         $items = $this->backend->getSubItems(
             new Item($this->getTaxon(1, null, 'code')),
@@ -186,10 +174,6 @@ final class TaxonBackendTest extends TestCase
 
     public function testGetSubItemsWithInvalidItem(): void
     {
-        $this->taxonRepositoryMock
-            ->expects($this->never())
-            ->method('createListPaginator');
-
         $items = $this->backend->getSubItems(new StubLocation(0));
 
         self::assertIsArray($items);
@@ -198,22 +182,21 @@ final class TaxonBackendTest extends TestCase
 
     public function testGetSubItemsWithOffsetAndLimit(): void
     {
-        $pagerfantaAdapterMock = $this->createMock(AdapterInterface::class);
+        $pagerfantaAdapterStub = self::createStub(AdapterInterface::class);
 
-        $pagerfantaAdapterMock
+        $pagerfantaAdapterStub
             ->method('getNbResults')
             ->willReturn(15);
 
-        $pagerfantaAdapterMock
+        $pagerfantaAdapterStub
             ->method('getSlice')
             ->with(self::identicalTo(8), self::identicalTo(2))
             ->willReturn(new ArrayIterator([$this->getTaxon(), $this->getTaxon()]));
 
-        $this->taxonRepositoryMock
-            ->expects($this->once())
+        $this->taxonRepositoryStub
             ->method('createListPaginator')
             ->with(self::identicalTo('code'), self::identicalTo('en'))
-            ->willReturn(new Pagerfanta($pagerfantaAdapterMock));
+            ->willReturn(new Pagerfanta($pagerfantaAdapterStub));
 
         $items = $this->backend->getSubItems(
             new Item($this->getTaxon(1, null, 'code')),
@@ -227,16 +210,15 @@ final class TaxonBackendTest extends TestCase
 
     public function testGetSubItemsCount(): void
     {
-        $pagerfantaAdapterMock = $this->createMock(AdapterInterface::class);
-        $pagerfantaAdapterMock
+        $pagerfantaAdapterStub = self::createStub(AdapterInterface::class);
+        $pagerfantaAdapterStub
             ->method('getNbResults')
             ->willReturn(2);
 
-        $this->taxonRepositoryMock
-            ->expects($this->once())
+        $this->taxonRepositoryStub
             ->method('createListPaginator')
             ->with(self::identicalTo('code'), self::identicalTo('en'))
-            ->willReturn(new Pagerfanta($pagerfantaAdapterMock));
+            ->willReturn(new Pagerfanta($pagerfantaAdapterStub));
 
         $count = $this->backend->getSubItemsCount(
             new Item($this->getTaxon(1, null, 'code')),
@@ -247,10 +229,6 @@ final class TaxonBackendTest extends TestCase
 
     public function testGetSubItemsCountWithInvalidItem(): void
     {
-        $this->taxonRepositoryMock
-            ->expects($this->never())
-            ->method('createListPaginator');
-
         $count = $this->backend->getSubItemsCount(new StubLocation(0));
 
         self::assertSame(0, $count);
@@ -258,17 +236,16 @@ final class TaxonBackendTest extends TestCase
 
     public function testSearchItems(): void
     {
-        $pagerfantaAdapterMock = $this->createMock(AdapterInterface::class);
-        $pagerfantaAdapterMock
+        $pagerfantaAdapterStub = self::createStub(AdapterInterface::class);
+        $pagerfantaAdapterStub
             ->method('getSlice')
             ->with(self::identicalTo(0), self::identicalTo(25))
             ->willReturn(new ArrayIterator([$this->getTaxon(), $this->getTaxon()]));
 
-        $this->taxonRepositoryMock
-            ->expects($this->once())
+        $this->taxonRepositoryStub
             ->method('createSearchPaginator')
             ->with(self::identicalTo('test'), self::identicalTo('en'))
-            ->willReturn(new Pagerfanta($pagerfantaAdapterMock));
+            ->willReturn(new Pagerfanta($pagerfantaAdapterStub));
 
         $searchResult = $this->backend->searchItems(new SearchQuery('test'));
 
@@ -278,22 +255,21 @@ final class TaxonBackendTest extends TestCase
 
     public function testSearchItemsWithOffsetAndLimit(): void
     {
-        $pagerfantaAdapterMock = $this->createMock(AdapterInterface::class);
+        $pagerfantaAdapterStub = self::createStub(AdapterInterface::class);
 
-        $pagerfantaAdapterMock
+        $pagerfantaAdapterStub
             ->method('getNbResults')
             ->willReturn(15);
 
-        $pagerfantaAdapterMock
+        $pagerfantaAdapterStub
             ->method('getSlice')
             ->with(self::identicalTo(8), self::identicalTo(2))
             ->willReturn(new ArrayIterator([$this->getTaxon(), $this->getTaxon()]));
 
-        $this->taxonRepositoryMock
-            ->expects($this->once())
+        $this->taxonRepositoryStub
             ->method('createSearchPaginator')
             ->with(self::identicalTo('test'), self::identicalTo('en'))
-            ->willReturn(new Pagerfanta($pagerfantaAdapterMock));
+            ->willReturn(new Pagerfanta($pagerfantaAdapterStub));
 
         $searchQuery = new SearchQuery('test');
         $searchQuery->offset = 8;
@@ -307,16 +283,15 @@ final class TaxonBackendTest extends TestCase
 
     public function testSearchItemsCount(): void
     {
-        $pagerfantaAdapterMock = $this->createMock(AdapterInterface::class);
-        $pagerfantaAdapterMock
+        $pagerfantaAdapterStub = self::createStub(AdapterInterface::class);
+        $pagerfantaAdapterStub
             ->method('getNbResults')
             ->willReturn(2);
 
-        $this->taxonRepositoryMock
-            ->expects($this->once())
+        $this->taxonRepositoryStub
             ->method('createSearchPaginator')
             ->with(self::identicalTo('test'), self::identicalTo('en'))
-            ->willReturn(new Pagerfanta($pagerfantaAdapterMock));
+            ->willReturn(new Pagerfanta($pagerfantaAdapterStub));
 
         $count = $this->backend->searchItemsCount(new SearchQuery('test'));
 
