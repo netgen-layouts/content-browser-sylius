@@ -14,10 +14,10 @@ use Netgen\ContentBrowser\Sylius\Item\Product\Item;
 use Netgen\ContentBrowser\Sylius\Item\Product\Location;
 use Netgen\ContentBrowser\Sylius\Item\Product\TaxonInterface as ContentBrowserTaxonInterface;
 use Netgen\ContentBrowser\Sylius\Repository\ProductRepositoryInterface;
+use Netgen\ContentBrowser\Sylius\Repository\TaxonRepositoryInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
-use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 
 use function array_map;
 use function count;
@@ -26,9 +26,6 @@ use function sprintf;
 
 final class ProductBackend implements BackendInterface
 {
-    /**
-     * @param \Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface<\Sylius\Component\Taxonomy\Model\TaxonInterface> $taxonRepository
-     */
     public function __construct(
         private TaxonRepositoryInterface $taxonRepository,
         private ProductRepositoryInterface $productRepository,

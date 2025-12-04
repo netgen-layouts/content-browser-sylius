@@ -11,6 +11,7 @@ use Netgen\ContentBrowser\Sylius\Backend\ProductBackend;
 use Netgen\ContentBrowser\Sylius\Item\Product\Item;
 use Netgen\ContentBrowser\Sylius\Item\Product\Location;
 use Netgen\ContentBrowser\Sylius\Repository\ProductRepositoryInterface;
+use Netgen\ContentBrowser\Sylius\Repository\TaxonRepositoryInterface;
 use Netgen\ContentBrowser\Sylius\Tests\Stubs\Location as StubLocation;
 use Netgen\ContentBrowser\Sylius\Tests\Stubs\Product;
 use Netgen\ContentBrowser\Sylius\Tests\Stubs\Taxon;
@@ -20,14 +21,10 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
-use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 
 #[CoversClass(ProductBackend::class)]
 final class ProductBackendTest extends TestCase
 {
-    /**
-     * @var \PHPUnit\Framework\MockObject\Stub&\Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface<\Sylius\Component\Taxonomy\Model\TaxonInterface>
-     */
     private Stub&TaxonRepositoryInterface $taxonRepositoryStub;
 
     private Stub&ProductRepositoryInterface $productRepositoryStub;

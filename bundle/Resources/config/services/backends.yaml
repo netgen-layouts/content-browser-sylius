@@ -2,7 +2,7 @@ services:
     netgen_content_browser.backend.sylius_product:
         class: Netgen\ContentBrowser\Sylius\Backend\ProductBackend
         arguments:
-            - "@sylius.repository.taxon"
+            - "@netgen_content_browser.sylius.taxon_repository"
             - "@netgen_content_browser.sylius.product_repository"
             - "@sylius.context.locale"
         tags:
