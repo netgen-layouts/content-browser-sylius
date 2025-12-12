@@ -165,7 +165,7 @@ final class ProductBackend implements BackendInterface
     private function buildLocations(array $taxons): array
     {
         return array_map(
-            fn (TaxonInterface $taxon): Location => $this->buildLocation($taxon),
+            $this->buildLocation(...),
             $taxons,
         );
     }
