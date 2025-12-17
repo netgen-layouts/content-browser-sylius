@@ -43,8 +43,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Netgen\\ContentBrowser\\Sylius\\Tests\\": "tests/lib/",
-            "Netgen\\ContentBrowser\\Tests\\": "vendor/netgen/content-browser/tests/lib/"
+            "Netgen\\ContentBrowser\\Sylius\\Tests\\": "tests/lib/"
         }
     },
     "minimum-stability": "dev",
