@@ -13,11 +13,12 @@ use Netgen\ContentBrowser\Item\LocationInterface;
 use Netgen\ContentBrowser\Sylius\Item\Product\Item;
 use Netgen\ContentBrowser\Sylius\Item\Product\Location;
 use Netgen\ContentBrowser\Sylius\Item\Product\TaxonInterface as ContentBrowserTaxonInterface;
-use Netgen\ContentBrowser\Sylius\Repository\ProductRepositoryInterface;
-use Netgen\ContentBrowser\Sylius\Repository\TaxonRepositoryInterface;
+use Netgen\ContentBrowser\Sylius\Service\ProductServiceInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\Product\Repository\ProductRepositoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 
 use function array_map;
 use function count;
@@ -26,9 +27,14 @@ use function sprintf;
 
 final class ProductBackend implements BackendInterface
 {
+    /**
+     * @param \Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface<\Sylius\Component\Taxonomy\Model\TaxonInterface> $taxonRepository
+     * @param \Sylius\Component\Product\Repository\ProductRepositoryInterface<\Sylius\Component\Product\Model\ProductInterface> $productRepository
+     */
     public function __construct(
         private TaxonRepositoryInterface $taxonRepository,
         private ProductRepositoryInterface $productRepository,
+        private ProductServiceInterface $productService,
         private LocaleContextInterface $localeContext,
     ) {}
 
@@ -93,7 +99,7 @@ final class ProductBackend implements BackendInterface
             return [];
         }
 
-        $paginator = $this->productRepository->createByTaxonPaginator(
+        $paginator = $this->productService->createByTaxonPaginator(
             $location->taxon,
             $this->localeContext->getLocaleCode(),
         );
@@ -112,7 +118,7 @@ final class ProductBackend implements BackendInterface
             return 0;
         }
 
-        $paginator = $this->productRepository->createByTaxonPaginator(
+        $paginator = $this->productService->createByTaxonPaginator(
             $location->taxon,
             $this->localeContext->getLocaleCode(),
         );
@@ -122,7 +128,7 @@ final class ProductBackend implements BackendInterface
 
     public function searchItems(SearchQuery $searchQuery): SearchResultInterface
     {
-        $paginator = $this->productRepository->createSearchPaginator(
+        $paginator = $this->productService->createSearchPaginator(
             $searchQuery->searchText,
             $this->localeContext->getLocaleCode(),
         );
@@ -139,7 +145,7 @@ final class ProductBackend implements BackendInterface
 
     public function searchItemsCount(SearchQuery $searchQuery): int
     {
-        $paginator = $this->productRepository->createSearchPaginator(
+        $paginator = $this->productService->createSearchPaginator(
             $searchQuery->searchText,
             $this->localeContext->getLocaleCode(),
         );

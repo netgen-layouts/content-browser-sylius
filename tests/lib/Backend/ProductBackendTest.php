@@ -10,8 +10,7 @@ use Netgen\ContentBrowser\Exceptions\NotFoundException;
 use Netgen\ContentBrowser\Sylius\Backend\ProductBackend;
 use Netgen\ContentBrowser\Sylius\Item\Product\Item;
 use Netgen\ContentBrowser\Sylius\Item\Product\Location;
-use Netgen\ContentBrowser\Sylius\Repository\ProductRepositoryInterface;
-use Netgen\ContentBrowser\Sylius\Repository\TaxonRepositoryInterface;
+use Netgen\ContentBrowser\Sylius\Service\ProductServiceInterface;
 use Netgen\ContentBrowser\Sylius\Tests\Stubs\Location as StubLocation;
 use Netgen\ContentBrowser\Sylius\Tests\Stubs\Product;
 use Netgen\ContentBrowser\Sylius\Tests\Stubs\Taxon;
@@ -21,13 +20,23 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
+use Sylius\Component\Product\Repository\ProductRepositoryInterface;
+use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 
 #[CoversClass(ProductBackend::class)]
 final class ProductBackendTest extends TestCase
 {
+    /**
+     * @var \PHPUnit\Framework\MockObject\Stub&\Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface<\Sylius\Component\Taxonomy\Model\TaxonInterface>
+     */
     private Stub&TaxonRepositoryInterface $taxonRepositoryStub;
 
+    /**
+     * @var \PHPUnit\Framework\MockObject\Stub&\Sylius\Component\Product\Repository\ProductRepositoryInterface<\Sylius\Component\Product\Model\ProductInterface>
+     */
     private Stub&ProductRepositoryInterface $productRepositoryStub;
+
+    private Stub&ProductServiceInterface $productServiceStub;
 
     private ProductBackend $backend;
 
@@ -35,6 +44,7 @@ final class ProductBackendTest extends TestCase
     {
         $this->taxonRepositoryStub = self::createStub(TaxonRepositoryInterface::class);
         $this->productRepositoryStub = self::createStub(ProductRepositoryInterface::class);
+        $this->productServiceStub = self::createStub(ProductServiceInterface::class);
 
         $localeContextStub = self::createStub(LocaleContextInterface::class);
 
@@ -45,6 +55,7 @@ final class ProductBackendTest extends TestCase
         $this->backend = new ProductBackend(
             $this->taxonRepositoryStub,
             $this->productRepositoryStub,
+            $this->productServiceStub,
             $localeContextStub,
         );
     }
@@ -166,7 +177,7 @@ final class ProductBackendTest extends TestCase
             ->with(self::identicalTo(0), self::identicalTo(25))
             ->willReturn(new ArrayIterator([$this->getProduct(), $this->getProduct()]));
 
-        $this->productRepositoryStub
+        $this->productServiceStub
             ->method('createByTaxonPaginator')
             ->with(self::identicalTo($taxon), self::identicalTo('en'))
             ->willReturn(new Pagerfanta($pagerfantaAdapterStub));
@@ -202,7 +213,7 @@ final class ProductBackendTest extends TestCase
 
         $taxon = $this->getTaxon(1);
 
-        $this->productRepositoryStub
+        $this->productServiceStub
             ->method('createByTaxonPaginator')
             ->with(self::identicalTo($taxon), self::identicalTo('en'))
             ->willReturn(new Pagerfanta($pagerfantaAdapterStub));
@@ -226,7 +237,7 @@ final class ProductBackendTest extends TestCase
             ->method('getNbResults')
             ->willReturn(2);
 
-        $this->productRepositoryStub
+        $this->productServiceStub
             ->method('createByTaxonPaginator')
             ->with(self::identicalTo($taxon), self::identicalTo('en'))
             ->willReturn(new Pagerfanta($pagerfantaAdapterStub));
@@ -253,7 +264,7 @@ final class ProductBackendTest extends TestCase
             ->with(self::identicalTo(0), self::identicalTo(25))
             ->willReturn(new ArrayIterator([$this->getProduct(), $this->getProduct()]));
 
-        $this->productRepositoryStub
+        $this->productServiceStub
             ->method('createSearchPaginator')
             ->with(self::identicalTo('test'), self::identicalTo('en'))
             ->willReturn(new Pagerfanta($pagerfantaAdapterStub));
@@ -277,7 +288,7 @@ final class ProductBackendTest extends TestCase
             ->with(self::identicalTo(8), self::identicalTo(2))
             ->willReturn(new ArrayIterator([$this->getProduct(), $this->getProduct()]));
 
-        $this->productRepositoryStub
+        $this->productServiceStub
             ->method('createSearchPaginator')
             ->with(self::identicalTo('test'), self::identicalTo('en'))
             ->willReturn(new Pagerfanta($pagerfantaAdapterStub));
@@ -299,7 +310,7 @@ final class ProductBackendTest extends TestCase
             ->method('getNbResults')
             ->willReturn(2);
 
-        $this->productRepositoryStub
+        $this->productServiceStub
             ->method('createSearchPaginator')
             ->with(self::identicalTo('test'), self::identicalTo('en'))
             ->willReturn(new Pagerfanta($pagerfantaAdapterStub));

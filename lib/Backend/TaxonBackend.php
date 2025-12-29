@@ -12,9 +12,10 @@ use Netgen\ContentBrowser\Exceptions\NotFoundException;
 use Netgen\ContentBrowser\Item\LocationInterface;
 use Netgen\ContentBrowser\Sylius\Item\Taxon\Item;
 use Netgen\ContentBrowser\Sylius\Item\Taxon\TaxonInterface as ContentBrowserTaxonInterface;
-use Netgen\ContentBrowser\Sylius\Repository\TaxonRepositoryInterface;
+use Netgen\ContentBrowser\Sylius\Service\TaxonServiceInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 
 use function count;
 use function is_countable;
@@ -22,8 +23,12 @@ use function sprintf;
 
 final class TaxonBackend implements BackendInterface
 {
+    /**
+     * @param \Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface<\Sylius\Component\Taxonomy\Model\TaxonInterface> $taxonRepository
+     */
     public function __construct(
         private TaxonRepositoryInterface $taxonRepository,
+        private TaxonServiceInterface $taxonService,
         private LocaleContextInterface $localeContext,
     ) {}
 
@@ -69,7 +74,7 @@ final class TaxonBackend implements BackendInterface
             return [];
         }
 
-        $paginator = $this->taxonRepository->createListPaginator(
+        $paginator = $this->taxonService->createListPaginator(
             (string) $location->taxon->getCode(),
             $this->localeContext->getLocaleCode(),
         );
@@ -86,7 +91,7 @@ final class TaxonBackend implements BackendInterface
             return 0;
         }
 
-        $paginator = $this->taxonRepository->createListPaginator(
+        $paginator = $this->taxonService->createListPaginator(
             (string) $location->taxon->getCode(),
             $this->localeContext->getLocaleCode(),
         );
@@ -96,7 +101,7 @@ final class TaxonBackend implements BackendInterface
 
     public function searchItems(SearchQuery $searchQuery): SearchResultInterface
     {
-        $paginator = $this->taxonRepository->createSearchPaginator(
+        $paginator = $this->taxonService->createSearchPaginator(
             $searchQuery->searchText,
             $this->localeContext->getLocaleCode(),
         );
@@ -113,7 +118,7 @@ final class TaxonBackend implements BackendInterface
 
     public function searchItemsCount(SearchQuery $searchQuery): int
     {
-        $paginator = $this->taxonRepository->createSearchPaginator(
+        $paginator = $this->taxonService->createSearchPaginator(
             $searchQuery->searchText,
             $this->localeContext->getLocaleCode(),
         );

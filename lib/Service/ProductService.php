@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Netgen\ContentBrowser\Sylius\Repository;
+namespace Netgen\ContentBrowser\Sylius\Service;
 
 use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\PagerfantaInterface;
-use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
-final class ProductRepository extends BaseProductRepository implements ProductRepositoryInterface
+final class ProductService extends EntityRepository implements ProductServiceInterface
 {
     public function createByTaxonPaginator(TaxonInterface $taxon, string $localeCode): PagerfantaInterface
     {

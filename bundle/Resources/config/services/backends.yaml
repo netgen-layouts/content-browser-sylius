@@ -2,8 +2,9 @@ services:
     netgen_content_browser.backend.sylius_product:
         class: Netgen\ContentBrowser\Sylius\Backend\ProductBackend
         arguments:
-            - "@netgen_content_browser.sylius.repository.taxon"
-            - "@netgen_content_browser.sylius.repository.product"
+            - "@sylius.repository.taxon"
+            - "@sylius.repository.product"
+            - "@netgen_content_browser.sylius.service.product"
             - "@sylius.context.locale"
         tags:
             - { name: netgen_content_browser.backend, item_type: sylius_product }
@@ -11,7 +12,8 @@ services:
     netgen_content_browser.backend.sylius_taxon:
         class: Netgen\ContentBrowser\Sylius\Backend\TaxonBackend
         arguments:
-            - "@netgen_content_browser.sylius.repository.taxon"
+            - "@sylius.repository.taxon"
+            - "@netgen_content_browser.sylius.service.taxon"
             - "@sylius.context.locale"
         tags:
             - { name: netgen_content_browser.backend, item_type: sylius_taxon }

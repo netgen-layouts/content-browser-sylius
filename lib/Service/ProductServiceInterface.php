@@ -2,16 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Netgen\ContentBrowser\Sylius\Repository;
+namespace Netgen\ContentBrowser\Sylius\Service;
 
 use Pagerfanta\PagerfantaInterface;
-use Sylius\Component\Product\Repository\ProductRepositoryInterface as BaseProductRepositoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
-/**
- * @extends \Sylius\Component\Product\Repository\ProductRepositoryInterface<\Sylius\Component\Product\Model\ProductInterface>
- */
-interface ProductRepositoryInterface extends BaseProductRepositoryInterface
+interface ProductServiceInterface
 {
     /**
      * Creates a paginator which is used to filter products by taxon.

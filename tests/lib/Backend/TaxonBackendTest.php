@@ -9,7 +9,7 @@ use Netgen\ContentBrowser\Backend\SearchQuery;
 use Netgen\ContentBrowser\Exceptions\NotFoundException;
 use Netgen\ContentBrowser\Sylius\Backend\TaxonBackend;
 use Netgen\ContentBrowser\Sylius\Item\Taxon\Item;
-use Netgen\ContentBrowser\Sylius\Repository\TaxonRepositoryInterface;
+use Netgen\ContentBrowser\Sylius\Service\TaxonServiceInterface;
 use Netgen\ContentBrowser\Sylius\Tests\Stubs\Location as StubLocation;
 use Netgen\ContentBrowser\Sylius\Tests\Stubs\Taxon;
 use Pagerfanta\Adapter\AdapterInterface;
@@ -18,17 +18,24 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
+use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 
 #[CoversClass(TaxonBackend::class)]
 final class TaxonBackendTest extends TestCase
 {
+    /**
+     * @var \PHPUnit\Framework\MockObject\Stub&\Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface<\Sylius\Component\Taxonomy\Model\TaxonInterface>
+     */
     private Stub&TaxonRepositoryInterface $taxonRepositoryStub;
+
+    private Stub&TaxonServiceInterface $taxonServiceStub;
 
     private TaxonBackend $backend;
 
     protected function setUp(): void
     {
         $this->taxonRepositoryStub = self::createStub(TaxonRepositoryInterface::class);
+        $this->taxonServiceStub = self::createStub(TaxonServiceInterface::class);
 
         $localeContextStub = self::createStub(LocaleContextInterface::class);
 
@@ -38,6 +45,7 @@ final class TaxonBackendTest extends TestCase
 
         $this->backend = new TaxonBackend(
             $this->taxonRepositoryStub,
+            $this->taxonServiceStub,
             $localeContextStub,
         );
     }
@@ -159,7 +167,7 @@ final class TaxonBackendTest extends TestCase
             ->with(self::identicalTo(0), self::identicalTo(25))
             ->willReturn(new ArrayIterator([$this->getTaxon(), $this->getTaxon()]));
 
-        $this->taxonRepositoryStub
+        $this->taxonServiceStub
             ->method('createListPaginator')
             ->with(self::identicalTo('code'), self::identicalTo('en'))
             ->willReturn(new Pagerfanta($pagerfantaAdapterStub));
@@ -193,7 +201,7 @@ final class TaxonBackendTest extends TestCase
             ->with(self::identicalTo(8), self::identicalTo(2))
             ->willReturn(new ArrayIterator([$this->getTaxon(), $this->getTaxon()]));
 
-        $this->taxonRepositoryStub
+        $this->taxonServiceStub
             ->method('createListPaginator')
             ->with(self::identicalTo('code'), self::identicalTo('en'))
             ->willReturn(new Pagerfanta($pagerfantaAdapterStub));
@@ -215,7 +223,7 @@ final class TaxonBackendTest extends TestCase
             ->method('getNbResults')
             ->willReturn(2);
 
-        $this->taxonRepositoryStub
+        $this->taxonServiceStub
             ->method('createListPaginator')
             ->with(self::identicalTo('code'), self::identicalTo('en'))
             ->willReturn(new Pagerfanta($pagerfantaAdapterStub));
@@ -242,7 +250,7 @@ final class TaxonBackendTest extends TestCase
             ->with(self::identicalTo(0), self::identicalTo(25))
             ->willReturn(new ArrayIterator([$this->getTaxon(), $this->getTaxon()]));
 
-        $this->taxonRepositoryStub
+        $this->taxonServiceStub
             ->method('createSearchPaginator')
             ->with(self::identicalTo('test'), self::identicalTo('en'))
             ->willReturn(new Pagerfanta($pagerfantaAdapterStub));
@@ -266,7 +274,7 @@ final class TaxonBackendTest extends TestCase
             ->with(self::identicalTo(8), self::identicalTo(2))
             ->willReturn(new ArrayIterator([$this->getTaxon(), $this->getTaxon()]));
 
-        $this->taxonRepositoryStub
+        $this->taxonServiceStub
             ->method('createSearchPaginator')
             ->with(self::identicalTo('test'), self::identicalTo('en'))
             ->willReturn(new Pagerfanta($pagerfantaAdapterStub));
@@ -288,7 +296,7 @@ final class TaxonBackendTest extends TestCase
             ->method('getNbResults')
             ->willReturn(2);
 
-        $this->taxonRepositoryStub
+        $this->taxonServiceStub
             ->method('createSearchPaginator')
             ->with(self::identicalTo('test'), self::identicalTo('en'))
             ->willReturn(new Pagerfanta($pagerfantaAdapterStub));

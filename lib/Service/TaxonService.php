@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Netgen\ContentBrowser\Sylius\Repository;
+namespace Netgen\ContentBrowser\Sylius\Service;
 
 use Pagerfanta\PagerfantaInterface;
-use Sylius\Bundle\TaxonomyBundle\Doctrine\ORM\TaxonRepository as BaseTaxonRepository;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
-final class TaxonRepository extends BaseTaxonRepository implements TaxonRepositoryInterface
+final class TaxonService extends EntityRepository implements TaxonServiceInterface
 {
     public function createListPaginator(string $parentCode, string $localeCode): PagerfantaInterface
     {
