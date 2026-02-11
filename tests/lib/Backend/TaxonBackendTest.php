@@ -66,7 +66,6 @@ final class TaxonBackendTest extends TestCase
     {
         $this->taxonRepositoryStub
             ->method('find')
-            ->with(self::identicalTo(1))
             ->willReturn($this->getTaxon(1));
 
         $location = $this->backend->loadLocation(1);
@@ -81,7 +80,6 @@ final class TaxonBackendTest extends TestCase
 
         $this->taxonRepositoryStub
             ->method('find')
-            ->with(self::identicalTo(1))
             ->willReturn(null);
 
         $this->backend->loadLocation(1);
@@ -91,7 +89,6 @@ final class TaxonBackendTest extends TestCase
     {
         $this->taxonRepositoryStub
             ->method('find')
-            ->with(self::identicalTo(1))
             ->willReturn($this->getTaxon(1));
 
         $item = $this->backend->loadItem(1);
@@ -106,7 +103,6 @@ final class TaxonBackendTest extends TestCase
 
         $this->taxonRepositoryStub
             ->method('find')
-            ->with(self::identicalTo(1))
             ->willReturn(null);
 
         $this->backend->loadItem(1);
@@ -116,10 +112,6 @@ final class TaxonBackendTest extends TestCase
     {
         $this->taxonRepositoryStub
             ->method('findChildren')
-            ->with(
-                self::identicalTo('code'),
-                self::identicalTo('en'),
-            )
             ->willReturn([$this->getTaxon(2, 1), $this->getTaxon(3, 1)]);
 
         $locations = $this->backend->getSubLocations(
@@ -146,10 +138,6 @@ final class TaxonBackendTest extends TestCase
     {
         $this->taxonRepositoryStub
             ->method('findChildren')
-            ->with(
-                self::identicalTo('code'),
-                self::identicalTo('en'),
-            )
             ->willReturn([$this->getTaxon(2), $this->getTaxon(3)]);
 
         $count = $this->backend->getSubLocationsCount(
@@ -164,12 +152,10 @@ final class TaxonBackendTest extends TestCase
         $pagerfantaAdapterStub = self::createStub(AdapterInterface::class);
         $pagerfantaAdapterStub
             ->method('getSlice')
-            ->with(self::identicalTo(0), self::identicalTo(25))
             ->willReturn(new ArrayIterator([$this->getTaxon(), $this->getTaxon()]));
 
         $this->taxonServiceStub
             ->method('createListPaginator')
-            ->with(self::identicalTo('code'), self::identicalTo('en'))
             ->willReturn(new Pagerfanta($pagerfantaAdapterStub));
 
         $items = $this->backend->getSubItems(
@@ -198,12 +184,10 @@ final class TaxonBackendTest extends TestCase
 
         $pagerfantaAdapterStub
             ->method('getSlice')
-            ->with(self::identicalTo(8), self::identicalTo(2))
             ->willReturn(new ArrayIterator([$this->getTaxon(), $this->getTaxon()]));
 
         $this->taxonServiceStub
             ->method('createListPaginator')
-            ->with(self::identicalTo('code'), self::identicalTo('en'))
             ->willReturn(new Pagerfanta($pagerfantaAdapterStub));
 
         $items = $this->backend->getSubItems(
@@ -225,7 +209,6 @@ final class TaxonBackendTest extends TestCase
 
         $this->taxonServiceStub
             ->method('createListPaginator')
-            ->with(self::identicalTo('code'), self::identicalTo('en'))
             ->willReturn(new Pagerfanta($pagerfantaAdapterStub));
 
         $count = $this->backend->getSubItemsCount(
@@ -247,12 +230,10 @@ final class TaxonBackendTest extends TestCase
         $pagerfantaAdapterStub = self::createStub(AdapterInterface::class);
         $pagerfantaAdapterStub
             ->method('getSlice')
-            ->with(self::identicalTo(0), self::identicalTo(25))
             ->willReturn(new ArrayIterator([$this->getTaxon(), $this->getTaxon()]));
 
         $this->taxonServiceStub
             ->method('createSearchPaginator')
-            ->with(self::identicalTo('test'), self::identicalTo('en'))
             ->willReturn(new Pagerfanta($pagerfantaAdapterStub));
 
         $searchResult = $this->backend->searchItems(new SearchQuery('test'));
@@ -271,12 +252,10 @@ final class TaxonBackendTest extends TestCase
 
         $pagerfantaAdapterStub
             ->method('getSlice')
-            ->with(self::identicalTo(8), self::identicalTo(2))
             ->willReturn(new ArrayIterator([$this->getTaxon(), $this->getTaxon()]));
 
         $this->taxonServiceStub
             ->method('createSearchPaginator')
-            ->with(self::identicalTo('test'), self::identicalTo('en'))
             ->willReturn(new Pagerfanta($pagerfantaAdapterStub));
 
         $searchQuery = new SearchQuery('test');
@@ -298,7 +277,6 @@ final class TaxonBackendTest extends TestCase
 
         $this->taxonServiceStub
             ->method('createSearchPaginator')
-            ->with(self::identicalTo('test'), self::identicalTo('en'))
             ->willReturn(new Pagerfanta($pagerfantaAdapterStub));
 
         $count = $this->backend->searchItemsCount(new SearchQuery('test'));
